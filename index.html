@@ -353,6 +353,99 @@ footer p {
     height: 120px;
   }
 }
+  
+#intro {
+  position: fixed;
+  inset: 0;
+  background: #050505;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity .8s ease, visibility .8s;
+}
+
+#intro.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.intro-stage {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.stage-mustache {
+  animation: mustacheShow 2s ease forwards;
+}
+
+.big-mustache {
+  width: 90%;
+  max-width: 430px;
+  animation: growMustache 2s ease;
+}
+
+.stage-logo h1 {
+  color: #050505;
+  -webkit-text-stroke: 1.5px white;
+  font-size: clamp(23px, 6vw, 38px);
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.stage-logo h2 {
+  color: white;
+  -webkit-text-stroke: .5px white;
+  font-size: 20px;
+  letter-spacing: 7px;
+  margin-top: 12px;
+}
+
+.stage-logo {
+  animation: logoShow 2s ease 2s forwards;
+}
+
+.stage-welcome h1 {
+  color: white;
+  font-size: clamp(30px, 7vw, 44px);
+}
+
+.stage-welcome p {
+  color: #d6b77e;
+  font-size: 21px;
+  margin-top: 15px;
+}
+
+.stage-welcome {
+  animation: welcomeShow 2s ease 4s forwards;
+}
+
+@keyframes growMustache {
+  from { transform: scale(.3); }
+  to { transform: scale(1); }
+}
+
+@keyframes mustacheShow {
+  0%, 75% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes logoShow {
+  0% { opacity: 0; visibility: visible; transform: scale(.8); }
+  25%, 75% { opacity: 1; visibility: visible; transform: scale(1); }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@keyframes welcomeShow {
+  0% { opacity: 0; visibility: visible; transform: translateY(20px); }
+  25%, 100% { opacity: 1; visibility: visible; transform: translateY(0); }
+}
+
 </style>
 </head>
 
@@ -360,27 +453,35 @@ footer p {
 
 <!-- ABERTURA -->
 
+
 <div id="intro">
 
-  <!-- Bigode simétrico com pontas levantadas -->
-  <svg class="mustache" viewBox="0 0 400 180"
-       xmlns="http://www.w3.org/2000/svg">
-    <path fill="#ffffff"
-      d="M200 83
-      C170 45 125 35 90 49
-      C54 62 35 91 10 85
-      C18 119 52 139 90 130
-      C132 120 161 99 200 91
-      C239 99 268 120 310 130
-      C348 139 382 119 390 85
-      C365 91 346 62 310 49
-      C275 35 230 45 200 83 Z"/>
-  </svg>
+  <div class="intro-stage stage-mustache">
+    <svg viewBox="0 0 400 180" class="big-mustache">
+      <path fill="white"
+        d="M200 83 C170 45 125 35 90 49
+        C54 62 35 91 10 85
+        C18 119 52 139 90 130
+        C132 120 161 99 200 91
+        C239 99 268 120 310 130
+        C348 139 382 119 390 85
+        C365 91 346 62 310 49
+        C275 35 230 45 200 83Z"/>
+    </svg>
+  </div>
 
-  <div class="intro-name">BIGODE DAS ENCOMENDAS</div>
-  <div class="intro-sub">IMPORTAÇÕES</div>
+  <div class="intro-stage stage-logo">
+    <h1>BIGODE DAS ENCOMENDAS</h1>
+    <h2>IMPORTAÇÕES</h2>
+  </div>
+
+  <div class="intro-stage stage-welcome">
+    <h1>Seja bem-vindo!</h1>
+    <p>Em que posso te ajudar?</p>
+  </div>
 
 </div>
+
 
 <header>
   <div class="brand">
@@ -527,11 +628,13 @@ updateGreeting();
 
 /* ANIMAÇÃO DE ENTRADA */
 
+
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("intro").classList.add("hide");
-  }, 2400);
+  }, 7200);
 });
+
 
 /* FORMATAR PREÇO */
 
