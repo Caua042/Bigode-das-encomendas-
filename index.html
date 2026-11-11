@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -59,7 +60,7 @@ button {
   visibility: hidden;
 }
 
-/* PRIMEIRA ETAPA: BIGODE */
+/* ETAPA 1: BIGODE */
 
 .stage-mustache {
   animation: mustacheShow 2s ease forwards;
@@ -71,50 +72,49 @@ button {
   animation: growMustache 2s ease;
 }
 
-/* SEGUNDA ETAPA: MARCA */
+/* ETAPA 2: MARCA */
 
 .stage-logo {
   animation: logoShow 2s ease 2s forwards;
 }
 
-.stage-logo h1 {
+.stage-logo h1,
+.stage-logo h2 {
   color: #ffffff;
   -webkit-text-stroke: 1.5px #000000;
   paint-order: stroke fill;
-  font-size: clamp(23px, 6vw, 38px);
   font-weight: 900;
+}
+
+.stage-logo h1 {
+  font-size: clamp(23px, 6vw, 38px);
   letter-spacing: 1px;
-  text-shadow: 0 0 1px white;
 }
 
 .stage-logo h2 {
-  color: #ffffff;
-  -webkit-text-stroke: 1px #000000;
-  paint-order: stroke fill;
   font-size: 22px;
-  font-weight: 900;
   letter-spacing: 7px;
   margin-top: 12px;
 }
 
-/* TERCEIRA ETAPA: BOAS-VINDAS */
+/* ETAPA 3: BOAS-VINDAS */
 
 .stage-welcome {
   animation: welcomeShow 2.5s ease 4s forwards;
 }
 
 .stage-welcome h1 {
-  color: white;
+  color: #ffffff;
   font-size: clamp(30px, 7vw, 44px);
 }
 
 .stage-welcome p {
-  color: white;
+  color: #ffffff;
   font-size: 21px;
   margin-top: 15px;
 }
 
-/* ANIMAÇÕES */
+/* MOVIMENTOS DA ANIMAÇÃO */
 
 @keyframes growMustache {
   from {
@@ -171,7 +171,7 @@ button {
 ================================= */
 
 header {
-  background: #111;
+  background: #111111;
   color: white;
   padding: 18px 5%;
   display: flex;
@@ -199,15 +199,15 @@ header {
 
 .brand span {
   display: block;
-  color: white;
+  color: #ffffff;
   font-size: 10px;
   margin-top: 3px;
   letter-spacing: 3px;
 }
 
 .cart-top {
-  background: white;
-  color: #111;
+  background: #ffffff;
+  color: #111111;
   padding: 11px 15px;
   border-radius: 30px;
   font-weight: bold;
@@ -230,12 +230,12 @@ header {
 }
 
 .hero p {
-  color: #ddd;
+  color: #dddddd;
   line-height: 1.6;
 }
 
 .hero strong {
-  color: white;
+  color: #ffffff;
 }
 
 /* =================================
@@ -257,14 +257,14 @@ header {
 }
 
 .section-title p {
-  color: #777;
+  color: #777777;
   margin-top: 7px;
 }
 
 .search {
   width: 100%;
   padding: 15px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   border-radius: 12px;
   margin-bottom: 25px;
   background: white;
@@ -272,7 +272,7 @@ header {
 }
 
 .search:focus {
-  border-color: #111;
+  border-color: #111111;
 }
 
 .products {
@@ -309,7 +309,7 @@ header {
 .price {
   font-weight: bold;
   font-size: 19px;
-  color: #111;
+  color: #111111;
   margin-bottom: 12px;
 }
 
@@ -342,11 +342,11 @@ header {
   align-items: center;
   gap: 10px;
   padding: 15px 0;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #eeeeee;
 }
 
 .cart-item small {
-  color: #777;
+  color: #777777;
 }
 
 .quantity {
@@ -356,7 +356,7 @@ header {
 }
 
 .quantity button {
-  background: #eee;
+  background: #eeeeee;
   border-radius: 7px;
   padding: 7px 11px;
 }
@@ -377,7 +377,7 @@ header {
 }
 
 .empty {
-  color: #888;
+  color: #888888;
   padding: 20px 0;
 }
 
@@ -398,14 +398,14 @@ header {
 .form-group input {
   width: 100%;
   padding: 14px;
-  border: 1px solid #ddd;
+  border: 1px solid #dddddd;
   border-radius: 9px;
-  outline-color: #111;
+  outline-color: #111111;
 }
 
 .notice {
   background: #eeeeee;
-  color: #222;
+  color: #222222;
   padding: 14px;
   border-radius: 10px;
   font-size: 13px;
@@ -415,7 +415,7 @@ header {
 
 .confirm {
   width: 100%;
-  background: #111;
+  background: #111111;
   color: white;
   padding: 16px;
   border-radius: 10px;
@@ -433,7 +433,7 @@ header {
 ================================= */
 
 footer {
-  background: #111;
+  background: #111111;
   color: white;
   text-align: center;
   padding: 30px 15px;
@@ -441,7 +441,7 @@ footer {
 }
 
 footer p {
-  color: #aaa;
+  color: #aaaaaa;
   font-size: 13px;
   margin-top: 8px;
 }
@@ -457,7 +457,6 @@ footer p {
     height: 120px;
   }
 }
-
 </style>
 </head>
 
@@ -469,7 +468,7 @@ footer p {
 
 <div id="intro">
 
-  <!-- ETAPA 1: BIGODE -->
+  <!-- PRIMEIRA ETAPA: BIGODE -->
 
   <div class="intro-stage stage-mustache">
     <svg viewBox="0 0 400 180" class="big-mustache">
@@ -484,14 +483,14 @@ footer p {
     </svg>
   </div>
 
-  <!-- ETAPA 2: MARCA -->
+  <!-- SEGUNDA ETAPA: MARCA -->
 
   <div class="intro-stage stage-logo">
     <h1>BIGODE DAS ENCOMENDAS</h1>
     <h2>IMPORTAÇÕES</h2>
   </div>
 
-  <!-- ETAPA 3: BOAS-VINDAS -->
+  <!-- TERCEIRA ETAPA: BOAS-VINDAS -->
 
   <div class="intro-stage stage-welcome">
     <h1>Seja bem-vindo!</h1>
@@ -564,8 +563,6 @@ footer p {
 
   <div class="products" id="products"></div>
 
-  <!-- CARRINHO -->
-
   <section class="cart-section" id="carrinho">
 
     <div class="section-title">
@@ -614,7 +611,6 @@ footer p {
     </button>
 
   </section>
-
 </main>
 
 <!-- =================================
@@ -637,7 +633,7 @@ footer p {
 
 const STORE_WHATSAPP = "5538992041456";
 
-/* PRODUTOS */
+/* CADASTRO DOS PRODUTOS */
 
 const productsList = [
   {
@@ -818,7 +814,7 @@ function renderCart() {
     money(total);
 }
 
-/* ENVIAR SOLICITAÇÃO PELO WHATSAPP */
+/* ENVIAR SOLICITAÇÃO */
 
 function sendOrder() {
 
@@ -876,7 +872,7 @@ Pedido enviado pelo site!`;
   window.location.href = link;
 }
 
-/* INICIALIZAR A LOJA */
+/* INICIALIZAR */
 
 renderProducts();
 renderCart();
