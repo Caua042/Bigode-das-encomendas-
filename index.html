@@ -354,6 +354,7 @@ footer p {
   }
 }
   
+
 #intro {
   position: fixed;
   inset: 0;
@@ -380,6 +381,7 @@ footer p {
   visibility: hidden;
 }
 
+/* ETAPA 1: BIGODE */
 .stage-mustache {
   animation: mustacheShow 2s ease forwards;
 }
@@ -390,8 +392,13 @@ footer p {
   animation: growMustache 2s ease;
 }
 
+/* ETAPA 2: MARCA */
+.stage-logo {
+  animation: logoShow 2s ease 2s forwards;
+}
+
 .stage-logo h1 {
-  color: #050505;
+  color: black;
   -webkit-text-stroke: 1.5px white;
   font-size: clamp(23px, 6vw, 38px);
   font-weight: 900;
@@ -400,14 +407,17 @@ footer p {
 
 .stage-logo h2 {
   color: white;
-  -webkit-text-stroke: .5px white;
-  font-size: 20px;
+  -webkit-text-stroke: 1px black;
+  paint-order: stroke fill;
+  font-size: 22px;
+  font-weight: 900;
   letter-spacing: 7px;
   margin-top: 12px;
 }
 
-.stage-logo {
-  animation: logoShow 2s ease 2s forwards;
+/* ETAPA 3: BOAS-VINDAS */
+.stage-welcome {
+  animation: welcomeShow 2.5s ease 4s forwards;
 }
 
 .stage-welcome h1 {
@@ -421,30 +431,52 @@ footer p {
   margin-top: 15px;
 }
 
-.stage-welcome {
-  animation: welcomeShow 2s ease 4s forwards;
-}
-
 @keyframes growMustache {
   from { transform: scale(.3); }
   to { transform: scale(1); }
 }
 
 @keyframes mustacheShow {
-  0%, 75% { opacity: 1; visibility: visible; }
-  100% { opacity: 0; visibility: hidden; }
+  0%, 80% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes logoShow {
-  0% { opacity: 0; visibility: visible; transform: scale(.8); }
-  25%, 75% { opacity: 1; visibility: visible; transform: scale(1); }
-  100% { opacity: 0; visibility: hidden; }
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: scale(.8);
+  }
+  20%, 80% {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 @keyframes welcomeShow {
-  0% { opacity: 0; visibility: visible; transform: translateY(20px); }
-  25%, 100% { opacity: 1; visibility: visible; transform: translateY(0); }
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: translateY(20px);
+  }
+  20%, 100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
 }
+
 
 </style>
 </head>
@@ -454,31 +486,37 @@ footer p {
 <!-- ABERTURA -->
 
 
+
 <div id="intro">
 
+  <!-- PRIMEIRA ETAPA: SOMENTE O BIGODE -->
   <div class="intro-stage stage-mustache">
     <svg viewBox="0 0 400 180" class="big-mustache">
-      <path fill="white"
-        d="M200 83 C170 45 125 35 90 49
-        C54 62 35 91 10 85
-        C18 119 52 139 90 130
-        C132 120 161 99 200 91
-        C239 99 268 120 310 130
-        C348 139 382 119 390 85
-        C365 91 346 62 310 49
-        C275 35 230 45 200 83Z"/>
+      <path fill="white" d="M200 83 C170 45 125 35 90 49
+      C54 62 35 91 10 85
+      C18 119 52 139 90 130
+      C132 120 161 99 200 91
+      C239 99 268 120 310 130
+      C348 139 382 119 390 85
+      C365 91 346 62 310 49
+      C275 35 230 45 200 83Z"/>
     </svg>
   </div>
 
+  <!-- SEGUNDA ETAPA: MARCA -->
   <div class="intro-stage stage-logo">
     <h1>BIGODE DAS ENCOMENDAS</h1>
     <h2>IMPORTAÇÕES</h2>
   </div>
 
+  <!-- TERCEIRA ETAPA: BOAS-VINDAS -->
   <div class="intro-stage stage-welcome">
     <h1>Seja bem-vindo!</h1>
     <p>Em que posso te ajudar?</p>
   </div>
+
+</div>
+
 
 </div>
 
@@ -629,11 +667,13 @@ updateGreeting();
 /* ANIMAÇÃO DE ENTRADA */
 
 
+
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("intro").classList.add("hide");
-  }, 7200);
+  }, 7000);
 });
+
 
 
 /* FORMATAR PREÇO */
