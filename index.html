@@ -29,18 +29,20 @@ button {
   border: none;
 }
 
-/* ABERTURA ANIMADA */
+/* =================================
+   ABERTURA ANIMADA
+================================= */
 
 #intro {
   position: fixed;
   inset: 0;
-  background: #101010;
+  background: #050505;
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  transition: opacity .8s, visibility .8s;
+  overflow: hidden;
+  transition: opacity .8s ease, visibility .8s;
 }
 
 #intro.hide {
@@ -48,40 +50,125 @@ button {
   visibility: hidden;
 }
 
-.mustache {
-  width: 230px;
-  max-width: 75vw;
-  animation: appear 1.2s ease forwards;
+.intro-stage {
+  position: absolute;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  opacity: 0;
+  visibility: hidden;
 }
 
-.intro-name {
+/* PRIMEIRA ETAPA: BIGODE */
+
+.stage-mustache {
+  animation: mustacheShow 2s ease forwards;
+}
+
+.big-mustache {
+  width: 90%;
+  max-width: 430px;
+  animation: growMustache 2s ease;
+}
+
+/* SEGUNDA ETAPA: MARCA */
+
+.stage-logo {
+  animation: logoShow 2s ease 2s forwards;
+}
+
+.stage-logo h1 {
+  color: #ffffff;
+  -webkit-text-stroke: 1.5px #000000;
+  paint-order: stroke fill;
+  font-size: clamp(23px, 6vw, 38px);
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-shadow: 0 0 1px white;
+}
+
+.stage-logo h2 {
+  color: #ffffff;
+  -webkit-text-stroke: 1px #000000;
+  paint-order: stroke fill;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 7px;
+  margin-top: 12px;
+}
+
+/* TERCEIRA ETAPA: BOAS-VINDAS */
+
+.stage-welcome {
+  animation: welcomeShow 2.5s ease 4s forwards;
+}
+
+.stage-welcome h1 {
   color: white;
-  font-size: 25px;
-  font-weight: bold;
-  letter-spacing: 2px;
-  margin-top: 20px;
-  animation: appear 1.5s ease;
+  font-size: clamp(30px, 7vw, 44px);
 }
 
-.intro-sub {
-  color: #c5a46d;
-  letter-spacing: 4px;
-  margin-top: 8px;
-  font-size: 12px;
+.stage-welcome p {
+  color: white;
+  font-size: 21px;
+  margin-top: 15px;
 }
 
-@keyframes appear {
+/* ANIMAÇÕES */
+
+@keyframes growMustache {
   from {
-    opacity: 0;
-    transform: scale(.7) translateY(15px);
+    transform: scale(.3);
   }
   to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
+    transform: scale(1);
   }
 }
 
-/* CABEÇALHO */
+@keyframes mustacheShow {
+  0%, 80% {
+    opacity: 1;
+    visibility: visible;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes logoShow {
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: scale(.8);
+  }
+  20%, 80% {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes welcomeShow {
+  0% {
+    opacity: 0;
+    visibility: visible;
+    transform: translateY(20px);
+  }
+  20%, 100% {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+}
+
+/* =================================
+   CABEÇALHO
+================================= */
 
 header {
   background: #111;
@@ -112,20 +199,23 @@ header {
 
 .brand span {
   display: block;
-  color: #c5a46d;
+  color: white;
   font-size: 10px;
   margin-top: 3px;
+  letter-spacing: 3px;
 }
 
 .cart-top {
-  background: #c5a46d;
+  background: white;
   color: #111;
   padding: 11px 15px;
   border-radius: 30px;
   font-weight: bold;
 }
 
-/* SAUDAÇÃO */
+/* =================================
+   SAUDAÇÃO
+================================= */
 
 .hero {
   background: linear-gradient(135deg, #151515, #292929);
@@ -145,10 +235,12 @@ header {
 }
 
 .hero strong {
-  color: #d6b77e;
+  color: white;
 }
 
-/* MARKETPLACE */
+/* =================================
+   CATÁLOGO
+================================= */
 
 .container {
   max-width: 1100px;
@@ -177,6 +269,10 @@ header {
   margin-bottom: 25px;
   background: white;
   outline: none;
+}
+
+.search:focus {
+  border-color: #111;
 }
 
 .products {
@@ -213,7 +309,7 @@ header {
 .price {
   font-weight: bold;
   font-size: 19px;
-  color: #99743c;
+  color: #111;
   margin-bottom: 12px;
 }
 
@@ -229,7 +325,9 @@ header {
   transform: scale(.97);
 }
 
-/* CARRINHO */
+/* =================================
+   CARRINHO
+================================= */
 
 .cart-section {
   margin-top: 40px;
@@ -283,7 +381,9 @@ header {
   padding: 20px 0;
 }
 
-/* FORMULÁRIO */
+/* =================================
+   FORMULÁRIO
+================================= */
 
 .form-group {
   margin-bottom: 15px;
@@ -300,12 +400,12 @@ header {
   padding: 14px;
   border: 1px solid #ddd;
   border-radius: 9px;
-  outline-color: #c5a46d;
+  outline-color: #111;
 }
 
 .notice {
-  background: #fff5df;
-  color: #79551e;
+  background: #eeeeee;
+  color: #222;
   padding: 14px;
   border-radius: 10px;
   font-size: 13px;
@@ -315,7 +415,7 @@ header {
 
 .confirm {
   width: 100%;
-  background: #16834a;
+  background: #111;
   color: white;
   padding: 16px;
   border-radius: 10px;
@@ -328,7 +428,9 @@ header {
   cursor: not-allowed;
 }
 
-/* RODAPÉ */
+/* =================================
+   RODAPÉ
+================================= */
 
 footer {
   background: #111;
@@ -344,6 +446,8 @@ footer p {
   margin-top: 8px;
 }
 
+/* CELULARES */
+
 @media (max-width: 400px) {
   .products {
     grid-template-columns: repeat(2, 1fr);
@@ -353,141 +457,20 @@ footer p {
     height: 120px;
   }
 }
-  
-
-#intro {
-  position: fixed;
-  inset: 0;
-  background: #050505;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  transition: opacity .8s ease, visibility .8s;
-}
-
-#intro.hide {
-  opacity: 0;
-  visibility: hidden;
-}
-
-.intro-stage {
-  position: absolute;
-  width: 100%;
-  padding: 20px;
-  text-align: center;
-  opacity: 0;
-  visibility: hidden;
-}
-
-/* ETAPA 1: BIGODE */
-.stage-mustache {
-  animation: mustacheShow 2s ease forwards;
-}
-
-.big-mustache {
-  width: 90%;
-  max-width: 430px;
-  animation: growMustache 2s ease;
-}
-
-/* ETAPA 2: MARCA */
-
-.stage-logo h1 {
-  color: #ffffff;
-  -webkit-text-stroke: 1.5px #000000;
-  paint-order: stroke fill;
-  font-size: clamp(23px, 6vw, 38px);
-  font-weight: 900;
-  letter-spacing: 1px;
-}
-
-.stage-logo h2 {
-  color: #ffffff;
-  -webkit-text-stroke: 1px #000000;
-  paint-order: stroke fill;
-  font-size: 22px;
-  font-weight: 900;
-  letter-spacing: 7px;
-  margin-top: 12px;
-}
-
-/* ETAPA 3: BOAS-VINDAS */
-.stage-welcome {
-  animation: welcomeShow 2.5s ease 4s forwards;
-}
-
-.stage-welcome h1 {
-  color: white;
-  font-size: clamp(30px, 7vw, 44px);
-}
-
-.stage-welcome p {
-  color: #d6b77e;
-  font-size: 21px;
-  margin-top: 15px;
-}
-
-@keyframes growMustache {
-  from { transform: scale(.3); }
-  to { transform: scale(1); }
-}
-
-@keyframes mustacheShow {
-  0%, 80% {
-    opacity: 1;
-    visibility: visible;
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes logoShow {
-  0% {
-    opacity: 0;
-    visibility: visible;
-    transform: scale(.8);
-  }
-  20%, 80% {
-    opacity: 1;
-    visibility: visible;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
-@keyframes welcomeShow {
-  0% {
-    opacity: 0;
-    visibility: visible;
-    transform: translateY(20px);
-  }
-  20%, 100% {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
-}
-
 
 </style>
 </head>
 
 <body>
 
-<!-- ABERTURA -->
-
-
+<!-- =================================
+     ABERTURA DA LOJA
+================================= -->
 
 <div id="intro">
 
-  <!-- PRIMEIRA ETAPA: SOMENTE O BIGODE -->
+  <!-- ETAPA 1: BIGODE -->
+
   <div class="intro-stage stage-mustache">
     <svg viewBox="0 0 400 180" class="big-mustache">
       <path fill="white" d="M200 83 C170 45 125 35 90 49
@@ -501,13 +484,15 @@ footer p {
     </svg>
   </div>
 
-  <!-- SEGUNDA ETAPA: MARCA -->
+  <!-- ETAPA 2: MARCA -->
+
   <div class="intro-stage stage-logo">
     <h1>BIGODE DAS ENCOMENDAS</h1>
     <h2>IMPORTAÇÕES</h2>
   </div>
 
-  <!-- TERCEIRA ETAPA: BOAS-VINDAS -->
+  <!-- ETAPA 3: BOAS-VINDAS -->
+
   <div class="intro-stage stage-welcome">
     <h1>Seja bem-vindo!</h1>
     <p>Em que posso te ajudar?</p>
@@ -515,34 +500,53 @@ footer p {
 
 </div>
 
-
-</div>
-
+<!-- =================================
+     CABEÇALHO
+================================= -->
 
 <header>
+
   <div class="brand">
+
     <svg viewBox="0 0 400 180">
       <path fill="white"
-      d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/>
+      d="M200 83 C170 45 125 35 90 49
+      C54 62 35 91 10 85
+      C18 119 52 139 90 130
+      C132 120 161 99 200 91
+      C239 99 268 120 310 130
+      C348 139 382 119 390 85
+      C365 91 346 62 310 49
+      C275 35 230 45 200 83Z"/>
     </svg>
 
     <div>
       <h2>BIGODE DAS ENCOMENDAS</h2>
       <span>IMPORTAÇÕES</span>
     </div>
+
   </div>
 
   <button class="cart-top"
     onclick="document.getElementById('carrinho').scrollIntoView({behavior:'smooth'})">
     🛒 <span id="cart-count">0</span>
   </button>
+
 </header>
+
+<!-- =================================
+     SAUDAÇÃO
+================================= -->
 
 <section class="hero">
   <h1 id="greeting">Olá!</h1>
   <p>Como posso te ajudar?</p>
   <p><strong>Encontre seus produtos favoritos!</strong></p>
 </section>
+
+<!-- =================================
+     CATÁLOGO E CARRINHO
+================================= -->
 
 <main class="container">
 
@@ -559,6 +563,8 @@ footer p {
     oninput="renderProducts()">
 
   <div class="products" id="products"></div>
+
+  <!-- CARRINHO -->
 
   <section class="cart-section" id="carrinho">
 
@@ -608,7 +614,12 @@ footer p {
     </button>
 
   </section>
+
 </main>
+
+<!-- =================================
+     RODAPÉ
+================================= -->
 
 <footer>
   <h3>BIGODE DAS ENCOMENDAS</h3>
@@ -616,13 +627,17 @@ footer p {
   <p>Atendimento pelo WhatsApp</p>
 </footer>
 
+<!-- =================================
+     JAVASCRIPT
+================================= -->
+
 <script>
 
 /* CONFIGURAÇÕES DA LOJA */
 
 const STORE_WHATSAPP = "5538992041456";
 
-/* CADASTRO DOS PRODUTOS */
+/* PRODUTOS */
 
 const productsList = [
   {
@@ -664,15 +679,11 @@ updateGreeting();
 
 /* ANIMAÇÃO DE ENTRADA */
 
-
-
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("intro").classList.add("hide");
   }, 7000);
 });
-
-
 
 /* FORMATAR PREÇO */
 
@@ -807,7 +818,7 @@ function renderCart() {
     money(total);
 }
 
-/* ENVIAR SOLICITAÇÃO */
+/* ENVIAR SOLICITAÇÃO PELO WHATSAPP */
 
 function sendOrder() {
 
@@ -825,7 +836,7 @@ function sendOrder() {
     return;
   }
 
-  let total = cart.reduce(
+  const total = cart.reduce(
     (sum, item) => sum + item.price * item.quantity, 0
   );
 
@@ -865,7 +876,7 @@ Pedido enviado pelo site!`;
   window.location.href = link;
 }
 
-/* INICIALIZAR */
+/* INICIALIZAR A LOJA */
 
 renderProducts();
 renderCart();
