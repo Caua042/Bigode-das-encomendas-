@@ -457,6 +457,18 @@ footer p {
     height: 120px;
   }
 }
+  
+.fam-brand {
+  color: #20c55a;
+  font-weight: 900;
+}
+
+.warranty {
+  color: #777;
+  font-size: 13px;
+  margin: 8px 0;
+}
+
 </style>
 </head>
 
@@ -709,6 +721,7 @@ function money(value) {
 
 /* MOSTRAR PRODUTOS */
 
+
 function renderProducts() {
   const area = document.getElementById("products");
   const search = document.getElementById("search")
@@ -721,13 +734,29 @@ function renderProducts() {
   area.innerHTML = "";
 
   filtered.forEach(product => {
+    const productName = product.brand === "FAM"
+      ? product.name.replace(
+          /FAM/i,
+          '<span class="fam-brand">FAM</span>'
+        )
+      : product.name;
+
     area.innerHTML += `
       <div class="product">
         <div class="product-image">${product.image}</div>
 
         <div class="product-info">
-          <h3>${product.name}</h3>
-          <div class="price">${money(product.price)}</div>
+          <h3>${productName}</h3>
+
+          <div class="price">
+            ${money(product.price)}
+          </div>
+
+          ${product.warranty ? `
+            <p class="warranty">
+              🛡️ ${product.warranty}
+            </p>
+          ` : ""}
 
           <button class="add"
             onclick="addToCart(${product.id})">
