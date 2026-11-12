@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -30,9 +29,7 @@ button {
   border: none;
 }
 
-/* =================================
-   ABERTURA ANIMADA
-================================= */
+/* ABERTURA ANIMADA */
 
 #intro {
   position: fixed;
@@ -60,8 +57,6 @@ button {
   visibility: hidden;
 }
 
-/* ETAPA 1: BIGODE */
-
 .stage-mustache {
   animation: mustacheShow 2s ease forwards;
 }
@@ -71,8 +66,6 @@ button {
   max-width: 430px;
   animation: growMustache 2s ease;
 }
-
-/* ETAPA 2: MARCA */
 
 .stage-logo {
   animation: logoShow 2s ease 2s forwards;
@@ -97,8 +90,6 @@ button {
   margin-top: 12px;
 }
 
-/* ETAPA 3: BOAS-VINDAS */
-
 .stage-welcome {
   animation: welcomeShow 2.5s ease 4s forwards;
 }
@@ -114,15 +105,9 @@ button {
   margin-top: 15px;
 }
 
-/* MOVIMENTOS DA ANIMAÇÃO */
-
 @keyframes growMustache {
-  from {
-    transform: scale(.3);
-  }
-  to {
-    transform: scale(1);
-  }
+  from { transform: scale(.3); }
+  to { transform: scale(1); }
 }
 
 @keyframes mustacheShow {
@@ -166,9 +151,7 @@ button {
   }
 }
 
-/* =================================
-   CABEÇALHO
-================================= */
+/* CABEÇALHO */
 
 header {
   background: #111111;
@@ -213,9 +196,7 @@ header {
   font-weight: bold;
 }
 
-/* =================================
-   SAUDAÇÃO
-================================= */
+/* SAUDAÇÃO */
 
 .hero {
   background: linear-gradient(135deg, #151515, #292929);
@@ -238,9 +219,7 @@ header {
   color: #ffffff;
 }
 
-/* =================================
-   CATÁLOGO
-================================= */
+/* CATÁLOGO */
 
 .container {
   max-width: 1100px;
@@ -275,10 +254,42 @@ header {
   border-color: #111111;
 }
 
+/* IMPORTANTE: O CATÁLOGO PRINCIPAL NÃO É MAIS UMA GRADE */
+
 .products {
+  display: block;
+  width: 100%;
+}
+
+.product-section {
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.product-section .section-title {
+  margin-bottom: 18px;
+}
+
+.product-section .section-title h2 {
+  font-size: 23px;
+  margin-bottom: 5px;
+}
+
+.product-section .section-title p {
+  color: #888888;
+  font-size: 13px;
+}
+
+.fam-section .section-title h2 {
+  color: #20c55a;
+}
+
+/* GRADE DOS CARTÕES */
+
+.product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
 }
 
 .product {
@@ -286,6 +297,7 @@ header {
   border-radius: 15px;
   overflow: hidden;
   box-shadow: 0 3px 12px #0000000c;
+  min-width: 0;
 }
 
 .product-image {
@@ -304,6 +316,7 @@ header {
 .product-info h3 {
   font-size: 15px;
   margin-bottom: 8px;
+  overflow-wrap: break-word;
 }
 
 .price {
@@ -311,6 +324,29 @@ header {
   font-size: 19px;
   color: #111111;
   margin-bottom: 12px;
+}
+
+.fam-brand {
+  color: #20c55a;
+  font-weight: 900;
+}
+
+.brand-label {
+  display: inline-block;
+  font-size: 11px;
+  color: #777777;
+  margin-bottom: 7px;
+}
+
+.fam-label {
+  color: #20c55a;
+  font-weight: bold;
+}
+
+.warranty {
+  color: #777777;
+  font-size: 13px;
+  margin: 8px 0;
 }
 
 .add {
@@ -325,9 +361,7 @@ header {
   transform: scale(.97);
 }
 
-/* =================================
-   CARRINHO
-================================= */
+/* CARRINHO */
 
 .cart-section {
   margin-top: 40px;
@@ -347,6 +381,19 @@ header {
 
 .cart-item small {
   color: #777777;
+}
+
+.cart-warranty {
+  display: block;
+  color: #777777;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.cart-brand-fam {
+  color: #20c55a;
+  font-weight: bold;
+  font-size: 12px;
 }
 
 .quantity {
@@ -381,9 +428,7 @@ header {
   padding: 20px 0;
 }
 
-/* =================================
-   FORMULÁRIO
-================================= */
+/* FORMULÁRIO */
 
 .form-group {
   margin-bottom: 15px;
@@ -428,9 +473,7 @@ header {
   cursor: not-allowed;
 }
 
-/* =================================
-   RODAPÉ
-================================= */
+/* RODAPÉ */
 
 footer {
   background: #111111;
@@ -449,71 +492,39 @@ footer p {
 /* CELULARES */
 
 @media (max-width: 400px) {
-  .products {
-    grid-template-columns: repeat(2, 1fr);
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
   .product-image {
     height: 120px;
   }
-}
-  
-.fam-brand {
-  color: #20c55a;
-  font-weight: 900;
-}
 
-.warranty {
-  color: #777;
-  font-size: 13px;
-  margin: 8px 0;
-}
+  .product-info {
+    padding: 10px;
+  }
 
-.product-section {
-  margin-bottom: 35px;
-}
+  .product-info h3 {
+    font-size: 13px;
+  }
 
-.section-title {
-  margin-bottom: 18px;
-}
+  .price {
+    font-size: 17px;
+  }
 
-.section-title h2 {
-  font-size: 23px;
-  margin-bottom: 5px;
+  .cart-item {
+    align-items: flex-start;
+  }
 }
-
-.section-title p {
-  color: #888;
-  font-size: 13px;
-}
-
-.fam-section .section-title h2 {
-  color: #20c55a;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 15px;
-}
-
-.fam-brand {
-  color: #20c55a;
-  font-weight: 900;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- =================================
-     ABERTURA DA LOJA
-================================= -->
+<!-- ABERTURA DA LOJA -->
 
 <div id="intro">
-
-  <!-- PRIMEIRA ETAPA: BIGODE -->
 
   <div class="intro-stage stage-mustache">
     <svg viewBox="0 0 400 180" class="big-mustache">
@@ -528,14 +539,10 @@ footer p {
     </svg>
   </div>
 
-  <!-- SEGUNDA ETAPA: MARCA -->
-
   <div class="intro-stage stage-logo">
     <h1>BIGODE DAS ENCOMENDAS</h1>
     <h2>IMPORTAÇÕES</h2>
   </div>
-
-  <!-- TERCEIRA ETAPA: BOAS-VINDAS -->
 
   <div class="intro-stage stage-welcome">
     <h1>Seja bem-vindo!</h1>
@@ -544,9 +551,7 @@ footer p {
 
 </div>
 
-<!-- =================================
-     CABEÇALHO
-================================= -->
+<!-- CABEÇALHO -->
 
 <header>
 
@@ -578,9 +583,7 @@ footer p {
 
 </header>
 
-<!-- =================================
-     SAUDAÇÃO
-================================= -->
+<!-- SAUDAÇÃO -->
 
 <section class="hero">
   <h1 id="greeting">Olá!</h1>
@@ -588,9 +591,7 @@ footer p {
   <p><strong>Encontre seus produtos favoritos!</strong></p>
 </section>
 
-<!-- =================================
-     CATÁLOGO E CARRINHO
-================================= -->
+<!-- CATÁLOGO E CARRINHO -->
 
 <main class="container">
 
@@ -658,9 +659,7 @@ footer p {
   </section>
 </main>
 
-<!-- =================================
-     RODAPÉ
-================================= -->
+<!-- RODAPÉ -->
 
 <footer>
   <h3>BIGODE DAS ENCOMENDAS</h3>
@@ -668,22 +667,18 @@ footer p {
   <p>Atendimento pelo WhatsApp</p>
 </footer>
 
-<!-- =================================
-     JAVASCRIPT
-================================= -->
-
 <script>
 
 /* CONFIGURAÇÕES DA LOJA */
 
 const STORE_WHATSAPP = "5538992041456";
 
-/* CADASTRO DOS PRODUTOS */
-
-
+/* CADASTRO DOS 21 PRODUTOS */
 
 const productsList = [
+
   // PRODUTOS INICIAIS
+
   {
     id: 1,
     name: "Capa para celular",
@@ -715,6 +710,7 @@ const productsList = [
   },
 
   // CABOS FAM
+
   {
     id: 5,
     name: "Cabo Tipo-C para USB - 1 metro",
@@ -764,7 +760,8 @@ const productsList = [
     warranty: "1 ano de garantia"
   },
 
-  // CABOS DE OUTRAS MARCAS
+  // CABOS GOLD
+
   {
     id: 11,
     name: "Cabo Tipo-C para Lightning - 1 metro",
@@ -807,6 +804,7 @@ const productsList = [
   },
 
   // FONE BLUETOOTH FAM
+
   {
     id: 16,
     name: "Fone Bluetooth com borracha",
@@ -817,6 +815,7 @@ const productsList = [
   },
 
   // FONES BLUETOOTH DE OUTRAS MARCAS
+
   {
     id: 17,
     name: "Fone Bluetooth com borracha",
@@ -835,6 +834,7 @@ const productsList = [
   },
 
   // FONES COM FIO
+
   {
     id: 19,
     name: "Fone com fio simples - conector de pino",
@@ -859,10 +859,10 @@ const productsList = [
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
   }
+
 ];
 
 let cart = [];
-
 
 /* SAUDAÇÃO AUTOMÁTICA */
 
@@ -900,22 +900,70 @@ function money(value) {
   });
 }
 
-/* MOSTRAR PRODUTOS */
+/* CRIAR CARTÃO DE PRODUTO */
 
+function createProductCard(product) {
 
+  const isFam = product.brand === "FAM";
 
+  const productName = isFam
+    ? `${product.name} <span class="fam-brand">FAM</span>`
+    : product.name;
 
+  const brandLabel = isFam
+    ? '<span class="brand-label fam-label">MARCA FAM</span>'
+    : product.brand
+      ? `<span class="brand-label">${product.brand}</span>`
+      : "";
+
+  return `
+    <div class="product">
+
+      <div class="product-image">
+        ${product.image}
+      </div>
+
+      <div class="product-info">
+
+        ${brandLabel}
+
+        <h3>${productName}</h3>
+
+        <div class="price">
+          ${money(product.price)}
+        </div>
+
+        ${product.warranty ? `
+          <p class="warranty">
+            🛡️ ${product.warranty}
+          </p>
+        ` : ""}
+
+        <button class="add"
+          onclick="addToCart(${product.id})">
+          + Adicionar
+        </button>
+
+      </div>
+    </div>
+  `;
+}
+
+/* MOSTRAR E SEPARAR PRODUTOS */
 
 function renderProducts() {
-  const area = document.getElementById("products");
-  const search = document.getElementById("search")
-    .value.toLowerCase();
 
-  const filtered = productsList.filter(product =>
-    (product.name + " " + (product.brand || ""))
-      .toLowerCase()
-      .includes(search)
-  );
+  const area = document.getElementById("products");
+
+  const search = document.getElementById("search")
+    .value.trim().toLowerCase();
+
+  const filtered = productsList.filter(product => {
+    const searchableText =
+      `${product.name} ${product.brand || ""}`.toLowerCase();
+
+    return searchableText.includes(search);
+  });
 
   const famProducts = filtered.filter(
     product => product.brand === "FAM"
@@ -925,52 +973,15 @@ function renderProducts() {
     product => product.brand !== "FAM"
   );
 
-  function createProductCard(product) {
-    let productName = product.name;
-
-    if (product.brand === "FAM") {
-      if (/FAM/i.test(productName)) {
-        productName = productName.replace(
-          /FAM/i,
-          '<span class="fam-brand">FAM</span>'
-        );
-      } else {
-        productName +=
-          ' <span class="fam-brand">FAM</span>';
-      }
-    }
-
-    return `
-      <div class="product">
-        <div class="product-image">${product.image}</div>
-
-        <div class="product-info">
-          <h3>${productName}</h3>
-
-          <div class="price">
-            ${money(product.price)}
-          </div>
-
-          ${product.warranty ? `
-            <p class="warranty">
-              🛡️ ${product.warranty}
-            </p>
-          ` : ""}
-
-          <button class="add"
-            onclick="addToCart(${product.id})">
-            + Adicionar
-          </button>
-        </div>
-      </div>
-    `;
-  }
-
   area.innerHTML = "";
 
+  /* SEÇÃO FAM */
+
   if (famProducts.length > 0) {
+
     area.innerHTML += `
       <section class="product-section fam-section">
+
         <div class="section-title">
           <h2>💚 Produtos FAM</h2>
           <p>Marca registrada da loja · 1 ano de garantia</p>
@@ -979,35 +990,47 @@ function renderProducts() {
         <div class="product-grid">
           ${famProducts.map(createProductCard).join("")}
         </div>
+
       </section>
     `;
   }
 
+  /* SEÇÃO OUTROS PRODUTOS */
+
   if (otherProducts.length > 0) {
+
     area.innerHTML += `
       <section class="product-section">
+
         <div class="section-title">
           <h2>Outros produtos</h2>
-          <p>Confira nossos outros produtos e marcas</p>
+          <p>Confira nossos outros produtos e marcas.</p>
         </div>
 
         <div class="product-grid">
           ${otherProducts.map(createProductCard).join("")}
         </div>
+
       </section>
     `;
   }
 
-  if (filtered.length === 0) {
-    area.innerHTML = "<p>Nenhum produto encontrado.</p>";
-  }
-}
+  /* PESQUISA SEM RESULTADOS */
 
+  if (filtered.length === 0) {
+    area.innerHTML =
+      "<p class='empty'>Nenhum produto encontrado.</p>";
+  }
+
+}
 
 /* ADICIONAR AO CARRINHO */
 
 function addToCart(id) {
+
   const product = productsList.find(p => p.id === id);
+
+  if (!product) return;
 
   const existing = cart.find(item => item.id === id);
 
@@ -1026,6 +1049,7 @@ function addToCart(id) {
 /* ALTERAR QUANTIDADE */
 
 function changeQuantity(id, amount) {
+
   const item = cart.find(p => p.id === id);
 
   if (!item) return;
@@ -1049,6 +1073,7 @@ function removeItem(id) {
 /* ATUALIZAR CARRINHO */
 
 function renderCart() {
+
   const area = document.getElementById("cart-items");
 
   const count = cart.reduce(
@@ -1058,15 +1083,34 @@ function renderCart() {
   document.getElementById("cart-count").textContent = count;
 
   if (cart.length === 0) {
+
     area.innerHTML =
       '<p class="empty">Seu carrinho está vazio.</p>';
+
   } else {
+
     area.innerHTML = cart.map(item => `
+
       <div class="cart-item">
+
         <div>
+
           <strong>${item.name}</strong>
+
+          ${item.brand === "FAM" ? `
+            <div class="cart-brand-fam">FAM</div>
+          ` : ""}
+
           <br>
+
           <small>${money(item.price)} cada</small>
+
+          ${item.warranty ? `
+            <span class="cart-warranty">
+              🛡️ ${item.warranty}
+            </span>
+          ` : ""}
+
           <br>
 
           <button type="button"
@@ -1075,6 +1119,7 @@ function renderCart() {
             data-id="${item.id}">
             Apagar produto
           </button>
+
         </div>
 
         <div class="quantity">
@@ -1094,8 +1139,11 @@ function renderCart() {
           </button>
 
         </div>
+
       </div>
+
     `).join("");
+
   }
 
   const total = cart.reduce(
@@ -1104,84 +1152,36 @@ function renderCart() {
 
   document.getElementById("total").textContent =
     money(total);
+
 }
 
 /* CLIQUES NOS BOTÕES DO CARRINHO */
 
-document.getElementById("cart-items").addEventListener("click", function(event) {
+document.getElementById("cart-items").addEventListener(
+  "click",
+  function(event) {
 
-  const button = event.target.closest("button[data-action]");
+    const button = event.target.closest("button[data-action]");
 
-  if (!button) return;
+    if (!button) return;
 
-  const id = Number(button.dataset.id);
-  const action = button.dataset.action;
+    const id = Number(button.dataset.id);
+    const action = button.dataset.action;
 
-  if (action === "plus") {
-    changeQuantity(id, 1);
+    if (action === "plus") {
+      changeQuantity(id, 1);
+    }
+
+    if (action === "minus") {
+      changeQuantity(id, -1);
+    }
+
+    if (action === "remove") {
+      removeItem(id);
+    }
+
   }
-
-  if (action === "minus") {
-    changeQuantity(id, -1);
-  }
-
-  if (action === "remove") {
-    removeItem(id);
-  }
-
-});
-
-/* REMOVER PRODUTO */
-
-function removeItem(id) {
-  cart = cart.filter(p => p.id !== id);
-  renderCart();
-}
-
-/* ATUALIZAR CARRINHO */
-
-function renderCart() {
-  const area = document.getElementById("cart-items");
-
-  const count = cart.reduce(
-    (sum, item) => sum + item.quantity, 0
-  );
-
-  document.getElementById("cart-count").textContent = count;
-
-  if (cart.length === 0) {
-    area.innerHTML =
-      '<p class="empty">Seu carrinho está vazio.</p>';
-  } else {
-    area.innerHTML = cart.map(item => `
-      <div class="cart-item">
-        <div>
-          <strong>${item.name}</strong>
-          <br>
-          <small>${money(item.price)} cada</small>
-          <br>
-          <button class="remove"
-            onclick="removeItem(${item.id})">
-            Remover
-          </button>
-        </div>
-
-        <div class="quantity">
-          <button onclick="changeQuantity(${item.id}, -1)">−</button>
-          <strong>${item.quantity}</strong>
-          <button onclick="changeQuantity(${item.id}, 1)">+</button>
-        </div>
-      </div>
-    `).join("");
-  }
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity, 0
-  );
-
-  document.getElementById("total").textContent =
-    money(total);
-}
+);
 
 /* ENVIAR SOLICITAÇÃO */
 
@@ -1217,11 +1217,14 @@ function sendOrder() {
 `;
 
   cart.forEach(item => {
+
     mensagem += `
-• ${item.name}
+• ${item.name}${item.brand === "FAM" ? " - FAM" : ""}
 Quantidade: ${item.quantity}
 Valor estimado: ${money(item.price * item.quantity)}
+Garantia: ${item.warranty || "Não informada"}
 `;
+
   });
 
   mensagem += `
