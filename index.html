@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -61,16 +62,15 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .products{width:100%}
 .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .product{background:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #0000000c;min-width:0}
-.product-image{height:145px;background:#e9e9e9;display:flex;align-items:center;justify-content:center;font-size:55px}
+
+/* FOTOS DOS PRODUTOS */
+.product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.product-image img{width:100%;height:100%;object-fit:contain}
+.product-image .fallback{font-size:55px}
+
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
-.brand-emblem{width:31px;height:31px;min-width:31px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#f1f1f1;border:1px solid #ddd;color:#333;font-size:8px;font-weight:900;letter-spacing:-.5px}
-.brand-emblem.fam{background:#101010;color:white;border:2px solid #20c55a}
-.brand-emblem.gold{background:#202020;color:#e4e4e4;border:2px solid #aaa}
-.brand-emblem.other{background:#eee;color:#555}
-.brand-label{display:inline-block;font-size:10px;color:#777;margin-bottom:7px;font-weight:bold;letter-spacing:.4px}
-.brand-label.fam-label{color:#168b42}
 .price{font-weight:bold;font-size:19px;color:#111;margin-bottom:12px}
 .warranty{color:#777;font-size:12px;margin:8px 0}
 .add{background:#151515;color:white;width:100%;padding:12px;border-radius:9px}
@@ -103,13 +103,16 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .cart-products-title{font-weight:bold;margin-bottom:12px;font-size:15px}
 .cart-products-title span{color:#d45cff}
 .cart-item{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-top:1px solid #393939}
-.cart-item-image{width:48px;height:48px;flex-shrink:0;background:#333;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:25px}
+
+/* FOTO NO CARRINHO */
+.cart-item-image{width:48px;height:48px;flex-shrink:0;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:25px}
+.cart-item-image img{width:100%;height:100%;object-fit:contain}
+
 .cart-item-info{flex:1;min-width:0}
 .cart-item-info strong{display:block;font-size:13px;line-height:1.35;overflow-wrap:break-word}
 .cart-item-info small{display:block;color:#aaa;font-size:11px;margin-top:4px}
 .cart-item-info .cart-price{color:#d45cff;font-weight:bold;font-size:14px;margin-top:5px}
 .cart-warranty{color:#aaa;font-size:11px;display:block;margin-top:4px}
-.cart-brand-fam{color:#20c55a;font-weight:bold;font-size:11px;margin-top:3px}
 .cart-item-actions{display:flex;flex-direction:column;align-items:center;gap:8px}
 .quantity{display:flex;align-items:center;gap:7px}
 .quantity button{width:25px;height:25px;border-radius:7px;background:#333;color:white;font-weight:bold}
@@ -377,18 +380,18 @@ const productsList = [
   {id:3,name:"Kit carregador turbo",price:60,image:"⚡",warranty:"2 meses de garantia"},
   {id:4,name:"Kit carregador FAM",price:130,image:"🔋",brand:"FAM",warranty:"1 ano de garantia"},
 
-  {id:5,name:"Cabo Tipo-C para USB - 1 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:6,name:"Cabo Lightning para USB - 1 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:7,name:"Cabo Tipo-C para USB - 2 metros",price:45,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:8,name:"Cabo Lightning para USB - 2 metros",price:45,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:9,name:"Cabo Tipo-C para Tipo-C reforçado - 1 metro",price:50,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:10,name:"Cabo Tipo-C para Lightning reforçado - 1 metro",price:50,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:5,name:"Cabo Tipo-C para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1128.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:6,name:"Cabo Lightning para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1132.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:7,name:"Cabo Tipo-C para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1131.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:8,name:"Cabo Lightning para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1130.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:9,name:"Cabo Tipo-C para Tipo-C reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1125.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:10,name:"Cabo Tipo-C para Lightning reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1124.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
 
   {id:11,name:"Cabo Tipo-C para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:12,name:"Cabo USB para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:13,name:"Cabo USB para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:14,name:"Cabo Tipo-C para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
-  {id:15,name:"Cabo USB para V8 - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
+  {id:15,name:"Cabo USB para V8 - 1 metro",price:20,image:"🔌",photo:"imagens/IMG_1129.jpeg",brand:"Gold",warranty:"2 meses de garantia"},
 
   {id:16,name:"Fone Bluetooth com borracha",price:160,image:"🎧",brand:"FAM",warranty:"1 ano de garantia"},
   {id:17,name:"Fone Bluetooth com borracha",price:120,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
@@ -398,11 +401,10 @@ const productsList = [
   {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
 
   /* NOVOS PRODUTOS FAM */
-  {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",photo:"imagens/IMG_1127.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",photo:"imagens/IMG_1126.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:24,name:"Cabo Tipo-C para Tipo-C normal - 3A, 1,2 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:25,name:"Cabo USB para Lightning - PD",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
-  {id:26,name:"Cabo USB 3 em 1",price:55,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"}
+  {id:25,name:"Cabo USB 3 em 1",price:55,image:"🔌",photo:"imagens/IMG_1123.webp",brand:"FAM",warranty:"1 ano de garantia"}
 ];
 
 let cart = [];
@@ -438,42 +440,24 @@ function money(value){
   });
 }
 
-/* IDENTIDADE DAS MARCAS */
-function getBrandClass(brand){
-  if(brand==="FAM")return "fam";
-  if(brand==="Gold")return "gold";
-  return "other";
-}
-
-function getBrandEmblem(brand){
-  if(!brand)return "";
-
-  const brandClass=getBrandClass(brand);
-  const label=brand==="Outras marcas"?"MARCA":brand.toUpperCase();
-
-  /*
-    FUTURO:
-    Quando tivermos o recorte da logo original,
-    substituiremos o texto FAM pela imagem verdadeira.
-  */
-  return `<span class="brand-emblem ${brandClass}" aria-label="Marca ${brand}">${label}</span>`;
-}
-
 /* CARTÃO DO PRODUTO */
 function createProductCard(product){
-  const brandLabel=product.brand
-    ? `<span class="brand-label ${product.brand==="FAM"?"fam-label":""}">${product.brand.toUpperCase()}</span>`
-    : "";
+  const productPhoto = product.photo
+    ? `<img src="${product.photo}" alt="${product.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+       <span class="fallback" style="display:none">${product.image}</span>`
+    : `<span class="fallback">${product.image}</span>`;
 
   return `
     <div class="product">
-      <div class="product-image">${product.image}</div>
+      <div class="product-image">
+        ${productPhoto}
+      </div>
+
       <div class="product-info">
-        ${brandLabel}
         <div class="product-title-row">
           <h3>${product.name}</h3>
-          ${getBrandEmblem(product.brand)}
         </div>
+
         <div class="price">${money(product.price)}</div>
         <p class="warranty">🛡️ ${product.warranty}</p>
         <button class="add" onclick="addToCart(${product.id})">+ Adicionar</button>
@@ -671,13 +655,18 @@ function renderCart(){
   }else{
     area.innerHTML=cart.map(item=>`
       <div class="cart-item">
-        <div class="cart-item-image">${item.image}</div>
+        <div class="cart-item-image">
+          ${item.photo
+            ? `<img src="${item.photo}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${item.image}</span>`
+            : item.image}
+        </div>
+
         <div class="cart-item-info">
           <strong>${item.name}</strong>
-          ${item.brand?`<small>${item.brand}</small>`:""}
           <span class="cart-warranty">🛡️ ${item.warranty||"Consultar garantia"}</span>
           <div class="cart-price">${money(item.price*item.quantity)}</div>
         </div>
+
         <div class="cart-item-actions">
           <div class="quantity">
             <button type="button" onclick="changeQuantity(${item.id},-1)">−</button>
@@ -750,7 +739,7 @@ function sendOrder(){
 
   cart.forEach(item=>{
     mensagem+=`
-• ${item.name}${item.brand?" - "+item.brand:""}
+• ${item.name}
 Quantidade: ${item.quantity}
 Valor estimado: ${money(item.price*item.quantity)}
 Garantia: ${item.warranty||"Não informada"}
