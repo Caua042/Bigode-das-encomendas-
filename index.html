@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -210,14 +209,6 @@ header {
   .brand h2 {
     font-size: 13px;
   }
-}
-
-.cart-top {
-  background: #fff;
-  color: #111;
-  padding: 11px 15px;
-  border-radius: 30px;
-  font-weight: bold;
 }
 
 /* SAUDAÇÃO */
@@ -789,7 +780,7 @@ header {
   margin-top: 8px;
 }
 
-/* NOVA JANELA PERSONALIZADA DO BIGODE */
+/* JANELA PERSONALIZADA DO BIGODE */
 
 .cancel-modal-overlay {
   position: fixed;
@@ -998,6 +989,7 @@ footer p {
 
 <header>
   <div class="brand">
+
     <svg viewBox="0 0 400 180">
       <path fill="white" d="M200 83 C170 45 125 35 90 49
       C54 62 35 91 10 85
@@ -1013,8 +1005,8 @@ footer p {
       <h2>BIGODE DAS ENCOMENDAS</h2>
       <span>IMPORTAÇÕES</span>
     </div>
-  </div>
 
+  </div>
 </header>
 
 <!-- SAUDAÇÃO -->
@@ -1909,7 +1901,7 @@ function renderCart() {
     (sum, item) => sum + item.quantity, 0
   );
 
-  document.getElementById("cart-count-top").textContent = count;
+  /* ATUALIZA SOMENTE O CONTADOR FLUTUANTE */
 
   document.getElementById("cart-badge").textContent =
     count > 0 ? count : "";
