@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -765,6 +766,114 @@ header {
   margin-top: 8px;
 }
 
+/* NOVA JANELA PERSONALIZADA DO BIGODE */
+
+.cancel-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 800;
+  background: #000000b8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+
+.cancel-modal-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cancel-modal {
+  width: 100%;
+  max-width: 360px;
+  background: #191919;
+  color: white;
+  border: 2px solid #8125cf;
+  border-radius: 23px;
+  padding: 25px 21px;
+  text-align: center;
+  box-shadow: 0 0 35px #8125cf55;
+  transform: translateY(15px) scale(.94);
+  transition: transform .25s ease;
+}
+
+.cancel-modal-overlay.open .cancel-modal {
+  transform: translateY(0) scale(1);
+}
+
+.cancel-modal-icon {
+  width: 76px;
+  height: 76px;
+  margin: 0 auto 17px;
+  border-radius: 50%;
+  background: #252525;
+  border: 2px solid #a000ff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 39px;
+  box-shadow: 0 0 16px #a000ff33;
+}
+
+.cancel-modal h2 {
+  font-size: 23px;
+  margin-bottom: 13px;
+  line-height: 1.3;
+}
+
+.cancel-modal p {
+  color: #ddd;
+  font-size: 14px;
+  line-height: 1.65;
+  margin-bottom: 22px;
+}
+
+.cancel-modal-buttons {
+  display: grid;
+  gap: 10px;
+}
+
+.cancel-modal-button {
+  width: 100%;
+  padding: 14px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.4;
+  transition: transform .15s, opacity .15s;
+}
+
+.cancel-modal-button:active {
+  transform: scale(.97);
+}
+
+.modal-continue {
+  background: #16c75a;
+  color: white;
+  box-shadow: 0 4px 12px #16c75a33;
+}
+
+.modal-confirm {
+  background: transparent;
+  color: #ff6974;
+  border: 1px solid #ff5260;
+}
+
+.modal-finish {
+  background: #16c75a;
+  color: white;
+}
+
+.cancel-modal-footer {
+  color: #777;
+  font-size: 11px;
+  margin-top: 18px;
+}
+
 /* RODAPÉ */
 
 footer {
@@ -822,6 +931,10 @@ footer p {
   .floating-cart svg {
     width: 46px;
     height: 46px;
+  }
+
+  .cancel-modal {
+    padding: 22px 17px;
   }
 }
 </style>
@@ -930,7 +1043,6 @@ footer p {
   <svg viewBox="0 0 100 100" fill="none"
        xmlns="http://www.w3.org/2000/svg">
 
-    <!-- Carrinho -->
     <path d="M12 17 H23 L31 62 Q32 68 39 68 H78"
       stroke="white" stroke-width="5"
       stroke-linecap="round" stroke-linejoin="round"/>
@@ -939,7 +1051,6 @@ footer p {
       stroke="white" stroke-width="5"
       stroke-linejoin="round"/>
 
-    <!-- Bigode integrado -->
     <path d="M34 43
       C42 31 49 37 56 43
       C63 37 72 31 83 43
@@ -947,7 +1058,6 @@ footer p {
       C47 57 39 57 34 43Z"
       fill="white"/>
 
-    <!-- Rodas -->
     <circle cx="42" cy="81" r="5" fill="white"/>
     <circle cx="74" cy="81" r="5" fill="white"/>
 
@@ -1102,6 +1212,58 @@ footer p {
 
   </div>
 </section>
+
+<!-- JANELA PERSONALIZADA DE CANCELAMENTO -->
+
+<div
+  class="cancel-modal-overlay"
+  id="cancel-modal-overlay"
+  onclick="handleCancelModalBackdrop(event)"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="cancel-modal-title">
+
+  <div class="cancel-modal">
+
+    <div class="cancel-modal-icon" id="cancel-modal-icon">
+      🥹
+    </div>
+
+    <h2 id="cancel-modal-title">
+      Ôxe, já desistiu? 🥹
+    </h2>
+
+    <p id="cancel-modal-message">
+      O Bigode ficou triste agora! KKKK Mas não tem problema, não.
+      Sua visita já é importante pra gente. Volte sempre! ❤️
+    </p>
+
+    <div class="cancel-modal-buttons">
+
+      <button
+        class="cancel-modal-button modal-continue"
+        id="cancel-modal-primary"
+        type="button"
+        onclick="handleCancelModalPrimary()">
+        Vou ficar mais um pouquinho! ❤️
+      </button>
+
+      <button
+        class="cancel-modal-button modal-confirm"
+        id="cancel-modal-secondary"
+        type="button"
+        onclick="confirmCancelCart()">
+        Pode cancelar, Bigode 🥺
+      </button>
+
+    </div>
+
+    <div class="cancel-modal-footer">
+      BIGODE DAS ENCOMENDAS · IMPORTAÇÕES
+    </div>
+
+  </div>
+</div>
 
 <script>
 
@@ -1297,6 +1459,7 @@ const productsList = [
 ];
 
 let cart = [];
+let cancelModalMode = "";
 
 /* SAUDAÇÃO AUTOMÁTICA */
 
@@ -1563,23 +1726,136 @@ function removeItem(id) {
 
 }
 
-/* CANCELAR COMPRA */
+/* ABRIR JANELA DE CANCELAMENTO */
 
 function cancelCart() {
 
   if (cart.length === 0) {
 
-    alert("Seu carrinho já está vazio.");
+    showCancelModal("empty");
 
     return;
 
   }
 
-  const confirmCancel = confirm(
-    "Tem certeza que deseja cancelar a compra e remover todos os produtos?"
-  );
+  showCancelModal("confirm");
 
-  if (!confirmCancel) return;
+}
+
+/* CONFIGURAR JANELA PERSONALIZADA */
+
+function showCancelModal(mode) {
+
+  cancelModalMode = mode;
+
+  const overlay =
+    document.getElementById("cancel-modal-overlay");
+
+  const icon =
+    document.getElementById("cancel-modal-icon");
+
+  const title =
+    document.getElementById("cancel-modal-title");
+
+  const message =
+    document.getElementById("cancel-modal-message");
+
+  const primary =
+    document.getElementById("cancel-modal-primary");
+
+  const secondary =
+    document.getElementById("cancel-modal-secondary");
+
+  if (mode === "confirm") {
+
+    icon.textContent = "🥹";
+
+    title.textContent = "Ôxe, já desistiu? 🥹";
+
+    message.textContent =
+      "O Bigode ficou triste agora! KKKK Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️";
+
+    primary.textContent =
+      "Vou ficar mais um pouquinho! ❤️";
+
+    secondary.textContent =
+      "Pode cancelar, Bigode 🥺";
+
+    secondary.style.display = "block";
+
+  }
+
+  if (mode === "success") {
+
+    icon.textContent = "❤️";
+
+    title.textContent =
+      "Tudo bem, fica para a próxima!";
+
+    message.textContent =
+      "Seu carrinho foi esvaziado. Esperamos ter a oportunidade de atender você novamente. Quando precisar, o Bigode estará aqui de portas abertas! ❤️";
+
+    primary.textContent =
+      "Voltar às compras ❤️";
+
+    secondary.style.display = "none";
+
+  }
+
+  if (mode === "empty") {
+
+    icon.textContent = "😅";
+
+    title.textContent =
+      "Uai, mas já está vazio!";
+
+    message.textContent =
+      "Não tem nenhum produto para cancelar. Que tal dar uma olhadinha no nosso catálogo? O Bigode está esperando por você! ❤️";
+
+    primary.textContent =
+      "Voltar às compras ❤️";
+
+    secondary.style.display = "none";
+
+  }
+
+  overlay.classList.add("open");
+}
+
+/* FECHAR JANELA */
+
+function closeCancelModal() {
+
+  document.getElementById("cancel-modal-overlay")
+    .classList.remove("open");
+
+  cancelModalMode = "";
+
+}
+
+/* BOTÃO PRINCIPAL DA JANELA */
+
+function handleCancelModalPrimary() {
+
+  if (cancelModalMode === "success" ||
+      cancelModalMode === "empty") {
+
+    closeCancelModal();
+    closeCart();
+
+    return;
+
+  }
+
+  closeCancelModal();
+
+}
+
+/* CONFIRMAR CANCELAMENTO DE VERDADE */
+
+function confirmCancelCart() {
+
+  if (cancelModalMode !== "confirm") return;
 
   cart = [];
 
@@ -1587,7 +1863,19 @@ function cancelCart() {
 
   hideCheckoutForm();
 
-  alert("Carrinho esvaziado! Você pode começar novamente. 😊");
+  showCancelModal("success");
+
+}
+
+/* FECHAR CLICANDO FORA DA JANELA */
+
+function handleCancelModalBackdrop(event) {
+
+  if (event.target.id === "cancel-modal-overlay") {
+
+    closeCancelModal();
+
+  }
 
 }
 
@@ -1705,7 +1993,7 @@ function showCheckoutForm() {
 
   if (cart.length === 0) {
 
-    alert("Adicione algum produto antes de finalizar.");
+    showCancelModal("empty");
 
     return;
 
@@ -1750,7 +2038,7 @@ function sendOrder() {
 
   if (cart.length === 0) {
 
-    alert("Adicione pelo menos um produto ao carrinho.");
+    showCancelModal("empty");
 
     return;
 
