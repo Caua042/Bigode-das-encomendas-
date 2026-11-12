@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -32,7 +33,7 @@ button{cursor:pointer;border:none}
 @keyframes welcomeShow{0%{opacity:0;visibility:visible;transform:translateY(20px)}20%,100%{opacity:1;visibility:visible;transform:translateY(0)}}
 
 /* CABEÇALHO */
-header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:flex-start;position:sticky;top:0;z-index:100;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
+header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
 .brand{display:flex;align-items:center;gap:13px}
 .brand svg{width:50px;flex-shrink:0}
 .brand h2{font-size:15px;font-weight:800;letter-spacing:1.2px;line-height:1.3}
@@ -52,49 +53,38 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .section-title p{color:#777;margin-top:7px}
 .search{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;margin-bottom:25px;background:white;outline:none}
 .search:focus{border-color:#111}
-
-/* FILTROS */
 .catalog-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-12px;margin-bottom:25px}
 .catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #ddd;border-radius:10px;background:white;color:#222;outline:none;font-size:13px}
 .catalog-filters select:focus{border-color:#20c55a}
 @media(max-width:350px){.catalog-filters{grid-template-columns:1fr}}
 
-.products{display:block;width:100%}
-.product-section{width:100%;margin-bottom:35px}
-.product-section+.product-section{padding-top:25px;border-top:1px solid #444}
-.product-section .section-title{margin-bottom:18px}
-.product-section .section-title h2{font-size:23px;margin-bottom:5px}
-.product-section .section-title p{color:#888;font-size:13px}
-.fam-section .section-title h2{color:#20c55a}
-
-/* DESTAQUE FAM */
-.fam-highlight{background:linear-gradient(110deg,#111,#202820);border:1px solid #286c40;border-left:4px solid #20c55a;border-radius:12px;padding:15px;margin-bottom:18px}
-.fam-highlight strong{display:block;color:#20c55a;font-size:16px;margin-bottom:5px}
-.fam-highlight p{color:#ddd;font-size:12px;line-height:1.5}
-.fam-highlight span{display:inline-block;color:#20c55a;font-size:10px;font-weight:bold;margin-top:8px;letter-spacing:1px}
-
-/* PRODUTOS */
+.products{width:100%}
 .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .product{background:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #0000000c;min-width:0}
 .product-image{height:145px;background:#e9e9e9;display:flex;align-items:center;justify-content:center;font-size:55px}
 .product-info{padding:13px}
-.product-info h3{font-size:15px;margin-bottom:8px;overflow-wrap:break-word}
+.product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
+.brand-emblem{width:31px;height:31px;min-width:31px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#f1f1f1;border:1px solid #ddd;color:#333;font-size:8px;font-weight:900;letter-spacing:-.5px}
+.brand-emblem.fam{background:#101010;color:white;border:2px solid #20c55a}
+.brand-emblem.gold{background:#202020;color:#e4e4e4;border:2px solid #aaa}
+.brand-emblem.other{background:#eee;color:#555}
+.brand-label{display:inline-block;font-size:10px;color:#777;margin-bottom:7px;font-weight:bold;letter-spacing:.4px}
+.brand-label.fam-label{color:#168b42}
 .price{font-weight:bold;font-size:19px;color:#111;margin-bottom:12px}
-.fam-brand{color:#20c55a;font-weight:900}
-.brand-label{display:inline-block;font-size:11px;color:#777;margin-bottom:7px}
-.fam-label{color:#20c55a;font-weight:bold}
-.warranty{color:#777;font-size:13px;margin:8px 0}
+.warranty{color:#777;font-size:12px;margin:8px 0}
 .add{background:#151515;color:white;width:100%;padding:12px;border-radius:9px}
 .add:active{transform:scale(.97)}
+.no-products{color:#888;text-align:center;padding:25px}
 
 /* CARRINHO FLUTUANTE */
-.floating-cart{position:fixed;right:20px;bottom:22px;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,#101010,#242424);border:3px solid #20d875;box-shadow:0 0 18px #20d87566;display:flex;align-items:center;justify-content:center;z-index:500;transition:transform .2s,box-shadow .2s}
+.floating-cart{position:fixed;right:20px;bottom:22px;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,#101010,#242424);border:3px solid #20d875;box-shadow:0 0 18px #20d87566;display:flex;align-items:center;justify-content:center;z-index:500;transition:transform .2s}
 .floating-cart:active{transform:scale(.92)}
 .floating-cart svg{width:52px;height:52px}
 .cart-badge{position:absolute;top:-7px;right:-6px;min-width:27px;height:27px;padding:0 6px;border-radius:20px;background:#a000ff;color:white;font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #111}
 .cart-badge:empty{display:none}
 
-/* PAINEL */
+/* PAINEL BIGAS */
 .cart-overlay{position:fixed;inset:0;background:#00000070;z-index:600;opacity:0;visibility:hidden;transition:.25s}
 .cart-overlay.open{opacity:1;visibility:visible}
 .cart-panel{position:fixed;z-index:601;right:18px;bottom:110px;width:min(420px,calc(100% - 24px));max-height:min(78vh,720px);background:#151515;color:white;border:2px solid #8125cf;border-radius:23px;box-shadow:0 0 30px #7000bb55;display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(20px) scale(.97);transition:.25s}
@@ -155,10 +145,8 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .cancel-modal h2{font-size:23px;margin-bottom:13px;line-height:1.3}
 .cancel-modal p{color:#ddd;font-size:14px;line-height:1.65;margin-bottom:22px}
 .cancel-modal-buttons{display:grid;gap:10px}
-.cancel-modal-button{width:100%;padding:14px 12px;border-radius:12px;font-size:14px;font-weight:bold;line-height:1.4;transition:transform .15s,opacity .15s}
-.cancel-modal-button:active{transform:scale(.97)}
+.cancel-modal-button{width:100%;padding:14px 12px;border-radius:12px;font-size:14px;font-weight:bold;line-height:1.4}
 .modal-continue,.modal-finish{background:#16c75a;color:white}
-.modal-continue{box-shadow:0 4px 12px #16c75a33}
 .modal-confirm{background:transparent;color:#ff6974;border:1px solid #ff5260}
 .cancel-modal-footer{color:#777;font-size:11px;margin-top:18px}
 
@@ -168,10 +156,10 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
 
 /* CELULARES */
 @media(max-width:400px){
-.product-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.product-grid{gap:10px}
 .product-image{height:120px}
 .product-info{padding:10px}
-.product-info h3{font-size:13px}
+.product-title-row h3{font-size:12px}
 .price{font-size:17px}
 .cart-panel{right:12px;bottom:98px;width:calc(100% - 24px);max-height:78vh}
 .floating-cart{width:66px;height:66px;right:15px;bottom:15px}
@@ -250,7 +238,6 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
   <div class="products" id="products"></div>
 </main>
 
-<!-- RODAPÉ -->
 <footer>
   <h3>BIGODE DAS ENCOMENDAS</h3>
   <p>Importações e encomendas</p>
@@ -284,12 +271,10 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
         <circle cx="74" cy="81" r="5" fill="white"/>
       </svg>
     </div>
-
     <div class="cart-panel-title">
       <h2>Bigas</h2>
       <p>Assistente de encomendas</p>
     </div>
-
     <button class="close-cart" type="button" onclick="closeCart()">×</button>
   </div>
 
@@ -303,14 +288,11 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
 
     <div class="cart-products-box">
       <div class="cart-products-title">
-        🛒 Seus produtos ·
-        <span id="cart-items-count">0 itens</span>
+        🛒 Seus produtos · <span id="cart-items-count">0 itens</span>
       </div>
-
       <div id="cart-items">
         <p class="empty">Seu carrinho está vazio. 😔</p>
       </div>
-
       <div class="cart-total">
         <span>Total da encomenda:</span>
         <strong id="total">R$ 0,00</strong>
@@ -328,31 +310,25 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
       A loja verificará o estoque e entrará em contato.
     </p>
 
-    <!-- DADOS DO CLIENTE -->
     <div class="checkout-form" id="checkout-form">
       <h3>Seus dados 📋</h3>
-
       <div class="form-group">
         <label for="nome">Nome completo</label>
         <input id="nome" placeholder="Digite seu nome">
       </div>
-
       <div class="form-group">
         <label for="telefone">Telefone</label>
         <input id="telefone" type="tel" placeholder="(38) 99999-9999">
       </div>
-
       <div class="form-group">
         <label for="endereco">Endereço</label>
         <input id="endereco" placeholder="Rua, número e bairro">
       </div>
-
       <div class="notice">
         ⚠️ A solicitação não representa uma compra confirmada.
         O proprietário verificará a disponibilidade e entrará
         em contato para combinar a entrega.
       </div>
-
       <button class="confirm" type="button" onclick="sendOrder()">Enviar solicitação pelo WhatsApp</button>
       <button class="back-to-cart" type="button" onclick="hideCheckoutForm()">← Voltar ao carrinho</button>
     </div>
@@ -364,7 +340,6 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
   onclick="handleCancelModalBackdrop(event)"
   role="dialog" aria-modal="true"
   aria-labelledby="cancel-modal-title">
-
   <div class="cancel-modal">
     <div class="cancel-modal-icon" id="cancel-modal-icon">🥹</div>
     <h2 id="cancel-modal-title">Ôxe, já desistiu? 🥹</h2>
@@ -372,21 +347,18 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
       O Bigode ficou triste agora! KKKK Mas não tem problema, não.
       Sua visita já é importante pra gente. Volte sempre! ❤️
     </p>
-
     <div class="cancel-modal-buttons">
       <button class="cancel-modal-button modal-continue"
         id="cancel-modal-primary" type="button"
         onclick="handleCancelModalPrimary()">
         Vou ficar mais um pouquinho! ❤️
       </button>
-
       <button class="cancel-modal-button modal-confirm"
         id="cancel-modal-secondary" type="button"
         onclick="confirmCancelCart()">
         Pode cancelar, Bigode 🥺
       </button>
     </div>
-
     <div class="cancel-modal-footer">
       BIGODE DAS ENCOMENDAS · IMPORTAÇÕES
     </div>
@@ -423,7 +395,14 @@ const productsList = [
   {id:18,name:"Fone Bluetooth sem borracha",price:130,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:19,name:"Fone com fio simples - conector de pino",price:20,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:20,name:"Fone com fio resistente e borracha - conector de pino",price:30,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
-  {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"}
+  {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
+
+  /* NOVOS PRODUTOS FAM */
+  {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:24,name:"Cabo Tipo-C para Tipo-C normal - 3A, 1,2 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:25,name:"Cabo USB para Lightning - PD",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
+  {id:26,name:"Cabo USB 3 em 1",price:55,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"}
 ];
 
 let cart = [];
@@ -459,26 +438,42 @@ function money(value){
   });
 }
 
-/* CARTÃO */
+/* IDENTIDADE DAS MARCAS */
+function getBrandClass(brand){
+  if(brand==="FAM")return "fam";
+  if(brand==="Gold")return "gold";
+  return "other";
+}
+
+function getBrandEmblem(brand){
+  if(!brand)return "";
+
+  const brandClass=getBrandClass(brand);
+  const label=brand==="Outras marcas"?"MARCA":brand.toUpperCase();
+
+  /*
+    FUTURO:
+    Quando tivermos o recorte da logo original,
+    substituiremos o texto FAM pela imagem verdadeira.
+  */
+  return `<span class="brand-emblem ${brandClass}" aria-label="Marca ${brand}">${label}</span>`;
+}
+
+/* CARTÃO DO PRODUTO */
 function createProductCard(product){
-  const isFam = product.brand==="FAM";
-
-  const productName = isFam
-    ? `${product.name} <span class="fam-brand">FAM</span>`
-    : product.name;
-
-  const brandLabel = isFam
-    ? '<span class="brand-label fam-label">MARCA FAM</span>'
-    : product.brand
-      ? `<span class="brand-label">${product.brand}</span>`
-      : "";
+  const brandLabel=product.brand
+    ? `<span class="brand-label ${product.brand==="FAM"?"fam-label":""}">${product.brand.toUpperCase()}</span>`
+    : "";
 
   return `
     <div class="product">
       <div class="product-image">${product.image}</div>
       <div class="product-info">
         ${brandLabel}
-        <h3>${productName}</h3>
+        <div class="product-title-row">
+          <h3>${product.name}</h3>
+          ${getBrandEmblem(product.brand)}
+        </div>
         <div class="price">${money(product.price)}</div>
         <p class="warranty">🛡️ ${product.warranty}</p>
         <button class="add" onclick="addToCart(${product.id})">+ Adicionar</button>
@@ -489,26 +484,24 @@ function createProductCard(product){
 
 /* PESQUISA, FILTROS E ORDENAÇÃO */
 function renderProducts(){
-  const area = document.getElementById("products");
-  const search = document.getElementById("search").value.trim().toLowerCase();
-  const sort = document.getElementById("sort-filter").value;
-  const brand = document.getElementById("brand-filter").value;
+  const area=document.getElementById("products");
+  const search=document.getElementById("search").value.trim().toLowerCase();
+  const sort=document.getElementById("sort-filter").value;
+  const brand=document.getElementById("brand-filter").value;
 
-  let filtered = productsList.filter(product=>{
-    const searchableText =
-      `${product.name} ${product.brand || ""}`.toLowerCase();
+  let filtered=productsList.filter(product=>{
+    const searchableText=
+      `${product.name} ${product.brand||""}`.toLowerCase();
 
-    const matchesSearch = searchableText.includes(search);
-    let matchesBrand = true;
+    const matchesSearch=searchableText.includes(search);
+    let matchesBrand=true;
 
     if(brand==="FAM" || brand==="Gold"){
-      matchesBrand = product.brand===brand;
+      matchesBrand=product.brand===brand;
     }
 
     if(brand==="other"){
-      matchesBrand =
-        product.brand!=="FAM" &&
-        product.brand!=="Gold";
+      matchesBrand=product.brand!=="FAM" && product.brand!=="Gold";
     }
 
     return matchesSearch && matchesBrand;
@@ -516,59 +509,22 @@ function renderProducts(){
 
   if(sort==="low"){
     filtered.sort((a,b)=>a.price-b.price);
-  }
-
-  if(sort==="high"){
+  }else if(sort==="high"){
     filtered.sort((a,b)=>b.price-a.price);
-  }
-
-  if(sort==="az"){
+  }else if(sort==="az"){
     filtered.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
   }
 
-  const famProducts = filtered.filter(p=>p.brand==="FAM");
-  const otherProducts = filtered.filter(p=>p.brand!=="FAM");
-
-  area.innerHTML = "";
-
-  if(famProducts.length>0){
-    area.innerHTML += `
-      <section class="product-section fam-section">
-        <div class="fam-highlight">
-          <strong>💚 Linha FAM</strong>
-          <p>Uma das especialidades da nossa loja. Confira nossa seleção de acessórios FAM.</p>
-          <span>QUALIDADE E CONFIANÇA</span>
-        </div>
-
-        <div class="section-title">
-          <h2>Produtos FAM</h2>
-          <p>Confira os modelos disponíveis da marca.</p>
-        </div>
-
-        <div class="product-grid">
-          ${famProducts.map(createProductCard).join("")}
-        </div>
-      </section>
-    `;
-  }
-
-  if(otherProducts.length>0){
-    area.innerHTML += `
-      <section class="product-section">
-        <div class="section-title">
-          <h2>Outros produtos</h2>
-          <p>Confira nossos outros produtos e marcas.</p>
-        </div>
-        <div class="product-grid">
-          ${otherProducts.map(createProductCard).join("")}
-        </div>
-      </section>
-    `;
-  }
-
   if(filtered.length===0){
-    area.innerHTML="<p class='empty'>Nenhum produto encontrado.</p>";
+    area.innerHTML="<p class='no-products'>Nenhum produto encontrado.</p>";
+    return;
   }
+
+  area.innerHTML=`
+    <div class="product-grid">
+      ${filtered.map(createProductCard).join("")}
+    </div>
+  `;
 }
 
 /* CARRINHO */
@@ -698,7 +654,6 @@ function handleCancelModalBackdrop(event){
 /* ATUALIZAR CARRINHO */
 function renderCart(){
   const area=document.getElementById("cart-items");
-
   const count=cart.reduce((sum,item)=>sum+item.quantity,0);
 
   document.getElementById("cart-badge").textContent=count>0?count:"";
@@ -717,30 +672,18 @@ function renderCart(){
     area.innerHTML=cart.map(item=>`
       <div class="cart-item">
         <div class="cart-item-image">${item.image}</div>
-
         <div class="cart-item-info">
           <strong>${item.name}</strong>
-
-          ${item.brand==="FAM"?`
-            <span class="cart-brand-fam">FAM</span>
-          `:""}
-
-          <small>${item.brand||"Marca não informada"}</small>
-
+          ${item.brand?`<small>${item.brand}</small>`:""}
           <span class="cart-warranty">🛡️ ${item.warranty||"Consultar garantia"}</span>
-
-          <div class="cart-price">
-            ${money(item.price*item.quantity)}
-          </div>
+          <div class="cart-price">${money(item.price*item.quantity)}</div>
         </div>
-
         <div class="cart-item-actions">
           <div class="quantity">
             <button type="button" onclick="changeQuantity(${item.id},-1)">−</button>
             <strong>${item.quantity}</strong>
             <button type="button" onclick="changeQuantity(${item.id},1)">+</button>
           </div>
-
           <button type="button" class="remove"
             aria-label="Remover produto"
             onclick="removeItem(${item.id})">🗑</button>
@@ -750,7 +693,6 @@ function renderCart(){
   }
 
   const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
-
   document.getElementById("total").textContent=money(total);
 
   document.querySelector(".finish-shopping").disabled=cart.length===0;
@@ -808,7 +750,7 @@ function sendOrder(){
 
   cart.forEach(item=>{
     mensagem+=`
-• ${item.name}${item.brand==="FAM"?" - FAM":""}
+• ${item.name}${item.brand?" - "+item.brand:""}
 Quantidade: ${item.quantity}
 Valor estimado: ${money(item.price*item.quantity)}
 Garantia: ${item.warranty||"Não informada"}
@@ -826,7 +768,6 @@ Por favor, entre em contato com o cliente para confirmar os produtos e combinar 
 Pedido enviado pelo site!`;
 
   const link="https://wa.me/"+STORE_WHATSAPP+"?text="+encodeURIComponent(mensagem);
-
   window.location.href=link;
 }
 
