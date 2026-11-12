@@ -875,9 +875,9 @@ function renderProducts() {
   const search = document.getElementById("search")
     .value.toLowerCase();
 
-  const filtered = productsList.filter(product =>
-    product.name.toLowerCase().includes(search)
-  );
+ const filtered = productsList.filter(product =>
+  product.name.toLowerCase().includes(search)
+);
 
   area.innerHTML = "";
 
