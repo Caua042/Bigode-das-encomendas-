@@ -469,6 +469,39 @@ footer p {
   margin: 8px 0;
 }
 
+.product-section {
+  margin-bottom: 35px;
+}
+
+.section-title {
+  margin-bottom: 18px;
+}
+
+.section-title h2 {
+  font-size: 23px;
+  margin-bottom: 5px;
+}
+
+.section-title p {
+  color: #888;
+  font-size: 13px;
+}
+
+.fam-section .section-title h2 {
+  color: #20c55a;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.fam-brand {
+  color: #20c55a;
+  font-weight: 900;
+}
+
 </style>
 </head>
 
@@ -870,26 +903,44 @@ function money(value) {
 /* MOSTRAR PRODUTOS */
 
 
+
+
+
 function renderProducts() {
   const area = document.getElementById("products");
   const search = document.getElementById("search")
     .value.toLowerCase();
 
- const filtered = productsList.filter(product =>
-  product.name.toLowerCase().includes(search)
-);
+  const filtered = productsList.filter(product =>
+    (product.name + " " + (product.brand || ""))
+      .toLowerCase()
+      .includes(search)
+  );
 
-  area.innerHTML = "";
+  const famProducts = filtered.filter(
+    product => product.brand === "FAM"
+  );
 
-  filtered.forEach(product => {
-    const productName = product.brand === "FAM"
-      ? product.name.replace(
+  const otherProducts = filtered.filter(
+    product => product.brand !== "FAM"
+  );
+
+  function createProductCard(product) {
+    let productName = product.name;
+
+    if (product.brand === "FAM") {
+      if (/FAM/i.test(productName)) {
+        productName = productName.replace(
           /FAM/i,
           '<span class="fam-brand">FAM</span>'
-        )
-      : product.name;
+        );
+      } else {
+        productName +=
+          ' <span class="fam-brand">FAM</span>';
+      }
+    }
 
-    area.innerHTML += `
+    return `
       <div class="product">
         <div class="product-image">${product.image}</div>
 
@@ -913,13 +964,45 @@ function renderProducts() {
         </div>
       </div>
     `;
-  });
+  }
+
+  area.innerHTML = "";
+
+  if (famProducts.length > 0) {
+    area.innerHTML += `
+      <section class="product-section fam-section">
+        <div class="section-title">
+          <h2>💚 Produtos FAM</h2>
+          <p>Marca registrada da loja · 1 ano de garantia</p>
+        </div>
+
+        <div class="product-grid">
+          ${famProducts.map(createProductCard).join("")}
+        </div>
+      </section>
+    `;
+  }
+
+  if (otherProducts.length > 0) {
+    area.innerHTML += `
+      <section class="product-section">
+        <div class="section-title">
+          <h2>Outros produtos</h2>
+          <p>Confira nossos outros produtos e marcas</p>
+        </div>
+
+        <div class="product-grid">
+          ${otherProducts.map(createProductCard).join("")}
+        </div>
+      </section>
+    `;
+  }
 
   if (filtered.length === 0) {
-    area.innerHTML =
-      "<p>Nenhum produto encontrado.</p>";
+    area.innerHTML = "<p>Nenhum produto encontrado.</p>";
   }
 }
+
 
 /* ADICIONAR AO CARRINHO */
 
