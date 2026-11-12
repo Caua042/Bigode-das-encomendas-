@@ -46,6 +46,8 @@ button {
 #intro.hide {
   opacity: 0;
   visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .intro-stage {
@@ -892,7 +894,7 @@ updateGreeting();
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.getElementById("intro").classList.add("hide");
-  }, 7000);
+  }, 2500);
 });
 
 /* FORMATAR PREÇO */
