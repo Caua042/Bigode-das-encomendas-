@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -29,7 +30,7 @@ button {
   border: none;
 }
 
-/* ABERTURA ANIMADA */
+/* ABERTURA - 2,5 SEGUNDOS */
 
 #intro {
   position: fixed;
@@ -40,14 +41,13 @@ button {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity .8s ease, visibility .8s;
+  transition: opacity .3s ease, visibility .3s ease;
 }
 
 #intro.hide {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .intro-stage {
@@ -60,17 +60,17 @@ button {
 }
 
 .stage-mustache {
-  animation: mustacheShow 2s ease forwards;
+  animation: mustacheShow .7s ease forwards;
 }
 
 .big-mustache {
   width: 90%;
   max-width: 430px;
-  animation: growMustache 2s ease;
+  animation: growMustache .7s ease;
 }
 
 .stage-logo {
-  animation: logoShow 2s ease 2s forwards;
+  animation: logoShow .8s ease .65s forwards;
 }
 
 .stage-logo h1,
@@ -83,7 +83,6 @@ button {
 
 .stage-logo h1 {
   font-size: clamp(23px, 6vw, 38px);
-  letter-spacing: 1px;
 }
 
 .stage-logo h2 {
@@ -93,16 +92,16 @@ button {
 }
 
 .stage-welcome {
-  animation: welcomeShow 2.5s ease 4s forwards;
+  animation: welcomeShow 1s ease 1.4s forwards;
 }
 
 .stage-welcome h1 {
-  color: #ffffff;
+  color: white;
   font-size: clamp(30px, 7vw, 44px);
 }
 
 .stage-welcome p {
-  color: #ffffff;
+  color: white;
   font-size: 21px;
   margin-top: 15px;
 }
@@ -113,7 +112,7 @@ button {
 }
 
 @keyframes mustacheShow {
-  0%, 80% {
+  0%, 65% {
     opacity: 1;
     visibility: visible;
   }
@@ -129,7 +128,7 @@ button {
     visibility: visible;
     transform: scale(.8);
   }
-  20%, 80% {
+  20%, 75% {
     opacity: 1;
     visibility: visible;
     transform: scale(1);
@@ -156,7 +155,7 @@ button {
 /* CABEÇALHO */
 
 header {
-  background: #111111;
+  background: #111;
   color: white;
   padding: 18px 5%;
   display: flex;
@@ -184,15 +183,15 @@ header {
 
 .brand span {
   display: block;
-  color: #ffffff;
+  color: white;
   font-size: 10px;
   margin-top: 3px;
   letter-spacing: 3px;
 }
 
 .cart-top {
-  background: #ffffff;
-  color: #111111;
+  background: #fff;
+  color: #111;
   padding: 11px 15px;
   border-radius: 30px;
   font-weight: bold;
@@ -213,12 +212,12 @@ header {
 }
 
 .hero p {
-  color: #dddddd;
+  color: #ddd;
   line-height: 1.6;
 }
 
 .hero strong {
-  color: #ffffff;
+  color: white;
 }
 
 /* CATÁLOGO */
@@ -238,14 +237,14 @@ header {
 }
 
 .section-title p {
-  color: #777777;
+  color: #777;
   margin-top: 7px;
 }
 
 .search {
   width: 100%;
   padding: 15px;
-  border: 1px solid #dddddd;
+  border: 1px solid #ddd;
   border-radius: 12px;
   margin-bottom: 25px;
   background: white;
@@ -253,10 +252,9 @@ header {
 }
 
 .search:focus {
-  border-color: #111111;
+  border-color: #111;
 }
 
-/* IMPORTANTE: O CATÁLOGO PRINCIPAL NÃO É MAIS UMA GRADE */
 .products {
   display: block;
   width: 100%;
@@ -282,7 +280,7 @@ header {
 }
 
 .product-section .section-title p {
-  color: #888888;
+  color: #888;
   font-size: 13px;
 }
 
@@ -290,7 +288,7 @@ header {
   color: #20c55a;
 }
 
-/* GRADE DOS CARTÕES */
+/* CARTÕES */
 
 .product-grid {
   display: grid;
@@ -328,7 +326,7 @@ header {
 .price {
   font-weight: bold;
   font-size: 19px;
-  color: #111111;
+  color: #111;
   margin-bottom: 12px;
 }
 
@@ -340,7 +338,7 @@ header {
 .brand-label {
   display: inline-block;
   font-size: 11px;
-  color: #777777;
+  color: #777;
   margin-bottom: 7px;
 }
 
@@ -350,7 +348,7 @@ header {
 }
 
 .warranty {
-  color: #777777;
+  color: #777;
   font-size: 13px;
   margin: 8px 0;
 }
@@ -367,122 +365,411 @@ header {
   transform: scale(.97);
 }
 
-/* CARRINHO */
+/* BOTÃO FLUTUANTE DO BIGAS */
 
-.cart-section {
-  margin-top: 40px;
-  background: white;
-  padding: 20px;
-  border-radius: 15px;
+.floating-cart {
+  position: fixed;
+  right: 20px;
+  bottom: 22px;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #101010, #242424);
+  border: 3px solid #20d875;
+  box-shadow: 0 0 18px #20d87566;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 500;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.floating-cart:active {
+  transform: scale(.92);
+}
+
+.floating-cart svg {
+  width: 52px;
+  height: 52px;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -7px;
+  right: -6px;
+  min-width: 27px;
+  height: 27px;
+  padding: 0 6px;
+  border-radius: 20px;
+  background: #a000ff;
+  color: white;
+  font-weight: bold;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #111;
+}
+
+.cart-badge:empty {
+  display: none;
+}
+
+/* PAINEL DE CONVERSA */
+
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: #00000070;
+  z-index: 600;
+  opacity: 0;
+  visibility: hidden;
+  transition: .25s ease;
+}
+
+.cart-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.cart-panel {
+  position: fixed;
+  z-index: 601;
+  right: 18px;
+  bottom: 110px;
+  width: min(420px, calc(100% - 24px));
+  max-height: min(78vh, 720px);
+  background: #151515;
+  color: white;
+  border: 2px solid #8125cf;
+  border-radius: 23px;
+  box-shadow: 0 0 30px #7000bb55;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(.97);
+  transition: .25s ease;
+}
+
+.cart-panel.open {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+}
+
+.cart-panel-header {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.mini-cart-logo {
+  width: 55px;
+  height: 55px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #101010;
+  border: 2px solid #20d875;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #20d87555;
+}
+
+.mini-cart-logo svg {
+  width: 43px;
+  height: 43px;
+}
+
+.cart-panel-title {
+  flex: 1;
+}
+
+.cart-panel-title h2 {
+  font-size: 20px;
+}
+
+.cart-panel-title p {
+  color: #d45cff;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.close-cart {
+  background: none;
+  color: #ddd;
+  font-size: 28px;
+  padding: 4px 8px;
+}
+
+.cart-panel-content {
+  padding: 15px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.chat-message {
+  background: #292929;
+  border: 1px solid #393939;
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 15px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+.chat-message strong {
+  display: block;
+  color: white;
+  margin-bottom: 5px;
+  font-size: 16px;
+}
+
+.cart-products-box {
+  background: #202020;
+  border: 1px solid #353535;
+  border-radius: 16px;
+  padding: 13px;
+}
+
+.cart-products-title {
+  font-weight: bold;
+  margin-bottom: 12px;
+  font-size: 15px;
+}
+
+.cart-products-title span {
+  color: #d45cff;
 }
 
 .cart-item {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   gap: 10px;
-  padding: 15px 0;
-  border-bottom: 1px solid #eeeeee;
+  padding: 13px 0;
+  border-top: 1px solid #393939;
 }
 
-.cart-item small {
-  color: #777777;
+.cart-item-image {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  background: #333;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-info strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.35;
+  overflow-wrap: break-word;
+}
+
+.cart-item-info small {
+  display: block;
+  color: #aaa;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.cart-item-info .cart-price {
+  color: #d45cff;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 5px;
 }
 
 .cart-warranty {
+  color: #aaa;
+  font-size: 11px;
   display: block;
-  color: #777777;
-  font-size: 12px;
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .cart-brand-fam {
   color: #20c55a;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 11px;
+  margin-top: 3px;
+}
+
+.cart-item-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 }
 
 .quantity {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 7px;
 }
 
 .quantity button {
-  background: #eeeeee;
+  width: 25px;
+  height: 25px;
   border-radius: 7px;
-  padding: 7px 11px;
+  background: #333;
+  color: white;
+  font-weight: bold;
+}
+
+.quantity strong {
+  font-size: 13px;
+  min-width: 12px;
+  text-align: center;
 }
 
 .remove {
-  color: #c33;
   background: none;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.total {
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 20px 0;
+  color: #ff4b5c;
+  font-size: 17px;
+  padding: 3px;
 }
 
 .empty {
-  color: #888888;
-  padding: 20px 0;
+  color: #aaa;
+  padding: 18px 5px;
+  text-align: center;
+  font-size: 13px;
 }
 
-/* FORMULÁRIO */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 17px 0;
+  font-weight: bold;
+}
+
+.cart-total strong {
+  color: #20d875;
+  font-size: 22px;
+}
+
+.cart-actions {
+  display: grid;
+  gap: 10px;
+}
+
+.cart-action {
+  width: 100%;
+  padding: 14px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.continue-shopping {
+  background: #16c75a;
+  color: white;
+}
+
+.cancel-shopping {
+  background: transparent;
+  color: #ff5260;
+  border: 1px solid #ff5260;
+}
+
+.finish-shopping {
+  background: white;
+  color: #111;
+}
+
+.cart-notice {
+  color: #aaa;
+  font-size: 11px;
+  line-height: 1.5;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* FORMULÁRIO DENTRO DO CARRINHO */
+
+.checkout-form {
+  display: none;
+  margin-top: 16px;
+  padding: 15px;
+  background: #242424;
+  border: 1px solid #444;
+  border-radius: 14px;
+}
+
+.checkout-form.show {
+  display: block;
+}
+
+.checkout-form h3 {
+  margin-bottom: 14px;
+}
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 13px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 7px;
+  margin-bottom: 6px;
   font-weight: bold;
+  font-size: 13px;
 }
 
 .form-group input {
   width: 100%;
-  padding: 14px;
-  border: 1px solid #dddddd;
+  padding: 12px;
+  border: 1px solid #555;
   border-radius: 9px;
-  outline-color: #111111;
+  background: #111;
+  color: white;
+  outline-color: #a000ff;
 }
 
 .notice {
-  background: #eeeeee;
-  color: #222222;
-  padding: 14px;
+  background: #333;
+  color: #ddd;
+  padding: 12px;
   border-radius: 10px;
-  font-size: 13px;
+  font-size: 11px;
   line-height: 1.5;
-  margin: 15px 0;
+  margin: 12px 0;
 }
 
 .confirm {
   width: 100%;
-  background: #111111;
+  background: #16c75a;
   color: white;
-  padding: 16px;
+  padding: 14px;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 16px;
 }
 
-.confirm:disabled {
-  opacity: .5;
-  cursor: not-allowed;
+.back-to-cart {
+  width: 100%;
+  padding: 11px;
+  background: transparent;
+  color: #ccc;
+  margin-top: 8px;
 }
 
 /* RODAPÉ */
 
 footer {
-  background: #111111;
+  background: #111;
   color: white;
   text-align: center;
   padding: 30px 15px;
@@ -490,7 +777,7 @@ footer {
 }
 
 footer p {
-  color: #aaaaaa;
+  color: #aaa;
   font-size: 13px;
   margin-top: 8px;
 }
@@ -519,8 +806,23 @@ footer p {
     font-size: 17px;
   }
 
-  .cart-item {
-    align-items: flex-start;
+  .cart-panel {
+    right: 12px;
+    bottom: 98px;
+    width: calc(100% - 24px);
+    max-height: 78vh;
+  }
+
+  .floating-cart {
+    width: 66px;
+    height: 66px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .floating-cart svg {
+    width: 46px;
+    height: 46px;
   }
 }
 </style>
@@ -528,7 +830,7 @@ footer p {
 
 <body>
 
-<!-- ABERTURA DA LOJA -->
+<!-- ABERTURA -->
 
 <div id="intro">
 
@@ -560,12 +862,9 @@ footer p {
 <!-- CABEÇALHO -->
 
 <header>
-
   <div class="brand">
-
     <svg viewBox="0 0 400 180">
-      <path fill="white"
-      d="M200 83 C170 45 125 35 90 49
+      <path fill="white" d="M200 83 C170 45 125 35 90 49
       C54 62 35 91 10 85
       C18 119 52 139 90 130
       C132 120 161 99 200 91
@@ -579,14 +878,11 @@ footer p {
       <h2>BIGODE DAS ENCOMENDAS</h2>
       <span>IMPORTAÇÕES</span>
     </div>
-
   </div>
 
-  <button class="cart-top"
-    onclick="document.getElementById('carrinho').scrollIntoView({behavior:'smooth'})">
-    🛒 <span id="cart-count">0</span>
+  <button class="cart-top" onclick="openCart()">
+    🛒 <span id="cart-count-top">0</span>
   </button>
-
 </header>
 
 <!-- SAUDAÇÃO -->
@@ -597,7 +893,7 @@ footer p {
   <p><strong>Encontre seus produtos favoritos!</strong></p>
 </section>
 
-<!-- CATÁLOGO E CARRINHO -->
+<!-- CATÁLOGO -->
 
 <main class="container">
 
@@ -615,54 +911,6 @@ footer p {
 
   <div class="products" id="products"></div>
 
-  <section class="cart-section" id="carrinho">
-
-    <div class="section-title">
-      <h2>🛒 Meu carrinho</h2>
-      <p>Confira os produtos que deseja solicitar.</p>
-    </div>
-
-    <div id="cart-items">
-      <p class="empty">Seu carrinho está vazio.</p>
-    </div>
-
-    <div class="total">
-      <span>Total estimado</span>
-      <span id="total">R$ 0,00</span>
-    </div>
-
-    <div class="notice">
-      ⚠️ A solicitação não representa uma compra confirmada.
-      O proprietário verificará a disponibilidade dos produtos
-      e entrará em contato para combinar a entrega.
-    </div>
-
-    <h3 style="margin:20px 0">Seus dados</h3>
-
-    <div class="form-group">
-      <label>Nome completo</label>
-      <input id="nome" placeholder="Digite seu nome">
-    </div>
-
-    <div class="form-group">
-      <label>Telefone</label>
-      <input id="telefone" type="tel"
-        placeholder="(38) 99999-9999">
-    </div>
-
-    <div class="form-group">
-      <label>Endereço</label>
-      <input id="endereco"
-        placeholder="Rua, número e bairro">
-    </div>
-
-    <button class="confirm"
-      id="confirm-button"
-      onclick="sendOrder()">
-      Enviar solicitação pelo WhatsApp
-    </button>
-
-  </section>
 </main>
 
 <!-- RODAPÉ -->
@@ -673,54 +921,235 @@ footer p {
   <p>Atendimento pelo WhatsApp</p>
 </footer>
 
+<!-- BOTÃO FLUTUANTE DO CARRINHO -->
+
+<button class="floating-cart"
+  type="button"
+  onclick="openCart()"
+  aria-label="Abrir carrinho">
+
+  <svg viewBox="0 0 100 100" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Carrinho -->
+    <path d="M12 17 H23 L31 62 Q32 68 39 68 H78"
+      stroke="white" stroke-width="5"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <path d="M28 29 H89 L79 59 H34 Z"
+      stroke="white" stroke-width="5"
+      stroke-linejoin="round"/>
+
+    <!-- Bigode integrado -->
+    <path d="M34 43
+      C42 31 49 37 56 43
+      C63 37 72 31 83 43
+      C77 57 65 57 56 49
+      C47 57 39 57 34 43Z"
+      fill="white"/>
+
+    <!-- Rodas -->
+    <circle cx="42" cy="81" r="5" fill="white"/>
+    <circle cx="74" cy="81" r="5" fill="white"/>
+
+  </svg>
+
+  <span class="cart-badge" id="cart-badge"></span>
+</button>
+
+<!-- FUNDO ESCURO DO PAINEL -->
+
+<div class="cart-overlay" id="cart-overlay"
+     onclick="closeCart()"></div>
+
+<!-- PAINEL DE CONVERSA DO BIGAS -->
+
+<section class="cart-panel" id="cart-panel">
+
+  <div class="cart-panel-header">
+
+    <div class="mini-cart-logo">
+      <svg viewBox="0 0 100 100" fill="none"
+           xmlns="http://www.w3.org/2000/svg">
+
+        <path d="M12 17 H23 L31 62 Q32 68 39 68 H78"
+          stroke="white" stroke-width="5"
+          stroke-linecap="round" stroke-linejoin="round"/>
+
+        <path d="M28 29 H89 L79 59 H34 Z"
+          stroke="white" stroke-width="5"
+          stroke-linejoin="round"/>
+
+        <path d="M34 43
+          C42 31 49 37 56 43
+          C63 37 72 31 83 43
+          C77 57 65 57 56 49
+          C47 57 39 57 34 43Z"
+          fill="white"/>
+
+        <circle cx="42" cy="81" r="5" fill="white"/>
+        <circle cx="74" cy="81" r="5" fill="white"/>
+
+      </svg>
+    </div>
+
+    <div class="cart-panel-title">
+      <h2>Bigas</h2>
+      <p>Assistente de encomendas</p>
+    </div>
+
+    <button class="close-cart"
+      type="button"
+      onclick="closeCart()">×</button>
+
+  </div>
+
+  <div class="cart-panel-content" id="cart-panel-content">
+
+    <div class="chat-message">
+      <strong id="cart-greeting">Bom dia! ☀️</strong>
+      Você chegou ao carrinho, Bigas está pronto! 😁
+      <br><br>
+      Sua compra está assim. Gostaria de adicionar mais alguma coisa?
+    </div>
+
+    <div class="cart-products-box">
+
+      <div class="cart-products-title">
+        🛒 Seus produtos ·
+        <span id="cart-items-count">0 itens</span>
+      </div>
+
+      <div id="cart-items">
+        <p class="empty">Seu carrinho está vazio. 😔</p>
+      </div>
+
+      <div class="cart-total">
+        <span>Total da encomenda:</span>
+        <strong id="total">R$ 0,00</strong>
+      </div>
+
+    </div>
+
+    <div class="cart-actions">
+
+      <button class="cart-action continue-shopping"
+        type="button"
+        onclick="closeCart()">
+        ✓ Continuar compras
+      </button>
+
+      <button class="cart-action cancel-shopping"
+        type="button"
+        onclick="cancelCart()">
+        🗑 Cancelar compra
+      </button>
+
+      <button class="cart-action finish-shopping"
+        type="button"
+        onclick="showCheckoutForm()">
+        Finalizar encomenda
+      </button>
+
+    </div>
+
+    <p class="cart-notice">
+      A solicitação não confirma a compra.
+      A loja verificará o estoque e entrará em contato.
+    </p>
+
+    <!-- DADOS DO CLIENTE -->
+
+    <div class="checkout-form" id="checkout-form">
+
+      <h3>Seus dados 📋</h3>
+
+      <div class="form-group">
+        <label for="nome">Nome completo</label>
+        <input id="nome" placeholder="Digite seu nome">
+      </div>
+
+      <div class="form-group">
+        <label for="telefone">Telefone</label>
+        <input id="telefone" type="tel"
+          placeholder="(38) 99999-9999">
+      </div>
+
+      <div class="form-group">
+        <label for="endereco">Endereço</label>
+        <input id="endereco"
+          placeholder="Rua, número e bairro">
+      </div>
+
+      <div class="notice">
+        ⚠️ A solicitação não representa uma compra confirmada.
+        O proprietário verificará a disponibilidade e entrará
+        em contato para combinar a entrega.
+      </div>
+
+      <button class="confirm"
+        type="button"
+        onclick="sendOrder()">
+        Enviar solicitação pelo WhatsApp
+      </button>
+
+      <button class="back-to-cart"
+        type="button"
+        onclick="hideCheckoutForm()">
+        ← Voltar ao carrinho
+      </button>
+
+    </div>
+
+  </div>
+</section>
+
 <script>
 
 /* CONFIGURAÇÕES DA LOJA */
 
 const STORE_WHATSAPP = "5538992041456";
 
-/* CADASTRO DOS 21 PRODUTOS */
+/* PRODUTOS */
 
 const productsList = [
-
-  // PRODUTOS INICIAIS
 
   {
     id: 1,
     name: "Capa para celular",
-    price: 15.00,
+    price: 15,
     image: "📱",
     warranty: "Consultar garantia"
   },
   {
     id: 2,
     name: "Kit carregador simples",
-    price: 35.00,
+    price: 35,
     image: "🔌",
     warranty: "2 meses de garantia"
   },
   {
     id: 3,
     name: "Kit carregador turbo",
-    price: 60.00,
+    price: 60,
     image: "⚡",
     warranty: "2 meses de garantia"
   },
   {
     id: 4,
     name: "Kit carregador FAM",
-    price: 130.00,
+    price: 130,
     image: "🔋",
     brand: "FAM",
     warranty: "1 ano de garantia"
   },
 
-  // CABOS FAM
+  /* CABOS FAM */
 
   {
     id: 5,
     name: "Cabo Tipo-C para USB - 1 metro",
-    price: 35.00,
+    price: 35,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
@@ -728,7 +1157,7 @@ const productsList = [
   {
     id: 6,
     name: "Cabo Lightning para USB - 1 metro",
-    price: 35.00,
+    price: 35,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
@@ -736,7 +1165,7 @@ const productsList = [
   {
     id: 7,
     name: "Cabo Tipo-C para USB - 2 metros",
-    price: 45.00,
+    price: 45,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
@@ -744,7 +1173,7 @@ const productsList = [
   {
     id: 8,
     name: "Cabo Lightning para USB - 2 metros",
-    price: 45.00,
+    price: 45,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
@@ -752,7 +1181,7 @@ const productsList = [
   {
     id: 9,
     name: "Cabo Tipo-C para Tipo-C reforçado - 1 metro",
-    price: 50.00,
+    price: 50,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
@@ -760,18 +1189,18 @@ const productsList = [
   {
     id: 10,
     name: "Cabo Tipo-C para Lightning reforçado - 1 metro",
-    price: 50.00,
+    price: 50,
     image: "🔌",
     brand: "FAM",
     warranty: "1 ano de garantia"
   },
 
-  // CABOS GOLD
+  /* CABOS GOLD */
 
   {
     id: 11,
     name: "Cabo Tipo-C para Lightning - 1 metro",
-    price: 20.00,
+    price: 20,
     image: "🔌",
     brand: "Gold",
     warranty: "2 meses de garantia"
@@ -779,7 +1208,7 @@ const productsList = [
   {
     id: 12,
     name: "Cabo USB para Tipo-C - 1 metro",
-    price: 20.00,
+    price: 20,
     image: "🔌",
     brand: "Gold",
     warranty: "2 meses de garantia"
@@ -787,7 +1216,7 @@ const productsList = [
   {
     id: 13,
     name: "Cabo USB para Lightning - 1 metro",
-    price: 20.00,
+    price: 20,
     image: "🔌",
     brand: "Gold",
     warranty: "2 meses de garantia"
@@ -795,7 +1224,7 @@ const productsList = [
   {
     id: 14,
     name: "Cabo Tipo-C para Tipo-C - 1 metro",
-    price: 20.00,
+    price: 20,
     image: "🔌",
     brand: "Gold",
     warranty: "2 meses de garantia"
@@ -803,29 +1232,29 @@ const productsList = [
   {
     id: 15,
     name: "Cabo USB para V8 - 1 metro",
-    price: 20.00,
+    price: 20,
     image: "🔌",
     brand: "Gold",
     warranty: "2 meses de garantia"
   },
 
-  // FONE BLUETOOTH FAM
+  /* FONE BLUETOOTH FAM */
 
   {
     id: 16,
     name: "Fone Bluetooth com borracha",
-    price: 160.00,
+    price: 160,
     image: "🎧",
     brand: "FAM",
     warranty: "1 ano de garantia"
   },
 
-  // FONES BLUETOOTH DE OUTRAS MARCAS
+  /* OUTROS FONES BLUETOOTH */
 
   {
     id: 17,
     name: "Fone Bluetooth com borracha",
-    price: 120.00,
+    price: 120,
     image: "🎧",
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
@@ -833,18 +1262,18 @@ const productsList = [
   {
     id: 18,
     name: "Fone Bluetooth sem borracha",
-    price: 130.00,
+    price: 130,
     image: "🎧",
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
   },
 
-  // FONES COM FIO
+  /* FONES COM FIO */
 
   {
     id: 19,
     name: "Fone com fio simples - conector de pino",
-    price: 20.00,
+    price: 20,
     image: "🎵",
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
@@ -852,7 +1281,7 @@ const productsList = [
   {
     id: 20,
     name: "Fone com fio resistente e borracha - conector de pino",
-    price: 30.00,
+    price: 30,
     image: "🎵",
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
@@ -860,7 +1289,7 @@ const productsList = [
   {
     id: 21,
     name: "Fone com fio - conector Tipo-C",
-    price: 35.00,
+    price: 35,
     image: "🎵",
     brand: "Outras marcas",
     warranty: "2 meses de garantia"
@@ -872,41 +1301,59 @@ let cart = [];
 
 /* SAUDAÇÃO AUTOMÁTICA */
 
-function updateGreeting() {
+function getGreeting() {
+
   const hour = new Date().getHours();
 
-  let greeting = "Boa noite";
-
   if (hour >= 5 && hour < 12) {
-    greeting = "Bom dia";
-  } else if (hour >= 12 && hour < 18) {
-    greeting = "Boa tarde";
+    return "Bom dia! ☀️";
   }
 
+  if (hour >= 12 && hour < 18) {
+    return "Boa tarde! 🌤️";
+  }
+
+  return "Boa noite! 🌙";
+}
+
+function updateGreeting() {
+
+  const greeting = getGreeting();
+
   document.getElementById("greeting").textContent =
-    greeting + "!";
+    greeting.replace(/[☀️🌤️🌙]/gu, "").trim();
+
+  document.getElementById("cart-greeting").textContent =
+    greeting;
 }
 
 updateGreeting();
 
-/* ANIMAÇÃO DE ENTRADA */
+/* ANIMAÇÃO */
 
 window.addEventListener("load", () => {
+
   setTimeout(() => {
-    document.getElementById("intro").classList.add("hide");
+
+    document.getElementById("intro")
+      .classList.add("hide");
+
   }, 2500);
+
 });
 
 /* FORMATAR PREÇO */
 
 function money(value) {
+
   return value.toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL"
   });
+
 }
 
-/* CRIAR CARTÃO DE PRODUTO */
+/* CARTÃO DO PRODUTO */
 
 function createProductCard(product) {
 
@@ -939,11 +1386,9 @@ function createProductCard(product) {
           ${money(product.price)}
         </div>
 
-        ${product.warranty ? `
-          <p class="warranty">
-            🛡️ ${product.warranty}
-          </p>
-        ` : ""}
+        <p class="warranty">
+          🛡️ ${product.warranty}
+        </p>
 
         <button class="add"
           onclick="addToCart(${product.id})">
@@ -953,9 +1398,10 @@ function createProductCard(product) {
       </div>
     </div>
   `;
+
 }
 
-/* MOSTRAR E SEPARAR PRODUTOS */
+/* MOSTRAR PRODUTOS */
 
 function renderProducts() {
 
@@ -965,10 +1411,12 @@ function renderProducts() {
     .value.trim().toLowerCase();
 
   const filtered = productsList.filter(product => {
+
     const searchableText =
       `${product.name} ${product.brand || ""}`.toLowerCase();
 
     return searchableText.includes(search);
+
   });
 
   const famProducts = filtered.filter(
@@ -980,8 +1428,6 @@ function renderProducts() {
   );
 
   area.innerHTML = "";
-
-  /* SEÇÃO FAM */
 
   if (famProducts.length > 0) {
 
@@ -999,9 +1445,8 @@ function renderProducts() {
 
       </section>
     `;
-  }
 
-  /* SEÇÃO OUTROS PRODUTOS */
+  }
 
   if (otherProducts.length > 0) {
 
@@ -1019,18 +1464,50 @@ function renderProducts() {
 
       </section>
     `;
+
   }
 
-  /* PESQUISA SEM RESULTADOS */
-
   if (filtered.length === 0) {
+
     area.innerHTML =
       "<p class='empty'>Nenhum produto encontrado.</p>";
+
   }
 
 }
 
-/* ADICIONAR AO CARRINHO */
+/* ABRIR CARRINHO */
+
+function openCart() {
+
+  updateGreeting();
+  renderCart();
+
+  document.getElementById("cart-panel")
+    .classList.add("open");
+
+  document.getElementById("cart-overlay")
+    .classList.add("open");
+
+  document.body.style.overflow = "hidden";
+
+}
+
+/* FECHAR CARRINHO */
+
+function closeCart() {
+
+  document.getElementById("cart-panel")
+    .classList.remove("open");
+
+  document.getElementById("cart-overlay")
+    .classList.remove("open");
+
+  document.body.style.overflow = "";
+
+}
+
+/* ADICIONAR PRODUTO */
 
 function addToCart(id) {
 
@@ -1041,15 +1518,20 @@ function addToCart(id) {
   const existing = cart.find(item => item.id === id);
 
   if (existing) {
+
     existing.quantity++;
+
   } else {
+
     cart.push({
       ...product,
       quantity: 1
     });
+
   }
 
   renderCart();
+
 }
 
 /* ALTERAR QUANTIDADE */
@@ -1063,20 +1545,54 @@ function changeQuantity(id, amount) {
   item.quantity += amount;
 
   if (item.quantity <= 0) {
+
     cart = cart.filter(p => p.id !== id);
+
   }
 
   renderCart();
+
 }
 
 /* REMOVER PRODUTO */
 
 function removeItem(id) {
+
   cart = cart.filter(p => p.id !== id);
+
   renderCart();
+
 }
 
-/* ATUALIZAR CARRINHO */
+/* CANCELAR COMPRA */
+
+function cancelCart() {
+
+  if (cart.length === 0) {
+
+    alert("Seu carrinho já está vazio.");
+
+    return;
+
+  }
+
+  const confirmCancel = confirm(
+    "Tem certeza que deseja cancelar a compra e remover todos os produtos?"
+  );
+
+  if (!confirmCancel) return;
+
+  cart = [];
+
+  renderCart();
+
+  hideCheckoutForm();
+
+  alert("Carrinho esvaziado! Você pode começar novamente. 😊");
+
+}
+
+/* MOSTRAR CARRINHO */
 
 function renderCart() {
 
@@ -1086,12 +1602,23 @@ function renderCart() {
     (sum, item) => sum + item.quantity, 0
   );
 
-  document.getElementById("cart-count").textContent = count;
+  document.getElementById("cart-count-top").textContent = count;
+
+  document.getElementById("cart-badge").textContent =
+    count > 0 ? count : "";
+
+  document.getElementById("cart-items-count").textContent =
+    `${count} ${count === 1 ? "item" : "itens"}`;
 
   if (cart.length === 0) {
 
-    area.innerHTML =
-      '<p class="empty">Seu carrinho está vazio.</p>';
+    area.innerHTML = `
+      <p class="empty">
+        Seu carrinho está vazio. 😔
+        <br><br>
+        Que tal escolher alguns produtos?
+      </p>
+    `;
 
   } else {
 
@@ -1099,49 +1626,55 @@ function renderCart() {
 
       <div class="cart-item">
 
-        <div>
+        <div class="cart-item-image">
+          ${item.image}
+        </div>
+
+        <div class="cart-item-info">
 
           <strong>${item.name}</strong>
 
           ${item.brand === "FAM" ? `
-            <div class="cart-brand-fam">FAM</div>
+            <span class="cart-brand-fam">FAM</span>
           ` : ""}
 
-          <br>
+          <small>
+            ${item.brand || "Marca não informada"}
+          </small>
 
-          <small>${money(item.price)} cada</small>
+          <span class="cart-warranty">
+            🛡️ ${item.warranty || "Consultar garantia"}
+          </span>
 
-          ${item.warranty ? `
-            <span class="cart-warranty">
-              🛡️ ${item.warranty}
-            </span>
-          ` : ""}
-
-          <br>
-
-          <button type="button"
-            class="remove"
-            data-action="remove"
-            data-id="${item.id}">
-            Apagar produto
-          </button>
+          <div class="cart-price">
+            ${money(item.price * item.quantity)}
+          </div>
 
         </div>
 
-        <div class="quantity">
+        <div class="cart-item-actions">
+
+          <div class="quantity">
+
+            <button type="button"
+              onclick="changeQuantity(${item.id}, -1)">
+              −
+            </button>
+
+            <strong>${item.quantity}</strong>
+
+            <button type="button"
+              onclick="changeQuantity(${item.id}, 1)">
+              +
+            </button>
+
+          </div>
 
           <button type="button"
-            data-action="minus"
-            data-id="${item.id}">
-            −
-          </button>
-
-          <strong>${item.quantity}</strong>
-
-          <button type="button"
-            data-action="plus"
-            data-id="${item.id}">
-            +
+            class="remove"
+            aria-label="Remover produto"
+            onclick="removeItem(${item.id})">
+            🗑
           </button>
 
         </div>
@@ -1159,52 +1692,77 @@ function renderCart() {
   document.getElementById("total").textContent =
     money(total);
 
+  document.querySelector(".finish-shopping").disabled =
+    cart.length === 0;
+
+  document.querySelector(".finish-shopping").style.opacity =
+    cart.length === 0 ? ".5" : "1";
+
 }
 
-/* CLIQUES NOS BOTÕES DO CARRINHO */
+/* ABRIR FORMULÁRIO */
 
-document.getElementById("cart-items").addEventListener(
-  "click",
-  function(event) {
+function showCheckoutForm() {
 
-    const button = event.target.closest("button[data-action]");
+  if (cart.length === 0) {
 
-    if (!button) return;
+    alert("Adicione algum produto antes de finalizar.");
 
-    const id = Number(button.dataset.id);
-    const action = button.dataset.action;
-
-    if (action === "plus") {
-      changeQuantity(id, 1);
-    }
-
-    if (action === "minus") {
-      changeQuantity(id, -1);
-    }
-
-    if (action === "remove") {
-      removeItem(id);
-    }
+    return;
 
   }
-);
 
-/* ENVIAR SOLICITAÇÃO */
+  const form = document.getElementById("checkout-form");
+
+  form.classList.add("show");
+
+  setTimeout(() => {
+
+    form.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+
+  }, 100);
+
+}
+
+/* ESCONDER FORMULÁRIO */
+
+function hideCheckoutForm() {
+
+  document.getElementById("checkout-form")
+    .classList.remove("show");
+
+}
+
+/* ENVIAR PEDIDO */
 
 function sendOrder() {
 
-  const nome = document.getElementById("nome").value.trim();
-  const telefone = document.getElementById("telefone").value.trim();
-  const endereco = document.getElementById("endereco").value.trim();
+  const nome = document.getElementById("nome")
+    .value.trim();
+
+  const telefone = document.getElementById("telefone")
+    .value.trim();
+
+  const endereco = document.getElementById("endereco")
+    .value.trim();
 
   if (cart.length === 0) {
+
     alert("Adicione pelo menos um produto ao carrinho.");
+
     return;
+
   }
 
   if (!nome || !telefone || !endereco) {
+
     alert("Preencha todos os seus dados.");
+
     return;
+
   }
 
   const total = cart.reduce(
@@ -1248,6 +1806,7 @@ Pedido enviado pelo site!`;
     "?text=" + encodeURIComponent(mensagem);
 
   window.location.href = link;
+
 }
 
 /* INICIALIZAR */
