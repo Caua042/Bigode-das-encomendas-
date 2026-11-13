@@ -5,6 +5,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -39,11 +40,32 @@ button{cursor:pointer;border:none}
 @keyframes welcomeShow{0%{opacity:0;visibility:visible;transform:translateY(20px)}20%,100%{opacity:1;visibility:visible;transform:translateY(0)}}
 
 /* CABEÇALHO */
-header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;position:sticky;top:0;z-index:100;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
-.brand{display:flex;align-items:center;gap:13px;min-width:0}
+header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;z-index:700;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
+.brand{display:flex;align-items:center;gap:13px;min-width:0;flex-shrink:0}
 .brand svg{width:50px;flex-shrink:0}
 .brand h2{font-size:15px;font-weight:800;letter-spacing:1.2px;line-height:1.3}
 .brand span{display:block;color:#bdbdbd;font-size:10px;margin-top:4px;letter-spacing:3px}
+
+/* PESQUISA DO CABEÇALHO */
+.header-search-area{position:relative;flex:1;max-width:470px;min-width:120px}
+.header-search-box{height:43px;display:flex;align-items:center;gap:9px;padding:0 13px;background:#202020;border:1px solid #444;border-radius:13px;transition:border .2s,box-shadow .2s}
+.header-search-box:focus-within{border-color:#20d875;box-shadow:0 0 0 3px #20d87520}
+.header-search-icon{font-size:17px;flex-shrink:0}
+.header-search-input{width:100%;min-width:0;background:transparent;border:0;outline:none;color:white;font-size:13px}
+.header-search-input::placeholder{color:#999}
+.clear-search{display:none;background:transparent;color:#aaa;font-size:20px;padding:0 2px}
+.clear-search.visible{display:block}
+.search-suggestions{position:absolute;top:calc(100% + 9px);left:0;right:0;background:#1b1b1b;border:1px solid #444;border-radius:14px;padding:12px;box-shadow:0 12px 30px #0008;z-index:900;display:none;max-height:340px;overflow-y:auto}
+.search-suggestions.open{display:block}
+.suggestion-heading{font-size:10px;color:#999;text-transform:uppercase;letter-spacing:1px;font-weight:bold;margin:5px 5px 8px}
+.suggestion-list{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:12px}
+.search-suggestion{background:#292929;border:1px solid #414141;color:#eee;border-radius:20px;padding:8px 11px;font-size:12px}
+.search-suggestion:active{border-color:#20d875}
+.search-recent-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 5px;border-top:1px solid #333}
+.search-recent-row button{background:none;color:#ddd;font-size:12px;text-align:left}
+.search-recent-row .remove-recent{color:#999;font-size:15px}
+.clear-history{display:block;margin:8px 4px 0 auto;background:none;color:#20d875;font-size:11px}
+.mobile-search-toggle{display:none;background:#252525;color:white;border:1px solid #444;border-radius:11px;width:42px;height:42px;font-size:20px;flex-shrink:0}
 
 /* SELETOR DE TEMA */
 .theme-switch{position:relative;width:150px;height:43px;border-radius:30px;background:#303030;border:1px solid #555;display:flex;align-items:center;justify-content:space-between;padding:4px;cursor:grab;touch-action:pan-y;user-select:none;flex-shrink:0;outline-offset:4px}
@@ -80,8 +102,6 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
 .product-image img{width:100%;height:100%;object-fit:contain}
 .product-image .fallback{font-size:55px}
-
-/* SELO FAM */
 .fam-seal{position:absolute;top:9px;right:9px;width:45px;height:45px;border-radius:50%;background:#050505;border:2px solid #40DCCB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;letter-spacing:.3px;box-shadow:0 2px 9px #00000035;z-index:2;pointer-events:none}
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
@@ -213,6 +233,14 @@ body[data-theme="light"] .brand svg path{fill:#111}
 body[data-theme="light"] .brand span{color:#666}
 body[data-theme="light"] .theme-switch{background:#e4e4e4;border-color:#ccc}
 body[data-theme="light"] .theme-label{color:#444}
+body[data-theme="light"] .header-search-box{background:#f5f5f5;border-color:#ccc}
+body[data-theme="light"] .header-search-input{color:#222}
+body[data-theme="light"] .header-search-input::placeholder{color:#777}
+body[data-theme="light"] .mobile-search-toggle{background:#eee;color:#222;border-color:#ccc}
+body[data-theme="light"] .search-suggestions{background:#fff;border-color:#ddd;box-shadow:0 12px 30px #0002}
+body[data-theme="light"] .search-suggestion{background:#f1f1f1;border-color:#ddd;color:#222}
+body[data-theme="light"] .search-recent-row{border-color:#ddd}
+body[data-theme="light"] .search-recent-row button{color:#333}
 body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);color:#111}
 body[data-theme="light"] .hero p{color:#444}
 body[data-theme="light"] .hero strong{color:#111}
@@ -264,15 +292,26 @@ body[data-theme="light"] .stage-logo h1,body[data-theme="light"] .stage-logo h2{
 body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welcome p{color:white}
 
 /* CELULARES */
-@media(max-width:480px){
-  header{padding:14px 5%;gap:10px}
-  .brand{gap:10px}
-  .brand svg{width:43px}
-  .brand h2{font-size:13px}
-  .theme-switch{width:130px}
+@media(max-width:650px){
+  header{padding:11px 4%;gap:9px}
+  .brand{gap:8px}
+  .brand svg{width:39px}
+  .brand h2{font-size:11px;letter-spacing:.6px}
+  .brand span{font-size:9px;letter-spacing:2px}
+  .header-search-area{display:none;position:absolute;left:4%;right:4%;top:calc(100% + 8px);max-width:none;width:92%;z-index:950}
+  header.mobile-search-open .header-search-area{display:block}
+  .header-search-box{background:#202020;box-shadow:0 8px 25px #0008}
+  .mobile-search-toggle{display:block}
+  .theme-switch{width:120px;height:40px}
+  .theme-mustache{width:32px;height:32px}
   .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(87px)}
 }
 @media(max-width:400px){
+  .brand svg{width:33px}
+  .brand h2{font-size:10px}
+  .brand span{font-size:8px}
+  .theme-switch{width:105px}
+  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(72px)}
   .product-grid{gap:10px}
   .product-image{height:120px}
   .product-info{padding:10px}
@@ -286,11 +325,12 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   .product-buttons button{font-size:11px;padding:10px 3px}
 }
 @media(max-width:360px){
-  header{align-items:flex-start}
-  .brand h2{font-size:11px}
-  .brand span{font-size:9px;letter-spacing:2px}
-  .theme-switch{width:120px}
-  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(77px)}
+  header{gap:6px}
+  .brand{gap:5px}
+  .brand h2{font-size:9px}
+  .brand span{font-size:8px;letter-spacing:1px}
+  .theme-switch{width:96px}
+  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(63px)}
   .product-info-modal{padding:13px}
 }
 </style>
@@ -316,7 +356,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 </div>
 
 <!-- CABEÇALHO -->
-<header>
+<header id="main-header">
   <div class="brand">
     <svg viewBox="0 0 400 180">
       <path fill="white" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/>
@@ -326,6 +366,21 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
       <span>IMPORTAÇÕES</span>
     </div>
   </div>
+
+  <div class="header-search-area" id="header-search-area">
+    <div class="header-search-box">
+      <span class="header-search-icon">🔎</span>
+      <input class="header-search-input" id="header-search"
+        type="search" placeholder="Pesquisar produtos..."
+        autocomplete="off" aria-label="Pesquisar produtos">
+      <button class="clear-search" id="clear-header-search"
+        type="button" aria-label="Limpar pesquisa">×</button>
+    </div>
+    <div class="search-suggestions" id="search-suggestions"></div>
+  </div>
+
+  <button class="mobile-search-toggle" id="mobile-search-toggle"
+    type="button" aria-label="Abrir pesquisa" aria-expanded="false">⌕</button>
 
   <div class="theme-switch" id="theme-switch" data-theme="dark"
        role="switch" aria-label="Alternar entre modo escuro e modo light"
@@ -355,7 +410,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   </div>
 
   <input class="search" id="search" type="search"
-    placeholder="🔎 Pesquisar produto..." oninput="renderProducts()">
+    placeholder="🔎 Pesquisar produto..." oninput="syncSearch('catalog')">
 
   <div class="catalog-filters">
     <select id="sort-filter" onchange="renderProducts()">
@@ -393,12 +448,10 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
       <button class="close-product-info" type="button"
         onclick="closeProductInfo()" aria-label="Fechar">×</button>
     </div>
-
     <div class="product-info-photo" id="product-info-photo"></div>
     <div class="product-info-price" id="product-info-price"></div>
     <p class="product-info-description" id="product-info-description"></p>
     <div class="product-info-details" id="product-info-details"></div>
-
     <button class="product-info-add" id="product-info-add"
       type="button">+ Adicionar ao carrinho</button>
   </div>
@@ -450,9 +503,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
       <div class="cart-products-title">
         🛒 Seus produtos · <span id="cart-items-count">0 itens</span>
       </div>
-      <div id="cart-items">
-        <p class="empty">Seu carrinho está vazio. 😔</p>
-      </div>
+      <div id="cart-items"><p class="empty">Seu carrinho está vazio. 😔</p></div>
       <div class="cart-total">
         <span>Total da encomenda:</span>
         <strong id="total">R$ 0,00</strong>
@@ -532,9 +583,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
         Pode cancelar, Bigode 🥺
       </button>
     </div>
-    <div class="cancel-modal-footer">
-      BIGODE DAS ENCOMENDAS · IMPORTAÇÕES
-    </div>
+    <div class="cancel-modal-footer">BIGODE DAS ENCOMENDAS · IMPORTAÇÕES</div>
   </div>
 </div>
 
@@ -542,31 +591,29 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
 
 <script>
-
 /* CONFIGURAÇÕES */
-const STORE_WHATSAPP = "5538992041456";
+const STORE_WHATSAPP="5538992041456";
+const RECENT_SEARCHES_KEY="bigode-recent-searches";
+const MAX_RECENT_SEARCHES=5;
 
 /* TEMA DO SITE */
-let currentTheme = "dark";
+let currentTheme="dark";
 let toastTimer;
 
 function applyTheme(theme){
-  currentTheme = theme;
-  document.body.dataset.theme = theme;
-
-  const toggle = document.getElementById("theme-switch");
+  currentTheme=theme;
+  document.body.dataset.theme=theme;
+  const toggle=document.getElementById("theme-switch");
 
   if(toggle){
-    toggle.dataset.theme = theme;
+    toggle.dataset.theme=theme;
     toggle.setAttribute("aria-checked",theme==="dark"?"true":"false");
   }
 
   document.querySelector('meta[name="theme-color"]')
     .setAttribute("content",theme==="dark"?"#101010":"#ffffff");
 
-  try{
-    localStorage.setItem("bigode-theme",theme);
-  }catch(error){}
+  try{localStorage.setItem("bigode-theme",theme)}catch(error){}
 }
 
 function toggleTheme(){
@@ -576,9 +623,7 @@ function toggleTheme(){
 try{
   const savedTheme=localStorage.getItem("bigode-theme");
   applyTheme(savedTheme==="light"?"light":"dark");
-}catch(error){
-  applyTheme("dark");
-}
+}catch(error){applyTheme("dark")}
 
 /* SELETOR: TOQUE, CLIQUE E ARRASTE */
 const themeSwitch=document.getElementById("theme-switch");
@@ -587,15 +632,12 @@ let dragMoved=false;
 let suppressThemeClick=false;
 
 themeSwitch.addEventListener("click",()=>{
-  if(suppressThemeClick){
-    suppressThemeClick=false;
-    return;
-  }
+  if(suppressThemeClick){suppressThemeClick=false;return}
   toggleTheme();
 });
 
 themeSwitch.addEventListener("keydown",event=>{
-  if(event.key==="Enter" || event.key===" "){
+  if(event.key==="Enter"||event.key===" "){
     event.preventDefault();
     toggleTheme();
   }
@@ -624,266 +666,385 @@ themeSwitch.addEventListener("pointerup",event=>{
   dragStartX=null;
 });
 
-themeSwitch.addEventListener("pointercancel",()=>{
-  dragStartX=null;
-});
+themeSwitch.addEventListener("pointercancel",()=>{dragStartX=null});
 
 /* AVISOS PERSONALIZADOS */
 function showToast(message,type="success"){
   const toast=document.getElementById("site-toast");
   toast.textContent=message;
   toast.className="site-toast show";
-
   if(type==="error")toast.classList.add("error");
-
   clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>{
-    toast.classList.remove("show");
-  },3500);
+  toastTimer=setTimeout(()=>toast.classList.remove("show"),3500);
 }
 
 /* PRODUTOS */
-const productsList = [
+const productsList=[
   {id:1,name:"Capa para celular",price:15,image:"📱",warranty:"Consultar garantia"},
   {id:2,name:"Kit carregador simples",price:35,image:"🔌",warranty:"2 meses de garantia"},
   {id:3,name:"Kit carregador turbo",price:60,image:"⚡",warranty:"2 meses de garantia"},
   {id:4,name:"Kit carregador FAM",price:130,image:"🔋",brand:"FAM",warranty:"1 ano de garantia"},
-
   {id:5,name:"Cabo Tipo-C para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1128.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:6,name:"Cabo Lightning para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1132.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:7,name:"Cabo Tipo-C para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1131.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:8,name:"Cabo Lightning para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1130.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:9,name:"Cabo Tipo-C para Tipo-C reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1125.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:10,name:"Cabo Tipo-C para Lightning reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1124.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
-
   {id:11,name:"Cabo Tipo-C para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:12,name:"Cabo USB para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:13,name:"Cabo USB para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:14,name:"Cabo Tipo-C para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
   {id:15,name:"Cabo USB para V8 - 1 metro",price:20,image:"🔌",photo:"imagens/IMG_1129.jpeg",brand:"Gold",warranty:"2 meses de garantia"},
-
   {id:16,name:"Fone Bluetooth com borracha",price:160,image:"🎧",brand:"FAM",warranty:"1 ano de garantia"},
   {id:17,name:"Fone Bluetooth com borracha",price:120,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:18,name:"Fone Bluetooth sem borracha",price:130,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:19,name:"Fone com fio simples - conector de pino",price:20,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:20,name:"Fone com fio resistente e borracha - conector de pino",price:30,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
-
   {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",photo:"imagens/IMG_1127.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",photo:"imagens/IMG_1126.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:24,name:"Cabo Tipo-C para Tipo-C normal - 3A, 1,2 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
   {id:25,name:"Cabo USB 3 em 1",price:55,image:"🔌",photo:"imagens/IMG_1123.webp",brand:"FAM",warranty:"1 ano de garantia"}
 ];
 
-let cart = [];
-let cancelModalMode = "";
+let cart=[];
+let cancelModalMode="";
 
 /* DESCRIÇÕES DOS PRODUTOS */
-const productDescriptions = {
-  1:{
-    description:"Uma capa para ajudar a proteger seu celular contra riscos e pequenos impactos do uso diário.",
-    compatibility:"Confira o modelo exato do seu aparelho antes de escolher a capa.",
-    extra:"O formato e os recortes precisam corresponder ao modelo do celular."
-  },
-  2:{
-    description:"Kit carregador simples para carregar aparelhos compatíveis no dia a dia.",
-    compatibility:"Confira o tipo de entrada do cabo e a compatibilidade com seu aparelho.",
-    extra:"A potência e a velocidade dependem do carregador e do dispositivo."
-  },
-  3:{
-    description:"Kit carregador turbo para quem procura uma opção de carregamento mais rápido.",
-    compatibility:"A velocidade turbo depende da compatibilidade entre carregador, cabo e aparelho.",
-    extra:"Verifique a potência suportada pelo seu dispositivo."
-  },
-  4:{
-    description:"Kit carregador da FAM para uso no dia a dia, com garantia informada de 1 ano.",
-    compatibility:"Confira o conector e a compatibilidade com seu aparelho antes de encomendar.",
-    extra:"A velocidade de carregamento depende do aparelho e das especificações do kit."
-  },
-  5:{
-    description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",
-    compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",
-    extra:"Comprimento: 1 metro. Garantia: 1 ano."
-  },
-  6:{
-    description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",
-    compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning. A outra ponta conecta em carregadores ou portas USB convencionais.",
-    extra:"Comprimento: 1 metro. Garantia: 1 ano."
-  },
-  7:{
-    description:"Cabo FAM Tipo-C para USB convencional, com 2 metros de comprimento para dar mais liberdade durante o uso.",
-    compatibility:"A ponta Tipo-C deve ser conectada a um aparelho com entrada USB-C.",
-    extra:"Comprimento: 2 metros. Garantia: 1 ano."
-  },
-  8:{
-    description:"Cabo FAM Lightning para USB convencional, com 2 metros de comprimento.",
-    compatibility:"Para aparelhos Apple que utilizam entrada Lightning. A outra ponta é USB convencional.",
-    extra:"Comprimento: 2 metros. Garantia: 1 ano."
-  },
-  9:{
-    description:"Cabo FAM reforçado com conectores Tipo-C nas duas pontas.",
-    compatibility:"Pode ser usado com carregadores e aparelhos que possuam entrada USB-C.",
-    extra:"Comprimento: 1 metro. A potência depende dos equipamentos utilizados. Garantia: 1 ano."
-  },
-  10:{
-    description:"Cabo FAM reforçado com uma ponta Tipo-C e outra Lightning.",
-    compatibility:"Conecta um carregador com saída USB-C a aparelhos Apple que utilizam entrada Lightning.",
-    extra:"Comprimento: 1 metro. Garantia: 1 ano."
-  },
-  11:{
-    description:"Cabo com uma ponta Tipo-C e outra Lightning.",
-    compatibility:"A ponta Lightning é destinada a aparelhos Apple compatíveis. A ponta Tipo-C deve ser conectada a uma fonte USB-C.",
-    extra:"Comprimento: 1 metro. Garantia: 2 meses."
-  },
-  12:{
-    description:"Cabo com uma ponta USB convencional e outra Tipo-C.",
-    compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores convencionais.",
-    extra:"Comprimento: 1 metro. Garantia: 2 meses."
-  },
-  13:{
-    description:"Cabo com uma ponta USB convencional e outra Lightning.",
-    compatibility:"Para aparelhos Apple que utilizam entrada Lightning, conectado a uma fonte USB convencional.",
-    extra:"Comprimento: 1 metro. Garantia: 2 meses."
-  },
-  14:{
-    description:"Cabo com conectores Tipo-C nas duas pontas.",
-    compatibility:"Utilize com aparelhos e fontes que possuam entrada USB-C.",
-    extra:"Comprimento: 1 metro. Garantia: 2 meses."
-  },
-  15:{
-    description:"Cabo com uma ponta USB convencional e outra V8, também conhecida como Micro-USB.",
-    compatibility:"Indicado para aparelhos e acessórios que utilizam entrada Micro-USB.",
-    extra:"Comprimento: 1 metro. Garantia: 2 meses."
-  },
-  16:{
-    description:"Fone Bluetooth FAM com borrachinhas, sem necessidade de conexão por fio durante o uso.",
-    compatibility:"Compatível com aparelhos que possuam Bluetooth e suportem conexão com fones de ouvido.",
-    extra:"Garantia: 1 ano. Consulte a loja para informações sobre bateria e acessórios inclusos."
-  },
-  17:{
-    description:"Fone Bluetooth com borrachinhas para um encaixe no ouvido. A conexão é sem fio.",
-    compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",
-    extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."
-  },
-  18:{
-    description:"Fone Bluetooth sem borrachinhas, para quem prefere esse formato de encaixe.",
-    compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",
-    extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."
-  },
-  19:{
-    description:"Fone com fio simples, com conector de pino.",
-    compatibility:"Confira se seu aparelho possui entrada compatível. Alguns celulares podem precisar de adaptador.",
-    extra:"Garantia: 2 meses."
-  },
-  20:{
-    description:"Fone com fio e borrachinhas, com construção descrita como resistente.",
-    compatibility:"Possui conector de pino. Confira se seu aparelho possui entrada compatível ou se precisa de adaptador.",
-    extra:"Garantia: 2 meses."
-  },
-  21:{
-    description:"Fone com fio que utiliza conector Tipo-C.",
-    compatibility:"Para aparelhos com entrada USB-C que ofereçam suporte a áudio por essa conexão.",
-    extra:"Alguns aparelhos podem não aceitar áudio por USB-C. Garantia: 2 meses."
-  },
-  22:{
-    description:"Cabo FAM Tipo-C para Tipo-C, indicado para transferência de dados e com capacidade informada de até 60W.",
-    compatibility:"Utilize com aparelhos e fontes USB-C compatíveis.",
-    extra:"Até 60W conforme especificação do produto. A potência efetiva depende também do carregador e do aparelho. Garantia: 1 ano."
-  },
-  23:{
-    description:"Cabo FAM Tipo-C para Lightning, com capacidade informada de até 27W.",
-    compatibility:"Conecta uma fonte USB-C a aparelhos Apple que utilizam entrada Lightning.",
-    extra:"Até 27W conforme especificação do produto. A velocidade depende do aparelho e da fonte. Garantia: 1 ano."
-  },
-  24:{
-    description:"Cabo FAM Tipo-C para Tipo-C, com corrente informada de até 3A e comprimento de 1,2 metro.",
-    compatibility:"Utilize com fontes e aparelhos que possuam entrada USB-C.",
-    extra:"Corrente informada: até 3A. A velocidade depende dos equipamentos utilizados. Garantia: 1 ano."
-  },
-  25:{
-    description:"Cabo FAM 3 em 1, uma opção para diferentes tipos de conexão.",
-    compatibility:"Confira as pontas e os conectores disponíveis na foto do produto para verificar se atendem ao seu aparelho.",
-    extra:"Garantia: 1 ano."
-  }
+const productDescriptions={
+1:{description:"Uma capa para ajudar a proteger seu celular contra riscos e pequenos impactos do uso diário.",compatibility:"Confira o modelo exato do seu aparelho antes de escolher a capa.",extra:"O formato e os recortes precisam corresponder ao modelo do celular."},
+2:{description:"Kit carregador simples para carregar aparelhos compatíveis no dia a dia.",compatibility:"Confira o tipo de entrada do cabo e a compatibilidade com seu aparelho.",extra:"A potência e a velocidade dependem do carregador e do dispositivo."},
+3:{description:"Kit carregador turbo para quem procura uma opção de carregamento mais rápido.",compatibility:"A velocidade turbo depende da compatibilidade entre carregador, cabo e aparelho.",extra:"Verifique a potência suportada pelo seu dispositivo."},
+4:{description:"Kit carregador da FAM para uso no dia a dia, com garantia informada de 1 ano.",compatibility:"Confira o conector e a compatibilidade com seu aparelho antes de encomendar.",extra:"A velocidade de carregamento depende do aparelho e das especificações do kit."},
+5:{description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
+6:{description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning. A outra ponta conecta em carregadores ou portas USB convencionais.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
+7:{description:"Cabo FAM Tipo-C para USB convencional, com 2 metros de comprimento para dar mais liberdade durante o uso.",compatibility:"A ponta Tipo-C deve ser conectada a um aparelho com entrada USB-C.",extra:"Comprimento: 2 metros. Garantia: 1 ano."},
+8:{description:"Cabo FAM Lightning para USB convencional, com 2 metros de comprimento.",compatibility:"Para aparelhos Apple que utilizam entrada Lightning. A outra ponta é USB convencional.",extra:"Comprimento: 2 metros. Garantia: 1 ano."},
+9:{description:"Cabo FAM reforçado com conectores Tipo-C nas duas pontas.",compatibility:"Pode ser usado com carregadores e aparelhos que possuam entrada USB-C.",extra:"Comprimento: 1 metro. A potência depende dos equipamentos utilizados. Garantia: 1 ano."},
+10:{description:"Cabo FAM reforçado com uma ponta Tipo-C e outra Lightning.",compatibility:"Conecta um carregador com saída USB-C a aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
+11:{description:"Cabo com uma ponta Tipo-C e outra Lightning.",compatibility:"A ponta Lightning é destinada a aparelhos Apple compatíveis. A ponta Tipo-C deve ser conectada a uma fonte USB-C.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
+12:{description:"Cabo com uma ponta USB convencional e outra Tipo-C.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores convencionais.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
+13:{description:"Cabo com uma ponta USB convencional e outra Lightning.",compatibility:"Para aparelhos Apple que utilizam entrada Lightning, conectado a uma fonte USB convencional.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
+14:{description:"Cabo com conectores Tipo-C nas duas pontas.",compatibility:"Utilize com aparelhos e fontes que possuam entrada USB-C.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
+15:{description:"Cabo com uma ponta USB convencional e outra V8, também conhecida como Micro-USB.",compatibility:"Indicado para aparelhos e acessórios que utilizam entrada Micro-USB.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
+16:{description:"Fone Bluetooth FAM com borrachinhas, sem necessidade de conexão por fio durante o uso.",compatibility:"Compatível com aparelhos que possuam Bluetooth e suportem conexão com fones de ouvido.",extra:"Garantia: 1 ano. Consulte a loja para informações sobre bateria e acessórios inclusos."},
+17:{description:"Fone Bluetooth com borrachinhas para um encaixe no ouvido. A conexão é sem fio.",compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."},
+18:{description:"Fone Bluetooth sem borrachinhas, para quem prefere esse formato de encaixe.",compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."},
+19:{description:"Fone com fio simples, com conector de pino.",compatibility:"Confira se seu aparelho possui entrada compatível. Alguns celulares podem precisar de adaptador.",extra:"Garantia: 2 meses."},
+20:{description:"Fone com fio e borrachinhas, com construção descrita como resistente.",compatibility:"Possui conector de pino. Confira se seu aparelho possui entrada compatível ou se precisa de adaptador.",extra:"Garantia: 2 meses."},
+21:{description:"Fone com fio que utiliza conector Tipo-C.",compatibility:"Para aparelhos com entrada USB-C que ofereçam suporte a áudio por essa conexão.",extra:"Alguns aparelhos podem não aceitar áudio por USB-C. Garantia: 2 meses."},
+22:{description:"Cabo FAM Tipo-C para Tipo-C, indicado para transferência de dados e com capacidade informada de até 60W.",compatibility:"Utilize com aparelhos e fontes USB-C compatíveis.",extra:"Até 60W conforme especificação do produto. A potência efetiva depende também do carregador e do aparelho. Garantia: 1 ano."},
+23:{description:"Cabo FAM Tipo-C para Lightning, com capacidade informada de até 27W.",compatibility:"Conecta uma fonte USB-C a aparelhos Apple que utilizam entrada Lightning.",extra:"Até 27W conforme especificação do produto. A velocidade depende do aparelho e da fonte. Garantia: 1 ano."},
+24:{description:"Cabo FAM Tipo-C para Tipo-C, com corrente informada de até 3A e comprimento de 1,2 metro.",compatibility:"Utilize com fontes e aparelhos que possuam entrada USB-C.",extra:"Corrente informada: até 3A. A velocidade depende dos equipamentos utilizados. Garantia: 1 ano."},
+25:{description:"Cabo FAM 3 em 1, uma opção para diferentes tipos de conexão.",compatibility:"Confira as pontas e os conectores disponíveis na foto do produto para verificar se atendem ao seu aparelho.",extra:"Garantia: 1 ano."}
 };
+
+/* PESQUISA INTELIGENTE */
+const popularSearches=["Capas","Carregadores","Cabos Tipo-C","Cabos Lightning","Fones Bluetooth","Cabos FAM"];
+
+function normalizeText(text){
+  return text.toLowerCase()
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+    .replace(/[^a-z0-9\s-]/g," ")
+    .replace(/\s+/g," ").trim();
+}
+
+function expandSearchTerms(query){
+  const normalized=normalizeText(query);
+  const terms=normalized.split(" ").filter(Boolean);
+  const expanded=new Set(terms);
+
+  const synonymGroups=[
+    ["tipo-c","type-c","usb-c","usbc","type c","tipo c"],
+    ["usb","usb-a","usb normal","usb convencional"],
+    ["lightning","iphone","apple"],
+    ["v8","micro-usb","micro usb"],
+    ["fone","fone de ouvido","headphone","earphone"],
+    ["bluetooth","sem fio","wireless"],
+    ["carregador","fonte","adaptador"],
+    ["capa","capinha","case"],
+    ["reforcado","reforcada","resistente"],
+    ["fam","f a m"]
+  ];
+
+  synonymGroups.forEach(group=>{
+    if(group.some(word=>normalized.includes(normalizeText(word)))){
+      group.forEach(word=>expanded.add(normalizeText(word)));
+    }
+  });
+
+  if(normalized.includes("iphone")){
+    expanded.add("lightning");
+    expanded.add("apple");
+  }
+
+  return [...expanded];
+}
+
+function productMatchesSearch(product,query){
+  if(!query)return true;
+
+  const normalized=normalizeText(query);
+  const terms=expandSearchTerms(query);
+  const productText=normalizeText(
+    `${product.name} ${product.brand||""} ${product.warranty||""} ${productDescriptions[product.id]?.description||""} ${productDescriptions[product.id]?.compatibility||""}`
+  );
+
+  if(productText.includes(normalized))return true;
+
+  const aliases={
+    "tipo-c":["tipo c","type-c","type c","usb-c","usbc"],
+    "lightning":["iphone","apple"],
+    "v8":["micro-usb","micro usb"],
+    "fone":["fone de ouvido","headphone","earphone"],
+    "carregador":["fonte","adaptador"],
+    "capa":["capinha","case"]
+  };
+
+  const aliasMatches=Object.entries(aliases).some(([key,values])=>{
+    return (normalized.includes(key)||values.some(v=>normalized.includes(v))) &&
+      (productText.includes(key)||values.some(v=>productText.includes(v)));
+  });
+
+  if(aliasMatches)return true;
+
+  return terms.some(term=>term.length>2&&productText.includes(term));
+}
+
+function getRecentSearches(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(RECENT_SEARCHES_KEY)||"[]");
+    return Array.isArray(saved)?saved:[];
+  }catch(error){return []}
+}
+
+function saveRecentSearch(query){
+  const value=query.trim();
+  if(value.length<2)return;
+
+  let recent=getRecentSearches();
+  recent=recent.filter(item=>normalizeText(item)!==normalizeText(value));
+  recent.unshift(value);
+  recent=recent.slice(0,MAX_RECENT_SEARCHES);
+
+  try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(error){}
+}
+
+function setSearchValue(value,save=true){
+  document.getElementById("search").value=value;
+  document.getElementById("header-search").value=value;
+  updateClearSearch();
+  renderProducts();
+  if(save)saveRecentSearch(value);
+  closeSearchSuggestions();
+  closeMobileSearch();
+  if(value.trim())document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function syncSearch(source){
+  const value=source==="header"
+    ?document.getElementById("header-search").value
+    :document.getElementById("search").value;
+
+  document.getElementById(source==="header"?"search":"header-search").value=value;
+  updateClearSearch();
+  renderProducts();
+
+  if(source==="header")renderSearchSuggestions(value);
+}
+
+function updateClearSearch(){
+  const button=document.getElementById("clear-header-search");
+  button.classList.toggle("visible",!!document.getElementById("header-search").value);
+}
+
+function closeSearchSuggestions(){
+  document.getElementById("search-suggestions").classList.remove("open");
+}
+
+function openSearchSuggestions(){
+  renderSearchSuggestions(document.getElementById("header-search").value);
+  document.getElementById("search-suggestions").classList.add("open");
+}
+
+function renderSearchSuggestions(query=""){
+  const panel=document.getElementById("search-suggestions");
+  const recent=getRecentSearches();
+  const value=query.trim();
+
+  if(value){
+    const matches=productsList.filter(product=>productMatchesSearch(product,value)).slice(0,4);
+
+    panel.innerHTML=`
+      ${matches.length?`<div class="suggestion-heading">Produtos encontrados</div>
+      <div class="suggestion-list">
+        ${matches.map(product=>`<button class="search-suggestion" type="button" onclick="setSearchValue('${product.name.replace(/'/g,"\\'")}')">${product.image} ${product.name}</button>`).join("")}
+      </div>`:`<div class="suggestion-heading">Continue digitando para procurar</div>`}
+      ${recent.length?`
+        <div class="suggestion-heading">Pesquisas recentes</div>
+        ${recent.slice(0,3).map(item=>`
+          <div class="search-recent-row">
+            <button type="button" onclick="setSearchValue(${JSON.stringify(item)})">↶ ${escapeHtml(item)}</button>
+          </div>`).join("")}
+      `:""}
+    `;
+  }else{
+    panel.innerHTML=`
+      <div class="suggestion-heading">Pesquisas populares</div>
+      <div class="suggestion-list">
+        ${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick="setSearchValue(${JSON.stringify(item)})">${item}</button>`).join("")}
+      </div>
+      ${recent.length?`
+        <div class="suggestion-heading">Pesquisas recentes</div>
+        ${recent.map(item=>`
+          <div class="search-recent-row">
+            <button type="button" onclick="setSearchValue(${JSON.stringify(item)})">↶ ${escapeHtml(item)}</button>
+            <button class="remove-recent" type="button" aria-label="Remover pesquisa" onclick="removeRecentSearch(${JSON.stringify(item)})">×</button>
+          </div>`).join("")}
+        <button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>
+      `:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}
+    `;
+  }
+
+  panel.classList.add("open");
+}
+
+function removeRecentSearch(value){
+  const recent=getRecentSearches().filter(item=>item!==value);
+  try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(error){}
+  renderSearchSuggestions(document.getElementById("header-search").value);
+}
+
+function clearRecentSearches(){
+  try{localStorage.removeItem(RECENT_SEARCHES_KEY)}catch(error){}
+  renderSearchSuggestions(document.getElementById("header-search").value);
+  showToast("Histórico de pesquisas limpo.");
+}
+
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g,char=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[char]));
+}
+
+/* CONTROLES DA PESQUISA */
+const headerSearch=document.getElementById("header-search");
+const mainHeader=document.getElementById("main-header");
+const mobileSearchToggle=document.getElementById("mobile-search-toggle");
+
+headerSearch.addEventListener("input",()=>syncSearch("header"));
+headerSearch.addEventListener("focus",openSearchSuggestions);
+headerSearch.addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    event.preventDefault();
+    const value=headerSearch.value.trim();
+    if(value)saveRecentSearch(value);
+    closeSearchSuggestions();
+    closeMobileSearch();
+    document.getElementById("products").scrollIntoView({behavior:"smooth"});
+  }
+  if(event.key==="Escape"){
+    closeSearchSuggestions();
+    closeMobileSearch();
+    headerSearch.blur();
+  }
+});
+
+document.getElementById("search").addEventListener("keydown",event=>{
+  if(event.key==="Enter"){
+    const value=event.target.value.trim();
+    if(value)saveRecentSearch(value);
+  }
+});
+
+document.getElementById("clear-header-search").addEventListener("click",()=>{
+  headerSearch.value="";
+  document.getElementById("search").value="";
+  updateClearSearch();
+  renderProducts();
+  headerSearch.focus();
+  openSearchSuggestions();
+});
+
+mobileSearchToggle.addEventListener("click",()=>{
+  if(mainHeader.classList.contains("mobile-search-open")){
+    closeMobileSearch();
+  }else{
+    mainHeader.classList.add("mobile-search-open");
+    mobileSearchToggle.setAttribute("aria-expanded","true");
+    setTimeout(()=>headerSearch.focus(),50);
+    openSearchSuggestions();
+  }
+});
+
+function closeMobileSearch(){
+  mainHeader.classList.remove("mobile-search-open");
+  mobileSearchToggle.setAttribute("aria-expanded","false");
+}
+
+document.addEventListener("click",event=>{
+  if(!event.target.closest(".header-search-area")&&
+     !event.target.closest(".mobile-search-toggle")){
+    closeSearchSuggestions();
+    closeMobileSearch();
+  }
+});
 
 /* SAUDAÇÃO */
 function getGreeting(){
-  const hour = new Date().getHours();
-  if(hour>=5 && hour<12)return "Bom dia! ☀️";
-  if(hour>=12 && hour<18)return "Boa tarde! 🌤️";
+  const hour=new Date().getHours();
+  if(hour>=5&&hour<12)return "Bom dia! ☀️";
+  if(hour>=12&&hour<18)return "Boa tarde! 🌤️";
   return "Boa noite! 🌙";
 }
 
 function updateGreeting(){
-  const greeting = getGreeting();
-  document.getElementById("greeting").textContent =
-    greeting.replace(/[☀️🌤️🌙]/gu,"").trim();
-  document.getElementById("cart-greeting").textContent = greeting;
+  const greeting=getGreeting();
+  document.getElementById("greeting").textContent=greeting.replace(/[☀️🌤️🌙]/gu,"").trim();
+  document.getElementById("cart-greeting").textContent=greeting;
 }
 updateGreeting();
 
 /* ANIMAÇÃO */
 window.addEventListener("load",()=>{
-  setTimeout(()=>{
-    document.getElementById("intro").classList.add("hide");
-  },2500);
+  setTimeout(()=>document.getElementById("intro").classList.add("hide"),2500);
 });
 
 /* PREÇO */
 function money(value){
-  return value.toLocaleString("pt-BR",{
-    style:"currency",currency:"BRL"
-  });
+  return value.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 }
 
 /* CARTÃO DO PRODUTO */
 function createProductCard(product){
-  const productPhoto = product.photo
-    ? `<img src="${product.photo}" alt="${product.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-       <span class="fallback" style="display:none">${product.image}</span>`
-    : `<span class="fallback">${product.image}</span>`;
+  const productPhoto=product.photo
+    ?`<img src="${product.photo}" alt="${product.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">${product.image}</span>`
+    :`<span class="fallback">${product.image}</span>`;
 
-  const famSeal = product.brand === "FAM"
-    ? `<div class="fam-seal">FAM</div>`
-    : "";
+  const famSeal=product.brand==="FAM"?`<div class="fam-seal">FAM</div>`:"";
 
   return `
     <div class="product">
-      <div class="product-image">
-        ${productPhoto}
-        ${famSeal}
-      </div>
-
+      <div class="product-image">${productPhoto}${famSeal}</div>
       <div class="product-info">
-        <div class="product-title-row">
-          <h3>${product.name}</h3>
-        </div>
-
+        <div class="product-title-row"><h3>${product.name}</h3></div>
         <div class="price">${money(product.price)}</div>
         <p class="warranty">🛡️ ${product.warranty}</p>
-
         <div class="product-buttons">
-          <button class="product-info-button"
-            type="button" onclick="showProductInfo(${product.id})">
-            Informações
-          </button>
-          <button class="add" type="button"
-            onclick="addToCart(${product.id})">
-            + Adicionar
-          </button>
+          <button class="product-info-button" type="button" onclick="showProductInfo(${product.id})">Informações</button>
+          <button class="add" type="button" onclick="addToCart(${product.id})">+ Adicionar</button>
         </div>
       </div>
     </div>
   `;
 }
 
-/* ABRIR INFORMAÇÕES DO PRODUTO */
+/* INFORMAÇÕES DO PRODUTO */
 function showProductInfo(id){
   const product=productsList.find(item=>item.id===id);
   if(!product)return;
 
-  const details=productDescriptions[id] || {
+  const details=productDescriptions[id]||{
     description:"Consulte a loja para mais informações sobre este produto.",
     compatibility:"Confirme a compatibilidade com seu aparelho antes de encomendar.",
     extra:"Consulte a loja para detalhes adicionais."
@@ -896,11 +1057,7 @@ function showProductInfo(id){
   const photoArea=document.getElementById("product-info-photo");
 
   if(product.photo){
-    photoArea.innerHTML=`
-      <img src="${product.photo}" alt="${product.name}"
-        onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
-      <span style="display:none">${product.image}</span>
-    `;
+    photoArea.innerHTML=`<img src="${product.photo}" alt="${product.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${product.image}</span>`;
   }else{
     photoArea.innerHTML=`<span>${product.image}</span>`;
   }
@@ -926,54 +1083,36 @@ function closeProductInfo(){
 }
 
 function handleProductInfoBackdrop(event){
-  if(event.target.id==="product-info-overlay"){
-    closeProductInfo();
-  }
+  if(event.target.id==="product-info-overlay")closeProductInfo();
 }
 
 /* PESQUISA, FILTROS E ORDENAÇÃO */
 function renderProducts(){
   const area=document.getElementById("products");
-  const search=document.getElementById("search").value.trim().toLowerCase();
+  const search=document.getElementById("search").value.trim();
   const sort=document.getElementById("sort-filter").value;
   const brand=document.getElementById("brand-filter").value;
 
   let filtered=productsList.filter(product=>{
-    const searchableText=
-      `${product.name} ${product.brand||""}`.toLowerCase();
-
-    const matchesSearch=searchableText.includes(search);
+    const matchesSearch=productMatchesSearch(product,search);
     let matchesBrand=true;
 
-    if(brand==="FAM" || brand==="Gold"){
-      matchesBrand=product.brand===brand;
-    }
+    if(brand==="FAM"||brand==="Gold")matchesBrand=product.brand===brand;
+    if(brand==="other")matchesBrand=product.brand!=="FAM"&&product.brand!=="Gold";
 
-    if(brand==="other"){
-      matchesBrand=product.brand!=="FAM" && product.brand!=="Gold";
-    }
-
-    return matchesSearch && matchesBrand;
+    return matchesSearch&&matchesBrand;
   });
 
-  if(sort==="low"){
-    filtered.sort((a,b)=>a.price-b.price);
-  }else if(sort==="high"){
-    filtered.sort((a,b)=>b.price-a.price);
-  }else if(sort==="az"){
-    filtered.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
-  }
+  if(sort==="low")filtered.sort((a,b)=>a.price-b.price);
+  else if(sort==="high")filtered.sort((a,b)=>b.price-a.price);
+  else if(sort==="az")filtered.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
 
   if(filtered.length===0){
-    area.innerHTML="<p class='no-products'>Nenhum produto encontrado.</p>";
+    area.innerHTML="<p class='no-products'>Nenhum produto encontrado. Tente pesquisar por outro nome ou termo.</p>";
     return;
   }
 
-  area.innerHTML=`
-    <div class="product-grid">
-      ${filtered.map(createProductCard).join("")}
-    </div>
-  `;
+  area.innerHTML=`<div class="product-grid">${filtered.map(createProductCard).join("")}</div>`;
 }
 
 /* CARRINHO */
@@ -994,14 +1133,10 @@ function closeCart(){
 function addToCart(id){
   const product=productsList.find(p=>p.id===id);
   if(!product)return;
-
   const existing=cart.find(item=>item.id===id);
 
-  if(existing){
-    existing.quantity++;
-  }else{
-    cart.push({...product,quantity:1});
-  }
+  if(existing)existing.quantity++;
+  else cart.push({...product,quantity:1});
 
   renderCart();
   showToast("Produto adicionado ao carrinho! 🛒");
@@ -1010,13 +1145,8 @@ function addToCart(id){
 function changeQuantity(id,amount){
   const item=cart.find(p=>p.id===id);
   if(!item)return;
-
   item.quantity+=amount;
-
-  if(item.quantity<=0){
-    cart=cart.filter(p=>p.id!==id);
-  }
-
+  if(item.quantity<=0)cart=cart.filter(p=>p.id!==id);
   renderCart();
 }
 
@@ -1028,16 +1158,12 @@ function removeItem(id){
 
 /* CANCELAMENTO */
 function cancelCart(){
-  if(cart.length===0){
-    showCancelModal("empty");
-    return;
-  }
+  if(cart.length===0){showCancelModal("empty");return}
   showCancelModal("confirm");
 }
 
 function showCancelModal(mode){
   cancelModalMode=mode;
-
   const overlay=document.getElementById("cancel-modal-overlay");
   const icon=document.getElementById("cancel-modal-icon");
   const title=document.getElementById("cancel-modal-title");
@@ -1079,7 +1205,7 @@ function closeCancelModal(){
 }
 
 function handleCancelModalPrimary(){
-  if(cancelModalMode==="success" || cancelModalMode==="empty"){
+  if(cancelModalMode==="success"||cancelModalMode==="empty"){
     closeCancelModal();
     closeCart();
     return;
@@ -1089,7 +1215,6 @@ function handleCancelModalPrimary(){
 
 function confirmCancelCart(){
   if(cancelModalMode!=="confirm")return;
-
   cart=[];
   renderCart();
   hideCheckoutForm();
@@ -1097,9 +1222,7 @@ function confirmCancelCart(){
 }
 
 function handleCancelModalBackdrop(event){
-  if(event.target.id==="cancel-modal-overlay"){
-    closeCancelModal();
-  }
+  if(event.target.id==="cancel-modal-overlay")closeCancelModal();
 }
 
 /* ATUALIZAR CARRINHO */
@@ -1108,41 +1231,28 @@ function renderCart(){
   const count=cart.reduce((sum,item)=>sum+item.quantity,0);
 
   document.getElementById("cart-badge").textContent=count>0?count:"";
-  document.getElementById("cart-items-count").textContent=
-    `${count} ${count===1?"item":"itens"}`;
+  document.getElementById("cart-items-count").textContent=`${count} ${count===1?"item":"itens"}`;
 
   if(cart.length===0){
-    area.innerHTML=`
-      <p class="empty">
-        Seu carrinho está vazio. 😔
-        <br><br>
-        Que tal escolher alguns produtos?
-      </p>
-    `;
+    area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
   }else{
     area.innerHTML=cart.map(item=>`
       <div class="cart-item">
         <div class="cart-item-image">
-          ${item.photo
-            ? `<img src="${item.photo}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${item.image}</span>`
-            : item.image}
+          ${item.photo?`<img src="${item.photo}" alt="${item.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${item.image}</span>`:item.image}
         </div>
-
         <div class="cart-item-info">
           <strong>${item.name}</strong>
           <span class="cart-warranty">🛡️ ${item.warranty||"Consultar garantia"}</span>
           <div class="cart-price">${money(item.price*item.quantity)}</div>
         </div>
-
         <div class="cart-item-actions">
           <div class="quantity">
             <button type="button" onclick="changeQuantity(${item.id},-1)">−</button>
             <strong>${item.quantity}</strong>
             <button type="button" onclick="changeQuantity(${item.id},1)">+</button>
           </div>
-          <button type="button" class="remove"
-            aria-label="Remover produto"
-            onclick="removeItem(${item.id})">🗑</button>
+          <button type="button" class="remove" aria-label="Remover produto" onclick="removeItem(${item.id})">🗑</button>
         </div>
       </div>
     `).join("");
@@ -1150,29 +1260,18 @@ function renderCart(){
 
   const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
   document.getElementById("total").textContent=money(total);
-
   document.querySelector(".finish-shopping").disabled=cart.length===0;
-  document.querySelector(".finish-shopping").style.opacity=
-    cart.length===0?".5":"1";
+  document.querySelector(".finish-shopping").style.opacity=cart.length===0?".5":"1";
 
-  if(document.getElementById("checkout-form").classList.contains("show")){
-    renderPaymentDetails();
-  }
+  if(document.getElementById("checkout-form").classList.contains("show"))renderPaymentDetails();
 }
 
 /* FORMULÁRIO */
 function showCheckoutForm(){
-  if(cart.length===0){
-    showCancelModal("empty");
-    return;
-  }
-
+  if(cart.length===0){showCancelModal("empty");return}
   const form=document.getElementById("checkout-form");
   form.classList.add("show");
-
-  setTimeout(()=>{
-    form.scrollIntoView({behavior:"smooth",block:"start"});
-  },100);
+  setTimeout(()=>form.scrollIntoView({behavior:"smooth",block:"start"}),100);
 }
 
 function hideCheckoutForm(){
@@ -1199,17 +1298,9 @@ function renderPaymentDetails(){
       <div id="cash-change-details"></div>
     `;
   }else if(method==="Pix"){
-    area.innerHTML=`
-      <p class="payment-help">
-        A chave Pix será informada pela loja após a confirmação da encomenda.
-      </p>
-    `;
+    area.innerHTML=`<p class="payment-help">A chave Pix será informada pela loja após a confirmação da encomenda.</p>`;
   }else if(method==="Cartão"){
-    area.innerHTML=`
-      <p class="payment-help">
-        O pagamento será feito na maquininha, no momento da entrega.
-      </p>
-    `;
+    area.innerHTML=`<p class="payment-help">O pagamento será feito na maquininha, no momento da entrega.</p>`;
   }else{
     area.innerHTML="";
   }
@@ -1222,13 +1313,10 @@ function renderCashChange(){
   if(change==="sim"){
     area.innerHTML=`
       <label for="cash-amount">Vai pagar com quanto?</label>
-      <input id="cash-amount" type="number" min="0" step="0.01"
-        placeholder="Ex.: 150,00" oninput="calculateChange()">
+      <input id="cash-amount" type="number" min="0" step="0.01" placeholder="Ex.: 150,00" oninput="calculateChange()">
       <div id="change-result" class="payment-result"></div>
     `;
-  }else{
-    area.innerHTML="";
-  }
+  }else area.innerHTML="";
 }
 
 function calculateChange(){
@@ -1236,17 +1324,12 @@ function calculateChange(){
   const amount=Number(document.getElementById("cash-amount").value);
   const result=document.getElementById("change-result");
 
-  if(!Number.isFinite(amount) || amount<=0){
-    result.textContent="";
-    return;
-  }
-
+  if(!Number.isFinite(amount)||amount<=0){result.textContent="";return}
   if(amount<total){
     result.style.color="#ff6974";
     result.textContent="O valor informado é menor que o total do pedido.";
     return;
   }
-
   result.style.color="#20d875";
   result.textContent="Troco: "+money(amount-total);
 }
@@ -1261,28 +1344,19 @@ function getPaymentInformation(){
 
   if(method==="Dinheiro"){
     const change=document.getElementById("cash-change")?.value;
-
-    if(!change){
-      showToast("Informe se precisa de troco.","error");
-      return null;
-    }
+    if(!change){showToast("Informe se precisa de troco.","error");return null}
 
     if(change==="nao"){
-      return {
-        method:"Dinheiro",
-        description:"Não precisa de troco. Pagará com o valor exato."
-      };
+      return {method:"Dinheiro",description:"Não precisa de troco. Pagará com o valor exato."};
     }
 
     const amount=Number(document.getElementById("cash-amount")?.value);
-
-    if(!Number.isFinite(amount) || amount<=0){
+    if(!Number.isFinite(amount)||amount<=0){
       showToast("Informe quanto vai entregar em dinheiro.","error");
       return null;
     }
 
     const total=getOrderTotal();
-
     if(amount<total){
       showToast("O valor informado é menor que o total.","error");
       return null;
@@ -1317,11 +1391,7 @@ function sendOrder(){
   const telefone=document.getElementById("telefone").value.trim();
   const endereco=document.getElementById("endereco").value.trim();
 
-  if(cart.length===0){
-    showCancelModal("empty");
-    return;
-  }
-
+  if(cart.length===0){showCancelModal("empty");return}
   if(!nome||!telefone||!endereco){
     showToast("Preencha todos os seus dados antes de continuar.","error");
     return;
@@ -1375,13 +1445,15 @@ document.addEventListener("keydown",event=>{
     closeProductInfo();
     closeCancelModal();
     closeCart();
+    closeSearchSuggestions();
+    closeMobileSearch();
   }
 });
 
 /* INICIALIZAÇÃO */
 renderProducts();
 renderCart();
-
+updateClearSearch();
 </script>
 </body>
 </html>
