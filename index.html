@@ -4,6 +4,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -45,76 +46,16 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .brand span{display:block;color:#bdbdbd;font-size:10px;margin-top:4px;letter-spacing:3px}
 
 /* SELETOR DE TEMA */
-.theme-switch{
-  position:relative;
-  width:150px;
-  height:43px;
-  border-radius:30px;
-  background:#303030;
-  border:1px solid #555;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:4px;
-  cursor:grab;
-  touch-action:pan-y;
-  user-select:none;
-  flex-shrink:0;
-  outline-offset:4px;
-}
-
+.theme-switch{position:relative;width:150px;height:43px;border-radius:30px;background:#303030;border:1px solid #555;display:flex;align-items:center;justify-content:space-between;padding:4px;cursor:grab;touch-action:pan-y;user-select:none;flex-shrink:0;outline-offset:4px}
 .theme-switch:active{cursor:grabbing}
-
-.theme-label{
-  position:absolute;
-  top:50%;
-  width:50%;
-  transform:translate(-50%,-50%);
-  text-align:center;
-  color:#bbb;
-  font-size:12px;
-  font-weight:bold;
-  transition:opacity .2s;
-  pointer-events:none;
-}
-
+.theme-label{position:absolute;top:50%;width:50%;transform:translate(-50%,-50%);text-align:center;color:#bbb;font-size:12px;font-weight:bold;transition:opacity .2s;pointer-events:none}
 .theme-dark{left:25%}
 .theme-light{left:75%}
-
-.theme-mustache{
-  position:absolute;
-  top:3px;
-  left:3px;
-  width:35px;
-  height:35px;
-  border-radius:50%;
-  background:#20d875;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  transition:transform .25s ease;
-  z-index:2;
-  pointer-events:none;
-}
-
-.theme-mustache svg{
-  width:27px;
-  height:17px;
-  fill:#101010;
-}
-
-.theme-switch[data-theme="dark"] .theme-mustache{
-  transform:translateX(0);
-}
-
-.theme-switch[data-theme="light"] .theme-mustache{
-  transform:translateX(107px);
-}
-
-.theme-switch[data-theme="dark"] .theme-dark,
-.theme-switch[data-theme="light"] .theme-light{
-  opacity:0;
-}
+.theme-mustache{position:absolute;top:3px;left:3px;width:35px;height:35px;border-radius:50%;background:#20d875;display:flex;align-items:center;justify-content:center;transition:transform .25s ease;z-index:2;pointer-events:none}
+.theme-mustache svg{width:27px;height:17px;fill:#101010}
+.theme-switch[data-theme="dark"] .theme-mustache{transform:translateX(0)}
+.theme-switch[data-theme="light"] .theme-mustache{transform:translateX(107px)}
+.theme-switch[data-theme="dark"] .theme-dark,.theme-switch[data-theme="light"] .theme-light{opacity:0}
 
 /* SAUDAÇÃO */
 .hero{background:linear-gradient(135deg,#151515,#292929);color:white;padding:65px 7%;text-align:center}
@@ -133,46 +74,45 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #444;border-radius:10px;background:#202020;color:white;outline:none;font-size:13px}
 .catalog-filters select:focus{border-color:#20c55a}
 @media(max-width:350px){.catalog-filters{grid-template-columns:1fr}}
-
 .products{width:100%}
 .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .product{background:#1c1c1c;color:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #00000025;min-width:0}
-
-/* FOTOS DOS PRODUTOS */
 .product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
 .product-image img{width:100%;height:100%;object-fit:contain}
 .product-image .fallback{font-size:55px}
 
 /* SELO FAM */
-.fam-seal{
-  position:absolute;
-  top:9px;
-  right:9px;
-  width:45px;
-  height:45px;
-  border-radius:50%;
-  background:#050505;
-  border:2px solid #40DCCB;
-  color:#fff;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  font-size:10px;
-  font-weight:900;
-  letter-spacing:.3px;
-  box-shadow:0 2px 9px #00000035;
-  z-index:2;
-  pointer-events:none;
-}
-
+.fam-seal{position:absolute;top:9px;right:9px;width:45px;height:45px;border-radius:50%;background:#050505;border:2px solid #40DCCB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;letter-spacing:.3px;box-shadow:0 2px 9px #00000035;z-index:2;pointer-events:none}
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
 .price{font-weight:bold;font-size:19px;color:#20d875;margin-bottom:12px}
 .warranty{color:#aaa;font-size:12px;margin:8px 0}
-.add{background:#20d875;color:#101010;width:100%;padding:12px;border-radius:9px;font-weight:bold}
+.product-buttons{display:grid;grid-template-columns:1fr 1fr;gap:7px}
+.product-buttons button{width:100%;padding:11px 5px;border-radius:9px;font-size:12px;font-weight:bold}
+.add{background:#20d875;color:#101010}
 .add:active{transform:scale(.97)}
+.product-info-button{background:#333;color:white;border:1px solid #555}
+.product-info-button:active{transform:scale(.97)}
 .no-products{color:#888;text-align:center;padding:25px}
+
+/* JANELA DE INFORMAÇÕES */
+.product-info-overlay{position:fixed;inset:0;z-index:850;background:#000000b8;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.product-info-overlay.open{opacity:1;visibility:visible}
+.product-info-modal{width:100%;max-width:390px;max-height:85vh;overflow-y:auto;background:#191919;color:white;border:2px solid #40DCCB;border-radius:20px;padding:17px;transform:translateY(15px) scale(.97);transition:transform .25s}
+.product-info-overlay.open .product-info-modal{transform:translateY(0) scale(1)}
+.product-info-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
+.product-info-header h2{font-size:18px;line-height:1.3}
+.close-product-info{background:none;color:#ddd;font-size:29px;padding:0 5px}
+.product-info-photo{width:100%;height:210px;background:#fff;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:15px;position:relative}
+.product-info-photo img{width:100%;height:100%;object-fit:contain}
+.product-info-photo span{font-size:70px}
+.product-info-price{font-size:22px;color:#20d875;font-weight:bold;margin:10px 0}
+.product-info-description{color:#ddd;font-size:13px;line-height:1.6;margin-bottom:14px}
+.product-info-details{background:#252525;border-radius:12px;padding:13px;font-size:12px;line-height:1.8}
+.product-info-details p+p{margin-top:7px}
+.product-info-details strong{color:#40DCCB}
+.product-info-add{width:100%;padding:13px;margin-top:14px;background:#20d875;color:#101010;border-radius:10px;font-weight:bold}
 
 /* CARRINHO FLUTUANTE */
 .floating-cart{position:fixed;right:20px;bottom:22px;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,#101010,#242424);border:3px solid #20d875;box-shadow:0 0 18px #20d87566;display:flex;align-items:center;justify-content:center;z-index:500;transition:transform .2s}
@@ -200,11 +140,8 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .cart-products-title{font-weight:bold;margin-bottom:12px;font-size:15px}
 .cart-products-title span{color:#d45cff}
 .cart-item{display:flex;align-items:flex-start;gap:10px;padding:13px 0;border-top:1px solid #393939}
-
-/* FOTO NO CARRINHO */
 .cart-item-image{width:48px;height:48px;flex-shrink:0;background:#fff;border-radius:10px;display:flex;align-items:center;justify-content:center;overflow:hidden;font-size:25px}
 .cart-item-image img{width:100%;height:100%;object-fit:contain}
-
 .cart-item-info{flex:1;min-width:0}
 .cart-item-info strong{display:block;font-size:13px;line-height:1.35;overflow-wrap:break-word}
 .cart-item-info small{display:block;color:#aaa;font-size:11px;margin-top:4px}
@@ -265,26 +202,7 @@ footer{background:#080808;color:white;text-align:center;padding:30px 15px;margin
 footer p{color:#aaa;font-size:13px;margin-top:8px}
 
 /* AVISO PERSONALIZADO */
-.site-toast{
-  position:fixed;
-  left:50%;
-  bottom:25px;
-  transform:translate(-50%,20px);
-  width:min(90%,380px);
-  background:#191919;
-  color:white;
-  border:1px solid #20d875;
-  border-radius:13px;
-  padding:15px 18px;
-  z-index:10000;
-  box-shadow:0 5px 25px #0005;
-  opacity:0;
-  visibility:hidden;
-  transition:.25s;
-  font-size:14px;
-  line-height:1.5;
-  text-align:center;
-}
+.site-toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);width:min(90%,380px);background:#191919;color:white;border:1px solid #20d875;border-radius:13px;padding:15px 18px;z-index:10000;box-shadow:0 5px 25px #0005;opacity:0;visibility:hidden;transition:.25s;font-size:14px;line-height:1.5;text-align:center}
 .site-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
 .site-toast.error{border-color:#ff5260}
 
@@ -299,13 +217,13 @@ body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);colo
 body[data-theme="light"] .hero p{color:#444}
 body[data-theme="light"] .hero strong{color:#111}
 body[data-theme="light"] .section-title p{color:#777}
-body[data-theme="light"] .search,
-body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
+body[data-theme="light"] .search,body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
 body[data-theme="light"] .product{background:white;color:#202020;box-shadow:0 3px 12px #0000000c}
 body[data-theme="light"] .product-image{background:white}
 body[data-theme="light"] .price{color:#111}
 body[data-theme="light"] .warranty{color:#777}
 body[data-theme="light"] .add{background:#151515;color:white}
+body[data-theme="light"] .product-info-button{background:#eee;color:#222;border-color:#ccc}
 body[data-theme="light"] footer{background:#eee;color:#111}
 body[data-theme="light"] footer p{color:#666}
 
@@ -317,37 +235,33 @@ body[data-theme="light"] .chat-message{background:#f1f1f1;border-color:#ddd;colo
 body[data-theme="light"] .chat-message strong{color:#111}
 body[data-theme="light"] .cart-products-box{background:#f7f7f7;border-color:#ddd}
 body[data-theme="light"] .cart-item{border-top-color:#ddd}
-body[data-theme="light"] .cart-item-info small,
-body[data-theme="light"] .cart-warranty{color:#777}
+body[data-theme="light"] .cart-item-info small,body[data-theme="light"] .cart-warranty{color:#777}
 body[data-theme="light"] .empty{color:#777}
 body[data-theme="light"] .cart-notice{color:#777}
 body[data-theme="light"] .checkout-form{background:#f5f5f5;border-color:#ddd}
-body[data-theme="light"] .form-group input,
-body[data-theme="light"] .form-group select{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .form-group input,body[data-theme="light"] .form-group select{background:#fff;color:#222;border-color:#ccc}
 body[data-theme="light"] .notice{background:#eaeaea;color:#444}
 body[data-theme="light"] .back-to-cart{color:#555}
 body[data-theme="light"] .payment-box{background:#fff;border-color:#ddd}
-body[data-theme="light"] .payment-box select,
-body[data-theme="light"] .payment-box input{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .payment-box select,body[data-theme="light"] .payment-box input{background:#fff;color:#222;border-color:#ccc}
 body[data-theme="light"] .payment-help{color:#666}
 body[data-theme="light"] .cancel-modal{background:#fff;color:#202020}
 body[data-theme="light"] .cancel-modal p{color:#444}
 body[data-theme="light"] .cancel-modal-icon{background:#f1f1f1}
 body[data-theme="light"] .site-toast{background:#fff;color:#222}
+body[data-theme="light"] .product-info-modal{background:white;color:#202020}
+body[data-theme="light"] .close-product-info{color:#222}
+body[data-theme="light"] .product-info-description{color:#444}
+body[data-theme="light"] .product-info-details{background:#f1f1f1}
 
 /* ABERTURA ADAPTÁVEL */
 body[data-theme="dark"] #intro{background:#f5f5f5}
 body[data-theme="dark"] .big-mustache path{fill:#101010}
-body[data-theme="dark"] .stage-logo h1,
-body[data-theme="dark"] .stage-logo h2,
-body[data-theme="dark"] .stage-welcome h1,
-body[data-theme="dark"] .stage-welcome p{color:#101010;-webkit-text-stroke:0}
+body[data-theme="dark"] .stage-logo h1,body[data-theme="dark"] .stage-logo h2,body[data-theme="dark"] .stage-welcome h1,body[data-theme="dark"] .stage-welcome p{color:#101010;-webkit-text-stroke:0}
 body[data-theme="light"] #intro{background:#050505}
 body[data-theme="light"] .big-mustache path{fill:white}
-body[data-theme="light"] .stage-logo h1,
-body[data-theme="light"] .stage-logo h2{color:white;-webkit-text-stroke:1.5px #000;paint-order:stroke fill}
-body[data-theme="light"] .stage-welcome h1,
-body[data-theme="light"] .stage-welcome p{color:white}
+body[data-theme="light"] .stage-logo h1,body[data-theme="light"] .stage-logo h2{color:white;-webkit-text-stroke:1.5px #000;paint-order:stroke fill}
+body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welcome p{color:white}
 
 /* CELULARES */
 @media(max-width:480px){
@@ -369,6 +283,7 @@ body[data-theme="light"] .stage-welcome p{color:white}
   .floating-cart{width:66px;height:66px;right:15px;bottom:15px}
   .floating-cart svg{width:46px;height:46px}
   .cancel-modal{padding:22px 17px}
+  .product-buttons button{font-size:11px;padding:10px 3px}
 }
 @media(max-width:360px){
   header{align-items:flex-start}
@@ -376,6 +291,7 @@ body[data-theme="light"] .stage-welcome p{color:white}
   .brand span{font-size:9px;letter-spacing:2px}
   .theme-switch{width:120px}
   .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(77px)}
+  .product-info-modal{padding:13px}
 }
 </style>
 </head>
@@ -411,9 +327,8 @@ body[data-theme="light"] .stage-welcome p{color:white}
     </div>
   </div>
 
-  <div class="theme-switch" id="theme-switch"
-       data-theme="dark" role="switch"
-       aria-label="Alternar entre modo escuro e modo light"
+  <div class="theme-switch" id="theme-switch" data-theme="dark"
+       role="switch" aria-label="Alternar entre modo escuro e modo light"
        aria-checked="true" tabindex="0">
     <span class="theme-label theme-light">Light</span>
     <span class="theme-label theme-dark">Dark</span>
@@ -440,8 +355,7 @@ body[data-theme="light"] .stage-welcome p{color:white}
   </div>
 
   <input class="search" id="search" type="search"
-    placeholder="🔎 Pesquisar produto..."
-    oninput="renderProducts()">
+    placeholder="🔎 Pesquisar produto..." oninput="renderProducts()">
 
   <div class="catalog-filters">
     <select id="sort-filter" onchange="renderProducts()">
@@ -467,6 +381,28 @@ body[data-theme="light"] .stage-welcome p{color:white}
   <p>Importações e encomendas</p>
   <p>Atendimento pelo WhatsApp</p>
 </footer>
+
+<!-- JANELA DE INFORMAÇÕES DO PRODUTO -->
+<div class="product-info-overlay" id="product-info-overlay"
+  onclick="handleProductInfoBackdrop(event)"
+  role="dialog" aria-modal="true"
+  aria-labelledby="product-info-title">
+  <div class="product-info-modal">
+    <div class="product-info-header">
+      <h2 id="product-info-title">Informações do produto</h2>
+      <button class="close-product-info" type="button"
+        onclick="closeProductInfo()" aria-label="Fechar">×</button>
+    </div>
+
+    <div class="product-info-photo" id="product-info-photo"></div>
+    <div class="product-info-price" id="product-info-price"></div>
+    <p class="product-info-description" id="product-info-description"></p>
+    <div class="product-info-details" id="product-info-details"></div>
+
+    <button class="product-info-add" id="product-info-add"
+      type="button">+ Adicionar ao carrinho</button>
+  </div>
+</div>
 
 <!-- CARRINHO FLUTUANTE -->
 <button class="floating-cart" type="button"
@@ -549,18 +485,15 @@ body[data-theme="light"] .stage-welcome p{color:white}
         <input id="endereco" placeholder="Rua, número e bairro">
       </div>
 
-      <!-- PAGAMENTO -->
       <div class="payment-box">
         <h4>💳 Forma de pagamento</h4>
-
         <label for="payment-method">Como deseja pagar?</label>
         <select id="payment-method" onchange="renderPaymentDetails()">
-          <option value="">Selecione uma forma de pagamento</option>
+          <option value="">Escolha como deseja pagar</option>
           <option value="Dinheiro">💵 Dinheiro</option>
           <option value="Pix">📱 Pix</option>
           <option value="Cartão">💳 Cartão</option>
         </select>
-
         <div id="payment-details"></div>
       </div>
 
@@ -606,8 +539,7 @@ body[data-theme="light"] .stage-welcome p{color:white}
 </div>
 
 <!-- AVISO PERSONALIZADO -->
-<div id="site-toast" class="site-toast"
-     role="status" aria-live="polite"></div>
+<div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
 
 <script>
 
@@ -620,7 +552,6 @@ let toastTimer;
 
 function applyTheme(theme){
   currentTheme = theme;
-
   document.body.dataset.theme = theme;
 
   const toggle = document.getElementById("theme-switch");
@@ -642,7 +573,6 @@ function toggleTheme(){
   applyTheme(currentTheme==="dark"?"light":"dark");
 }
 
-/* CARREGAR TEMA SALVO */
 try{
   const savedTheme=localStorage.getItem("bigode-theme");
   applyTheme(savedTheme==="light"?"light":"dark");
@@ -679,27 +609,18 @@ themeSwitch.addEventListener("pointerdown",event=>{
 
 themeSwitch.addEventListener("pointermove",event=>{
   if(dragStartX===null)return;
-
-  if(Math.abs(event.clientX-dragStartX)>8){
-    dragMoved=true;
-  }
+  if(Math.abs(event.clientX-dragStartX)>8)dragMoved=true;
 });
 
 themeSwitch.addEventListener("pointerup",event=>{
   if(dragStartX===null)return;
-
   const distance=event.clientX-dragStartX;
 
   if(dragMoved){
     suppressThemeClick=true;
-
-    if(distance>0){
-      applyTheme("light");
-    }else{
-      applyTheme("dark");
-    }
+    if(distance>0)applyTheme("light");
+    else applyTheme("dark");
   }
-
   dragStartX=null;
 });
 
@@ -710,16 +631,12 @@ themeSwitch.addEventListener("pointercancel",()=>{
 /* AVISOS PERSONALIZADOS */
 function showToast(message,type="success"){
   const toast=document.getElementById("site-toast");
-
   toast.textContent=message;
   toast.className="site-toast show";
 
-  if(type==="error"){
-    toast.classList.add("error");
-  }
+  if(type==="error")toast.classList.add("error");
 
   clearTimeout(toastTimer);
-
   toastTimer=setTimeout(()=>{
     toast.classList.remove("show");
   },3500);
@@ -760,6 +677,135 @@ const productsList = [
 
 let cart = [];
 let cancelModalMode = "";
+
+/* DESCRIÇÕES DOS PRODUTOS */
+const productDescriptions = {
+  1:{
+    description:"Uma capa para ajudar a proteger seu celular contra riscos e pequenos impactos do uso diário.",
+    compatibility:"Confira o modelo exato do seu aparelho antes de escolher a capa.",
+    extra:"O formato e os recortes precisam corresponder ao modelo do celular."
+  },
+  2:{
+    description:"Kit carregador simples para carregar aparelhos compatíveis no dia a dia.",
+    compatibility:"Confira o tipo de entrada do cabo e a compatibilidade com seu aparelho.",
+    extra:"A potência e a velocidade dependem do carregador e do dispositivo."
+  },
+  3:{
+    description:"Kit carregador turbo para quem procura uma opção de carregamento mais rápido.",
+    compatibility:"A velocidade turbo depende da compatibilidade entre carregador, cabo e aparelho.",
+    extra:"Verifique a potência suportada pelo seu dispositivo."
+  },
+  4:{
+    description:"Kit carregador da FAM para uso no dia a dia, com garantia informada de 1 ano.",
+    compatibility:"Confira o conector e a compatibilidade com seu aparelho antes de encomendar.",
+    extra:"A velocidade de carregamento depende do aparelho e das especificações do kit."
+  },
+  5:{
+    description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",
+    compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",
+    extra:"Comprimento: 1 metro. Garantia: 1 ano."
+  },
+  6:{
+    description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",
+    compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning. A outra ponta conecta em carregadores ou portas USB convencionais.",
+    extra:"Comprimento: 1 metro. Garantia: 1 ano."
+  },
+  7:{
+    description:"Cabo FAM Tipo-C para USB convencional, com 2 metros de comprimento para dar mais liberdade durante o uso.",
+    compatibility:"A ponta Tipo-C deve ser conectada a um aparelho com entrada USB-C.",
+    extra:"Comprimento: 2 metros. Garantia: 1 ano."
+  },
+  8:{
+    description:"Cabo FAM Lightning para USB convencional, com 2 metros de comprimento.",
+    compatibility:"Para aparelhos Apple que utilizam entrada Lightning. A outra ponta é USB convencional.",
+    extra:"Comprimento: 2 metros. Garantia: 1 ano."
+  },
+  9:{
+    description:"Cabo FAM reforçado com conectores Tipo-C nas duas pontas.",
+    compatibility:"Pode ser usado com carregadores e aparelhos que possuam entrada USB-C.",
+    extra:"Comprimento: 1 metro. A potência depende dos equipamentos utilizados. Garantia: 1 ano."
+  },
+  10:{
+    description:"Cabo FAM reforçado com uma ponta Tipo-C e outra Lightning.",
+    compatibility:"Conecta um carregador com saída USB-C a aparelhos Apple que utilizam entrada Lightning.",
+    extra:"Comprimento: 1 metro. Garantia: 1 ano."
+  },
+  11:{
+    description:"Cabo com uma ponta Tipo-C e outra Lightning.",
+    compatibility:"A ponta Lightning é destinada a aparelhos Apple compatíveis. A ponta Tipo-C deve ser conectada a uma fonte USB-C.",
+    extra:"Comprimento: 1 metro. Garantia: 2 meses."
+  },
+  12:{
+    description:"Cabo com uma ponta USB convencional e outra Tipo-C.",
+    compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores convencionais.",
+    extra:"Comprimento: 1 metro. Garantia: 2 meses."
+  },
+  13:{
+    description:"Cabo com uma ponta USB convencional e outra Lightning.",
+    compatibility:"Para aparelhos Apple que utilizam entrada Lightning, conectado a uma fonte USB convencional.",
+    extra:"Comprimento: 1 metro. Garantia: 2 meses."
+  },
+  14:{
+    description:"Cabo com conectores Tipo-C nas duas pontas.",
+    compatibility:"Utilize com aparelhos e fontes que possuam entrada USB-C.",
+    extra:"Comprimento: 1 metro. Garantia: 2 meses."
+  },
+  15:{
+    description:"Cabo com uma ponta USB convencional e outra V8, também conhecida como Micro-USB.",
+    compatibility:"Indicado para aparelhos e acessórios que utilizam entrada Micro-USB.",
+    extra:"Comprimento: 1 metro. Garantia: 2 meses."
+  },
+  16:{
+    description:"Fone Bluetooth FAM com borrachinhas, sem necessidade de conexão por fio durante o uso.",
+    compatibility:"Compatível com aparelhos que possuam Bluetooth e suportem conexão com fones de ouvido.",
+    extra:"Garantia: 1 ano. Consulte a loja para informações sobre bateria e acessórios inclusos."
+  },
+  17:{
+    description:"Fone Bluetooth com borrachinhas para um encaixe no ouvido. A conexão é sem fio.",
+    compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",
+    extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."
+  },
+  18:{
+    description:"Fone Bluetooth sem borrachinhas, para quem prefere esse formato de encaixe.",
+    compatibility:"Funciona com aparelhos que possuam Bluetooth compatível com fones de ouvido.",
+    extra:"Garantia: 2 meses. Consulte a loja para detalhes sobre bateria e acessórios."
+  },
+  19:{
+    description:"Fone com fio simples, com conector de pino.",
+    compatibility:"Confira se seu aparelho possui entrada compatível. Alguns celulares podem precisar de adaptador.",
+    extra:"Garantia: 2 meses."
+  },
+  20:{
+    description:"Fone com fio e borrachinhas, com construção descrita como resistente.",
+    compatibility:"Possui conector de pino. Confira se seu aparelho possui entrada compatível ou se precisa de adaptador.",
+    extra:"Garantia: 2 meses."
+  },
+  21:{
+    description:"Fone com fio que utiliza conector Tipo-C.",
+    compatibility:"Para aparelhos com entrada USB-C que ofereçam suporte a áudio por essa conexão.",
+    extra:"Alguns aparelhos podem não aceitar áudio por USB-C. Garantia: 2 meses."
+  },
+  22:{
+    description:"Cabo FAM Tipo-C para Tipo-C, indicado para transferência de dados e com capacidade informada de até 60W.",
+    compatibility:"Utilize com aparelhos e fontes USB-C compatíveis.",
+    extra:"Até 60W conforme especificação do produto. A potência efetiva depende também do carregador e do aparelho. Garantia: 1 ano."
+  },
+  23:{
+    description:"Cabo FAM Tipo-C para Lightning, com capacidade informada de até 27W.",
+    compatibility:"Conecta uma fonte USB-C a aparelhos Apple que utilizam entrada Lightning.",
+    extra:"Até 27W conforme especificação do produto. A velocidade depende do aparelho e da fonte. Garantia: 1 ano."
+  },
+  24:{
+    description:"Cabo FAM Tipo-C para Tipo-C, com corrente informada de até 3A e comprimento de 1,2 metro.",
+    compatibility:"Utilize com fontes e aparelhos que possuam entrada USB-C.",
+    extra:"Corrente informada: até 3A. A velocidade depende dos equipamentos utilizados. Garantia: 1 ano."
+  },
+  25:{
+    description:"Cabo FAM 3 em 1, uma opção para diferentes tipos de conexão.",
+    compatibility:"Confira as pontas e os conectores disponíveis na foto do produto para verificar se atendem ao seu aparelho.",
+    extra:"Garantia: 1 ano."
+  }
+};
 
 /* SAUDAÇÃO */
 function getGreeting(){
@@ -816,10 +862,73 @@ function createProductCard(product){
 
         <div class="price">${money(product.price)}</div>
         <p class="warranty">🛡️ ${product.warranty}</p>
-        <button class="add" onclick="addToCart(${product.id})">+ Adicionar</button>
+
+        <div class="product-buttons">
+          <button class="product-info-button"
+            type="button" onclick="showProductInfo(${product.id})">
+            Informações
+          </button>
+          <button class="add" type="button"
+            onclick="addToCart(${product.id})">
+            + Adicionar
+          </button>
+        </div>
       </div>
     </div>
   `;
+}
+
+/* ABRIR INFORMAÇÕES DO PRODUTO */
+function showProductInfo(id){
+  const product=productsList.find(item=>item.id===id);
+  if(!product)return;
+
+  const details=productDescriptions[id] || {
+    description:"Consulte a loja para mais informações sobre este produto.",
+    compatibility:"Confirme a compatibilidade com seu aparelho antes de encomendar.",
+    extra:"Consulte a loja para detalhes adicionais."
+  };
+
+  document.getElementById("product-info-title").textContent=product.name;
+  document.getElementById("product-info-price").textContent=money(product.price);
+  document.getElementById("product-info-description").textContent=details.description;
+
+  const photoArea=document.getElementById("product-info-photo");
+
+  if(product.photo){
+    photoArea.innerHTML=`
+      <img src="${product.photo}" alt="${product.name}"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+      <span style="display:none">${product.image}</span>
+    `;
+  }else{
+    photoArea.innerHTML=`<span>${product.image}</span>`;
+  }
+
+  document.getElementById("product-info-details").innerHTML=`
+    <p><strong>Compatibilidade:</strong><br>${details.compatibility}</p>
+    <p><strong>Garantia:</strong><br>${product.warranty}</p>
+    <p><strong>Detalhes:</strong><br>${details.extra}</p>
+  `;
+
+  document.getElementById("product-info-add").onclick=()=>{
+    addToCart(product.id);
+    closeProductInfo();
+  };
+
+  document.getElementById("product-info-overlay").classList.add("open");
+  document.body.style.overflow="hidden";
+}
+
+function closeProductInfo(){
+  document.getElementById("product-info-overlay").classList.remove("open");
+  document.body.style.overflow="";
+}
+
+function handleProductInfoBackdrop(event){
+  if(event.target.id==="product-info-overlay"){
+    closeProductInfo();
+  }
 }
 
 /* PESQUISA, FILTROS E ORDENAÇÃO */
@@ -1091,13 +1200,9 @@ function renderPaymentDetails(){
     `;
   }else if(method==="Pix"){
     area.innerHTML=`
-      <label>Precisa de ajuda para realizar o Pix?</label>
-      <select id="pix-help">
-        <option value="">Selecione uma opção</option>
-        <option value="Não">Não, consigo fazer sozinho(a)</option>
-        <option value="Sim">Sim, preciso de ajuda</option>
-      </select>
-      <p class="payment-help">O pagamento será combinado com a loja após a confirmação da encomenda.</p>
+      <p class="payment-help">
+        A chave Pix será informada pela loja após a confirmação da encomenda.
+      </p>
     `;
   }else if(method==="Cartão"){
     area.innerHTML=`
@@ -1190,18 +1295,9 @@ function getPaymentInformation(){
   }
 
   if(method==="Pix"){
-    const help=document.getElementById("pix-help")?.value;
-
-    if(!help){
-      showToast("Informe se precisa de ajuda com o Pix.","error");
-      return null;
-    }
-
     return {
       method:"Pix",
-      description:help==="Sim"
-        ?"Precisa de ajuda para realizar o Pix."
-        :"Não precisa de ajuda para realizar o Pix."
+      description:"A chave Pix será informada pela loja após a confirmação da encomenda."
     };
   }
 
@@ -1272,6 +1368,15 @@ Pedido enviado pelo site!`;
   const link="https://wa.me/"+STORE_WHATSAPP+"?text="+encodeURIComponent(mensagem);
   window.location.href=link;
 }
+
+/* FECHAR JANELAS COM ESC */
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape"){
+    closeProductInfo();
+    closeCancelModal();
+    closeCart();
+  }
+});
 
 /* INICIALIZAÇÃO */
 renderProducts();
