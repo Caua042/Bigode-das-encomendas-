@@ -1,11 +1,6 @@
 
 
 
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -46,7 +41,7 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .brand h2{font-size:15px;font-weight:800;letter-spacing:1.2px;line-height:1.3}
 .brand span{display:block;color:#bdbdbd;font-size:10px;margin-top:4px;letter-spacing:3px}
 
-/* PESQUISA DO CABEÇALHO */
+/* PESQUISA ÚNICA DO CABEÇALHO */
 .header-search-area{position:relative;flex:1;max-width:470px;min-width:120px}
 .header-search-box{height:43px;display:flex;align-items:center;gap:9px;padding:0 13px;background:#202020;border:1px solid #444;border-radius:13px;transition:border .2s,box-shadow .2s}
 .header-search-box:focus-within{border-color:#20d875;box-shadow:0 0 0 3px #20d87520}
@@ -90,9 +85,7 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .section-title{margin-bottom:20px}
 .section-title h2{font-size:25px}
 .section-title p{color:#aaa;margin-top:7px}
-.search{width:100%;padding:15px;border:1px solid #444;border-radius:12px;margin-bottom:25px;background:#202020;color:white;outline:none}
-.search:focus{border-color:#20c55a}
-.catalog-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-12px;margin-bottom:25px}
+.catalog-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:25px}
 .catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #444;border-radius:10px;background:#202020;color:white;outline:none;font-size:13px}
 .catalog-filters select:focus{border-color:#20c55a}
 @media(max-width:350px){.catalog-filters{grid-template-columns:1fr}}
@@ -245,7 +238,7 @@ body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);colo
 body[data-theme="light"] .hero p{color:#444}
 body[data-theme="light"] .hero strong{color:#111}
 body[data-theme="light"] .section-title p{color:#777}
-body[data-theme="light"] .search,body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
+body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
 body[data-theme="light"] .product{background:white;color:#202020;box-shadow:0 3px 12px #0000000c}
 body[data-theme="light"] .product-image{background:white}
 body[data-theme="light"] .price{color:#111}
@@ -367,6 +360,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
     </div>
   </div>
 
+  <!-- ÚNICA BARRA DE PESQUISA -->
   <div class="header-search-area" id="header-search-area">
     <div class="header-search-box">
       <span class="header-search-icon">🔎</span>
@@ -409,8 +403,8 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
     <p>Confira nossos produtos e escolha seus favoritos.</p>
   </div>
 
-  <input class="search" id="search" type="search"
-    placeholder="🔎 Pesquisar produto..." oninput="syncSearch('catalog')">
+  <!-- A PESQUISA DO CATÁLOGO FOI REMOVIDA.
+       A PESQUISA DO CABEÇALHO É A ÚNICA. -->
 
   <div class="catalog-filters">
     <select id="sort-filter" onchange="renderProducts()">
@@ -743,72 +737,86 @@ const productDescriptions={
 const popularSearches=["Capas","Carregadores","Cabos Tipo-C","Cabos Lightning","Fones Bluetooth","Cabos FAM"];
 
 function normalizeText(text){
-  return text.toLowerCase()
+  return String(text).toLowerCase()
     .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
     .replace(/[^a-z0-9\s-]/g," ")
     .replace(/\s+/g," ").trim();
 }
 
-function expandSearchTerms(query){
-  const normalized=normalizeText(query);
-  const terms=normalized.split(" ").filter(Boolean);
-  const expanded=new Set(terms);
-
-  const synonymGroups=[
-    ["tipo-c","type-c","usb-c","usbc","type c","tipo c"],
-    ["usb","usb-a","usb normal","usb convencional"],
-    ["lightning","iphone","apple"],
-    ["v8","micro-usb","micro usb"],
-    ["fone","fone de ouvido","headphone","earphone"],
-    ["bluetooth","sem fio","wireless"],
-    ["carregador","fonte","adaptador"],
-    ["capa","capinha","case"],
-    ["reforcado","reforcada","resistente"],
-    ["fam","f a m"]
-  ];
-
-  synonymGroups.forEach(group=>{
-    if(group.some(word=>normalized.includes(normalizeText(word)))){
-      group.forEach(word=>expanded.add(normalizeText(word)));
-    }
-  });
-
-  if(normalized.includes("iphone")){
-    expanded.add("lightning");
-    expanded.add("apple");
-  }
-
-  return [...expanded];
-}
-
 function productMatchesSearch(product,query){
-  if(!query)return true;
+  if(!query.trim())return true;
 
   const normalized=normalizeText(query);
-  const terms=expandSearchTerms(query);
+
+  const details=productDescriptions[product.id]||{};
+
   const productText=normalizeText(
-    `${product.name} ${product.brand||""} ${product.warranty||""} ${productDescriptions[product.id]?.description||""} ${productDescriptions[product.id]?.compatibility||""}`
+    `${product.name} ${product.brand||""} ${product.warranty||""} ${details.description||""} ${details.compatibility||""} ${details.extra||""}`
   );
 
+  /* BUSCAS DIRETAS */
   if(productText.includes(normalized))return true;
 
-  const aliases={
-    "tipo-c":["tipo c","type-c","type c","usb-c","usbc"],
-    "lightning":["iphone","apple"],
-    "v8":["micro-usb","micro usb"],
-    "fone":["fone de ouvido","headphone","earphone"],
-    "carregador":["fonte","adaptador"],
-    "capa":["capinha","case"]
-  };
+  /* APELIDOS E SINÔNIMOS */
+  const rules=[
+    {
+      search:["tipo c","tipo-c","type c","type-c","usb c","usb-c","usbc"],
+      product:["tipo c","tipo-c","type c","type-c","usb c","usb-c"]
+    },
+    {
+      search:["v8","micro usb","micro-usb"],
+      product:["v8","micro usb","micro-usb"]
+    },
+    {
+      search:["lightning","iphone","apple"],
+      product:["lightning","iphone","apple"]
+    },
+    {
+      search:["fone","fone de ouvido","headphone","earphone"],
+      product:["fone","headphone","earphone"]
+    },
+    {
+      search:["bluetooth","sem fio","wireless"],
+      product:["bluetooth","sem fio","wireless"]
+    },
+    {
+      search:["carregador","carregadores","fonte","fontes","adaptador"],
+      product:["kit carregador","carregador","fonte","adaptador"]
+    },
+    {
+      search:["capa","capinha","capas","case"],
+      product:["capa","capinha","case"]
+    },
+    {
+      search:["fam","f a m"],
+      product:["fam"]
+    },
+    {
+      search:["turbo","carregamento rapido","carga rapida"],
+      product:["turbo","carregamento rapido","carga rapida"]
+    }
+  ];
 
-  const aliasMatches=Object.entries(aliases).some(([key,values])=>{
-    return (normalized.includes(key)||values.some(v=>normalized.includes(v))) &&
-      (productText.includes(key)||values.some(v=>productText.includes(v)));
-  });
+  for(const rule of rules){
+    const searchMatch=rule.search.some(term=>
+      normalized.includes(normalizeText(term))
+    );
 
-  if(aliasMatches)return true;
+    if(searchMatch){
+      const productMatch=rule.product.some(term=>
+        productText.includes(normalizeText(term))
+      );
 
-  return terms.some(term=>term.length>2&&productText.includes(term));
+      if(productMatch)return true;
+    }
+  }
+
+  /* PESQUISA POR PALAVRAS */
+  const terms=normalized.split(" ").filter(term=>term.length>1);
+
+  if(terms.length===0)return false;
+
+  return terms.every(term=>productText.includes(term));
 }
 
 function getRecentSearches(){
@@ -830,32 +838,36 @@ function saveRecentSearch(query){
   try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(error){}
 }
 
+/* A PESQUISA USA SOMENTE O CAMPO DO CABEÇALHO */
 function setSearchValue(value,save=true){
-  document.getElementById("search").value=value;
-  document.getElementById("header-search").value=value;
+  headerSearch.value=value;
   updateClearSearch();
   renderProducts();
+
   if(save)saveRecentSearch(value);
+
   closeSearchSuggestions();
   closeMobileSearch();
-  if(value.trim())document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+
+  if(value.trim()){
+    document.getElementById("products").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
 }
 
-function syncSearch(source){
-  const value=source==="header"
-    ?document.getElementById("header-search").value
-    :document.getElementById("search").value;
+function syncSearch(){
+  const value=headerSearch.value;
 
-  document.getElementById(source==="header"?"search":"header-search").value=value;
   updateClearSearch();
   renderProducts();
-
-  if(source==="header")renderSearchSuggestions(value);
+  renderSearchSuggestions(value);
 }
 
 function updateClearSearch(){
   const button=document.getElementById("clear-header-search");
-  button.classList.toggle("visible",!!document.getElementById("header-search").value);
+  button.classList.toggle("visible",!!headerSearch.value);
 }
 
 function closeSearchSuggestions(){
@@ -863,7 +875,7 @@ function closeSearchSuggestions(){
 }
 
 function openSearchSuggestions(){
-  renderSearchSuggestions(document.getElementById("header-search").value);
+  renderSearchSuggestions(headerSearch.value);
   document.getElementById("search-suggestions").classList.add("open");
 }
 
@@ -873,36 +885,69 @@ function renderSearchSuggestions(query=""){
   const value=query.trim();
 
   if(value){
-    const matches=productsList.filter(product=>productMatchesSearch(product,value)).slice(0,4);
+    const matches=productsList
+      .filter(product=>productMatchesSearch(product,value))
+      .slice(0,4);
 
     panel.innerHTML=`
-      ${matches.length?`<div class="suggestion-heading">Produtos encontrados</div>
-      <div class="suggestion-list">
-        ${matches.map(product=>`<button class="search-suggestion" type="button" onclick="setSearchValue('${product.name.replace(/'/g,"\\'")}')">${product.image} ${product.name}</button>`).join("")}
-      </div>`:`<div class="suggestion-heading">Continue digitando para procurar</div>`}
+      ${matches.length?`
+        <div class="suggestion-heading">Produtos encontrados</div>
+        <div class="suggestion-list">
+          ${matches.map(product=>`
+            <button class="search-suggestion" type="button"
+              onclick='setSearchValue(${JSON.stringify(product.name)})'>
+              ${product.image} ${escapeHtml(product.name)}
+            </button>
+          `).join("")}
+        </div>
+      `:`
+        <div class="suggestion-heading">Nenhum produto encontrado com esse termo</div>
+      `}
+
       ${recent.length?`
         <div class="suggestion-heading">Pesquisas recentes</div>
         ${recent.slice(0,3).map(item=>`
           <div class="search-recent-row">
-            <button type="button" onclick="setSearchValue(${JSON.stringify(item)})">↶ ${escapeHtml(item)}</button>
-          </div>`).join("")}
+            <button type="button"
+              onclick='setSearchValue(${JSON.stringify(item)})'>
+              ↶ ${escapeHtml(item)}
+            </button>
+          </div>
+        `).join("")}
       `:""}
     `;
   }else{
     panel.innerHTML=`
       <div class="suggestion-heading">Pesquisas populares</div>
       <div class="suggestion-list">
-        ${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick="setSearchValue(${JSON.stringify(item)})">${item}</button>`).join("")}
+        ${popularSearches.map(item=>`
+          <button class="search-suggestion" type="button"
+            onclick='setSearchValue(${JSON.stringify(item)})'>
+            ${escapeHtml(item)}
+          </button>
+        `).join("")}
       </div>
+
       ${recent.length?`
         <div class="suggestion-heading">Pesquisas recentes</div>
         ${recent.map(item=>`
           <div class="search-recent-row">
-            <button type="button" onclick="setSearchValue(${JSON.stringify(item)})">↶ ${escapeHtml(item)}</button>
-            <button class="remove-recent" type="button" aria-label="Remover pesquisa" onclick="removeRecentSearch(${JSON.stringify(item)})">×</button>
-          </div>`).join("")}
-        <button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>
-      `:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}
+            <button type="button"
+              onclick='setSearchValue(${JSON.stringify(item)})'>
+              ↶ ${escapeHtml(item)}
+            </button>
+            <button class="remove-recent" type="button"
+              aria-label="Remover pesquisa"
+              onclick='removeRecentSearch(${JSON.stringify(item)})'>×</button>
+          </div>
+        `).join("")}
+        <button class="clear-history" type="button"
+          onclick="clearRecentSearches()">Limpar histórico</button>
+      `:`
+        <p style="color:#999;font-size:12px;padding:5px">
+          Suas pesquisas recentes aparecerão aqui.
+        </p>
+      `}
     `;
   }
 
@@ -912,12 +957,12 @@ function renderSearchSuggestions(query=""){
 function removeRecentSearch(value){
   const recent=getRecentSearches().filter(item=>item!==value);
   try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(error){}
-  renderSearchSuggestions(document.getElementById("header-search").value);
+  renderSearchSuggestions(headerSearch.value);
 }
 
 function clearRecentSearches(){
   try{localStorage.removeItem(RECENT_SEARCHES_KEY)}catch(error){}
-  renderSearchSuggestions(document.getElementById("header-search").value);
+  renderSearchSuggestions(headerSearch.value);
   showToast("Histórico de pesquisas limpo.");
 }
 
@@ -932,17 +977,25 @@ const headerSearch=document.getElementById("header-search");
 const mainHeader=document.getElementById("main-header");
 const mobileSearchToggle=document.getElementById("mobile-search-toggle");
 
-headerSearch.addEventListener("input",()=>syncSearch("header"));
+headerSearch.addEventListener("input",syncSearch);
 headerSearch.addEventListener("focus",openSearchSuggestions);
+
 headerSearch.addEventListener("keydown",event=>{
   if(event.key==="Enter"){
     event.preventDefault();
+
     const value=headerSearch.value.trim();
     if(value)saveRecentSearch(value);
+
     closeSearchSuggestions();
     closeMobileSearch();
-    document.getElementById("products").scrollIntoView({behavior:"smooth"});
+
+    document.getElementById("products").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
   }
+
   if(event.key==="Escape"){
     closeSearchSuggestions();
     closeMobileSearch();
@@ -950,16 +1003,8 @@ headerSearch.addEventListener("keydown",event=>{
   }
 });
 
-document.getElementById("search").addEventListener("keydown",event=>{
-  if(event.key==="Enter"){
-    const value=event.target.value.trim();
-    if(value)saveRecentSearch(value);
-  }
-});
-
 document.getElementById("clear-header-search").addEventListener("click",()=>{
   headerSearch.value="";
-  document.getElementById("search").value="";
   updateClearSearch();
   renderProducts();
   headerSearch.focus();
@@ -1089,7 +1134,10 @@ function handleProductInfoBackdrop(event){
 /* PESQUISA, FILTROS E ORDENAÇÃO */
 function renderProducts(){
   const area=document.getElementById("products");
-  const search=document.getElementById("search").value.trim();
+
+  /* LÊ DIRETAMENTE A ÚNICA BARRA DO CABEÇALHO */
+  const search=document.getElementById("header-search").value.trim();
+
   const sort=document.getElementById("sort-filter").value;
   const brand=document.getElementById("brand-filter").value;
 
