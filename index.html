@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -64,9 +65,31 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .product{background:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #0000000c;min-width:0}
 
 /* FOTOS DOS PRODUTOS */
-.product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden}
+.product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
 .product-image img{width:100%;height:100%;object-fit:contain}
 .product-image .fallback{font-size:55px}
+
+/* SELO FAM */
+.fam-seal{
+  position:absolute;
+  top:9px;
+  right:9px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  background:#050505;
+  border:2px solid #40DCCB;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.3px;
+  box-shadow:0 2px 9px #00000035;
+  z-index:2;
+  pointer-events:none;
+}
 
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
@@ -164,6 +187,7 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
 .product-info{padding:10px}
 .product-title-row h3{font-size:12px}
 .price{font-size:17px}
+.fam-seal{width:40px;height:40px;font-size:9px;top:7px;right:7px}
 .cart-panel{right:12px;bottom:98px;width:calc(100% - 24px);max-height:78vh}
 .floating-cart{width:66px;height:66px;right:15px;bottom:15px}
 .floating-cart svg{width:46px;height:46px}
@@ -447,10 +471,15 @@ function createProductCard(product){
        <span class="fallback" style="display:none">${product.image}</span>`
     : `<span class="fallback">${product.image}</span>`;
 
+  const famSeal = product.brand === "FAM"
+    ? `<div class="fam-seal">FAM</div>`
+    : "";
+
   return `
     <div class="product">
       <div class="product-image">
         ${productPhoto}
+        ${famSeal}
       </div>
 
       <div class="product-info">
