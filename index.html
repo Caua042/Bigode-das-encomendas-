@@ -3,45 +3,94 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#101010">
+<meta name="color-scheme" content="light dark">
 <title>Bigode das Encomendas | Importações</title>
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:Arial,sans-serif;background:#f5f5f5;color:#202020}
+body{font-family:Arial,sans-serif;background:#101010;color:#f5f5f5;transition:background .25s,color .25s}
 button,input,select{font:inherit}
 button{cursor:pointer;border:none}
 
 /* ABERTURA */
-#intro{position:fixed;inset:0;background:#050505;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s,visibility .3s}
+#intro{position:fixed;inset:0;background:#f5f5f5;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s,visibility .3s}
 #intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 .intro-stage{position:absolute;width:100%;padding:20px;text-align:center;opacity:0;visibility:hidden}
 .stage-mustache{animation:mustacheShow .7s ease forwards}
 .big-mustache{width:90%;max-width:430px;animation:growMustache .7s ease}
 .stage-logo{animation:logoShow .8s ease .65s forwards}
-.stage-logo h1,.stage-logo h2{color:white;-webkit-text-stroke:1.5px #000;paint-order:stroke fill;font-weight:900}
+.stage-logo h1,.stage-logo h2{color:#101010;-webkit-text-stroke:0;font-weight:900}
 .stage-logo h1{font-size:clamp(23px,6vw,38px)}
 .stage-logo h2{font-size:22px;letter-spacing:7px;margin-top:12px}
 .stage-welcome{animation:welcomeShow 1s ease 1.4s forwards}
-.stage-welcome h1{color:white;font-size:clamp(30px,7vw,44px)}
-.stage-welcome p{color:white;font-size:21px;margin-top:15px}
+.stage-welcome h1{color:#101010;font-size:clamp(30px,7vw,44px)}
+.stage-welcome p{color:#101010;font-size:21px;margin-top:15px}
 @keyframes growMustache{from{transform:scale(.3)}to{transform:scale(1)}}
 @keyframes mustacheShow{0%,65%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
 @keyframes logoShow{0%{opacity:0;visibility:visible;transform:scale(.8)}20%,75%{opacity:1;visibility:visible;transform:scale(1)}100%{opacity:0;visibility:hidden}}
 @keyframes welcomeShow{0%{opacity:0;visibility:visible;transform:translateY(20px)}20%,100%{opacity:1;visibility:visible;transform:translateY(0)}}
 
 /* CABEÇALHO */
-header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:center;position:sticky;top:0;z-index:100;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
-.brand{display:flex;align-items:center;gap:13px}
+header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:15px;position:sticky;top:0;z-index:100;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
+.brand{display:flex;align-items:center;gap:13px;min-width:0}
 .brand svg{width:50px;flex-shrink:0}
 .brand h2{font-size:15px;font-weight:800;letter-spacing:1.2px;line-height:1.3}
 .brand span{display:block;color:#bdbdbd;font-size:10px;margin-top:4px;letter-spacing:3px}
-@media(max-width:480px){header{padding:14px 5%}.brand{gap:10px}.brand svg{width:43px}.brand h2{font-size:13px}}
+
+/* SELETOR DE TEMA */
+.theme-switch{
+  position:relative;
+  width:150px;
+  height:43px;
+  border-radius:30px;
+  background:#303030;
+  border:1px solid #555;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:4px;
+  cursor:grab;
+  touch-action:pan-y;
+  user-select:none;
+  flex-shrink:0;
+  outline-offset:4px;
+}
+.theme-switch:active{cursor:grabbing}
+.theme-label{
+  width:50%;
+  text-align:center;
+  color:#bbb;
+  font-size:12px;
+  font-weight:bold;
+  transition:opacity .2s;
+}
+.theme-mustache{
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:35px;
+  height:35px;
+  border-radius:50%;
+  background:#20d875;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .25s ease;
+  z-index:2;
+  pointer-events:none;
+}
+.theme-mustache svg{width:27px;height:17px;fill:#101010}
+.theme-switch[data-theme="dark"] .theme-mustache{transform:translateX(0)}
+.theme-switch[data-theme="light"] .theme-mustache{transform:translateX(107px)}
+.theme-switch[data-theme="dark"] .theme-dark,
+.theme-switch[data-theme="light"] .theme-light{opacity:0}
 
 /* SAUDAÇÃO */
 .hero{background:linear-gradient(135deg,#151515,#292929);color:white;padding:65px 7%;text-align:center}
@@ -53,17 +102,17 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .container{max-width:1100px;margin:auto;padding:35px 18px}
 .section-title{margin-bottom:20px}
 .section-title h2{font-size:25px}
-.section-title p{color:#777;margin-top:7px}
-.search{width:100%;padding:15px;border:1px solid #ddd;border-radius:12px;margin-bottom:25px;background:white;outline:none}
-.search:focus{border-color:#111}
+.section-title p{color:#aaa;margin-top:7px}
+.search{width:100%;padding:15px;border:1px solid #444;border-radius:12px;margin-bottom:25px;background:#202020;color:white;outline:none}
+.search:focus{border-color:#20c55a}
 .catalog-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:-12px;margin-bottom:25px}
-.catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #ddd;border-radius:10px;background:white;color:#222;outline:none;font-size:13px}
+.catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #444;border-radius:10px;background:#202020;color:white;outline:none;font-size:13px}
 .catalog-filters select:focus{border-color:#20c55a}
 @media(max-width:350px){.catalog-filters{grid-template-columns:1fr}}
 
 .products{width:100%}
 .product-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.product{background:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #0000000c;min-width:0}
+.product{background:#1c1c1c;color:white;border-radius:15px;overflow:hidden;box-shadow:0 3px 12px #00000025;min-width:0}
 
 /* FOTOS DOS PRODUTOS */
 .product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
@@ -95,9 +144,9 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
-.price{font-weight:bold;font-size:19px;color:#111;margin-bottom:12px}
-.warranty{color:#777;font-size:12px;margin:8px 0}
-.add{background:#151515;color:white;width:100%;padding:12px;border-radius:9px}
+.price{font-weight:bold;font-size:19px;color:#20d875;margin-bottom:12px}
+.warranty{color:#aaa;font-size:12px;margin:8px 0}
+.add{background:#20d875;color:#101010;width:100%;padding:12px;border-radius:9px;font-weight:bold}
 .add:active{transform:scale(.97)}
 .no-products{color:#888;text-align:center;padding:25px}
 
@@ -188,32 +237,132 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .cancel-modal-footer{color:#777;font-size:11px;margin-top:18px}
 
 /* RODAPÉ */
-footer{background:#111;color:white;text-align:center;padding:30px 15px;margin-top:45px}
+footer{background:#080808;color:white;text-align:center;padding:30px 15px;margin-top:45px}
 footer p{color:#aaa;font-size:13px;margin-top:8px}
 
+/* AVISO PERSONALIZADO */
+.site-toast{
+  position:fixed;
+  left:50%;
+  bottom:25px;
+  transform:translate(-50%,20px);
+  width:min(90%,380px);
+  background:#191919;
+  color:white;
+  border:1px solid #20d875;
+  border-radius:13px;
+  padding:15px 18px;
+  z-index:10000;
+  box-shadow:0 5px 25px #0005;
+  opacity:0;
+  visibility:hidden;
+  transition:.25s;
+  font-size:14px;
+  line-height:1.5;
+  text-align:center;
+}
+.site-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
+.site-toast.error{border-color:#ff5260}
+
+/* TEMA LIGHT */
+body[data-theme="light"]{background:#f5f5f5;color:#202020}
+body[data-theme="light"] header{background:#fff;color:#111;border-bottom:1px solid #ddd;box-shadow:0 4px 18px #00000012}
+body[data-theme="light"] .brand svg path{fill:#111}
+body[data-theme="light"] .brand span{color:#666}
+body[data-theme="light"] .theme-switch{background:#e4e4e4;border-color:#ccc}
+body[data-theme="light"] .theme-label{color:#444}
+body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);color:#111}
+body[data-theme="light"] .hero p{color:#444}
+body[data-theme="light"] .hero strong{color:#111}
+body[data-theme="light"] .section-title p{color:#777}
+body[data-theme="light"] .search,
+body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
+body[data-theme="light"] .product{background:white;color:#202020;box-shadow:0 3px 12px #0000000c}
+body[data-theme="light"] .product-image{background:white}
+body[data-theme="light"] .price{color:#111}
+body[data-theme="light"] .warranty{color:#777}
+body[data-theme="light"] .add{background:#151515;color:white}
+body[data-theme="light"] footer{background:#eee;color:#111}
+body[data-theme="light"] footer p{color:#666}
+
+/* PAINEL BIGAS NO LIGHT */
+body[data-theme="light"] .cart-panel{background:#fff;color:#202020}
+body[data-theme="light"] .cart-panel-header{border-bottom-color:#ddd}
+body[data-theme="light"] .close-cart{color:#333}
+body[data-theme="light"] .chat-message{background:#f1f1f1;border-color:#ddd;color:#333}
+body[data-theme="light"] .chat-message strong{color:#111}
+body[data-theme="light"] .cart-products-box{background:#f7f7f7;border-color:#ddd}
+body[data-theme="light"] .cart-item{border-top-color:#ddd}
+body[data-theme="light"] .cart-item-info small,
+body[data-theme="light"] .cart-warranty{color:#777}
+body[data-theme="light"] .empty{color:#777}
+body[data-theme="light"] .cart-notice{color:#777}
+body[data-theme="light"] .checkout-form{background:#f5f5f5;border-color:#ddd}
+body[data-theme="light"] .form-group input,
+body[data-theme="light"] .form-group select{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .notice{background:#eaeaea;color:#444}
+body[data-theme="light"] .back-to-cart{color:#555}
+body[data-theme="light"] .payment-box{background:#fff;border-color:#ddd}
+body[data-theme="light"] .payment-box select,
+body[data-theme="light"] .payment-box input{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .payment-help{color:#666}
+body[data-theme="light"] .cancel-modal{background:#fff;color:#202020}
+body[data-theme="light"] .cancel-modal p{color:#444}
+body[data-theme="light"] .cancel-modal-icon{background:#f1f1f1}
+body[data-theme="light"] .site-toast{background:#fff;color:#222}
+
+/* ABERTURA ADAPTÁVEL */
+body[data-theme="dark"] #intro{background:#f5f5f5}
+body[data-theme="dark"] .big-mustache path{fill:#101010}
+body[data-theme="dark"] .stage-logo h1,
+body[data-theme="dark"] .stage-logo h2,
+body[data-theme="dark"] .stage-welcome h1,
+body[data-theme="dark"] .stage-welcome p{color:#101010;-webkit-text-stroke:0}
+body[data-theme="light"] #intro{background:#050505}
+body[data-theme="light"] .big-mustache path{fill:white}
+body[data-theme="light"] .stage-logo h1,
+body[data-theme="light"] .stage-logo h2{color:white;-webkit-text-stroke:1.5px #000;paint-order:stroke fill}
+body[data-theme="light"] .stage-welcome h1,
+body[data-theme="light"] .stage-welcome p{color:white}
+
 /* CELULARES */
+@media(max-width:480px){
+  header{padding:14px 5%;gap:10px}
+  .brand{gap:10px}
+  .brand svg{width:43px}
+  .brand h2{font-size:13px}
+  .theme-switch{width:130px}
+  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(87px)}
+}
 @media(max-width:400px){
-.product-grid{gap:10px}
-.product-image{height:120px}
-.product-info{padding:10px}
-.product-title-row h3{font-size:12px}
-.price{font-size:17px}
-.fam-seal{width:40px;height:40px;font-size:9px;top:7px;right:7px}
-.cart-panel{right:12px;bottom:98px;width:calc(100% - 24px);max-height:78vh}
-.floating-cart{width:66px;height:66px;right:15px;bottom:15px}
-.floating-cart svg{width:46px;height:46px}
-.cancel-modal{padding:22px 17px}
+  .product-grid{gap:10px}
+  .product-image{height:120px}
+  .product-info{padding:10px}
+  .product-title-row h3{font-size:12px}
+  .price{font-size:17px}
+  .fam-seal{width:40px;height:40px;font-size:9px;top:7px;right:7px}
+  .cart-panel{right:12px;bottom:98px;width:calc(100% - 24px);max-height:78vh}
+  .floating-cart{width:66px;height:66px;right:15px;bottom:15px}
+  .floating-cart svg{width:46px;height:46px}
+  .cancel-modal{padding:22px 17px}
+}
+@media(max-width:360px){
+  header{align-items:flex-start}
+  .brand h2{font-size:11px}
+  .brand span{font-size:9px;letter-spacing:2px}
+  .theme-switch{width:120px}
+  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(77px)}
 }
 </style>
 </head>
 
-<body>
+<body data-theme="dark">
 
 <!-- ABERTURA -->
 <div id="intro">
   <div class="intro-stage stage-mustache">
     <svg viewBox="0 0 400 180" class="big-mustache">
-      <path fill="white" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/>
+      <path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/>
     </svg>
   </div>
   <div class="intro-stage stage-logo">
@@ -235,6 +384,19 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
     <div>
       <h2>BIGODE DAS ENCOMENDAS</h2>
       <span>IMPORTAÇÕES</span>
+    </div>
+  </div>
+
+  <div class="theme-switch" id="theme-switch"
+       data-theme="dark" role="switch"
+       aria-label="Alternar entre modo escuro e modo light"
+       aria-checked="true" tabindex="0">
+    <span class="theme-label theme-light">Light</span>
+    <span class="theme-label theme-dark">Dark</span>
+    <div class="theme-mustache">
+      <svg viewBox="0 0 400 180">
+        <path d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/>
+      </svg>
     </div>
   </div>
 </header>
@@ -419,10 +581,125 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
   </div>
 </div>
 
+<!-- AVISO PERSONALIZADO -->
+<div id="site-toast" class="site-toast"
+     role="status" aria-live="polite"></div>
+
 <script>
 
 /* CONFIGURAÇÕES */
 const STORE_WHATSAPP = "5538992041456";
+
+/* TEMA DO SITE */
+let currentTheme = "dark";
+let toastTimer;
+
+function applyTheme(theme){
+  currentTheme = theme;
+
+  document.body.dataset.theme = theme;
+
+  const toggle = document.getElementById("theme-switch");
+
+  if(toggle){
+    toggle.dataset.theme = theme;
+    toggle.setAttribute("aria-checked",theme==="dark"?"true":"false");
+  }
+
+  document.querySelector('meta[name="theme-color"]')
+    .setAttribute("content",theme==="dark"?"#101010":"#ffffff");
+
+  try{
+    localStorage.setItem("bigode-theme",theme);
+  }catch(error){}
+}
+
+function toggleTheme(){
+  applyTheme(currentTheme==="dark"?"light":"dark");
+}
+
+/* CARREGAR TEMA SALVO */
+try{
+  const savedTheme=localStorage.getItem("bigode-theme");
+  applyTheme(savedTheme==="light"?"light":"dark");
+}catch(error){
+  applyTheme("dark");
+}
+
+/* SELETOR: TOQUE, CLIQUE E ARRASTE */
+const themeSwitch=document.getElementById("theme-switch");
+let dragStartX=null;
+let dragMoved=false;
+let suppressThemeClick=false;
+
+themeSwitch.addEventListener("click",()=>{
+  if(suppressThemeClick){
+    suppressThemeClick=false;
+    return;
+  }
+  toggleTheme();
+});
+
+themeSwitch.addEventListener("keydown",event=>{
+  if(event.key==="Enter" || event.key===" "){
+    event.preventDefault();
+    toggleTheme();
+  }
+});
+
+themeSwitch.addEventListener("pointerdown",event=>{
+  dragStartX=event.clientX;
+  dragMoved=false;
+  themeSwitch.setPointerCapture(event.pointerId);
+});
+
+themeSwitch.addEventListener("pointermove",event=>{
+  if(dragStartX===null)return;
+
+  if(Math.abs(event.clientX-dragStartX)>8){
+    dragMoved=true;
+  }
+});
+
+themeSwitch.addEventListener("pointerup",event=>{
+  if(dragStartX===null)return;
+
+  const distance=event.clientX-dragStartX;
+
+  if(dragMoved){
+    suppressThemeClick=true;
+
+    if(distance>0){
+      applyTheme("light");
+    }else{
+      applyTheme("dark");
+    }
+  }
+
+  dragStartX=null;
+});
+
+themeSwitch.addEventListener("pointercancel",()=>{
+  dragStartX=null;
+});
+
+/* AVISOS PERSONALIZADOS */
+function showToast(message,type="success"){
+  const toast=document.getElementById("site-toast");
+
+  toast.textContent=message;
+  toast.className="site-toast show";
+
+  if(type==="error"){
+    toast.classList.add("error");
+  }
+
+  clearTimeout(toastTimer);
+
+  toastTimer=setTimeout(()=>{
+    toast.classList.remove("show");
+  },3500);
+}
 
 /* PRODUTOS */
 const productsList = [
@@ -594,6 +871,7 @@ function addToCart(id){
   }
 
   renderCart();
+  showToast("Produto adicionado ao carrinho! 🛒");
 }
 
 function changeQuantity(id,amount){
@@ -612,6 +890,7 @@ function changeQuantity(id,amount){
 function removeItem(id){
   cart=cart.filter(p=>p.id!==id);
   renderCart();
+  showToast("Produto removido do carrinho.");
 }
 
 /* CANCELAMENTO */
@@ -798,12 +1077,9 @@ function renderPaymentDetails(){
     `;
   }else if(method==="Cartão"){
     area.innerHTML=`
-      <label>Precisamos levar a maquininha?</label>
-      <select id="card-machine">
-        <option value="">Selecione uma opção</option>
-        <option value="Não">Não</option>
-        <option value="Sim">Sim, preciso da maquininha</option>
-      </select>
+      <p class="payment-help">
+        O pagamento será feito na maquininha, no momento da entrega.
+      </p>
     `;
   }else{
     area.innerHTML="";
@@ -850,7 +1126,7 @@ function getPaymentInformation(){
   const method=document.getElementById("payment-method").value;
 
   if(!method){
-    alert("Selecione a forma de pagamento.");
+    showToast("Selecione a forma de pagamento.","error");
     return null;
   }
 
@@ -858,7 +1134,7 @@ function getPaymentInformation(){
     const change=document.getElementById("cash-change")?.value;
 
     if(!change){
-      alert("Informe se precisa de troco.");
+      showToast("Informe se precisa de troco.","error");
       return null;
     }
 
@@ -872,14 +1148,14 @@ function getPaymentInformation(){
     const amount=Number(document.getElementById("cash-amount")?.value);
 
     if(!Number.isFinite(amount) || amount<=0){
-      alert("Informe quanto vai entregar em dinheiro.");
+      showToast("Informe quanto vai entregar em dinheiro.","error");
       return null;
     }
 
     const total=getOrderTotal();
 
     if(amount<total){
-      alert("O valor informado é menor que o total do pedido.");
+      showToast("O valor informado é menor que o total.","error");
       return null;
     }
 
@@ -893,7 +1169,7 @@ function getPaymentInformation(){
     const help=document.getElementById("pix-help")?.value;
 
     if(!help){
-      alert("Informe se precisa de ajuda para realizar o Pix.");
+      showToast("Informe se precisa de ajuda com o Pix.","error");
       return null;
     }
 
@@ -906,18 +1182,9 @@ function getPaymentInformation(){
   }
 
   if(method==="Cartão"){
-    const machine=document.getElementById("card-machine")?.value;
-
-    if(!machine){
-      alert("Informe se precisa que a loja leve a maquininha.");
-      return null;
-    }
-
     return {
       method:"Cartão",
-      description:machine==="Sim"
-        ?"Precisa que a loja leve a maquininha."
-        :"Não precisa que a loja leve a maquininha."
+      description:"Pagamento na maquininha, no momento da entrega."
     };
   }
 
@@ -936,7 +1203,7 @@ function sendOrder(){
   }
 
   if(!nome||!telefone||!endereco){
-    alert("Preencha todos os seus dados.");
+    showToast("Preencha todos os seus dados antes de continuar.","error");
     return;
   }
 
