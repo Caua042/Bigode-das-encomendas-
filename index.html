@@ -62,15 +62,25 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
   flex-shrink:0;
   outline-offset:4px;
 }
+
 .theme-switch:active{cursor:grabbing}
+
 .theme-label{
+  position:absolute;
+  top:50%;
   width:50%;
+  transform:translate(-50%,-50%);
   text-align:center;
   color:#bbb;
   font-size:12px;
   font-weight:bold;
   transition:opacity .2s;
+  pointer-events:none;
 }
+
+.theme-dark{left:25%}
+.theme-light{left:75%}
+
 .theme-mustache{
   position:absolute;
   top:3px;
@@ -86,11 +96,25 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
   z-index:2;
   pointer-events:none;
 }
-.theme-mustache svg{width:27px;height:17px;fill:#101010}
-.theme-switch[data-theme="dark"] .theme-mustache{transform:translateX(0)}
-.theme-switch[data-theme="light"] .theme-mustache{transform:translateX(107px)}
+
+.theme-mustache svg{
+  width:27px;
+  height:17px;
+  fill:#101010;
+}
+
+.theme-switch[data-theme="dark"] .theme-mustache{
+  transform:translateX(0);
+}
+
+.theme-switch[data-theme="light"] .theme-mustache{
+  transform:translateX(107px);
+}
+
 .theme-switch[data-theme="dark"] .theme-dark,
-.theme-switch[data-theme="light"] .theme-light{opacity:0}
+.theme-switch[data-theme="light"] .theme-light{
+  opacity:0;
+}
 
 /* SAUDAÇÃO */
 .hero{background:linear-gradient(135deg,#151515,#292929);color:white;padding:65px 7%;text-align:center}
