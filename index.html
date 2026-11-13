@@ -2,6 +2,7 @@
 
 
 
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -157,10 +158,20 @@ header{background:#101010;color:white;padding:16px 5%;display:flex;align-items:c
 .checkout-form h3{margin-bottom:14px}
 .form-group{margin-bottom:13px}
 .form-group label{display:block;margin-bottom:6px;font-weight:bold;font-size:13px}
-.form-group input{width:100%;padding:12px;border:1px solid #555;border-radius:9px;background:#111;color:white;outline-color:#a000ff}
+.form-group input,.form-group select{width:100%;padding:12px;border:1px solid #555;border-radius:9px;background:#111;color:white;outline-color:#a000ff}
 .notice{background:#333;color:#ddd;padding:12px;border-radius:10px;font-size:11px;line-height:1.5;margin:12px 0}
 .confirm{width:100%;background:#16c75a;color:white;padding:14px;border-radius:10px;font-weight:bold}
 .back-to-cart{width:100%;padding:11px;background:transparent;color:#ccc;margin-top:8px}
+
+/* PAGAMENTO */
+.payment-box{background:#191919;border:1px solid #444;border-radius:12px;padding:13px;margin:15px 0}
+.payment-box h4{font-size:15px;margin-bottom:12px}
+.payment-box select,.payment-box input{width:100%;padding:12px;border:1px solid #555;border-radius:9px;background:#101010;color:white;outline-color:#a000ff}
+.payment-box label{display:block;font-size:12px;font-weight:bold;margin:12px 0 6px}
+.payment-option{display:flex;align-items:center;gap:9px;padding:11px;background:#242424;border:1px solid #444;border-radius:9px;margin-top:8px;font-size:13px}
+.payment-option input{accent-color:#20d875;width:17px;height:17px;flex-shrink:0}
+.payment-result{color:#20d875;font-size:13px;font-weight:bold;margin-top:10px}
+.payment-help{color:#aaa;font-size:11px;line-height:1.5;margin-top:9px}
 
 /* MODAL DE CANCELAMENTO */
 .cancel-modal-overlay{position:fixed;inset:0;z-index:800;background:#000000b8;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
@@ -351,10 +362,26 @@ footer p{color:#aaa;font-size:13px;margin-top:8px}
         <label for="endereco">Endereço</label>
         <input id="endereco" placeholder="Rua, número e bairro">
       </div>
+
+      <!-- PAGAMENTO -->
+      <div class="payment-box">
+        <h4>💳 Forma de pagamento</h4>
+
+        <label for="payment-method">Como deseja pagar?</label>
+        <select id="payment-method" onchange="renderPaymentDetails()">
+          <option value="">Selecione uma forma de pagamento</option>
+          <option value="Dinheiro">💵 Dinheiro</option>
+          <option value="Pix">📱 Pix</option>
+          <option value="Cartão">💳 Cartão</option>
+        </select>
+
+        <div id="payment-details"></div>
+      </div>
+
       <div class="notice">
         ⚠️ A solicitação não representa uma compra confirmada.
         O proprietário verificará a disponibilidade e entrará
-        em contato para combinar a entrega.
+        em contato para confirmar os produtos e combinar a entrega.
       </div>
       <button class="confirm" type="button" onclick="sendOrder()">Enviar solicitação pelo WhatsApp</button>
       <button class="back-to-cart" type="button" onclick="hideCheckoutForm()">← Voltar ao carrinho</button>
@@ -424,7 +451,6 @@ const productsList = [
   {id:20,name:"Fone com fio resistente e borracha - conector de pino",price:30,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
   {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
 
-  /* NOVOS PRODUTOS FAM */
   {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",photo:"imagens/IMG_1127.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",photo:"imagens/IMG_1126.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
   {id:24,name:"Cabo Tipo-C para Tipo-C normal - 3A, 1,2 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
@@ -716,6 +742,10 @@ function renderCart(){
   document.querySelector(".finish-shopping").disabled=cart.length===0;
   document.querySelector(".finish-shopping").style.opacity=
     cart.length===0?".5":"1";
+
+  if(document.getElementById("checkout-form").classList.contains("show")){
+    renderPaymentDetails();
+  }
 }
 
 /* FORMULÁRIO */
@@ -737,6 +767,163 @@ function hideCheckoutForm(){
   document.getElementById("checkout-form").classList.remove("show");
 }
 
+/* PAGAMENTO */
+function getOrderTotal(){
+  return cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
+}
+
+function renderPaymentDetails(){
+  const method=document.getElementById("payment-method").value;
+  const area=document.getElementById("payment-details");
+
+  if(method==="Dinheiro"){
+    area.innerHTML=`
+      <label for="cash-change">Precisa de troco?</label>
+      <select id="cash-change" onchange="renderCashChange()">
+        <option value="">Selecione uma opção</option>
+        <option value="nao">Não, tenho o valor exato</option>
+        <option value="sim">Sim, preciso de troco</option>
+      </select>
+      <div id="cash-change-details"></div>
+    `;
+  }else if(method==="Pix"){
+    area.innerHTML=`
+      <label>Precisa de ajuda para realizar o Pix?</label>
+      <select id="pix-help">
+        <option value="">Selecione uma opção</option>
+        <option value="Não">Não, consigo fazer sozinho(a)</option>
+        <option value="Sim">Sim, preciso de ajuda</option>
+      </select>
+      <p class="payment-help">O pagamento será combinado com a loja após a confirmação da encomenda.</p>
+    `;
+  }else if(method==="Cartão"){
+    area.innerHTML=`
+      <label>Precisamos levar a maquininha?</label>
+      <select id="card-machine">
+        <option value="">Selecione uma opção</option>
+        <option value="Não">Não</option>
+        <option value="Sim">Sim, preciso da maquininha</option>
+      </select>
+    `;
+  }else{
+    area.innerHTML="";
+  }
+}
+
+function renderCashChange(){
+  const change=document.getElementById("cash-change").value;
+  const area=document.getElementById("cash-change-details");
+
+  if(change==="sim"){
+    area.innerHTML=`
+      <label for="cash-amount">Vai pagar com quanto?</label>
+      <input id="cash-amount" type="number" min="0" step="0.01"
+        placeholder="Ex.: 150,00" oninput="calculateChange()">
+      <div id="change-result" class="payment-result"></div>
+    `;
+  }else{
+    area.innerHTML="";
+  }
+}
+
+function calculateChange(){
+  const total=getOrderTotal();
+  const amount=Number(document.getElementById("cash-amount").value);
+  const result=document.getElementById("change-result");
+
+  if(!Number.isFinite(amount) || amount<=0){
+    result.textContent="";
+    return;
+  }
+
+  if(amount<total){
+    result.style.color="#ff6974";
+    result.textContent="O valor informado é menor que o total do pedido.";
+    return;
+  }
+
+  result.style.color="#20d875";
+  result.textContent="Troco: "+money(amount-total);
+}
+
+function getPaymentInformation(){
+  const method=document.getElementById("payment-method").value;
+
+  if(!method){
+    alert("Selecione a forma de pagamento.");
+    return null;
+  }
+
+  if(method==="Dinheiro"){
+    const change=document.getElementById("cash-change")?.value;
+
+    if(!change){
+      alert("Informe se precisa de troco.");
+      return null;
+    }
+
+    if(change==="nao"){
+      return {
+        method:"Dinheiro",
+        description:"Não precisa de troco. Pagará com o valor exato."
+      };
+    }
+
+    const amount=Number(document.getElementById("cash-amount")?.value);
+
+    if(!Number.isFinite(amount) || amount<=0){
+      alert("Informe quanto vai entregar em dinheiro.");
+      return null;
+    }
+
+    const total=getOrderTotal();
+
+    if(amount<total){
+      alert("O valor informado é menor que o total do pedido.");
+      return null;
+    }
+
+    return {
+      method:"Dinheiro",
+      description:`Precisa de troco. Pagará com ${money(amount)}. Troco: ${money(amount-total)}.`
+    };
+  }
+
+  if(method==="Pix"){
+    const help=document.getElementById("pix-help")?.value;
+
+    if(!help){
+      alert("Informe se precisa de ajuda para realizar o Pix.");
+      return null;
+    }
+
+    return {
+      method:"Pix",
+      description:help==="Sim"
+        ?"Precisa de ajuda para realizar o Pix."
+        :"Não precisa de ajuda para realizar o Pix."
+    };
+  }
+
+  if(method==="Cartão"){
+    const machine=document.getElementById("card-machine")?.value;
+
+    if(!machine){
+      alert("Informe se precisa que a loja leve a maquininha.");
+      return null;
+    }
+
+    return {
+      method:"Cartão",
+      description:machine==="Sim"
+        ?"Precisa que a loja leve a maquininha."
+        :"Não precisa que a loja leve a maquininha."
+    };
+  }
+
+  return null;
+}
+
 /* WHATSAPP */
 function sendOrder(){
   const nome=document.getElementById("nome").value.trim();
@@ -753,7 +940,10 @@ function sendOrder(){
     return;
   }
 
-  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
+  const payment=getPaymentInformation();
+  if(!payment)return;
+
+  const total=getOrderTotal();
 
   let mensagem=`🛒 NOVA SOLICITAÇÃO - BIGODE DAS ENCOMENDAS
 
@@ -777,6 +967,9 @@ Garantia: ${item.warranty||"Não informada"}
 
   mensagem+=`
 💰 TOTAL ESTIMADO: ${money(total)}
+
+💳 FORMA DE PAGAMENTO: ${payment.method}
+${payment.description}
 
 ⚠️ ATENÇÃO:
 Pedido aguardando confirmação de disponibilidade pelo proprietário.
