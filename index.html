@@ -359,6 +359,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
  </div>
 </div>
 <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
+
 <script>
 
 /* CONFIGURAÇÕES */
@@ -472,16 +473,12 @@ function getCoverColor(colorName){
 }
 
 /* PRÉVIA DA CAPA: IPHONE E ANDROID */
-
 function renderCoverPreview(model="",colorName="Preto"){
  const color=getCoverColor(colorName);
  const isIphone=/iphone/i.test(model);
  const isTransparent=/transparente/i.test(colorName);
 
- // Cor do aparelho que aparece por baixo da capa
  const phoneColor="#b9c5ce";
-
- // Transparência real ou silicone colorido
  const caseFill=isTransparent
   ? "rgba(220,232,235,.22)"
   : color;
@@ -539,13 +536,15 @@ function renderCoverPreview(model="",colorName="Preto"){
 
    <!-- Traseira da capa -->
    <rect x="30" y="7" width="160" height="286" rx="31"
-    fill="${caseFill}" stroke="${isTransparent ? "#b9d0d8" : "#777"}"
+    fill="${caseFill}"
+    stroke="${isTransparent ? "#b9d0d8" : "#777"}"
     stroke-width="3"/>
 
-   <!-- Área de brilho do silicone -->
+   <!-- Brilho do silicone -->
    <rect x="37" y="14" width="146" height="272" rx="25"
     fill="url(#caseShine)"
-    stroke="#ffffff" stroke-opacity="${isTransparent ? ".65" : ".3"}"
+    stroke="#ffffff"
+    stroke-opacity="${isTransparent ? ".65" : ".3"}"
     stroke-width="2"/>
 
    ${cameraDesign}
@@ -563,7 +562,22 @@ function renderCoverPreview(model="",colorName="Preto"){
  </div>`;
 }
 
+/* ATUALIZAÇÃO DA PRÉVIA */
+function updateCoverPreview(){
+ const model=document.getElementById("cover-model")?.value.trim()||"";
+ const area=document.getElementById("product-info-photo");
 
+ if(area){
+  area.innerHTML=renderCoverPreview(
+   model,
+   selectedCoverColor||"Preto"
+  );
+ }
+
+ updateCoverPricePreview();
+}
+
+/* SELEÇÃO DE COR */
 function selectCoverColor(color){
  selectedCoverColor=color;
  document.querySelectorAll(".color-choice").forEach(button=>{
@@ -869,6 +883,8 @@ document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeProduc
 renderProducts();
 renderCart();
 updateClearSearch();
+
 </script>
+
 </body>
 </html>
