@@ -488,7 +488,6 @@ function renderCoverPreview(model="",colorName="Preto"){
 
  if(isIphone){
   cameraArea=`
-   <!-- Abertura ampla da câmera, característica das capas de iPhone -->
    <path d="M48 34 Q48 25 58 25 H128 Q139 25 139 36 V111 Q139 124 127 124 H59 Q47 124 47 112 Z"
     fill="#d5d5d5" stroke="#777" stroke-width="3"/>
    <path d="M53 39 Q53 31 62 31 H124 Q133 31 133 40 V106 Q133 117 123 117 H63 Q53 117 53 106 Z"
@@ -503,7 +502,6 @@ function renderCoverPreview(model="",colorName="Preto"){
   `;
  }else{
   cameraArea=`
-   <!-- Traseira fechada com furos individuais para as câmeras -->
    <rect x="52" y="35" width="82" height="91" rx="17"
     fill="${color}" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
    <circle cx="75" cy="57" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
@@ -533,7 +531,6 @@ function renderCoverPreview(model="",colorName="Preto"){
     </linearGradient>
    </defs>
 
-   <!-- Corpo da capa -->
    <rect x="30" y="7" width="160" height="286" rx="31"
     fill="${color}" stroke="#777" stroke-width="3"/>
 
@@ -546,12 +543,11 @@ function renderCoverPreview(model="",colorName="Preto"){
 
   <span class="case-preview-caption">
    ${isIphone
-    ?"Prévia de iPhone — abertura ampla para as câmeras"
-    :"Prévia de Samsung e outras marcas — traseira fechada com furos para as câmeras"}
+    ?"Modelo ilustrativo para iPhone"
+    :"Modelo ilustrativo com traseira fechada"}
   </span>
  </div>`;
 }
-
 function updateCoverPreview(){
  const model=document.getElementById("cover-model")?.value.trim()||"";
  const area=document.getElementById("product-info-photo");
