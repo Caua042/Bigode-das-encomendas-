@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,14 +7,10 @@
 <meta name="theme-color" content="#101010">
 <meta name="color-scheme" content="light dark">
 <title>Bigode das Encomendas | Importações</title>
-
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:Arial,sans-serif;background:#101010;color:#f5f5f5;transition:background .25s,color .25s}
-button,input,select{font:inherit}
-button{cursor:pointer;border:0}
-
-/* ABERTURA */
+button,input,select{font:inherit}button{cursor:pointer;border:0}
 #intro{position:fixed;inset:0;background:#f5f5f5;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s,visibility .3s}
 #intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 .intro-stage{position:absolute;width:100%;padding:20px;text-align:center;opacity:0;visibility:hidden}
@@ -30,8 +27,6 @@ button{cursor:pointer;border:0}
 @keyframes mustacheShow{0%,65%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden}}
 @keyframes logoShow{0%{opacity:0;visibility:visible;transform:scale(.8)}20%,75%{opacity:1;visibility:visible;transform:scale(1)}100%{opacity:0;visibility:hidden}}
 @keyframes welcomeShow{0%{opacity:0;visibility:visible;transform:translateY(20px)}20%,100%{opacity:1;visibility:visible;transform:translateY(0)}}
-
-/* CABEÇALHO */
 header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:center;justify-content:space-between;gap:18px;position:sticky;top:0;z-index:700;border-bottom:1px solid #292929;box-shadow:0 4px 18px #00000059}
 .brand{display:flex;align-items:center;gap:13px;min-width:0;flex-shrink:0}
 .brand svg{width:50px;flex-shrink:0}
@@ -62,17 +57,11 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .theme-mustache svg{width:27px;height:17px;fill:#101010}
 .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(107px)}
 .theme-switch[data-theme="dark"] .theme-dark,.theme-switch[data-theme="light"] .theme-light{opacity:0}
-
-/* SAUDAÇÃO */
 .hero{background:linear-gradient(135deg,#151515,#292929);color:white;padding:65px 7%;text-align:center}
 .hero h1{font-size:clamp(27px,6vw,42px);margin-bottom:12px}
-.hero p{color:#ddd;line-height:1.6}
-.hero strong{color:white}
-
-/* CATÁLOGO */
+.hero p{color:#ddd;line-height:1.6}.hero strong{color:white}
 .container{max-width:1100px;margin:auto;padding:35px 18px}
-.section-title{margin-bottom:20px}
-.section-title h2{font-size:25px}
+.section-title{margin-bottom:20px}.section-title h2{font-size:25px}
 .section-title p{color:#aaa;margin-top:7px}
 .catalog-filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:25px}
 .catalog-filters select{width:100%;min-width:0;padding:13px 10px;border:1px solid #444;border-radius:10px;background:#202020;color:white;font-size:13px}
@@ -94,16 +83,14 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .product-info-button{background:#333;color:white;border:1px solid #555}
 .add:disabled{opacity:.45;cursor:not-allowed}
 .no-products{color:#888;text-align:center;padding:25px}
-
-/* INFORMAÇÕES */
 .product-info-overlay{position:fixed;inset:0;z-index:850;background:#000000b8;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;visibility:hidden;transition:.25s}
 .product-info-overlay.open{opacity:1;visibility:visible}
-.product-info-modal{width:100%;max-width:390px;max-height:85vh;overflow-y:auto;background:#191919;color:white;border:2px solid #40DCCB;border-radius:20px;padding:17px;transform:translateY(15px) scale(.97);transition:.25s}
+.product-info-modal{width:100%;max-width:390px;max-height:90vh;overflow-y:auto;background:#191919;color:white;border:2px solid #40DCCB;border-radius:20px;padding:17px;transform:translateY(15px) scale(.97);transition:.25s}
 .product-info-overlay.open .product-info-modal{transform:translateY(0) scale(1)}
 .product-info-header{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:13px}
 .product-info-header h2{font-size:18px;line-height:1.3}
 .close-product-info{background:none;color:#ddd;font-size:29px;padding:0 5px}
-.product-info-photo{width:100%;height:210px;background:#fff;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:15px}
+.product-info-photo{width:100%;height:210px;background:#f0f0f0;border-radius:13px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:15px}
 .product-info-photo img{width:100%;height:100%;object-fit:contain}
 .product-info-photo span{font-size:70px}
 .product-info-price{font-size:22px;color:#20d875;font-weight:bold;margin:10px 0}
@@ -113,23 +100,27 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .product-info-details strong{color:#40DCCB}
 .product-info-add{width:100%;padding:13px;margin-top:14px;background:#20d875;color:#101010;border-radius:10px;font-weight:bold}
 .custom-field{margin-top:13px}
-.custom-field label{display:block;font-size:13px;font-weight:bold;margin-bottom:7px}
+.custom-field label{display:block;font-size:13px;font-weight:bold;margin-bottom:9px}
 .custom-field input{width:100%;padding:12px;border-radius:9px;border:1px solid #555;background:#111;color:white;outline-color:#40DCCB}
-.color-options{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-.color-option{padding:10px 5px;border:1px solid #555;border-radius:9px;background:#333;color:white;font-size:12px}
-.color-option.selected{border:2px solid #40DCCB;background:#164b43;color:white}
+.color-options{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:7px 2px}
+.color-choice{display:flex;flex-direction:column;align-items:center;gap:5px;background:transparent;color:#ddd;font-size:10px;min-width:42px}
+.color-swatch{width:34px;height:34px;border-radius:50%;border:2px solid #777;display:block;box-shadow:0 1px 4px #0005;transition:transform .15s,border .15s}
+.color-choice.selected .color-swatch{outline:3px solid #40DCCB;outline-offset:3px;transform:scale(1.06)}
+.color-choice:focus-visible{outline:2px solid #40DCCB;outline-offset:4px;border-radius:8px}
+.case-preview-wrap{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.case-preview-wrap svg{height:195px;max-width:100%;width:auto;filter:drop-shadow(0 5px 5px #0003)}
+.case-preview-caption{font-size:11px;color:#666;text-align:center}
 .custom-price-note{font-size:11px;color:#aaa;margin-top:9px;line-height:1.5}
 body[data-theme="light"] .custom-field input{background:white;color:#222;border-color:#ccc}
-body[data-theme="light"] .color-option{background:#eee;color:#222;border-color:#ccc}
-body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:#159b78}
-
-/* CARRINHO FLUTUANTE */
+body[data-theme="light"] .color-choice{color:#333}
+body[data-theme="light"] .product-info-modal{background:white;color:#202020}
+body[data-theme="light"] .close-product-info{color:#222}
+body[data-theme="light"] .product-info-description{color:#444}
+body[data-theme="light"] .product-info-details{background:#f1f1f1}
 .floating-cart{position:fixed;right:20px;bottom:22px;width:76px;height:76px;border-radius:50%;background:linear-gradient(145deg,#101010,#242424);border:3px solid #20d875;box-shadow:0 0 18px #20d87566;display:flex;align-items:center;justify-content:center;z-index:500}
 .floating-cart svg{width:52px;height:52px}
 .cart-badge{position:absolute;top:-7px;right:-6px;min-width:27px;height:27px;padding:0 6px;border-radius:20px;background:#a000ff;color:white;font-weight:bold;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #111}
 .cart-badge:empty{display:none}
-
-/* PAINEL BIGAS */
 .cart-overlay{position:fixed;inset:0;background:#00000070;z-index:600;opacity:0;visibility:hidden;transition:.25s}
 .cart-overlay.open{opacity:1;visibility:visible}
 .cart-panel{position:fixed;z-index:601;right:18px;bottom:110px;width:min(420px,calc(100% - 24px));max-height:min(78vh,720px);background:#151515;color:white;border:2px solid #8125cf;border-radius:23px;box-shadow:0 0 30px #7000bb55;display:flex;flex-direction:column;overflow:hidden;opacity:0;visibility:hidden;transform:translateY(20px) scale(.97);transition:.25s}
@@ -137,8 +128,7 @@ body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:
 .cart-panel-header{padding:16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid #333}
 .mini-cart-logo{width:55px;height:55px;flex-shrink:0;border-radius:50%;background:#101010;border:2px solid #20d875;display:flex;align-items:center;justify-content:center}
 .mini-cart-logo svg{width:43px;height:43px}
-.cart-panel-title{flex:1}
-.cart-panel-title h2{font-size:20px}
+.cart-panel-title{flex:1}.cart-panel-title h2{font-size:20px}
 .cart-panel-title p{color:#d45cff;font-size:12px;margin-top:4px}
 .close-cart{background:none;color:#ddd;font-size:28px;padding:4px 8px}
 .cart-panel-content{padding:15px;overflow-y:auto;overscroll-behavior:contain}
@@ -169,8 +159,6 @@ body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:
 .cancel-shopping{background:transparent;color:#ff5260;border:1px solid #ff5260}
 .finish-shopping{background:white;color:#111}
 .cart-notice{color:#aaa;font-size:11px;line-height:1.5;margin-top:12px;text-align:center}
-
-/* FORMULÁRIO */
 .checkout-form{display:none;margin-top:16px;padding:15px;background:#242424;border:1px solid #444;border-radius:14px}
 .checkout-form.show{display:block}
 .checkout-form h3{margin-bottom:14px}
@@ -180,8 +168,6 @@ body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:
 .notice{background:#333;color:#ddd;padding:12px;border-radius:10px;font-size:11px;line-height:1.5;margin:12px 0}
 .confirm{width:100%;background:#16c75a;color:white;padding:14px;border-radius:10px;font-weight:bold}
 .back-to-cart{width:100%;padding:11px;background:transparent;color:#ccc;margin-top:8px}
-
-/* PAGAMENTO */
 .payment-box{background:#191919;border:1px solid #444;border-radius:12px;padding:13px;margin:15px 0}
 .payment-box h4{font-size:15px;margin-bottom:12px}
 .payment-box select,.payment-box input{width:100%;padding:12px;border:1px solid #555;border-radius:9px;background:#101010;color:white}
@@ -190,8 +176,6 @@ body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:
 .payment-option input{accent-color:#20d875;width:17px;height:17px}
 .payment-result{color:#20d875;font-size:13px;font-weight:bold;margin-top:10px}
 .payment-help{color:#aaa;font-size:11px;line-height:1.5;margin-top:9px}
-
-/* CANCELAMENTO */
 .cancel-modal-overlay{position:fixed;inset:0;z-index:800;background:#000000b8;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:.25s}
 .cancel-modal-overlay.open{opacity:1;visibility:visible}
 .cancel-modal{width:100%;max-width:360px;background:#191919;color:white;border:2px solid #8125cf;border-radius:23px;padding:25px 21px;text-align:center;box-shadow:0 0 35px #8125cf55;transform:translateY(15px) scale(.94);transition:.25s}
@@ -204,15 +188,11 @@ body[data-theme="light"] .color-option.selected{background:#d9f8ef;border-color:
 .modal-continue,.modal-finish{background:#16c75a;color:white}
 .modal-confirm{background:transparent;color:#ff6974;border:1px solid #ff5260}
 .cancel-modal-footer{color:#777;font-size:11px;margin-top:18px}
-
-/* RODAPÉ E AVISOS */
 footer{background:#080808;color:white;text-align:center;padding:30px 15px;margin-top:45px}
 footer p{color:#aaa;font-size:13px;margin-top:8px}
 .site-toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);width:min(90%,380px);background:#191919;color:white;border:1px solid #20d875;border-radius:13px;padding:15px 18px;z-index:10000;box-shadow:0 5px 25px #0005;opacity:0;visibility:hidden;transition:.25s;font-size:14px;line-height:1.5;text-align:center}
 .site-toast.show{opacity:1;visibility:visible;transform:translate(-50%,0)}
 .site-toast.error{border-color:#ff5260}
-
-/* LIGHT */
 body[data-theme="light"]{background:#f5f5f5;color:#202020}
 body[data-theme="light"] header{background:#fff;color:#111;border-bottom:1px solid #ddd}
 body[data-theme="light"] .brand svg path{fill:#111}
@@ -259,18 +239,12 @@ body[data-theme="light"] .cancel-modal{background:#fff;color:#202020}
 body[data-theme="light"] .cancel-modal p{color:#444}
 body[data-theme="light"] .cancel-modal-icon{background:#f1f1f1}
 body[data-theme="light"] .site-toast{background:#fff;color:#222}
-body[data-theme="light"] .product-info-modal{background:white;color:#202020}
-body[data-theme="light"] .close-product-info{color:#222}
-body[data-theme="light"] .product-info-description{color:#444}
-body[data-theme="light"] .product-info-details{background:#f1f1f1}
 body[data-theme="dark"] #intro{background:#f5f5f5}
 body[data-theme="dark"] .big-mustache path{fill:#101010}
 body[data-theme="light"] #intro{background:#050505}
 body[data-theme="light"] .big-mustache path{fill:white}
 body[data-theme="light"] .stage-logo h1,body[data-theme="light"] .stage-logo h2{color:white;-webkit-text-stroke:1.5px #000;paint-order:stroke fill}
 body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welcome p{color:white}
-
-/* CELULARES */
 @media(max-width:650px){
  header{padding:11px 4%;gap:9px}
  .brand{gap:8px}.brand svg{width:39px}
@@ -306,28 +280,19 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 }
 </style>
 </head>
-
 <body data-theme="dark">
-
 <div id="intro">
- <div class="intro-stage stage-mustache">
-  <svg viewBox="0 0 400 180" class="big-mustache"><path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg>
- </div>
+ <div class="intro-stage stage-mustache"><svg viewBox="0 0 400 180" class="big-mustache"><path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
  <div class="intro-stage stage-logo"><h1>BIGODE DAS ENCOMENDAS</h1><h2>IMPORTAÇÕES</h2></div>
  <div class="intro-stage stage-welcome"><h1>Seja bem-vindo!</h1><p>Em que posso te ajudar?</p></div>
 </div>
-
 <header id="main-header">
  <div class="brand">
   <svg viewBox="0 0 400 180"><path fill="white" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg>
   <div><h2>BIGODE DAS ENCOMENDAS</h2><span>IMPORTAÇÕES</span></div>
  </div>
  <div class="header-search-area" id="header-search-area">
-  <div class="header-search-box">
-   <span class="header-search-icon">🔎</span>
-   <input class="header-search-input" id="header-search" type="search" placeholder="Pesquisar produtos..." autocomplete="off" aria-label="Pesquisar produtos">
-   <button class="clear-search" id="clear-header-search" type="button">×</button>
-  </div>
+  <div class="header-search-box"><span class="header-search-icon">🔎</span><input class="header-search-input" id="header-search" type="search" placeholder="Pesquisar produtos..." autocomplete="off" aria-label="Pesquisar produtos"><button class="clear-search" id="clear-header-search" type="button">×</button></div>
   <div class="search-suggestions" id="search-suggestions"></div>
  </div>
  <button class="mobile-search-toggle" id="mobile-search-toggle" type="button" aria-label="Abrir pesquisa" aria-expanded="false">⌕</button>
@@ -336,44 +301,19 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   <div class="theme-mustache"><svg viewBox="0 0 400 180"><path d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
  </div>
 </header>
-
-<section class="hero">
- <h1 id="greeting">Olá!</h1>
- <p>Como posso te ajudar?</p>
- <p><strong>Encontre seus produtos favoritos!</strong></p>
-</section>
-
+<section class="hero"><h1 id="greeting">Olá!</h1><p>Como posso te ajudar?</p><p><strong>Encontre seus produtos favoritos!</strong></p></section>
 <main class="container">
  <div class="section-title"><h2>Nosso catálogo</h2><p>Confira nossos produtos e escolha seus favoritos.</p></div>
  <div class="catalog-filters">
-  <select id="sort-filter" onchange="renderProducts()">
-   <option value="featured">Ordenar produtos</option>
-   <option value="low">Menor preço</option>
-   <option value="high">Maior preço</option>
-   <option value="az">A–Z</option>
-  </select>
-  <select id="brand-filter" onchange="renderProducts()">
-   <option value="all">Todas as marcas</option>
-   <option value="FAM">Marca FAM</option>
-   <option value="Gold">Marca Gold</option>
-   <option value="other">Outras marcas</option>
-  </select>
+  <select id="sort-filter" onchange="renderProducts()"><option value="featured">Ordenar produtos</option><option value="low">Menor preço</option><option value="high">Maior preço</option><option value="az">A–Z</option></select>
+  <select id="brand-filter" onchange="renderProducts()"><option value="all">Todas as marcas</option><option value="FAM">Marca FAM</option><option value="Gold">Marca Gold</option><option value="other">Outras marcas</option></select>
  </div>
  <div class="products" id="products"></div>
 </main>
-
-<footer>
- <h3>BIGODE DAS ENCOMENDAS</h3>
- <p>Importações e encomendas</p>
- <p>Atendimento pelo WhatsApp</p>
-</footer>
-
+<footer><h3>BIGODE DAS ENCOMENDAS</h3><p>Importações e encomendas</p><p>Atendimento pelo WhatsApp</p></footer>
 <div class="product-info-overlay" id="product-info-overlay" onclick="handleProductInfoBackdrop(event)" role="dialog" aria-modal="true">
  <div class="product-info-modal">
-  <div class="product-info-header">
-   <h2 id="product-info-title">Informações do produto</h2>
-   <button class="close-product-info" type="button" onclick="closeProductInfo()">×</button>
-  </div>
+  <div class="product-info-header"><h2 id="product-info-title">Informações do produto</h2><button class="close-product-info" type="button" onclick="closeProductInfo()">×</button></div>
   <div class="product-info-photo" id="product-info-photo"></div>
   <div class="product-info-price" id="product-info-price"></div>
   <p class="product-info-description" id="product-info-description"></p>
@@ -381,90 +321,48 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   <button class="product-info-add" id="product-info-add" type="button">+ Adicionar ao carrinho</button>
  </div>
 </div>
-
 <button class="floating-cart" type="button" onclick="openCart()" aria-label="Abrir carrinho">
- <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M12 17 H23 L31 62 Q32 68 39 68 H78" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M28 29 H89 L79 59 H34 Z" stroke="white" stroke-width="5" stroke-linejoin="round"/>
-  <path d="M34 43 C42 31 49 37 56 43 C63 37 72 31 83 43 C77 57 65 57 56 49 C47 57 39 57 34 43Z" fill="white"/>
-  <circle cx="42" cy="81" r="5" fill="white"/><circle cx="74" cy="81" r="5" fill="white"/>
- </svg>
+ <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 17 H23 L31 62 Q32 68 39 68 H78" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 29 H89 L79 59 H34 Z" stroke="white" stroke-width="5" stroke-linejoin="round"/><path d="M34 43 C42 31 49 37 56 43 C63 37 72 31 83 43 C77 57 65 57 56 49 C47 57 39 57 34 43Z" fill="white"/><circle cx="42" cy="81" r="5" fill="white"/><circle cx="74" cy="81" r="5" fill="white"/></svg>
  <span class="cart-badge" id="cart-badge"></span>
 </button>
-
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
-
 <section class="cart-panel" id="cart-panel">
  <div class="cart-panel-header">
-  <div class="mini-cart-logo">
-   <svg viewBox="0 0 100 100" fill="none">
-    <path d="M12 17 H23 L31 62 Q32 68 39 68 H78" stroke="white" stroke-width="5" stroke-linecap="round"/>
-    <path d="M28 29 H89 L79 59 H34 Z" stroke="white" stroke-width="5"/>
-    <path d="M34 43 C42 31 49 37 56 43 C63 37 72 31 83 43 C77 57 65 57 56 49 C47 57 39 57 34 43Z" fill="white"/>
-    <circle cx="42" cy="81" r="5" fill="white"/><circle cx="74" cy="81" r="5" fill="white"/>
-   </svg>
-  </div>
-  <div class="cart-panel-title"><h2>Bigas</h2><p>Assistente de encomendas</p></div>
-  <button class="close-cart" type="button" onclick="closeCart()">×</button>
+  <div class="mini-cart-logo"><svg viewBox="0 0 100 100" fill="none"><path d="M12 17 H23 L31 62 Q32 68 39 68 H78" stroke="white" stroke-width="5" stroke-linecap="round"/><path d="M28 29 H89 L79 59 H34 Z" stroke="white" stroke-width="5"/><path d="M34 43 C42 31 49 37 56 43 C63 37 72 31 83 43 C77 57 65 57 56 49 C47 57 39 57 34 43Z" fill="white"/><circle cx="42" cy="81" r="5" fill="white"/><circle cx="74" cy="81" r="5" fill="white"/></svg></div>
+  <div class="cart-panel-title"><h2>Bigas</h2><p>Assistente de encomendas</p></div><button class="close-cart" type="button" onclick="closeCart()">×</button>
  </div>
-
  <div class="cart-panel-content" id="cart-panel-content">
-  <div class="chat-message">
-   <strong id="cart-greeting">Bom dia! ☀️</strong>
-   Você chegou ao carrinho, Bigas está pronto! 😁
-   <br><br>Sua compra está assim. Gostaria de adicionar mais alguma coisa?
-  </div>
-  <div class="cart-products-box">
-   <div class="cart-products-title">🛒 Seus produtos · <span id="cart-items-count">0 itens</span></div>
-   <div id="cart-items"><p class="empty">Seu carrinho está vazio. 😔</p></div>
-   <div class="cart-total"><span>Total da encomenda:</span><strong id="total">R$ 0,00</strong></div>
-  </div>
+  <div class="chat-message"><strong id="cart-greeting">Bom dia! ☀️</strong>Você chegou ao carrinho, Bigas está pronto! 😁<br><br>Sua compra está assim. Gostaria de adicionar mais alguma coisa?</div>
+  <div class="cart-products-box"><div class="cart-products-title">🛒 Seus produtos · <span id="cart-items-count">0 itens</span></div><div id="cart-items"><p class="empty">Seu carrinho está vazio. 😔</p></div><div class="cart-total"><span>Total da encomenda:</span><strong id="total">R$ 0,00</strong></div></div>
   <div class="cart-actions">
    <button class="cart-action continue-shopping" type="button" onclick="closeCart()">✓ Continuar compras</button>
    <button class="cart-action cancel-shopping" type="button" onclick="cancelCart()">🗑 Cancelar compra</button>
    <button class="cart-action finish-shopping" type="button" onclick="showCheckoutForm()">Finalizar encomenda</button>
   </div>
   <p class="cart-notice">A solicitação não confirma a compra. A loja verificará o estoque e entrará em contato.</p>
-
   <div class="checkout-form" id="checkout-form">
    <h3>Seus dados 📋</h3>
    <div class="form-group"><label for="nome">Nome completo</label><input id="nome" placeholder="Digite seu nome"></div>
    <div class="form-group"><label for="telefone">Telefone</label><input id="telefone" type="tel" placeholder="(38) 99999-9999"></div>
    <div class="form-group"><label for="endereco">Endereço</label><input id="endereco" placeholder="Rua, número e bairro"></div>
-   <div class="payment-box">
-    <h4>💳 Forma de pagamento</h4>
-    <label for="payment-method">Como deseja pagar?</label>
-    <select id="payment-method" onchange="renderPaymentDetails()">
-     <option value="">Escolha como deseja pagar</option>
-     <option value="Dinheiro">💵 Dinheiro</option>
-     <option value="Pix">📱 Pix</option>
-     <option value="Cartão">💳 Cartão</option>
-    </select>
-    <div id="payment-details"></div>
-   </div>
+   <div class="payment-box"><h4>💳 Forma de pagamento</h4><label for="payment-method">Como deseja pagar?</label><select id="payment-method" onchange="renderPaymentDetails()"><option value="">Escolha como deseja pagar</option><option value="Dinheiro">💵 Dinheiro</option><option value="Pix">📱 Pix</option><option value="Cartão">💳 Cartão</option></select><div id="payment-details"></div></div>
    <div class="notice">⚠️ A solicitação não representa uma compra confirmada. O proprietário verificará a disponibilidade e entrará em contato para confirmar os produtos e combinar a entrega.</div>
    <button class="confirm" type="button" onclick="sendOrder()">Enviar solicitação pelo WhatsApp</button>
    <button class="back-to-cart" type="button" onclick="hideCheckoutForm()">← Voltar ao carrinho</button>
   </div>
  </div>
 </section>
-
 <div class="cancel-modal-overlay" id="cancel-modal-overlay" onclick="handleCancelModalBackdrop(event)" role="dialog" aria-modal="true">
  <div class="cancel-modal">
-  <div class="cancel-modal-icon" id="cancel-modal-icon">🥹</div>
-  <h2 id="cancel-modal-title">Ôxe, já desistiu? 🥹</h2>
+  <div class="cancel-modal-icon" id="cancel-modal-icon">🥹</div><h2 id="cancel-modal-title">Ôxe, já desistiu? 🥹</h2>
   <p id="cancel-modal-message">O Bigode ficou triste agora! KKKK Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️</p>
-  <div class="cancel-modal-buttons">
-   <button class="cancel-modal-button modal-continue" id="cancel-modal-primary" type="button" onclick="handleCancelModalPrimary()">Vou ficar mais um pouquinho! ❤️</button>
-   <button class="cancel-modal-button modal-confirm" id="cancel-modal-secondary" type="button" onclick="confirmCancelCart()">Pode cancelar, Bigode 🥺</button>
-  </div>
+  <div class="cancel-modal-buttons"><button class="cancel-modal-button modal-continue" id="cancel-modal-primary" type="button" onclick="handleCancelModalPrimary()">Vou ficar mais um pouquinho! ❤️</button><button class="cancel-modal-button modal-confirm" id="cancel-modal-secondary" type="button" onclick="confirmCancelCart()">Pode cancelar, Bigode 🥺</button></div>
   <div class="cancel-modal-footer">BIGODE DAS ENCOMENDAS · IMPORTAÇÕES</div>
  </div>
 </div>
-
 <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
-
 <script>
+
 /* CONFIGURAÇÕES */
 const STORE_WHATSAPP="5538992041456";
 const RECENT_SEARCHES_KEY="bigode-recent-searches";
@@ -475,8 +373,7 @@ let selectedCoverColor="";
 
 /* TEMA */
 function applyTheme(theme){
- currentTheme=theme;
- document.body.dataset.theme=theme;
+ currentTheme=theme;document.body.dataset.theme=theme;
  const toggle=document.getElementById("theme-switch");
  if(toggle){toggle.dataset.theme=theme;toggle.setAttribute("aria-checked",theme==="dark"?"true":"false")}
  document.querySelector('meta[name="theme-color"]').setAttribute("content",theme==="dark"?"#101010":"#ffffff");
@@ -484,55 +381,37 @@ function applyTheme(theme){
 }
 function toggleTheme(){applyTheme(currentTheme==="dark"?"light":"dark")}
 try{applyTheme(localStorage.getItem("bigode-theme")==="light"?"light":"dark")}catch(e){applyTheme("dark")}
-
 const themeSwitch=document.getElementById("theme-switch");
 let dragStartX=null,dragMoved=false,suppressThemeClick=false;
 themeSwitch.addEventListener("click",()=>{if(suppressThemeClick){suppressThemeClick=false;return}toggleTheme()});
 themeSwitch.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggleTheme()}});
 themeSwitch.addEventListener("pointerdown",e=>{dragStartX=e.clientX;dragMoved=false;themeSwitch.setPointerCapture(e.pointerId)});
 themeSwitch.addEventListener("pointermove",e=>{if(dragStartX!==null&&Math.abs(e.clientX-dragStartX)>8)dragMoved=true});
-themeSwitch.addEventListener("pointerup",e=>{
- if(dragStartX===null)return;
- const distance=e.clientX-dragStartX;
- if(dragMoved){suppressThemeClick=true;applyTheme(distance>0?"light":"dark")}
- dragStartX=null;
-});
+themeSwitch.addEventListener("pointerup",e=>{if(dragStartX===null)return;const distance=e.clientX-dragStartX;if(dragMoved){suppressThemeClick=true;applyTheme(distance>0?"light":"dark")}dragStartX=null});
 themeSwitch.addEventListener("pointercancel",()=>dragStartX=null);
 
 /* AVISOS */
 function showToast(message,type="success"){
- const toast=document.getElementById("site-toast");
- toast.textContent=message;toast.className="site-toast show";
+ const toast=document.getElementById("site-toast");toast.textContent=message;toast.className="site-toast show";
  if(type==="error")toast.classList.add("error");
  clearTimeout(toastTimer);toastTimer=setTimeout(()=>toast.classList.remove("show"),3500);
 }
 
-/* PRODUTOS */
+/* PRODUTOS
+   Produtos sem foto foram retirados.
+   A capa personalizada permanece porque usa uma prévia desenhada.
+*/
 const productsList=[
  {id:1,name:"Capa de silicone personalizada",price:25,image:"📱",warranty:"Consultar garantia",customCover:true},
- {id:2,name:"Kit carregador simples",price:35,image:"🔌",warranty:"2 meses de garantia"},
- {id:3,name:"Kit carregador turbo",price:60,image:"⚡",warranty:"2 meses de garantia"},
- {id:4,name:"Kit carregador FAM",price:130,image:"🔋",brand:"FAM",warranty:"1 ano de garantia"},
  {id:5,name:"Cabo Tipo-C para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1128.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:6,name:"Cabo Lightning para USB - 1 metro",price:35,image:"🔌",photo:"imagens/IMG_1132.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:7,name:"Cabo Tipo-C para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1131.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:8,name:"Cabo Lightning para USB - 2 metros",price:45,image:"🔌",photo:"imagens/IMG_1130.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:9,name:"Cabo Tipo-C para Tipo-C reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1125.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:10,name:"Cabo Tipo-C para Lightning reforçado - 1 metro",price:50,image:"🔌",photo:"imagens/IMG_1124.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
- {id:11,name:"Cabo Tipo-C para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
- {id:12,name:"Cabo USB para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
- {id:13,name:"Cabo USB para Lightning - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
- {id:14,name:"Cabo Tipo-C para Tipo-C - 1 metro",price:20,image:"🔌",brand:"Gold",warranty:"2 meses de garantia"},
  {id:15,name:"Cabo USB para V8 - 1 metro",price:20,image:"🔌",photo:"imagens/IMG_1129.jpeg",brand:"Gold",warranty:"2 meses de garantia"},
- {id:16,name:"Fone Bluetooth com borracha",price:160,image:"🎧",brand:"FAM",warranty:"1 ano de garantia"},
- {id:17,name:"Fone Bluetooth com borracha",price:120,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
- {id:18,name:"Fone Bluetooth sem borracha",price:130,image:"🎧",brand:"Outras marcas",warranty:"2 meses de garantia"},
- {id:19,name:"Fone com fio simples - conector de pino",price:20,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
- {id:20,name:"Fone com fio resistente e borracha - conector de pino",price:30,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
- {id:21,name:"Fone com fio - conector Tipo-C",price:35,image:"🎵",brand:"Outras marcas",warranty:"2 meses de garantia"},
  {id:22,name:"Cabo Tipo-C para Tipo-C de dados - 60W",price:35,image:"🔌",photo:"imagens/IMG_1127.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:23,name:"Cabo Tipo-C para Lightning - 27W",price:35,image:"🔌",photo:"imagens/IMG_1126.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
- {id:24,name:"Cabo Tipo-C para Tipo-C normal - 3A, 1,2 metro",price:35,image:"🔌",brand:"FAM",warranty:"1 ano de garantia"},
  {id:25,name:"Cabo USB 3 em 1",price:55,image:"🔌",photo:"imagens/IMG_1123.webp",brand:"FAM",warranty:"1 ano de garantia"},
  {id:26,name:"Kit carregador FAM 20W + cabo Tipo-C",price:140,image:"🔋",photo:"imagens/IMG_1152.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
  {id:27,name:"Kit carregador FAM 20W + cabo Tipo-C para Lightning",price:140,image:"🔋",photo:"imagens/IMG_1154.jpeg",brand:"FAM",warranty:"1 ano de garantia"},
@@ -549,29 +428,15 @@ const productsList=[
 
 const productDescriptions={
  1:{description:"Capa de silicone para celular. Escolha a cor e informe o modelo exato do seu aparelho para solicitar a encomenda.",compatibility:"Informe o modelo completo do celular, por exemplo: iPhone 13 ou Samsung A15.",extra:"A disponibilidade da cor e do modelo será confirmada pelo WhatsApp. O preço varia conforme o modelo e a cor escolhida."},
- 2:{description:"Kit carregador simples para carregar aparelhos compatíveis no dia a dia.",compatibility:"Confira o tipo de entrada do cabo e a compatibilidade com seu aparelho.",extra:"A potência e a velocidade dependem do carregador e do dispositivo."},
- 3:{description:"Kit carregador turbo para quem procura uma opção de carregamento mais rápido.",compatibility:"A velocidade turbo depende da compatibilidade entre carregador, cabo e aparelho.",extra:"Verifique a potência suportada pelo seu dispositivo."},
- 4:{description:"Kit carregador da FAM para uso no dia a dia, com garantia informada de 1 ano.",compatibility:"Confira o conector e a compatibilidade com seu aparelho antes de encomendar.",extra:"A velocidade de carregamento depende do aparelho e das especificações do kit."},
  5:{description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
  6:{description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
  7:{description:"Cabo FAM Tipo-C para USB convencional, com 2 metros de comprimento.",compatibility:"A ponta Tipo-C deve ser conectada a um aparelho com entrada USB-C.",extra:"Comprimento: 2 metros. Garantia: 1 ano."},
  8:{description:"Cabo FAM Lightning para USB convencional, com 2 metros de comprimento.",compatibility:"Para aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 2 metros. Garantia: 1 ano."},
  9:{description:"Cabo FAM reforçado com conectores Tipo-C nas duas pontas.",compatibility:"Pode ser usado com carregadores e aparelhos que possuam entrada USB-C.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
  10:{description:"Cabo FAM reforçado com uma ponta Tipo-C e outra Lightning.",compatibility:"Conecta um carregador com saída USB-C a aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
- 11:{description:"Cabo com uma ponta Tipo-C e outra Lightning.",compatibility:"A ponta Lightning é destinada a aparelhos Apple compatíveis.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
- 12:{description:"Cabo com uma ponta USB convencional e outra Tipo-C.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
- 13:{description:"Cabo com uma ponta USB convencional e outra Lightning.",compatibility:"Para aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
- 14:{description:"Cabo com conectores Tipo-C nas duas pontas.",compatibility:"Utilize com aparelhos e fontes que possuam entrada USB-C.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
  15:{description:"Cabo com uma ponta USB convencional e outra V8, também conhecida como Micro-USB.",compatibility:"Indicado para aparelhos e acessórios que utilizam entrada Micro-USB.",extra:"Comprimento: 1 metro. Garantia: 2 meses."},
- 16:{description:"Fone Bluetooth FAM com borrachinhas, sem necessidade de conexão por fio durante o uso.",compatibility:"Compatível com aparelhos que possuam Bluetooth.",extra:"Garantia: 1 ano."},
- 17:{description:"Fone Bluetooth com borrachinhas para um encaixe no ouvido.",compatibility:"Funciona com aparelhos que possuam Bluetooth.",extra:"Garantia: 2 meses."},
- 18:{description:"Fone Bluetooth sem borrachinhas, para quem prefere esse formato de encaixe.",compatibility:"Funciona com aparelhos que possuam Bluetooth.",extra:"Garantia: 2 meses."},
- 19:{description:"Fone com fio simples, com conector de pino.",compatibility:"Confira se seu aparelho possui entrada compatível.",extra:"Garantia: 2 meses."},
- 20:{description:"Fone com fio e borrachinhas, com construção descrita como resistente.",compatibility:"Possui conector de pino. Confira se seu aparelho possui entrada compatível.",extra:"Garantia: 2 meses."},
- 21:{description:"Fone com fio que utiliza conector Tipo-C.",compatibility:"Para aparelhos com entrada USB-C que ofereçam suporte a áudio por essa conexão.",extra:"Garantia: 2 meses."},
  22:{description:"Cabo FAM Tipo-C para Tipo-C, indicado para transferência de dados e com capacidade informada de até 60W.",compatibility:"Utilize com aparelhos e fontes USB-C compatíveis.",extra:"Até 60W conforme especificação do produto. Garantia: 1 ano."},
  23:{description:"Cabo FAM Tipo-C para Lightning, com capacidade informada de até 27W.",compatibility:"Conecta uma fonte USB-C a aparelhos Apple que utilizam entrada Lightning.",extra:"Até 27W conforme especificação do produto. Garantia: 1 ano."},
- 24:{description:"Cabo FAM Tipo-C para Tipo-C, com corrente informada de até 3A e comprimento de 1,2 metro.",compatibility:"Utilize com fontes e aparelhos que possuam entrada USB-C.",extra:"Corrente informada: até 3A. Garantia: 1 ano."},
  25:{description:"Cabo FAM 3 em 1, uma opção para diferentes tipos de conexão.",compatibility:"Confira as pontas e os conectores disponíveis na foto do produto.",extra:"Garantia: 1 ano."},
  26:{description:"Kit carregador FAM de 20W acompanhado de cabo Tipo-C.",compatibility:"Para aparelhos compatíveis com conexão USB-C.",extra:"Kit com carregador e cabo Tipo-C. Garantia: 1 ano."},
  27:{description:"Kit carregador FAM de 20W acompanhado de cabo Tipo-C para Lightning.",compatibility:"Indicado para aparelhos Apple compatíveis com conector Lightning.",extra:"Kit com carregador e cabo Tipo-C para Lightning. Garantia: 1 ano."},
@@ -587,25 +452,83 @@ const productDescriptions={
 };
 
 /* PREÇO E FORMATAÇÃO */
-function money(value){
- return Number(value).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
-}
+function money(value){return Number(value).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function coverPrice(model,color){
  const isIphone=/iphone/i.test(model);
- if(isIphone)return (color==="Branco"||color==="Marrom")?42:35;
+ if(isIphone)return(color==="Branco"||color==="Marrom")?42:35;
  return 25;
 }
 function isUnknownPrice(product){return product.price===null||product.price===undefined}
 
+/* CORES E PRÉVIA DA CAPA */
+const coverColors=[
+ {name:"Preto",hex:"#222222"},
+ {name:"Azul",hex:"#2468b4"},
+ {name:"Vermelho",hex:"#d82d3b"},
+ {name:"Rosa",hex:"#e78db5"},
+ {name:"Roxo",hex:"#7545a5"},
+ {name:"Transparente",hex:"#dce8eb"},
+ {name:"Branco",hex:"#f3f3ef"},
+ {name:"Marrom",hex:"#906044"}
+];
+function getCoverColor(colorName){
+ return coverColors.find(c=>c.name===colorName)?.hex||"#222222";
+}
+function renderCoverPreview(model="",colorName="Preto"){
+ const color=getCoverColor(colorName);
+ const iphone=/iphone/i.test(model);
+ const cameraArea=iphone
+  ?`<rect x="48" y="34" width="91" height="91" rx="21" fill="#171717" stroke="#777" stroke-width="3"/>
+    <circle cx="76" cy="62" r="15" fill="#080808" stroke="#555" stroke-width="2"/>
+    <circle cx="112" cy="62" r="15" fill="#080808" stroke="#555" stroke-width="2"/>
+    <circle cx="76" cy="98" r="15" fill="#080808" stroke="#555" stroke-width="2"/>
+    <circle cx="112" cy="98" r="7" fill="#e9e9d8"/>`
+  :`<rect x="49" y="35" width="86" height="87" rx="19" fill="${color}" stroke="#ffffff" stroke-opacity=".65" stroke-width="3"/>
+    <circle cx="76" cy="62" r="14" fill="#101010" stroke="#777" stroke-width="2"/>
+    <circle cx="111" cy="62" r="14" fill="#101010" stroke="#777" stroke-width="2"/>
+    <circle cx="76" cy="98" r="14" fill="#101010" stroke="#777" stroke-width="2"/>
+    <circle cx="111" cy="98" r="6" fill="#e9e9d8"/>`;
+ return `<div class="case-preview-wrap">
+  <svg viewBox="0 0 220 300" role="img" aria-label="Prévia ilustrativa de capa de silicone ${escapeHtml(colorName)}">
+   <rect x="30" y="7" width="160" height="286" rx="31" fill="${color}" stroke="#777" stroke-width="3"/>
+   <rect x="37" y="14" width="146" height="272" rx="25" fill="${color}" stroke="#ffffff" stroke-opacity=".28" stroke-width="2"/>
+   ${cameraArea}
+   <rect x="187" y="78" width="5" height="39" rx="2" fill="#888"/>
+   <rect x="187" y="129" width="5" height="26" rx="2" fill="#888"/>
+   <path d="M48 150 Q110 166 172 150" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+   <path d="M47 269 Q110 280 173 269" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+  </svg>
+  <span class="case-preview-caption">${iphone?"Prévia de iPhone — região das câmeras aberta":"Prévia de outras marcas — traseira fechada com recortes das câmeras"}</span>
+ </div>`;
+}
+function updateCoverPreview(){
+ const model=document.getElementById("cover-model")?.value.trim()||"";
+ const area=document.getElementById("product-info-photo");
+ if(area)area.innerHTML=renderCoverPreview(model,selectedCoverColor||"Preto");
+ updateCoverPricePreview();
+}
+function selectCoverColor(color){
+ selectedCoverColor=color;
+ document.querySelectorAll(".color-choice").forEach(button=>{
+  const selected=button.dataset.color===color;
+  button.classList.toggle("selected",selected);
+  button.setAttribute("aria-pressed",selected?"true":"false");
+ });
+ updateCoverPreview();
+}
+function updateCoverPricePreview(){
+ const model=document.getElementById("cover-model")?.value.trim()||"";
+ const priceArea=document.getElementById("product-info-price");
+ if(!model||!selectedCoverColor){priceArea.textContent="A partir de R$ 25,00";return}
+ priceArea.textContent=money(coverPrice(model,selectedCoverColor));
+}
+
 /* PESQUISA */
 const popularSearches=["Capas","Carregadores","Cabos Tipo-C","Cabos Lightning","Fones Bluetooth","Cabos FAM"];
-function normalizeText(text){
- return String(text).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s-]/g," ").replace(/\s+/g," ").trim();
-}
+function normalizeText(text){return String(text).toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9\s-]/g," ").replace(/\s+/g," ").trim()}
 function productMatchesSearch(product,query){
  if(!query.trim())return true;
- const normalized=normalizeText(query);
- const details=productDescriptions[product.id]||{};
+ const normalized=normalizeText(query),details=productDescriptions[product.id]||{};
  const productText=normalizeText(`${product.name} ${product.brand||""} ${product.warranty||""} ${details.description||""} ${details.compatibility||""} ${details.extra||""}`);
  if(productText.includes(normalized))return true;
  const rules=[
@@ -619,133 +542,77 @@ function productMatchesSearch(product,query){
   {search:["fam","f a m"],product:["fam"]},
   {search:["turbo","carregamento rapido","carga rapida"],product:["turbo","carregamento rapido","carga rapida"]}
  ];
- for(const rule of rules){
-  if(rule.search.some(term=>normalized.includes(normalizeText(term)))&&rule.product.some(term=>productText.includes(normalizeText(term))))return true;
- }
+ for(const rule of rules){if(rule.search.some(term=>normalized.includes(normalizeText(term)))&&rule.product.some(term=>productText.includes(normalizeText(term))))return true}
  const terms=normalized.split(" ").filter(term=>term.length>1);
  return terms.length>0&&terms.every(term=>productText.includes(term));
 }
-function getRecentSearches(){
- try{const saved=JSON.parse(localStorage.getItem(RECENT_SEARCHES_KEY)||"[]");return Array.isArray(saved)?saved:[]}catch(e){return []}
-}
+function getRecentSearches(){try{const saved=JSON.parse(localStorage.getItem(RECENT_SEARCHES_KEY)||"[]");return Array.isArray(saved)?saved:[]}catch(e){return[]}}
 function saveRecentSearch(query){
  const value=query.trim();if(value.length<2)return;
  let recent=getRecentSearches().filter(item=>normalizeText(item)!==normalizeText(value));
  recent.unshift(value);recent=recent.slice(0,MAX_RECENT_SEARCHES);
  try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(e){}
 }
-function escapeHtml(value){
- return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]));
-}
+function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]))}
 const headerSearch=document.getElementById("header-search");
 const mainHeader=document.getElementById("main-header");
 const mobileSearchToggle=document.getElementById("mobile-search-toggle");
-
 function setSearchValue(value,save=true){
- headerSearch.value=value;updateClearSearch();renderProducts();
- if(save)saveRecentSearch(value);
+ headerSearch.value=value;updateClearSearch();renderProducts();if(save)saveRecentSearch(value);
  closeSearchSuggestions();closeMobileSearch();
  if(value.trim())document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
 }
-function syncSearch(){
- updateClearSearch();renderProducts();renderSearchSuggestions(headerSearch.value);
-}
-function updateClearSearch(){
- document.getElementById("clear-header-search").classList.toggle("visible",!!headerSearch.value);
-}
+function syncSearch(){updateClearSearch();renderProducts();renderSearchSuggestions(headerSearch.value)}
+function updateClearSearch(){document.getElementById("clear-header-search").classList.toggle("visible",!!headerSearch.value)}
 function closeSearchSuggestions(){document.getElementById("search-suggestions").classList.remove("open")}
 function openSearchSuggestions(){renderSearchSuggestions(headerSearch.value);document.getElementById("search-suggestions").classList.add("open")}
 function renderSearchSuggestions(query=""){
- const panel=document.getElementById("search-suggestions");
- const recent=getRecentSearches(),value=query.trim();
+ const panel=document.getElementById("search-suggestions"),recent=getRecentSearches(),value=query.trim();
  if(value){
   const matches=productsList.filter(p=>productMatchesSearch(p,value)).slice(0,5);
-  panel.innerHTML=`
-   ${matches.length?`<div class="suggestion-heading">Produtos encontrados</div><div class="suggestion-list">${matches.map(p=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(p.name)})'>${p.image} ${escapeHtml(p.name)}</button>`).join("")}</div>`:`<div class="suggestion-heading">Nenhum produto encontrado com esse termo</div>`}
-   ${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.slice(0,3).map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button></div>`).join("")}`:""}
-  `;
+  panel.innerHTML=`${matches.length?`<div class="suggestion-heading">Produtos encontrados</div><div class="suggestion-list">${matches.map(p=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(p.name)})'>${p.image} ${escapeHtml(p.name)}</button>`).join("")}</div>`:`<div class="suggestion-heading">Nenhum produto encontrado com esse termo</div>`}${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.slice(0,3).map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button></div>`).join("")}`:""}`;
  }else{
-  panel.innerHTML=`
-   <div class="suggestion-heading">Pesquisas populares</div>
-   <div class="suggestion-list">${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(item)})'>${escapeHtml(item)}</button>`).join("")}</div>
-   ${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button><button class="remove-recent" type="button" onclick='removeRecentSearch(${JSON.stringify(item)})'>×</button></div>`).join("")}<button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>`:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}
-  `;
+  panel.innerHTML=`<div class="suggestion-heading">Pesquisas populares</div><div class="suggestion-list">${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(item)})'>${escapeHtml(item)}</button>`).join("")}</div>${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button><button class="remove-recent" type="button" onclick='removeRecentSearch(${JSON.stringify(item)})'>×</button></div>`).join("")}<button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>`:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}`;
  }
  panel.classList.add("open");
 }
-function removeRecentSearch(value){
- const recent=getRecentSearches().filter(item=>item!==value);
- try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(e){}
- renderSearchSuggestions(headerSearch.value);
-}
-function clearRecentSearches(){
- try{localStorage.removeItem(RECENT_SEARCHES_KEY)}catch(e){}
- renderSearchSuggestions(headerSearch.value);showToast("Histórico de pesquisas limpo.");
-}
+function removeRecentSearch(value){const recent=getRecentSearches().filter(item=>item!==value);try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(e){}renderSearchSuggestions(headerSearch.value)}
+function clearRecentSearches(){try{localStorage.removeItem(RECENT_SEARCHES_KEY)}catch(e){}renderSearchSuggestions(headerSearch.value);showToast("Histórico de pesquisas limpo.")}
 headerSearch.addEventListener("input",syncSearch);
 headerSearch.addEventListener("focus",openSearchSuggestions);
 headerSearch.addEventListener("keydown",e=>{
  if(e.key==="Enter"){e.preventDefault();if(headerSearch.value.trim())saveRecentSearch(headerSearch.value);closeSearchSuggestions();closeMobileSearch();document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"})}
  if(e.key==="Escape"){closeSearchSuggestions();closeMobileSearch();headerSearch.blur()}
 });
-document.getElementById("clear-header-search").addEventListener("click",()=>{
- headerSearch.value="";updateClearSearch();renderProducts();headerSearch.focus();openSearchSuggestions();
-});
+document.getElementById("clear-header-search").addEventListener("click",()=>{headerSearch.value="";updateClearSearch();renderProducts();headerSearch.focus();openSearchSuggestions()});
 mobileSearchToggle.addEventListener("click",()=>{
  if(mainHeader.classList.contains("mobile-search-open"))closeMobileSearch();
  else{mainHeader.classList.add("mobile-search-open");mobileSearchToggle.setAttribute("aria-expanded","true");setTimeout(()=>headerSearch.focus(),50);openSearchSuggestions()}
 });
 function closeMobileSearch(){mainHeader.classList.remove("mobile-search-open");mobileSearchToggle.setAttribute("aria-expanded","false")}
-document.addEventListener("click",e=>{
- if(!e.target.closest(".header-search-area")&&!e.target.closest(".mobile-search-toggle")){closeSearchSuggestions();closeMobileSearch()}
-});
+document.addEventListener("click",e=>{if(!e.target.closest(".header-search-area")&&!e.target.closest(".mobile-search-toggle")){closeSearchSuggestions();closeMobileSearch()}});
 
 /* SAUDAÇÃO E INTRO */
-function getGreeting(){
- const hour=new Date().getHours();
- if(hour>=5&&hour<12)return "Bom dia! ☀️";
- if(hour>=12&&hour<18)return "Boa tarde! 🌤️";
- return "Boa noite! 🌙";
-}
-function updateGreeting(){
- const greeting=getGreeting();
- document.getElementById("greeting").textContent=greeting.replace(/[☀️🌤️🌙]/gu,"").trim();
- document.getElementById("cart-greeting").textContent=greeting;
-}
+function getGreeting(){const hour=new Date().getHours();if(hour>=5&&hour<12)return"Bom dia! ☀️";if(hour>=12&&hour<18)return"Boa tarde! 🌤️";return"Boa noite! 🌙"}
+function updateGreeting(){const greeting=getGreeting();document.getElementById("greeting").textContent=greeting.replace(/[☀️🌤️🌙]/gu,"").trim();document.getElementById("cart-greeting").textContent=greeting}
 updateGreeting();
 window.addEventListener("load",()=>setTimeout(()=>document.getElementById("intro").classList.add("hide"),2500));
 
 /* CATÁLOGO */
 function createProductCard(product){
- const productPhoto=product.photo
-  ?`<img src="${product.photo}" alt="${escapeHtml(product.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span class="fallback" style="display:none">${product.image}</span>`
-  :`<span class="fallback">${product.image}</span>`;
  const famSeal=product.brand==="FAM"?`<div class="fam-seal">FAM</div>`:"";
  const priceText=product.customCover?"A partir de R$ 25,00":isUnknownPrice(product)?"Preço a definir":money(product.price);
  const addDisabled=isUnknownPrice(product)&&!product.customCover;
- return `
-  <div class="product">
-   <div class="product-image">${productPhoto}${famSeal}</div>
-   <div class="product-info">
-    <div class="product-title-row"><h3>${escapeHtml(product.name)}</h3></div>
-    <div class="price">${priceText}</div>
-    <p class="warranty">🛡️ ${escapeHtml(product.warranty)}</p>
-    <div class="product-buttons">
-     <button class="product-info-button" type="button" onclick="showProductInfo(${product.id})">Informações</button>
-     <button class="add" type="button" ${addDisabled?"disabled":""} onclick="${product.customCover?`showProductInfo(${product.id})`:`addToCart(${product.id})`}">${addDisabled?"Indisponível":"+ Adicionar"}</button>
-    </div>
-   </div>
-  </div>
- `;
+ const imageHTML=product.customCover
+  ?`<span class="fallback">${product.image}</span>`
+  :`<img src="${product.photo}" alt="${escapeHtml(product.name)}" loading="lazy" onerror="this.closest('.product').remove()">`;
+ return `<div class="product"><div class="product-image">${imageHTML}${famSeal}</div><div class="product-info"><div class="product-title-row"><h3>${escapeHtml(product.name)}</h3></div><div class="price">${priceText}</div><p class="warranty">🛡️ ${escapeHtml(product.warranty)}</p><div class="product-buttons"><button class="product-info-button" type="button" onclick="showProductInfo(${product.id})">Informações</button><button class="add" type="button" ${addDisabled?"disabled":""} onclick="${product.customCover?`showProductInfo(${product.id})`:`addToCart(${product.id})`}">${addDisabled?"Indisponível":"+ Adicionar"}</button></div></div></div>`;
 }
 function renderProducts(){
- const area=document.getElementById("products");
- const search=headerSearch.value.trim();
- const sort=document.getElementById("sort-filter").value;
- const brand=document.getElementById("brand-filter").value;
+ const area=document.getElementById("products"),search=headerSearch.value.trim();
+ const sort=document.getElementById("sort-filter").value,brand=document.getElementById("brand-filter").value;
  let filtered=productsList.filter(product=>{
-  const matchesSearch=productMatchesSearch(product,search);
-  let matchesBrand=true;
+  const matchesSearch=productMatchesSearch(product,search);let matchesBrand=true;
   if(brand==="FAM"||brand==="Gold")matchesBrand=product.brand===brand;
   if(brand==="other")matchesBrand=product.brand!=="FAM"&&product.brand!=="Gold";
   return matchesSearch&&matchesBrand;
@@ -757,74 +624,39 @@ function renderProducts(){
  area.innerHTML=`<div class="product-grid">${filtered.map(createProductCard).join("")}</div>`;
 }
 
-/* PERSONALIZAÇÃO DA CAPA */
-const coverColors=["Preto","Azul","Vermelho","Rosa","Roxo","Transparente","Branco","Marrom"];
-function selectCoverColor(color){
- selectedCoverColor=color;
- document.querySelectorAll(".color-option").forEach(button=>{
-  button.classList.toggle("selected",button.dataset.color===color);
- });
- updateCoverPricePreview();
-}
-function updateCoverPricePreview(){
- const model=document.getElementById("cover-model")?.value.trim()||"";
- const priceArea=document.getElementById("product-info-price");
- if(!model||!selectedCoverColor){priceArea.textContent="A partir de R$ 25,00";return}
- const price=coverPrice(model,selectedCoverColor);
- priceArea.textContent=money(price);
-}
+/* INFORMAÇÕES DO PRODUTO */
 function showProductInfo(id){
- const product=productsList.find(item=>item.id===id);
- if(!product)return;
- currentInfoProduct=product;
- selectedCoverColor="";
+ const product=productsList.find(item=>item.id===id);if(!product)return;
+ currentInfoProduct=product;selectedCoverColor="";
  const details=productDescriptions[id]||{description:"Consulte a loja para mais informações.",compatibility:"Confirme a compatibilidade antes de encomendar.",extra:"Consulte a loja para detalhes adicionais."};
  document.getElementById("product-info-title").textContent=product.name;
  document.getElementById("product-info-price").textContent=product.customCover?"A partir de R$ 25,00":isUnknownPrice(product)?"Preço a definir":money(product.price);
  document.getElementById("product-info-description").textContent=details.description;
  const photoArea=document.getElementById("product-info-photo");
- if(product.photo){
-  photoArea.innerHTML=`<img src="${product.photo}" alt="${escapeHtml(product.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${product.image}</span>`;
- }else photoArea.innerHTML=`<span>${product.image}</span>`;
-
+ if(product.customCover)photoArea.innerHTML=renderCoverPreview("","Preto");
+ else photoArea.innerHTML=`<img src="${product.photo}" alt="${escapeHtml(product.name)}" onerror="this.style.display='none'">`;
  const detailsArea=document.getElementById("product-info-details");
  if(product.customCover){
   detailsArea.innerHTML=`
    <p><strong>Como personalizar:</strong><br>Informe o modelo exato do aparelho e escolha a cor desejada.</p>
-   <div class="custom-field">
-    <label for="cover-model">Modelo do celular</label>
-    <input id="cover-model" type="text" placeholder="Ex.: iPhone 13, Samsung A15" oninput="updateCoverPricePreview()">
-   </div>
-   <div class="custom-field">
-    <label>Escolha a cor</label>
-    <div class="color-options">
-     ${coverColors.map(color=>`<button type="button" class="color-option" data-color="${color}" onclick="selectCoverColor('${color}')">${color}</button>`).join("")}
-    </div>
-   </div>
-   <p class="custom-price-note">iPhone: R$ 35,00 nas cores comuns e R$ 42,00 nas cores branca e marrom. Outras marcas e modelos: R$ 25,00. A disponibilidade será confirmada pelo WhatsApp.</p>
-  `;
+   <div class="custom-field"><label for="cover-model">Modelo do celular</label><input id="cover-model" type="text" placeholder="Ex.: iPhone 13, Samsung A15" oninput="updateCoverPreview()"></div>
+   <div class="custom-field"><label>Escolha a cor</label><div class="color-options">
+   ${coverColors.map(c=>`<button type="button" class="color-choice" data-color="${c.name}" aria-label="Escolher cor ${c.name}" aria-pressed="false" onclick="selectCoverColor('${c.name}')"><span class="color-swatch" style="background:${c.hex};${c.name==="Transparente"?"background-image:linear-gradient(135deg,#fff 25%,#d5d5d5 25%,#d5d5d5 50%,#fff 50%,#fff 75%,#d5d5d5 75%);background-size:10px 10px;":""}"></span><span>${c.name}</span></button>`).join("")}
+   </div></div>
+   <p class="custom-price-note">iPhone: R$ 35,00 nas cores comuns e R$ 42,00 nas cores branca e marrom. Outras marcas e modelos: R$ 25,00. A prévia é ilustrativa e a disponibilidade será confirmada pelo WhatsApp.</p>`;
  }else{
-  detailsArea.innerHTML=`
-   <p><strong>Compatibilidade:</strong><br>${escapeHtml(details.compatibility)}</p>
-   <p><strong>Garantia:</strong><br>${escapeHtml(product.warranty)}</p>
-   <p><strong>Detalhes:</strong><br>${escapeHtml(details.extra)}</p>
-  `;
+  detailsArea.innerHTML=`<p><strong>Compatibilidade:</strong><br>${escapeHtml(details.compatibility)}</p><p><strong>Garantia:</strong><br>${escapeHtml(product.warranty)}</p><p><strong>Detalhes:</strong><br>${escapeHtml(details.extra)}</p>`;
  }
  const addButton=document.getElementById("product-info-add");
- if(isUnknownPrice(product)){
-  addButton.disabled=true;addButton.textContent="Preço ainda não definido";addButton.style.opacity=".5";
- }else{
-  addButton.disabled=false;addButton.textContent="+ Adicionar ao carrinho";addButton.style.opacity="1";
- }
+ if(isUnknownPrice(product)){addButton.disabled=true;addButton.textContent="Preço ainda não definido";addButton.style.opacity=".5"}
+ else{addButton.disabled=false;addButton.textContent="+ Adicionar ao carrinho";addButton.style.opacity="1"}
  addButton.onclick=()=>{
   if(product.customCover){
    const model=document.getElementById("cover-model").value.trim();
    if(!model){showToast("Informe o modelo exato do celular.","error");return}
    if(!selectedCoverColor){showToast("Escolha a cor da capa.","error");return}
-   const price=coverPrice(model,selectedCoverColor);
-   addToCart(product.id,{model,color:selectedCoverColor,price});
-   closeProductInfo();
-   return;
+   addToCart(product.id,{model,color:selectedCoverColor,price:coverPrice(model,selectedCoverColor)});
+   closeProductInfo();return;
   }
   if(isUnknownPrice(product)){showToast("O preço deste produto ainda será definido.","error");return}
   addToCart(product.id);closeProductInfo();
@@ -832,131 +664,56 @@ function showProductInfo(id){
  document.getElementById("product-info-overlay").classList.add("open");
  document.body.style.overflow="hidden";
 }
-function closeProductInfo(){
- document.getElementById("product-info-overlay").classList.remove("open");
- document.body.style.overflow="";
-}
-function handleProductInfoBackdrop(event){
- if(event.target.id==="product-info-overlay")closeProductInfo();
-}
+function closeProductInfo(){document.getElementById("product-info-overlay").classList.remove("open");document.body.style.overflow=""}
+function handleProductInfoBackdrop(event){if(event.target.id==="product-info-overlay")closeProductInfo()}
 
 /* CARRINHO */
-function openCart(){
- updateGreeting();renderCart();
- document.getElementById("cart-panel").classList.add("open");
- document.getElementById("cart-overlay").classList.add("open");
- document.body.style.overflow="hidden";
-}
-function closeCart(){
- document.getElementById("cart-panel").classList.remove("open");
- document.getElementById("cart-overlay").classList.remove("open");
- document.body.style.overflow="";
-}
+function openCart(){updateGreeting();renderCart();document.getElementById("cart-panel").classList.add("open");document.getElementById("cart-overlay").classList.add("open");document.body.style.overflow="hidden"}
+function closeCart(){document.getElementById("cart-panel").classList.remove("open");document.getElementById("cart-overlay").classList.remove("open");document.body.style.overflow=""}
 function addToCart(id,variant=null){
- const product=productsList.find(p=>p.id===id);
- if(!product)return;
+ const product=productsList.find(p=>p.id===id);if(!product)return;
  if(product.customCover&&!variant){showProductInfo(id);return}
  if(isUnknownPrice(product)){showToast("O preço deste produto ainda será definido.","error");return}
  const variantKey=variant?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.color)}`:String(id);
  const existing=cart.find(item=>item.variantKey===variantKey);
  if(existing)existing.quantity++;
  else cart.push({...product,...(variant||{}),price:variant?variant.price:product.price,quantity:1,variantKey});
- renderCart();
- showToast("Produto adicionado ao carrinho! 🛒");
+ renderCart();showToast("Produto adicionado ao carrinho! 🛒");
 }
-function changeQuantity(key,amount){
- const item=cart.find(p=>p.variantKey===key);
- if(!item)return;
- item.quantity+=amount;
- if(item.quantity<=0)cart=cart.filter(p=>p.variantKey!==key);
- renderCart();
-}
-function removeItem(key){
- cart=cart.filter(p=>p.variantKey!==key);
- renderCart();showToast("Produto removido do carrinho.");
-}
+function changeQuantity(key,amount){const item=cart.find(p=>p.variantKey===key);if(!item)return;item.quantity+=amount;if(item.quantity<=0)cart=cart.filter(p=>p.variantKey!==key);renderCart()}
+function removeItem(key){cart=cart.filter(p=>p.variantKey!==key);renderCart();showToast("Produto removido do carrinho.")}
 
 /* CANCELAMENTO */
-function cancelCart(){
- if(cart.length===0){showCancelModal("empty");return}
- showCancelModal("confirm");
-}
+function cancelCart(){if(cart.length===0){showCancelModal("empty");return}showCancelModal("confirm")}
 function showCancelModal(mode){
  cancelModalMode=mode;
- const overlay=document.getElementById("cancel-modal-overlay");
- const icon=document.getElementById("cancel-modal-icon");
- const title=document.getElementById("cancel-modal-title");
- const message=document.getElementById("cancel-modal-message");
- const primary=document.getElementById("cancel-modal-primary");
- const secondary=document.getElementById("cancel-modal-secondary");
+ const overlay=document.getElementById("cancel-modal-overlay"),icon=document.getElementById("cancel-modal-icon"),title=document.getElementById("cancel-modal-title"),message=document.getElementById("cancel-modal-message"),primary=document.getElementById("cancel-modal-primary"),secondary=document.getElementById("cancel-modal-secondary");
  if(mode==="confirm"){
-  icon.textContent="🥹";title.textContent="Ôxe, já desistiu? 🥹";
-  message.textContent="O Bigode ficou triste agora! KKKK Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️";
-  primary.textContent="Vou ficar mais um pouquinho! ❤️";
-  secondary.textContent="Pode cancelar, Bigode 🥺";secondary.style.display="block";
+  icon.textContent="🥹";title.textContent="Ôxe, já desistiu? 🥹";message.textContent="O Bigode ficou triste agora! KKKK Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️";primary.textContent="Vou ficar mais um pouquinho! ❤️";secondary.textContent="Pode cancelar, Bigode 🥺";secondary.style.display="block";
  }
  if(mode==="success"){
-  icon.textContent="❤️";title.textContent="Tudo bem, fica para a próxima!";
-  message.textContent="Seu carrinho foi esvaziado. Esperamos ter a oportunidade de atender você novamente. Quando precisar, o Bigode estará aqui de portas abertas! ❤️";
-  primary.textContent="Voltar às compras ❤️";secondary.style.display="none";
+  icon.textContent="❤️";title.textContent="Tudo bem, fica para a próxima!";message.textContent="Seu carrinho foi esvaziado. Esperamos ter a oportunidade de atender você novamente. Quando precisar, o Bigode estará aqui de portas abertas! ❤️";primary.textContent="Voltar às compras ❤️";secondary.style.display="none";
  }
  if(mode==="empty"){
-  icon.textContent="😅";title.textContent="Uai, mas já está vazio!";
-  message.textContent="Não tem nenhum produto para cancelar. Que tal dar uma olhadinha no nosso catálogo? O Bigode está esperando por você! ❤️";
-  primary.textContent="Voltar às compras ❤️";secondary.style.display="none";
+  icon.textContent="😅";title.textContent="Uai, mas já está vazio!";message.textContent="Não tem nenhum produto para cancelar. Que tal dar uma olhadinha no nosso catálogo? O Bigode está esperando por você! ❤️";primary.textContent="Voltar às compras ❤️";secondary.style.display="none";
  }
  overlay.classList.add("open");
 }
-function closeCancelModal(){
- document.getElementById("cancel-modal-overlay").classList.remove("open");
- cancelModalMode="";
-}
-function handleCancelModalPrimary(){
- if(cancelModalMode==="success"||cancelModalMode==="empty"){closeCancelModal();closeCart();return}
- closeCancelModal();
-}
-function confirmCancelCart(){
- if(cancelModalMode!=="confirm")return;
- cart=[];renderCart();hideCheckoutForm();showCancelModal("success");
-}
-function handleCancelModalBackdrop(event){
- if(event.target.id==="cancel-modal-overlay")closeCancelModal();
-}
+function closeCancelModal(){document.getElementById("cancel-modal-overlay").classList.remove("open");cancelModalMode=""}
+function handleCancelModalPrimary(){if(cancelModalMode==="success"||cancelModalMode==="empty"){closeCancelModal();closeCart();return}closeCancelModal()}
+function confirmCancelCart(){if(cancelModalMode!=="confirm")return;cart=[];renderCart();hideCheckoutForm();showCancelModal("success")}
+function handleCancelModalBackdrop(event){if(event.target.id==="cancel-modal-overlay")closeCancelModal()}
 
 /* ATUALIZAR CARRINHO */
 function renderCart(){
- const area=document.getElementById("cart-items");
- const count=cart.reduce((sum,item)=>sum+item.quantity,0);
+ const area=document.getElementById("cart-items"),count=cart.reduce((sum,item)=>sum+item.quantity,0);
  document.getElementById("cart-badge").textContent=count>0?count:"";
  document.getElementById("cart-items-count").textContent=`${count} ${count===1?"item":"itens"}`;
- if(cart.length===0){
-  area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
- }else{
-  area.innerHTML=cart.map(item=>{
-   const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:"";
-   return `
-    <div class="cart-item">
-     <div class="cart-item-image">
-      ${item.photo?`<img src="${item.photo}" alt="${escapeHtml(item.name)}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none">${item.image}</span>`:item.image}
-     </div>
-     <div class="cart-item-info">
-      <strong>${escapeHtml(item.name)}</strong>
-      ${variantText?`<small>${variantText}</small>`:""}
-      <span class="cart-warranty">🛡️ ${escapeHtml(item.warranty||"Consultar garantia")}</span>
-      <div class="cart-price">${money(item.price*item.quantity)}</div>
-     </div>
-     <div class="cart-item-actions">
-      <div class="quantity">
-       <button type="button" onclick="changeQuantity('${item.variantKey}',-1)">−</button>
-       <strong>${item.quantity}</strong>
-       <button type="button" onclick="changeQuantity('${item.variantKey}',1)">+</button>
-      </div>
-      <button type="button" class="remove" onclick="removeItem('${item.variantKey}')">🗑</button>
-     </div>
-    </div>
-   `;
-  }).join("");
- }
+ if(cart.length===0)area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
+ else area.innerHTML=cart.map(item=>{
+  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:"";
+  return `<div class="cart-item"><div class="cart-item-image">${item.photo?`<img src="${item.photo}" alt="${escapeHtml(item.name)}">`:item.image}</div><div class="cart-item-info"><strong>${escapeHtml(item.name)}</strong>${variantText?`<small>${variantText}</small>`:""}<span class="cart-warranty">🛡️ ${escapeHtml(item.warranty||"Consultar garantia")}</span><div class="cart-price">${money(item.price*item.quantity)}</div></div><div class="cart-item-actions"><div class="quantity"><button type="button" onclick="changeQuantity('${item.variantKey}',-1)">−</button><strong>${item.quantity}</strong><button type="button" onclick="changeQuantity('${item.variantKey}',1)">+</button></div><button type="button" class="remove" onclick="removeItem('${item.variantKey}')">🗑</button></div></div>`;
+ }).join("");
  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
  document.getElementById("total").textContent=money(total);
  document.querySelector(".finish-shopping").disabled=cart.length===0;
@@ -965,44 +722,25 @@ function renderCart(){
 }
 
 /* FORMULÁRIO */
-function showCheckoutForm(){
- if(cart.length===0){showCancelModal("empty");return}
- const form=document.getElementById("checkout-form");
- form.classList.add("show");
- setTimeout(()=>form.scrollIntoView({behavior:"smooth",block:"start"}),100);
-}
+function showCheckoutForm(){if(cart.length===0){showCancelModal("empty");return}const form=document.getElementById("checkout-form");form.classList.add("show");setTimeout(()=>form.scrollIntoView({behavior:"smooth",block:"start"}),100)}
 function hideCheckoutForm(){document.getElementById("checkout-form").classList.remove("show")}
 
 /* PAGAMENTO */
 function getOrderTotal(){return cart.reduce((sum,item)=>sum+item.price*item.quantity,0)}
 function renderPaymentDetails(){
- const method=document.getElementById("payment-method").value;
- const area=document.getElementById("payment-details");
- if(method==="Dinheiro"){
-  area.innerHTML=`
-   <label for="cash-change">Precisa de troco?</label>
-   <select id="cash-change" onchange="renderCashChange()">
-    <option value="">Selecione uma opção</option>
-    <option value="nao">Não, tenho o valor exato</option>
-    <option value="sim">Sim, preciso de troco</option>
-   </select><div id="cash-change-details"></div>
-  `;
- }else if(method==="Pix"){
-  area.innerHTML=`<p class="payment-help">A chave Pix será informada pela loja após a confirmação da encomenda.</p>`;
- }else if(method==="Cartão"){
-  area.innerHTML=`<p class="payment-help">O pagamento será feito na maquininha, no momento da entrega.</p>`;
- }else area.innerHTML="";
+ const method=document.getElementById("payment-method").value,area=document.getElementById("payment-details");
+ if(method==="Dinheiro")area.innerHTML=`<label for="cash-change">Precisa de troco?</label><select id="cash-change" onchange="renderCashChange()"><option value="">Selecione uma opção</option><option value="nao">Não, tenho o valor exato</option><option value="sim">Sim, preciso de troco</option></select><div id="cash-change-details"></div>`;
+ else if(method==="Pix")area.innerHTML=`<p class="payment-help">A chave Pix será informada pela loja após a confirmação da encomenda.</p>`;
+ else if(method==="Cartão")area.innerHTML=`<p class="payment-help">O pagamento será feito na maquininha, no momento da entrega.</p>`;
+ else area.innerHTML="";
 }
 function renderCashChange(){
- const change=document.getElementById("cash-change").value;
- const area=document.getElementById("cash-change-details");
- if(change==="sim"){
-  area.innerHTML=`<label for="cash-amount">Vai pagar com quanto?</label><input id="cash-amount" type="number" min="0" step="0.01" placeholder="Ex.: 150,00" oninput="calculateChange()"><div id="change-result" class="payment-result"></div>`;
- }else area.innerHTML="";
+ const change=document.getElementById("cash-change").value,area=document.getElementById("cash-change-details");
+ if(change==="sim")area.innerHTML=`<label for="cash-amount">Vai pagar com quanto?</label><input id="cash-amount" type="number" min="0" step="0.01" placeholder="Ex.: 150,00" oninput="calculateChange()"><div id="change-result" class="payment-result"></div>`;
+ else area.innerHTML="";
 }
 function calculateChange(){
- const total=getOrderTotal(),amount=Number(document.getElementById("cash-amount").value);
- const result=document.getElementById("change-result");
+ const total=getOrderTotal(),amount=Number(document.getElementById("cash-amount").value),result=document.getElementById("change-result");
  if(!Number.isFinite(amount)||amount<=0){result.textContent="";return}
  if(amount<total){result.style.color="#ff6974";result.textContent="O valor informado é menor que o total do pedido.";return}
  result.style.color="#20d875";result.textContent="Troco: "+money(amount-total);
@@ -1013,27 +751,23 @@ function getPaymentInformation(){
  if(method==="Dinheiro"){
   const change=document.getElementById("cash-change")?.value;
   if(!change){showToast("Informe se precisa de troco.","error");return null}
-  if(change==="nao")return {method:"Dinheiro",description:"Não precisa de troco. Pagará com o valor exato."};
+  if(change==="nao")return{method:"Dinheiro",description:"Não precisa de troco. Pagará com o valor exato."};
   const amount=Number(document.getElementById("cash-amount")?.value);
   if(!Number.isFinite(amount)||amount<=0){showToast("Informe quanto vai entregar em dinheiro.","error");return null}
-  const total=getOrderTotal();
-  if(amount<total){showToast("O valor informado é menor que o total.","error");return null}
-  return {method:"Dinheiro",description:`Precisa de troco. Pagará com ${money(amount)}. Troco: ${money(amount-total)}.`};
+  const total=getOrderTotal();if(amount<total){showToast("O valor informado é menor que o total.","error");return null}
+  return{method:"Dinheiro",description:`Precisa de troco. Pagará com ${money(amount)}. Troco: ${money(amount-total)}.`};
  }
- if(method==="Pix")return {method:"Pix",description:"A chave Pix será informada pela loja após a confirmação da encomenda."};
- if(method==="Cartão")return {method:"Cartão",description:"Pagamento na maquininha, no momento da entrega."};
+ if(method==="Pix")return{method:"Pix",description:"A chave Pix será informada pela loja após a confirmação da encomenda."};
+ if(method==="Cartão")return{method:"Cartão",description:"Pagamento na maquininha, no momento da entrega."};
  return null;
 }
 
 /* ENVIO PELO WHATSAPP */
 function sendOrder(){
- const nome=document.getElementById("nome").value.trim();
- const telefone=document.getElementById("telefone").value.trim();
- const endereco=document.getElementById("endereco").value.trim();
+ const nome=document.getElementById("nome").value.trim(),telefone=document.getElementById("telefone").value.trim(),endereco=document.getElementById("endereco").value.trim();
  if(cart.length===0){showCancelModal("empty");return}
  if(!nome||!telefone||!endereco){showToast("Preencha todos os seus dados antes de continuar.","error");return}
- const payment=getPaymentInformation();
- if(!payment)return;
+ const payment=getPaymentInformation();if(!payment)return;
  const total=getOrderTotal();
  let mensagem=`🛒 NOVA SOLICITAÇÃO - BIGODE DAS ENCOMENDAS
 
@@ -1069,18 +803,11 @@ No caso da capa de silicone, confirmar a disponibilidade da cor e do modelo esco
 Por favor, entre em contato com o cliente para confirmar os produtos e combinar a entrega.
 
 Pedido enviado pelo site!`;
- const link="https://wa.me/"+STORE_WHATSAPP+"?text="+encodeURIComponent(mensagem);
- window.location.href=link;
+ window.location.href="https://wa.me/"+STORE_WHATSAPP+"?text="+encodeURIComponent(mensagem);
 }
 
-/* TECLADO */
-document.addEventListener("keydown",event=>{
- if(event.key==="Escape"){
-  closeProductInfo();closeCancelModal();closeCart();closeSearchSuggestions();closeMobileSearch();
- }
-});
-
-/* INICIALIZAÇÃO */
+/* TECLADO E INICIALIZAÇÃO */
+document.addEventListener("keydown",event=>{if(event.key==="Escape"){closeProductInfo();closeCancelModal();closeCart();closeSearchSuggestions();closeMobileSearch()}});
 renderProducts();
 renderCart();
 updateClearSearch();
