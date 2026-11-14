@@ -1,4 +1,5 @@
 
+<!
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -107,9 +108,8 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .color-swatch{width:34px;height:34px;border-radius:50%;border:2px solid #777;display:block;box-shadow:0 1px 4px #0005;transition:transform .15s,border .15s}
 .color-choice.selected .color-swatch{outline:3px solid #40DCCB;outline-offset:3px;transform:scale(1.06)}
 .color-choice:focus-visible{outline:2px solid #40DCCB;outline-offset:4px;border-radius:8px}
-.case-preview-wrap{width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.case-preview-wrap{width:100%;display:flex;align-items:center;justify-content:center}
 .case-preview-wrap svg{height:195px;max-width:100%;width:auto;filter:drop-shadow(0 5px 5px #0003)}
-.case-preview-caption{font-size:11px;color:#666;text-align:center}
 .custom-price-note{font-size:11px;color:#aaa;margin-top:9px;line-height:1.5}
 body[data-theme="light"] .custom-field input{background:white;color:#222;border-color:#ccc}
 body[data-theme="light"] .color-choice{color:#333}
@@ -457,7 +457,7 @@ function coverPrice(model,color){
 }
 function isUnknownPrice(product){return product.price===null||product.price===undefined}
 
-/* CORES E PRÉVIA DA CAPA */
+/* CORES E DESENHO ÚNICO DA CAPA */
 const coverColors=[
  {name:"Preto",hex:"#222222"},
  {name:"Azul",hex:"#2468b4"},
@@ -473,81 +473,54 @@ function getCoverColor(colorName){
  return coverColors.find(c=>c.name===colorName)?.hex||"#222222";
 }
 
-/*
- PRÉVIA DAS CAPAS:
- - iPhone: capa com abertura ampla para o módulo de câmeras.
- - Samsung e outras marcas: traseira fechada, com furos individuais
-   para as lentes e recorte menor para o flash.
- - A cor escolhida é aplicada ao corpo da capa em tempo real.
-*/
+/* UM ÚNICO MODELO DE CAPA PARA TODOS OS APARELHOS */
 function renderCoverPreview(model="",colorName="Preto"){
  const color=getCoverColor(colorName);
- const isIphone=/iphone/i.test(model);
-
- let cameraArea="";
-
- if(isIphone){
-  cameraArea=`
-   <path d="M48 34 Q48 25 58 25 H128 Q139 25 139 36 V111 Q139 124 127 124 H59 Q47 124 47 112 Z"
-    fill="#d5d5d5" stroke="#777" stroke-width="3"/>
-   <path d="M53 39 Q53 31 62 31 H124 Q133 31 133 40 V106 Q133 117 123 117 H63 Q53 117 53 106 Z"
-    fill="#191919"/>
-   <circle cx="76" cy="59" r="17" fill="#080808" stroke="#555" stroke-width="3"/>
-   <circle cx="111" cy="59" r="17" fill="#080808" stroke="#555" stroke-width="3"/>
-   <circle cx="76" cy="98" r="17" fill="#080808" stroke="#555" stroke-width="3"/>
-   <circle cx="76" cy="59" r="7" fill="#252525"/>
-   <circle cx="111" cy="59" r="7" fill="#252525"/>
-   <circle cx="76" cy="98" r="7" fill="#252525"/>
-   <circle cx="111" cy="98" r="7" fill="#f4edc8" stroke="#aaa" stroke-width="2"/>
-  `;
- }else{
-  cameraArea=`
-   <rect x="52" y="35" width="82" height="91" rx="17"
-    fill="${color}" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
-   <circle cx="75" cy="57" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="110" cy="57" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="75" cy="91" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="75" cy="57" r="4.5" fill="#292929"/>
-   <circle cx="110" cy="57" r="4.5" fill="#292929"/>
-   <circle cx="75" cy="91" r="4.5" fill="#292929"/>
-   <circle cx="110" cy="91" r="5" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
-  `;
- }
-
- const finish=`
-  <rect x="187" y="78" width="5" height="39" rx="2" fill="#888"/>
-  <rect x="187" y="129" width="5" height="26" rx="2" fill="#888"/>
-  <path d="M48 150 Q110 166 172 150" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
-  <path d="M47 269 Q110 280 173 269" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
- `;
 
  return `<div class="case-preview-wrap">
-  <svg viewBox="0 0 220 300" role="img" aria-label="Prévia ilustrativa de capa de silicone ${escapeHtml(colorName)}">
+  <svg viewBox="0 0 220 300" role="img" aria-label="Capa de silicone na cor ${escapeHtml(colorName)}">
    <defs>
     <linearGradient id="caseShine" x1="0" y1="0" x2="1" y2="1">
-     <stop offset="0" stop-color="#ffffff" stop-opacity=".18"/>
+     <stop offset="0" stop-color="#ffffff" stop-opacity=".2"/>
      <stop offset=".45" stop-color="#ffffff" stop-opacity="0"/>
-     <stop offset="1" stop-color="#000000" stop-opacity=".12"/>
+     <stop offset="1" stop-color="#000000" stop-opacity=".13"/>
     </linearGradient>
    </defs>
 
+   <!-- Corpo da capa -->
    <rect x="30" y="7" width="160" height="286" rx="31"
     fill="${color}" stroke="#777" stroke-width="3"/>
 
+   <!-- Acabamento da silicone -->
    <rect x="37" y="14" width="146" height="272" rx="25"
     fill="url(#caseShine)" stroke="#ffffff" stroke-opacity=".3" stroke-width="2"/>
 
-   ${cameraArea}
-   ${finish}
-  </svg>
+   <!-- Área fechada das câmeras -->
+   <rect x="52" y="35" width="82" height="91" rx="17"
+    fill="${color}" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
 
-  <span class="case-preview-caption">
-   ${isIphone
-    ?"Modelo ilustrativo para iPhone"
-    :"Modelo ilustrativo com traseira fechada"}
-  </span>
+   <!-- Furos individuais das câmeras -->
+   <circle cx="75" cy="57" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
+   <circle cx="110" cy="57" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
+   <circle cx="75" cy="91" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
+
+   <!-- Reflexo das lentes -->
+   <circle cx="75" cy="57" r="4.5" fill="#292929"/>
+   <circle cx="110" cy="57" r="4.5" fill="#292929"/>
+   <circle cx="75" cy="91" r="4.5" fill="#292929"/>
+
+   <!-- Flash -->
+   <circle cx="110" cy="91" r="5" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
+
+   <!-- Botões laterais e acabamento -->
+   <rect x="187" y="78" width="5" height="39" rx="2" fill="#888"/>
+   <rect x="187" y="129" width="5" height="26" rx="2" fill="#888"/>
+   <path d="M48 150 Q110 166 172 150" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+   <path d="M47 269 Q110 280 173 269" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+  </svg>
  </div>`;
 }
+
 function updateCoverPreview(){
  const model=document.getElementById("cover-model")?.value.trim()||"";
  const area=document.getElementById("product-info-photo");
@@ -692,7 +665,7 @@ function showProductInfo(id){
    <div class="custom-field"><label>Escolha a cor</label><div class="color-options">
    ${coverColors.map(c=>`<button type="button" class="color-choice" data-color="${c.name}" aria-label="Escolher cor ${c.name}" aria-pressed="false" onclick="selectCoverColor('${c.name}')"><span class="color-swatch" style="background:${c.hex};${c.name==="Transparente"?"background-image:linear-gradient(135deg,#fff 25%,#d5d5d5 25%,#d5d5d5 50%,#fff 50%,#fff 75%,#d5d5d5 75%);background-size:10px 10px;":""}"></span><span>${c.name}</span></button>`).join("")}
    </div></div>
-   <p class="custom-price-note">iPhone: R$ 35,00 nas cores comuns e R$ 42,00 nas cores branca e marrom. Outras marcas e modelos: R$ 25,00. A prévia é ilustrativa e a disponibilidade será confirmada pelo WhatsApp.</p>`;
+   <p class="custom-price-note">O valor pode variar conforme o modelo e a cor. A disponibilidade será confirmada pelo WhatsApp.</p>`;
  }else{
   detailsArea.innerHTML=`<p><strong>Compatibilidade:</strong><br>${escapeHtml(details.compatibility)}</p><p><strong>Garantia:</strong><br>${escapeHtml(product.warranty)}</p><p><strong>Detalhes:</strong><br>${escapeHtml(details.extra)}</p>`;
  }
@@ -738,7 +711,7 @@ function showCancelModal(mode){
  cancelModalMode=mode;
  const overlay=document.getElementById("cancel-modal-overlay"),icon=document.getElementById("cancel-modal-icon"),title=document.getElementById("cancel-modal-title"),message=document.getElementById("cancel-modal-message"),primary=document.getElementById("cancel-modal-primary"),secondary=document.getElementById("cancel-modal-secondary");
  if(mode==="confirm"){
-  icon.textContent="🥹";title.textContent="Ôxe, já desistiu? 🥹";message.textContent="O Bigode ficou triste agora! KKKK Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️";primary.textContent="Vou ficar mais um pouquinho! ❤️";secondary.textContent="Pode cancelar, Bigode 🥺";secondary.style.display="block";
+  icon.textContent="🥹";title.textContent="Ôxe, já desistiu? 🥹";message.textContent="O Bigode ficou triste agora! Mas não tem problema, não. Sua visita já é importante pra gente. Volte sempre! ❤️";primary.textContent="Vou ficar mais um pouquinho! ❤️";secondary.textContent="Pode cancelar, Bigode 🥺";secondary.style.display="block";
  }
  if(mode==="success"){
   icon.textContent="❤️";title.textContent="Tudo bem, fica para a próxima!";message.textContent="Seu carrinho foi esvaziado. Esperamos ter a oportunidade de atender você novamente. Quando precisar, o Bigode estará aqui de portas abertas! ❤️";primary.textContent="Voltar às compras ❤️";secondary.style.display="none";
