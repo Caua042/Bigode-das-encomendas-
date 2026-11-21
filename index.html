@@ -69,7 +69,26 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
 .product-image img{width:100%;height:100%;object-fit:contain}
 .product-image .fallback{font-size:55px}
-.fam-seal{position:absolute;top:9px;right:9px;width:45px;height:45px;border-radius:50%;background:#050505;border:2px solid #40DCCB;color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;box-shadow:0 2px 9px #00000035;z-index:2}
+
+/* SELOS REDONDOS DAS MARCAS */
+.brand-seal{
+ position:absolute;top:9px;right:9px;
+ width:45px;height:45px;border-radius:50%;
+ background:#fff;border:2px solid #ddd;
+ display:flex;align-items:center;justify-content:center;
+ overflow:hidden;padding:4px;
+ box-shadow:0 2px 9px #00000035;z-index:2
+}
+.brand-seal img{
+ width:100%;height:100%;object-fit:contain;
+ border-radius:50%
+}
+.brand-seal-fam{
+ background:#050505;border:2px solid #40DCCB
+}
+.brand-seal-fam img{
+ background:#fff;border-radius:50%;padding:2px
+}
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
@@ -261,7 +280,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
  .theme-switch[data-theme="light"] .theme-mustache{transform:translateX(72px)}
  .product-grid{gap:10px}.product-image{height:120px}
  .product-info{padding:10px}.product-title-row h3{font-size:12px}
- .price{font-size:17px}.fam-seal{width:40px;height:40px;font-size:9px}
+ .price{font-size:17px}.brand-seal{width:40px;height:40px}
  .cart-panel{right:12px;bottom:98px;width:calc(100% - 24px);max-height:78vh}
  .floating-cart{width:66px;height:66px;right:15px;bottom:15px}
  .floating-cart svg{width:46px;height:46px}
@@ -279,11 +298,13 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 </style>
 </head>
 <body data-theme="dark">
+
 <div id="intro">
  <div class="intro-stage stage-mustache"><svg viewBox="0 0 400 180" class="big-mustache"><path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
  <div class="intro-stage stage-logo"><h1>BIGODE DAS ENCOMENDAS</h1><h2>IMPORTAÇÕES</h2></div>
  <div class="intro-stage stage-welcome"><h1>Seja bem-vindo!</h1><p>Em que posso te ajudar?</p></div>
 </div>
+
 <header id="main-header">
  <div class="brand">
   <svg viewBox="0 0 400 180"><path fill="white" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg>
@@ -299,7 +320,9 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   <div class="theme-mustache"><svg viewBox="0 0 400 180"><path d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
  </div>
 </header>
+
 <section class="hero"><h1 id="greeting">Olá!</h1><p>Como posso te ajudar?</p><p><strong>Encontre seus produtos favoritos!</strong></p></section>
+
 <main class="container">
  <div class="section-title"><h2>Nosso catálogo</h2><p>Confira nossos produtos e escolha seus favoritos.</p></div>
  <div class="catalog-filters">
@@ -308,7 +331,9 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
  </div>
  <div class="products" id="products"></div>
 </main>
+
 <footer><h3>BIGODE DAS ENCOMENDAS</h3><p>Importações e encomendas</p><p>Atendimento pelo WhatsApp</p></footer>
+
 <div class="product-info-overlay" id="product-info-overlay" onclick="handleProductInfoBackdrop(event)" role="dialog" aria-modal="true">
  <div class="product-info-modal">
   <div class="product-info-header"><h2 id="product-info-title">Informações do produto</h2><button class="close-product-info" type="button" onclick="closeProductInfo()">×</button></div>
@@ -319,10 +344,12 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   <button class="product-info-add" id="product-info-add" type="button">+ Adicionar ao carrinho</button>
  </div>
 </div>
+
 <button class="floating-cart" type="button" onclick="openCart()" aria-label="Abrir carrinho">
  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 17 H23 L31 62 Q32 68 39 68 H78" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path d="M28 29 H89 L79 59 H34 Z" stroke="white" stroke-width="5" stroke-linejoin="round"/><path d="M34 43 C42 31 49 37 56 43 C63 37 72 31 83 43 C77 57 65 57 56 49 C47 57 39 57 34 43Z" fill="white"/><circle cx="42" cy="81" r="5" fill="white"/><circle cx="74" cy="81" r="5" fill="white"/></svg>
  <span class="cart-badge" id="cart-badge"></span>
 </button>
+
 <div class="cart-overlay" id="cart-overlay" onclick="closeCart()"></div>
 <section class="cart-panel" id="cart-panel">
  <div class="cart-panel-header">
@@ -332,7 +359,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
  <div class="cart-panel-content" id="cart-panel-content">
   <div class="chat-message"><strong id="cart-greeting">Bom dia! ☀️</strong>Você chegou ao carrinho, Bigas está pronto! 😁<br><br>Sua compra está assim. Gostaria de adicionar mais alguma coisa?</div>
   <div class="cart-products-box"><div class="cart-products-title">🛒 Seus produtos · <span id="cart-items-count">0 itens</span></div><div id="cart-items"><p class="empty">Seu carrinho está vazio. 😔</p></div><div class="cart-total"><span>Total da encomenda:</span><strong id="total">R$ 0,00</strong></div></div>
-    <div class="cart-actions">
+  <div class="cart-actions">
    <button class="cart-action continue-shopping" type="button" onclick="closeCart()">✓ Continuar compras</button>
    <button class="cart-action cancel-shopping" type="button" onclick="cancelCart()">🗑 Cancelar compra</button>
    <button class="cart-action finish-shopping" type="button" onclick="showCheckoutForm()">Finalizar encomenda</button>
@@ -350,6 +377,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   </div>
  </div>
 </section>
+
 <div class="cancel-modal-overlay" id="cancel-modal-overlay" onclick="handleCancelModalBackdrop(event)" role="dialog" aria-modal="true">
  <div class="cancel-modal">
   <div class="cancel-modal-icon" id="cancel-modal-icon">🥹</div><h2 id="cancel-modal-title">Ôxe, já desistiu? 🥹</h2>
@@ -358,10 +386,10 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
   <div class="cancel-modal-footer">BIGODE DAS ENCOMENDAS · IMPORTAÇÕES</div>
  </div>
 </div>
+
 <div id="site-toast" class="site-toast" role="status" aria-live="polite"></div>
 
 <script>
-
 /* CONFIGURAÇÕES */
 const STORE_WHATSAPP="5538992041456";
 const RECENT_SEARCHES_KEY="bigode-recent-searches";
@@ -369,6 +397,27 @@ const MAX_RECENT_SEARCHES=5;
 let currentTheme="dark",toastTimer,cart=[],cancelModalMode="";
 let currentInfoProduct=null;
 let selectedCoverColor="";
+
+/* LOGOS DAS MARCAS */
+const brandLogos={
+ "FAM":"imagens/IMG_1269.jpeg",
+ "Gold":"imagens/IMG_1265.png",
+ "Gold Plus":"imagens/IMG_1265.png",
+ "One-X":"imagens/IMG_1266.jpeg",
+ "H'Maston":"imagens/IMG_1267.png"
+};
+
+function createBrandSeal(brand){
+ const logo=brandLogos[brand];
+ if(!logo)return "";
+ const fam=brand==="FAM";
+ return `
+  <div class="brand-seal ${fam?"brand-seal-fam":""}">
+   <img src="${logo}" alt="Logo ${escapeHtml(brand)}" loading="lazy"
+    onerror="this.parentElement.style.display='none'">
+  </div>
+ `;
+}
 
 /* TEMA */
 function applyTheme(theme){
@@ -430,7 +479,12 @@ const productsList=[
  {id:44,name:"Suporte automotivo One-X para saída de ar",price:60,image:"🚗",photo:"imagens/IMG_1253.jpeg",brand:"One-X",warranty:"Consultar garantia"},
  {id:45,name:"Suporte universal H'Maston para moto",price:60,image:"📱",photo:"imagens/IMG_1254.jpeg",brand:"H'Maston",warranty:"Consultar garantia",options:[{label:"Sem cabo",price:60},{label:"Com cabo",price:68}]},
  {id:46,name:"Power bank H'Maston 50.000 mAh",price:320,image:"🔋",photo:"imagens/IMG_1255.webp",brand:"H'Maston",warranty:"Consultar garantia",startingPrice:true},
- {id:47,name:"Caneta Gold Plus para iPad",price:160,image:"✏️",photo:"imagens/IMG_1256.webp",brand:"Gold Plus",warranty:"Consultar garantia"}
+ {id:47,name:"Caneta Gold Plus para iPad",price:160,image:"✏️",photo:"imagens/IMG_1256.webp",brand:"Gold Plus",warranty:"Consultar garantia"},
+
+ /* NOVOS FONES GOLD */
+ {id:48,name:"Fone Bluetooth sem borracha (Gold)",price:55,image:"🎧",photo:"imagens/IMG_1261.webp",brand:"Gold",warranty:"Consultar garantia"},
+ {id:49,name:"Fone Bluetooth sem borracha (Gold)",price:75,image:"🎧",photo:"imagens/IMG_1262.webp",brand:"Gold",warranty:"Consultar garantia"},
+ {id:50,name:"Fone Bluetooth com borracha (Gold)",price:80,image:"🎧",photo:"imagens/IMG_1263.webp",brand:"Gold",warranty:"Consultar garantia"}
 ];
 
 const productDescriptions={
@@ -466,7 +520,10 @@ const productDescriptions={
  44:{description:"Suporte automotivo One-X para instalação na saída de ar do veículo.",compatibility:"Confira o formato da saída de ar do veículo e o tamanho do aparelho antes de encomendar.",extra:"Suporte para uso automotivo. Consulte a loja sobre garantia."},
  45:{description:"Suporte universal H'Maston para celular em motocicletas. Escolha se deseja receber com ou sem cabo.",compatibility:"Confira as medidas e o encaixe no guidão da sua moto antes de encomendar.",extra:"Opções: sem cabo por R$ 60,00 ou com cabo por R$ 68,00. Consulte a loja sobre garantia."},
  46:{description:"Power bank H'Maston com capacidade anunciada de 50.000 mAh.",compatibility:"Verifique as conexões e a compatibilidade com seu aparelho antes de encomendar.",extra:"Preço anunciado a partir de R$ 320,00. Consulte a loja para confirmar disponibilidade e detalhes. Garantia a consultar."},
- 47:{description:"Caneta Gold Plus para iPad.",compatibility:"Confirme o modelo exato do iPad e a compatibilidade da caneta com a loja antes de encomendar.",extra:"Consulte a loja sobre compatibilidade e garantia."}
+ 47:{description:"Caneta Gold Plus para iPad.",compatibility:"Confirme o modelo exato do iPad e a compatibilidade da caneta com a loja antes de encomendar.",extra:"Consulte a loja sobre compatibilidade e garantia."},
+ 48:{description:"Fone Bluetooth Gold sem borracha.",compatibility:"Compatível com aparelhos que possuam Bluetooth.",extra:"Modelo sem borracha. Consulte a loja sobre detalhes e garantia."},
+ 49:{description:"Fone Bluetooth Gold sem borracha.",compatibility:"Compatível com aparelhos que possuam Bluetooth.",extra:"Modelo sem borracha. Consulte a loja sobre detalhes e garantia."},
+ 50:{description:"Fone Bluetooth Gold com borracha.",compatibility:"Compatível com aparelhos que possuam Bluetooth.",extra:"Modelo com borracha. Consulte a loja sobre detalhes e garantia."}
 };
 
 /* PREÇO E FORMATAÇÃO */
@@ -509,107 +566,53 @@ function renderCoverPreview(model="",colorName="Preto"){
  const color=getCoverColor(colorName);
  const isIphone=/iphone/i.test(model);
  const isTransparent=/transparente/i.test(colorName);
-
  const phoneColor="#b9c5ce";
- const caseFill=isTransparent
-  ? "rgba(220,232,235,.22)"
-  : color;
+ const caseFill=isTransparent?"rgba(220,232,235,.22)":color;
 
  const cameraDesign=isIphone
  ?`
-   <!-- Abertura grande das câmeras do iPhone -->
-   <rect x="43" y="25" width="105" height="112" rx="21"
-    fill="#171717" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
-
+   <rect x="43" y="25" width="105" height="112" rx="21" fill="#171717" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
    <circle cx="72" cy="55" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
    <circle cx="119" cy="55" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
    <circle cx="72" cy="101" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
-
    <circle cx="72" cy="55" r="7" fill="#292929"/>
    <circle cx="119" cy="55" r="7" fill="#292929"/>
    <circle cx="72" cy="101" r="7" fill="#292929"/>
    <circle cx="119" cy="101" r="7" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
  `
  :`
-   <!-- Área das câmeras Android -->
-   <rect x="49" y="25" width="91" height="105" rx="18"
-    fill="${isTransparent ? "rgba(90,105,115,.12)" : color}"
-    stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
-
-   <!-- Furos individuais das câmeras -->
+   <rect x="49" y="25" width="91" height="105" rx="18" fill="${isTransparent?"rgba(90,105,115,.12)":color}" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
    <circle cx="75" cy="53" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
    <circle cx="113" cy="53" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
    <circle cx="75" cy="89" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-
-   <!-- Reflexos das lentes -->
    <circle cx="75" cy="53" r="4.5" fill="#292929"/>
    <circle cx="113" cy="53" r="4.5" fill="#292929"/>
    <circle cx="75" cy="89" r="4.5" fill="#292929"/>
-
-   <!-- Flash -->
    <circle cx="113" cy="89" r="5" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
  `;
 
  return `<div class="case-preview-wrap">
-  <svg viewBox="0 0 220 300" role="img"
-   aria-label="Capa ${escapeHtml(colorName)} para ${isIphone?"iPhone":"Android"}">
-
-   <defs>
-    <linearGradient id="caseShine" x1="0" y1="0" x2="1" y2="1">
-     <stop offset="0" stop-color="#ffffff" stop-opacity=".3"/>
-     <stop offset=".45" stop-color="#ffffff" stop-opacity="0"/>
-     <stop offset="1" stop-color="#000000" stop-opacity=".13"/>
-    </linearGradient>
-   </defs>
-
-   <!-- Celular por baixo da capa -->
-   <rect x="37" y="14" width="146" height="272" rx="25"
-    fill="${phoneColor}"/>
-
-   <!-- Traseira da capa -->
-   <rect x="30" y="7" width="160" height="286" rx="31"
-    fill="${caseFill}"
-    stroke="${isTransparent ? "#b9d0d8" : "#777"}"
-    stroke-width="3"/>
-
-   <!-- Brilho do silicone -->
-   <rect x="37" y="14" width="146" height="272" rx="25"
-    fill="url(#caseShine)"
-    stroke="#ffffff"
-    stroke-opacity="${isTransparent ? ".65" : ".3"}"
-    stroke-width="2"/>
-
+  <svg viewBox="0 0 220 300" role="img" aria-label="Capa ${escapeHtml(colorName)} para ${isIphone?"iPhone":"Android"}">
+   <defs><linearGradient id="caseShine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".3"/><stop offset=".45" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity=".13"/></linearGradient></defs>
+   <rect x="37" y="14" width="146" height="272" rx="25" fill="${phoneColor}"/>
+   <rect x="30" y="7" width="160" height="286" rx="31" fill="${caseFill}" stroke="${isTransparent?"#b9d0d8":"#777"}" stroke-width="3"/>
+   <rect x="37" y="14" width="146" height="272" rx="25" fill="url(#caseShine)" stroke="#ffffff" stroke-opacity="${isTransparent?".65":".3"}" stroke-width="2"/>
    ${cameraDesign}
-
-   <!-- Botões laterais e acabamento -->
    <rect x="187" y="78" width="5" height="39" rx="2" fill="#888"/>
    <rect x="187" y="129" width="5" height="26" rx="2" fill="#888"/>
-
-   <path d="M48 150 Q110 166 172 150"
-    fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
-   <path d="M47 269 Q110 280 173 269"
-    fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
-
+   <path d="M48 150 Q110 166 172 150" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
+   <path d="M47 269 Q110 280 173 269" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
   </svg>
  </div>`;
 }
 
-/* ATUALIZAÇÃO DA PRÉVIA */
 function updateCoverPreview(){
  const model=document.getElementById("cover-model")?.value.trim()||"";
  const area=document.getElementById("product-info-photo");
-
- if(area){
-  area.innerHTML=renderCoverPreview(
-   model,
-   selectedCoverColor||"Preto"
-  );
- }
-
+ if(area)area.innerHTML=renderCoverPreview(model,selectedCoverColor||"Preto");
  updateCoverPricePreview();
 }
 
-/* SELEÇÃO DE COR */
 function selectCoverColor(color){
  selectedCoverColor=color;
  document.querySelectorAll(".color-choice").forEach(button=>{
@@ -682,7 +685,7 @@ function renderSearchSuggestions(query=""){
 }
 function removeRecentSearch(value){const recent=getRecentSearches().filter(item=>item!==value);try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(e){}renderSearchSuggestions(headerSearch.value)}
 function clearRecentSearches(){try{localStorage.removeItem(RECENT_SEARCHES_KEY)}catch(e){}renderSearchSuggestions(headerSearch.value);showToast("Histórico de pesquisas limpo.")}
- headerSearch.addEventListener("input",syncSearch);
+headerSearch.addEventListener("input",syncSearch);
 headerSearch.addEventListener("focus",openSearchSuggestions);
 headerSearch.addEventListener("keydown",e=>{
  if(e.key==="Enter"){e.preventDefault();if(headerSearch.value.trim())saveRecentSearch(headerSearch.value);closeSearchSuggestions();closeMobileSearch();document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"})}
@@ -704,14 +707,27 @@ window.addEventListener("load",()=>setTimeout(()=>document.getElementById("intro
 
 /* CATÁLOGO */
 function createProductCard(product){
- const famSeal=product.brand==="FAM"?`<div class="fam-seal">FAM</div>`:"";
+ const brandSeal=createBrandSeal(product.brand);
  const priceText=getProductPriceText(product);
  const addDisabled=isUnknownPrice(product)&&!product.customCover;
  const imageHTML=product.customCover
   ?`<span class="fallback">${product.image}</span>`
   :`<img src="${product.photo}" alt="${escapeHtml(product.name)}" loading="lazy" onerror="this.closest('.product').remove()">`;
- return `<div class="product"><div class="product-image">${imageHTML}${famSeal}</div><div class="product-info"><div class="product-title-row"><h3>${escapeHtml(product.name)}</h3></div><div class="price">${priceText}</div><p class="warranty">🛡️ ${escapeHtml(product.warranty)}</p><div class="product-buttons"><button class="product-info-button" type="button" onclick="showProductInfo(${product.id})">Informações</button><button class="add" type="button" ${addDisabled?"disabled":""} onclick="${product.customCover?`showProductInfo(${product.id})`:`addToCart(${product.id})`}">${addDisabled?"Indisponível":"+ Adicionar"}</button></div></div></div>`;
+
+ return `<div class="product">
+  <div class="product-image">${imageHTML}${brandSeal}</div>
+  <div class="product-info">
+   <div class="product-title-row"><h3>${escapeHtml(product.name)}</h3></div>
+   <div class="price">${priceText}</div>
+   <p class="warranty">🛡️ ${escapeHtml(product.warranty)}</p>
+   <div class="product-buttons">
+    <button class="product-info-button" type="button" onclick="showProductInfo(${product.id})">Informações</button>
+    <button class="add" type="button" ${addDisabled?"disabled":""} onclick="${product.customCover?`showProductInfo(${product.id})`:`addToCart(${product.id})`}">${addDisabled?"Indisponível":"+ Adicionar"}</button>
+   </div>
+  </div>
+ </div>`;
 }
+
 function renderProducts(){
  const area=document.getElementById("products"),search=headerSearch.value.trim();
  const sort=document.getElementById("sort-filter").value,brand=document.getElementById("brand-filter").value;
@@ -932,6 +948,5 @@ renderCart();
 updateClearSearch();
 
 </script>
-
 </body>
 </html>
