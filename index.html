@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -69,26 +70,10 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .product-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:10px;overflow:hidden;position:relative}
 .product-image img{width:100%;height:100%;object-fit:contain}
 .product-image .fallback{font-size:55px}
-
-/* SELOS REDONDOS DAS MARCAS */
-.brand-seal{
- position:absolute;top:9px;right:9px;
- width:45px;height:45px;border-radius:50%;
- background:#fff;border:2px solid #ddd;
- display:flex;align-items:center;justify-content:center;
- overflow:hidden;padding:4px;
- box-shadow:0 2px 9px #00000035;z-index:2
-}
-.brand-seal img{
- width:100%;height:100%;object-fit:contain;
- border-radius:50%
-}
-.brand-seal-fam{
- background:#050505;border:2px solid #40DCCB
-}
-.brand-seal-fam img{
- background:#fff;border-radius:50%;padding:2px
-}
+.brand-seal{position:absolute;top:9px;right:9px;width:45px;height:45px;border-radius:50%;background:#fff;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;overflow:hidden;padding:4px;box-shadow:0 2px 9px #00000035;z-index:2}
+.brand-seal img{width:100%;height:100%;object-fit:contain;border-radius:50%}
+.brand-seal-fam{background:#050505;border:2px solid #40DCCB}
+.brand-seal-fam img{background:#fff;border-radius:50%;padding:2px}
 .product-info{padding:13px}
 .product-title-row{display:flex;align-items:center;gap:8px;margin-bottom:9px}
 .product-title-row h3{font-size:14px;line-height:1.35;overflow-wrap:anywhere;flex:1}
@@ -477,11 +462,9 @@ const productsList=[
  {id:42,name:"Carregador Turbo 48W + cabo Tipo-C (completo)",price:65,image:"🔋",photo:"imagens/IMG_1251.webp",brand:"One-X",warranty:"Consultar garantia"},
  {id:43,name:"Carregador Turbo 48W + cabo Lightning (completo)",price:65,image:"🔋",photo:"imagens/IMG_1252.webp",brand:"One-X",warranty:"Consultar garantia"},
  {id:44,name:"Suporte automotivo para saída de ar",price:60,image:"🚗",photo:"imagens/IMG_1253.jpeg",brand:"One-X",warranty:"Consultar garantia"},
- {id:45,name:"Suporte universal H'Maston para moto",price:55$,image:"📱",photo:"imagens/IMG_1254.jpeg",brand:"H'Maston",warranty:"Consultar garantia",options:[{label:"Sem cabo",price:60},{label:"Com cabo",price:68}]},
+ {id:45,name:"Suporte universal H'Maston para moto",price:60,image:"📱",photo:"imagens/IMG_1254.jpeg",brand:"H'Maston",warranty:"Consultar garantia",options:[{label:"Sem cabo",price:60},{label:"Com cabo",price:68}]},
  {id:46,name:"Power bank H'Maston 50.000 mAh",price:320,image:"🔋",photo:"imagens/IMG_1255.webp",brand:"H'Maston",warranty:"Consultar garantia",startingPrice:true},
  {id:47,name:"Caneta Gold Plus para iPad",price:160,image:"✏️",photo:"imagens/IMG_1256.webp",brand:"Gold Plus",warranty:"Consultar garantia"},
-
- /* NOVOS FONES GOLD */
  {id:48,name:"Fone Bluetooth sem borracha ",price:55,image:"🎧",photo:"imagens/IMG_1261.webp",brand:"Gold",warranty:"Consultar garantia"},
  {id:49,name:"Fone Bluetooth sem borracha ",price:75,image:"🎧",photo:"imagens/IMG_1262.webp",brand:"Gold",warranty:"Consultar garantia"},
  {id:50,name:"Fone Bluetooth com borracha ",price:80,image:"🎧",photo:"imagens/IMG_1263.webp",brand:"Gold",warranty:"Consultar garantia"}
@@ -561,7 +544,6 @@ function getCoverColor(colorName){
  return coverColors.find(c=>c.name===colorName)?.hex||"#222222";
 }
 
-/* PRÉVIA DA CAPA: IPHONE E ANDROID */
 function renderCoverPreview(model="",colorName="Preto"){
  const color=getCoverColor(colorName);
  const isIphone=/iphone/i.test(model);
@@ -661,6 +643,10 @@ function saveRecentSearch(query){
  try{localStorage.setItem(RECENT_SEARCHES_KEY,JSON.stringify(recent))}catch(e){}
 }
 function escapeHtml(value){return String(value).replace(/[&<>"']/g,char=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[char]))}
+
+/* Protege textos com apóstrofos nos botões de pesquisa */
+function jsArg(value){return JSON.stringify(String(value)).replace(/'/g,"\\u0027")}
+
 const headerSearch=document.getElementById("header-search");
 const mainHeader=document.getElementById("main-header");
 const mobileSearchToggle=document.getElementById("mobile-search-toggle");
@@ -677,9 +663,9 @@ function renderSearchSuggestions(query=""){
  const panel=document.getElementById("search-suggestions"),recent=getRecentSearches(),value=query.trim();
  if(value){
   const matches=productsList.filter(p=>productMatchesSearch(p,value)).slice(0,5);
-  panel.innerHTML=`${matches.length?`<div class="suggestion-heading">Produtos encontrados</div><div class="suggestion-list">${matches.map(p=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(p.name)})'>${p.image} ${escapeHtml(p.name)}</button>`).join("")}</div>`:`<div class="suggestion-heading">Nenhum produto encontrado com esse termo</div>`}${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.slice(0,3).map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button></div>`).join("")}`:""}`;
+  panel.innerHTML=`${matches.length?`<div class="suggestion-heading">Produtos encontrados</div><div class="suggestion-list">${matches.map(p=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${jsArg(p.name)})'>${p.image} ${escapeHtml(p.name)}</button>`).join("")}</div>`:`<div class="suggestion-heading">Nenhum produto encontrado com esse termo</div>`}${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.slice(0,3).map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${jsArg(item)})'>↶ ${escapeHtml(item)}</button></div>`).join("")}`:""}`;
  }else{
-  panel.innerHTML=`<div class="suggestion-heading">Pesquisas populares</div><div class="suggestion-list">${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${JSON.stringify(item)})'>${escapeHtml(item)}</button>`).join("")}</div>${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${JSON.stringify(item)})'>↶ ${escapeHtml(item)}</button><button class="remove-recent" type="button" onclick='removeRecentSearch(${JSON.stringify(item)})'>×</button></div>`).join("")}<button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>`:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}`;
+  panel.innerHTML=`<div class="suggestion-heading">Pesquisas populares</div><div class="suggestion-list">${popularSearches.map(item=>`<button class="search-suggestion" type="button" onclick='setSearchValue(${jsArg(item)})'>${escapeHtml(item)}</button>`).join("")}</div>${recent.length?`<div class="suggestion-heading">Pesquisas recentes</div>${recent.map(item=>`<div class="search-recent-row"><button type="button" onclick='setSearchValue(${jsArg(item)})'>↶ ${escapeHtml(item)}</button><button class="remove-recent" type="button" onclick='removeRecentSearch(${jsArg(item)})'>×</button></div>`).join("")}<button class="clear-history" type="button" onclick="clearRecentSearches()">Limpar histórico</button>`:`<p style="color:#999;font-size:12px;padding:5px">Suas pesquisas recentes aparecerão aqui.</p>`}`;
  }
  panel.classList.add("open");
 }
