@@ -721,6 +721,7 @@ function renderProducts(){
   const matchesSearch=productMatchesSearch(product,search);let matchesBrand=true;
   if(brand==="FAM")matchesBrand=product.brand==="FAM";
   if(brand==="Gold")matchesBrand=product.brand==="Gold"||product.brand==="Gold Plus";
+  if(brand==="One-X")matchesBrand=product.brand==="One-X";
   if(brand==="One-X")matchesBrand=product.brand!=="FAM"&&product.brand!=="Gold"&&product.brand!=="Gold Plus";
   return matchesSearch&&matchesBrand;
  });
