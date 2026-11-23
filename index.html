@@ -722,7 +722,7 @@ function renderProducts(){
   if(brand==="FAM")matchesBrand=product.brand==="FAM";
   if(brand==="Gold")matchesBrand=product.brand==="Gold"||product.brand==="Gold Plus";
   if(brand==="One-X")matchesBrand=product.brand==="One-X";
-  if(brand==="One-X")matchesBrand=product.brand!=="FAM"&&product.brand!=="Gold"&&product.brand!=="Gold Plus";
+  if(brand==="H'Maston")matchesBrand=product.brand!=="H'Maston";
   return matchesSearch&&matchesBrand;
  });
  if(sort==="low")filtered.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
