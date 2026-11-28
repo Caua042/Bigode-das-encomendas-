@@ -16,6 +16,8 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}
 .intro-stage{position:absolute;width:100%;padding:20px;text-align:center;opacity:0;visibility:hidden}
 .stage-mustache{animation:mustacheShow .7s ease forwards}
 .big-mustache{width:90%;max-width:430px;animation:growMustache .7s ease}
+.intro-logo-image{display:block;width:min(88vw,430px);max-height:62vh;object-fit:contain;margin:auto;filter:drop-shadow(0 5px 12px #0002)}
+.brand-logo{display:block;width:78px;height:78px;object-fit:contain;flex-shrink:0;border-radius:10px}
 .stage-logo{animation:logoShow .8s ease .65s forwards}
 .stage-logo h1,.stage-logo h2{color:#101010;font-weight:900}
 .stage-logo h1{font-size:clamp(23px,6vw,38px)}
@@ -310,14 +312,13 @@ body[data-theme="light"] .category-back{background:#eee;color:#222;border-color:
 
 <div id="intro">
  <div class="intro-stage stage-mustache"><svg viewBox="0 0 400 180" class="big-mustache"><path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
- <div class="intro-stage stage-logo"><h1>BIGODE DAS ENCOMENDAS</h1><h2>IMPORTAÇÕES</h2></div>
+ <div class="intro-stage stage-logo"><img class="intro-logo-image" src="imagens/IMG_1314.png" alt="Logo Bigode das Encomendas | Importações" onerror="this.style.display='none'"></div>
  <div class="intro-stage stage-welcome"><h1>Seja bem-vindo!</h1><p>Em que posso te ajudar?</p></div>
 </div>
 
 <header id="main-header">
  <div class="brand">
-  <svg viewBox="0 0 400 180"><path fill="white" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg>
-  <div><h2>BIGODE DAS ENCOMENDAS</h2><span>IMPORTAÇÕES</span></div>
+  <img class="brand-logo" src="imagens/IMG_1314.png" alt="Logo Bigode das Encomendas | Importações" onerror="this.style.display='none'">
  </div>
  <div class="header-search-area" id="header-search-area">
   <div class="header-search-box"><span class="header-search-icon">🔎</span><input class="header-search-input" id="header-search" type="search" placeholder="Pesquisar produtos..." autocomplete="off" aria-label="Pesquisar produtos"><button class="clear-search" id="clear-header-search" type="button">×</button></div>
