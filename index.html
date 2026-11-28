@@ -280,6 +280,30 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
  .product-info-modal{padding:13px}
  .catalog-filters{grid-template-columns:1fr}
 }
+
+
+/* NOVO CATÁLOGO POR CATEGORIAS */
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.category-card{background:#1c1c1c;color:white;border:1px solid #333;border-radius:16px;overflow:hidden;text-align:left;min-width:0;box-shadow:0 3px 12px #00000025;transition:transform .18s,border-color .18s}
+.category-card:active{transform:scale(.98)}
+.category-image{height:145px;background:#fff;display:flex;align-items:center;justify-content:center;padding:12px;position:relative}
+.category-image img{width:100%;height:100%;object-fit:contain}
+.category-image .fallback{font-size:58px}
+.category-info{padding:13px}
+.category-info h3{font-size:15px;line-height:1.3;margin-bottom:7px}
+.category-price{font-size:14px;font-weight:bold;color:#20d875;line-height:1.45}
+.category-count{font-size:11px;color:#aaa;margin-top:7px}
+.category-open{display:block;margin-top:11px;width:100%;padding:10px;border-radius:9px;background:#20d875;color:#101010;font-size:12px;font-weight:bold}
+.category-heading{display:flex;align-items:center;gap:12px;margin:2px 0 18px}
+.category-back{background:#292929;color:white;border:1px solid #555;border-radius:10px;padding:10px 13px;font-size:13px;font-weight:bold;flex-shrink:0}
+.category-heading-text{min-width:0}
+.category-heading-text h3{font-size:18px}
+.category-heading-text p{font-size:12px;color:#999;margin-top:4px}
+body[data-theme="light"] .category-card{background:white;color:#202020;border-color:#ddd}
+body[data-theme="light"] .category-count{color:#777}
+body[data-theme="light"] .category-back{background:#eee;color:#222;border-color:#ccc}
+@media(max-width:400px){.category-grid{gap:10px}.category-image{height:120px}.category-info{padding:10px}.category-info h3{font-size:13px}}
+
 </style>
 </head>
 <body data-theme="dark">
@@ -309,7 +333,7 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 <section class="hero"><h1 id="greeting">Olá!</h1><p>Como posso te ajudar?</p><p><strong>Encontre seus produtos favoritos!</strong></p></section>
 
 <main class="container">
- <div class="section-title"><h2>Nosso catálogo</h2><p>Confira nossos produtos e escolha seus favoritos.</p></div>
+ <div class="section-title"><h2>Nosso catálogo</h2><p>Escolha uma categoria para ver os modelos disponíveis.</p></div>
  <div class="catalog-filters">
   <select id="sort-filter" onchange="renderProducts()"><option value="featured">Ordenar produtos</option><option value="low">Menor preço</option><option value="high">Maior preço</option><option value="az">A–Z</option></select>
   <select id="brand-filter" onchange="renderProducts()"><option value="all">Todas as marcas</option><option value="FAM">FAM</option><option value="One-X">one-x</option><option value="Gold">Gold</option><option value="H'Maston">H'Maston</option></select>
@@ -692,6 +716,54 @@ updateGreeting();
 window.addEventListener("load",()=>setTimeout(()=>document.getElementById("intro").classList.add("hide"),2500));
 
 /* CATÁLOGO */
+/* CATEGORIAS DO CATÁLOGO
+   Os produtos continuam cadastrados uma única vez em productsList.
+   Para mudar um produto de categoria, altere apenas os IDs abaixo. */
+const catalogCategories=[
+ {id:"capas",name:"Capinhas",icon:"📱",ids:[1]},
+ {id:"cabos",name:"Cabos",icon:"🔌",ids:[5,6,7,8,9,10,15,22,23,25,37,38,39,40]},
+ {id:"carregadores",name:"Carregadores",icon:"🔋",ids:[26,27,28,29,30,35,36,41,42,43]},
+ {id:"fones",name:"Fones de ouvido",icon:"🎧",ids:[33,48,49,50]},
+ {id:"suportes",name:"Suportes",icon:"🚗",ids:[31,32,44,45]},
+ {id:"acessorios",name:"Acessórios",icon:"✨",ids:[34,46,47]}
+];
+let activeCategory=null;
+
+function getCategoryProducts(category){
+ return productsList.filter(product=>category.ids.includes(product.id));
+}
+function getProductPriceBounds(product){
+ if(product.customCover)return{min:25,max:42};
+ if(product.options&&product.options.length){
+  const prices=product.options.map(option=>Number(option.price)).filter(Number.isFinite);
+  return prices.length?{min:Math.min(...prices),max:Math.max(...prices)}:null;
+ }
+ if(isUnknownPrice(product))return null;
+ const value=Number(product.price);
+ return Number.isFinite(value)?{min:value,max:value}:null;
+}
+function getCategoryPriceText(items){
+ const bounds=items.map(getProductPriceBounds).filter(Boolean);
+ if(!bounds.length)return"Consulte os preços";
+ const min=Math.min(...bounds.map(item=>item.min));
+ const max=Math.max(...bounds.map(item=>item.max));
+ const hasStarting=items.some(item=>item.startingPrice);
+ if(min===max)return hasStarting?`A partir de ${money(min)}`:money(min);
+ return`A partir de ${money(min)} até ${money(max)}`;
+}
+function getFilteredProducts(){
+ const search=headerSearch.value.trim();
+ const brand=document.getElementById("brand-filter").value;
+ return productsList.filter(product=>{
+  const matchesSearch=productMatchesSearch(product,search);
+  let matchesBrand=true;
+  if(brand==="FAM")matchesBrand=product.brand==="FAM";
+  if(brand==="Gold")matchesBrand=product.brand==="Gold"||product.brand==="Gold Plus";
+  if(brand==="One-X")matchesBrand=product.brand==="One-X";
+  if(brand==="H'Maston")matchesBrand=product.brand==="H'Maston";
+  return matchesSearch&&matchesBrand;
+ });
+}
 function createProductCard(product){
  const brandSeal=createBrandSeal(product.brand);
  const priceText=getProductPriceText(product);
@@ -699,7 +771,6 @@ function createProductCard(product){
  const imageHTML=product.customCover
   ?`<span class="fallback">${product.image}</span>`
   :`<img src="${product.photo}" alt="${escapeHtml(product.name)}" loading="lazy" onerror="this.closest('.product').remove()">`;
-
  return `<div class="product">
   <div class="product-image">${imageHTML}${brandSeal}</div>
   <div class="product-info">
@@ -713,23 +784,50 @@ function createProductCard(product){
   </div>
  </div>`;
 }
-
+function createCategoryCard(category,items){
+ const first=items.find(product=>product.photo);
+ const image=first?`<img src="${first.photo}" alt="${escapeHtml(category.name)}" loading="lazy">`:`<span class="fallback">${category.icon}</span>`;
+ return `<button class="category-card" type="button" onclick="openCategory('${category.id}')">
+  <div class="category-image">${image}</div>
+  <div class="category-info">
+   <h3>${escapeHtml(category.name)}</h3>
+   <div class="category-price">${getCategoryPriceText(items)}</div>
+   <p class="category-count">${items.length} ${items.length===1?"produto":"produtos"}</p>
+   <span class="category-open">Ver opções →</span>
+  </div>
+ </button>`;
+}
+function openCategory(categoryId){
+ activeCategory=categoryId;
+ renderProducts();
+ document.getElementById("products").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function showAllCategories(){
+ activeCategory=null;
+ renderProducts();
+}
 function renderProducts(){
- const area=document.getElementById("products"),search=headerSearch.value.trim();
- const sort=document.getElementById("sort-filter").value,brand=document.getElementById("brand-filter").value;
- let filtered=productsList.filter(product=>{
-  const matchesSearch=productMatchesSearch(product,search);let matchesBrand=true;
-  if(brand==="FAM")matchesBrand=product.brand==="FAM";
-  if(brand==="Gold")matchesBrand=product.brand==="Gold"||product.brand==="Gold Plus";
-  if(brand==="One-X")matchesBrand=product.brand==="One-X";
-  if(brand==="H'Maston")matchesBrand=product.brand!=="H'Maston";
-  return matchesSearch&&matchesBrand;
- });
- if(sort==="low")filtered.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
- else if(sort==="high")filtered.sort((a,b)=>(b.price??-Infinity)-(a.price??-Infinity));
- else if(sort==="az")filtered.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
- if(!filtered.length){area.innerHTML="<p class='no-products'>Nenhum produto encontrado. Tente pesquisar por outro nome ou termo.</p>";return}
- area.innerHTML=`<div class="product-grid">${filtered.map(createProductCard).join("")}</div>`;
+ const area=document.getElementById("products");
+ const sort=document.getElementById("sort-filter").value;
+ const filtered=getFilteredProducts();
+ if(activeCategory){
+  const category=catalogCategories.find(item=>item.id===activeCategory);
+  if(!category){activeCategory=null;renderProducts();return}
+  let items=filtered.filter(product=>category.ids.includes(product.id));
+  if(sort==="low")items.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
+  else if(sort==="high")items.sort((a,b)=>(b.price??-Infinity)-(a.price??-Infinity));
+  else if(sort==="az")items.sort((a,b)=>a.name.localeCompare(b.name,"pt-BR"));
+  const title=`<div class="category-heading">
+   <button class="category-back" type="button" onclick="showAllCategories()">← Categorias</button>
+   <div class="category-heading-text"><h3>${escapeHtml(category.name)}</h3><p>${items.length} ${items.length===1?"opção disponível":"opções disponíveis"}</p></div>
+  </div>`;
+  area.innerHTML=title+(items.length?`<div class="product-grid">${items.map(createProductCard).join("")}</div>`:`<p class="no-products">Nenhum produto encontrado nesta categoria com os filtros atuais.</p>`);
+  return;
+ }
+ const categories=catalogCategories.map(category=>({category,items:getCategoryProducts(category).filter(product=>filtered.includes(product))}))
+  .filter(item=>item.items.length>0);
+ if(!categories.length){area.innerHTML="<p class='no-products'>Nenhum produto encontrado. Tente pesquisar por outro nome ou termo.</p>";return}
+ area.innerHTML=`<div class="category-grid">${categories.map(item=>createCategoryCard(item.category,item.items)).join("")}</div>`;
 }
 
 /* INFORMAÇÕES DO PRODUTO */
