@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -284,6 +283,19 @@ body[data-theme="light"] .stage-welcome h1,body[data-theme="light"] .stage-welco
 }
 
 
+/* SELETOR INTELIGENTE DE PELÍCULAS */
+.screen-film-box{margin-top:12px;text-align:left}
+.screen-film-box label{display:block;font-size:13px;font-weight:bold;margin:12px 0 7px}
+.screen-film-box input,.screen-film-box select{width:100%;padding:12px;border:1px solid #555;border-radius:9px;background:#111;color:white;outline-color:#40DCCB}
+.screen-film-help{font-size:11px;color:#aaa;line-height:1.5;margin-top:8px}
+.screen-film-result{padding:12px;border-radius:10px;margin-top:12px;font-size:12px;line-height:1.6;background:#292929;border:1px solid #555;color:#eee}
+.screen-film-result.curved{border-color:#20d875}
+.screen-film-result.unknown{border-color:#e0a43b}
+.screen-film-result strong{display:block;margin-bottom:4px}
+.screen-film-promo{color:#20d875;font-weight:bold;margin-top:7px}
+body[data-theme="light"] .screen-film-box input,body[data-theme="light"] .screen-film-box select{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .screen-film-result{background:#f2f2f2;color:#222}
+
 /* NOVO CATÁLOGO POR CATEGORIAS */
 .category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
 .category-card{background:#1c1c1c;color:white;border:1px solid #333;border-radius:16px;overflow:hidden;text-align:left;min-width:0;box-shadow:0 3px 12px #00000025;transition:transform .18s,border-color .18s}
@@ -492,10 +504,12 @@ const productsList=[
  {id:47,name:"Caneta para iPad",price:160,image:"✏️",photo:"imagens/IMG_1256.webp",brand:"Gold Plus",warranty:"Consultar garantia"},
  {id:48,name:"Fone Bluetooth sem borracha ",price:55,image:"🎧",photo:"imagens/IMG_1261.webp",brand:"Gold",warranty:"Consultar garantia"},
  {id:49,name:"Fone Bluetooth sem borracha ",price:75,image:"🎧",photo:"imagens/IMG_1262.webp",brand:"Gold",warranty:"Consultar garantia"},
- {id:50,name:"Fone Bluetooth com borracha ",price:80,image:"🎧",photo:"imagens/IMG_1263.webp",brand:"Gold",warranty:"Consultar garantia"}
+ {id:50,name:"Fone Bluetooth com borracha ",price:80,image:"🎧",photo:"imagens/IMG_1263.webp",brand:"Gold",warranty:"Consultar garantia"},
+ {id:51,name:"Películas para celular",price:30,image:"🛡️",warranty:"Consultar garantia",screenProtector:true}
 ];
 
 const productDescriptions={
+ 51:{description:"Escolha a película ideal para o seu aparelho. Informe o modelo exato para o sistema verificar a curvatura da tela e liberar somente as opções compatíveis.",compatibility:"A compatibilidade será verificada pelo modelo informado.",extra:"Vidro 3D: R$ 30,00. Cerâmica: R$ 65,00. Hidrogel: R$ 90,00. Consulte as ofertas de capa + película."},
  1:{description:"Capa de silicone para celular. Escolha a cor e informe o modelo exato do seu aparelho para solicitar a encomenda.",compatibility:"Informe o modelo completo do celular, por exemplo: iPhone 13 ou Samsung A15.",extra:"A disponibilidade da cor e do modelo será confirmada pelo WhatsApp. O preço varia conforme o modelo e a cor escolhida."},
  5:{description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
  6:{description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
@@ -726,7 +740,8 @@ const catalogCategories=[
  {id:"carregadores",name:"Carregadores",icon:"🔋",ids:[26,27,28,29,30,35,36,41,42,43]},
  {id:"fones",name:"Fones de ouvido",icon:"🎧",ids:[33,48,49,50]},
  {id:"suportes",name:"Suportes",icon:"🚗",ids:[31,32,44,45]},
- {id:"acessorios",name:"Acessórios",icon:"✨",ids:[34,46,47]}
+ {id:"acessorios",name:"Acessórios",icon:"✨",ids:[34,46,47]},
+ {id:"peliculas",name:"Películas",icon:"🛡️",ids:[51]}
 ];
 let activeCategory=null;
 
@@ -769,7 +784,7 @@ function createProductCard(product){
  const brandSeal=createBrandSeal(product.brand);
  const priceText=getProductPriceText(product);
  const addDisabled=isUnknownPrice(product)&&!product.customCover;
- const imageHTML=product.customCover
+ const imageHTML=product.customCover||!product.photo
   ?`<span class="fallback">${product.image}</span>`
   :`<img src="${product.photo}" alt="${escapeHtml(product.name)}" loading="lazy" onerror="this.closest('.product').remove()">`;
  return `<div class="product">
@@ -831,19 +846,102 @@ function renderProducts(){
  area.innerHTML=`<div class="category-grid">${categories.map(item=>createCategoryCard(item.category,item.items)).join("")}</div>`;
 }
 
+/* COMPATIBILIDADE DAS PELÍCULAS */
+const curvedScreenModels=[
+ "samsung galaxy s6 edge","samsung galaxy s6 edge plus","samsung galaxy s7 edge","samsung galaxy s8","samsung galaxy s8 plus","samsung galaxy s9","samsung galaxy s9 plus","samsung galaxy s10","samsung galaxy s10 plus","samsung galaxy s10 5g","samsung galaxy s20 ultra","samsung galaxy s21 ultra","samsung galaxy s22 ultra","samsung galaxy s23 ultra","samsung galaxy s24 ultra","samsung galaxy note 8","samsung galaxy note 9","samsung galaxy note 10","samsung galaxy note 10 plus",
+ "motorola edge","motorola edge 20 pro","motorola edge 30 pro","motorola edge 30 ultra","motorola edge 40","motorola edge 40 pro","motorola edge 50 pro","motorola edge 50 fusion","motorola edge 50 ultra","motorola edge 60 pro",
+ "xiaomi mi note 10","xiaomi mi note 10 pro","xiaomi 12 pro","xiaomi 13 pro","redmi note 13 pro plus","redmi note 14 pro 5g","redmi note 14 pro plus",
+ "huawei p30 pro","huawei p40 pro","huawei mate 30 pro","huawei mate 40 pro","huawei mate 50 pro","huawei p60 pro",
+ "oneplus 7 pro","oneplus 9 pro","oneplus 12","oppo find x5 pro","oppo find x7 ultra","realme gt 6","honor magic6 pro"
+];
+const flatScreenModels=[
+ "iphone 6","iphone 6s","iphone 7","iphone 8","iphone se","iphone se 2020","iphone se 2022","iphone 11","iphone 12","iphone 12 mini","iphone 12 pro","iphone 12 pro max","iphone 13","iphone 13 mini","iphone 13 pro","iphone 13 pro max","iphone 14","iphone 14 plus","iphone 14 pro","iphone 14 pro max","iphone 15","iphone 15 plus","iphone 15 pro","iphone 15 pro max","iphone 16e","iphone 16","iphone 16 plus","iphone 16 pro","iphone 16 pro max",
+ "samsung galaxy a04","samsung galaxy a05","samsung galaxy a05s","samsung galaxy a06","samsung galaxy a10","samsung galaxy a12","samsung galaxy a13","samsung galaxy a14","samsung galaxy a15","samsung galaxy a16","samsung galaxy a20","samsung galaxy a21s","samsung galaxy a22","samsung galaxy a23","samsung galaxy a24","samsung galaxy a25","samsung galaxy a30","samsung galaxy a31","samsung galaxy a32","samsung galaxy a33","samsung galaxy a34","samsung galaxy a35","samsung galaxy a50","samsung galaxy a51","samsung galaxy a52","samsung galaxy a53","samsung galaxy a54","samsung galaxy a55","samsung galaxy a70","samsung galaxy a71","samsung galaxy a72","samsung galaxy a73",
+ "motorola moto g04","motorola moto g14","motorola moto g24","motorola moto g34","motorola moto g54","motorola moto g84","motorola moto g85","motorola moto g100","motorola moto g200","motorola moto g200 5g"
+];
+function normalizePhoneModel(model){
+ return normalizeText(model).replace(/\b(samsung|galaxy|motorola|xiaomi|redmi|huawei|oneplus|oppo|realme|honor|apple)\b/g," ").replace(/\s+/g," ").trim();
+}
+function getScreenFilmCompatibility(model){
+ const value=normalizePhoneModel(model);
+ if(!value)return null;
+ const matches=name=>{
+  const candidate=normalizePhoneModel(name);
+  return value===candidate||value.includes(candidate)||candidate.includes(value)&&value.length>=5;
+ };
+ if(curvedScreenModels.some(matches))return "curved";
+ if(flatScreenModels.some(matches))return "flat";
+ return null;
+}
+function screenFilmPrice(type,bundle){
+ const solo={"Vidro 3D":30,"Cerâmica":65,"Hidrogel":90};
+ const combo={"Vidro 3D":40,"Cerâmica":75,"Hidrogel":75};
+ return (bundle==="bundle"?combo:solo)[type];
+}
+function checkScreenFilmCompatibility(){
+ const input=document.getElementById("film-model");
+ if(!input)return;
+ const model=input.value.trim(),result=document.getElementById("screen-film-result"),options=document.getElementById("screen-film-options"),typeSelect=document.getElementById("film-type");
+ options.hidden=true;
+ if(!model){result.className="screen-film-result";result.textContent="Informe o modelo para verificar a compatibilidade.";return}
+ const compatibility=getScreenFilmCompatibility(model);
+ if(compatibility==="curved"){
+  result.className="screen-film-result curved";
+  result.innerHTML="<strong>✓ Tela curvada identificada</strong>Para este aparelho, não disponibilizamos película 3D de vidro nem cerâmica, pois não são as opções adequadas para a curvatura da tela. A película indicada é a hidrogel, por sua melhor adaptação às bordas.";
+  typeSelect.innerHTML='<option value="Hidrogel">Hidrogel — R$ 90,00</option>';
+  options.hidden=false;
+ }else if(compatibility==="flat"){
+  result.className="screen-film-result";
+  result.innerHTML="<strong>✓ Tela plana identificada</strong>Este modelo está cadastrado como tela plana. Você pode escolher entre película 3D de vidro ou cerâmica. A hidrogel também pode ser solicitada.";
+  typeSelect.innerHTML='<option value="">Selecione uma película</option><option value="Vidro 3D">3D de vidro — R$ 30,00</option><option value="Cerâmica">Cerâmica — R$ 65,00</option><option value="Hidrogel">Hidrogel — R$ 90,00</option>';
+  options.hidden=false;
+ }else{
+  result.className="screen-film-result unknown";
+  result.innerHTML="<strong>⚠️ Modelo ainda não identificado</strong>Não encontramos esse modelo na nossa lista de compatibilidade. Para evitar indicar uma película incorreta, confirme com a loja antes de escolher. Confira se digitou o nome completo do aparelho.";
+ }
+ updateScreenFilmPrice();
+}
+function updateScreenFilmPrice(){
+ const type=document.getElementById("film-type"),bundle=document.getElementById("film-bundle"),note=document.getElementById("screen-film-price-note"),priceArea=document.getElementById("product-info-price");
+ if(!type||!bundle||!note)return;
+ const selected=type.value;
+ if(!selected){note.textContent="Selecione o tipo de película para consultar o valor.";return}
+ const solo=screenFilmPrice(selected,"solo"),combo=screenFilmPrice(selected,"bundle");
+ const price=screenFilmPrice(selected,bundle.value);
+ priceArea.textContent=money(price);
+ note.innerHTML=bundle.value==="bundle"?`Oferta capa + película: <strong>${money(combo)}</strong>. Você economiza ${money(25+solo-combo)} em relação aos valores individuais.`:`Somente película: <strong>${money(solo)}</strong>. Se incluir uma capa, o valor promocional fica por ${money(combo)}.`;
+}
+
 /* INFORMAÇÕES DO PRODUTO */
 function showProductInfo(id){
  const product=productsList.find(item=>item.id===id);if(!product)return;
  currentInfoProduct=product;selectedCoverColor="";
  const details=productDescriptions[id]||{description:"Consulte a loja para mais informações.",compatibility:"Confirme a compatibilidade antes de encomendar.",extra:"Consulte a loja para detalhes adicionais."};
  document.getElementById("product-info-title").textContent=product.name;
- document.getElementById("product-info-price").textContent=getProductPriceText(product);
+ document.getElementById("product-info-price").textContent=product.screenProtector?"A partir de R$ 30,00":getProductPriceText(product);
  document.getElementById("product-info-description").textContent=details.description;
  const photoArea=document.getElementById("product-info-photo");
  if(product.customCover)photoArea.innerHTML=renderCoverPreview("","Preto");
+ else if(product.screenProtector)photoArea.innerHTML=`<span>🛡️</span>`;
  else photoArea.innerHTML=`<img src="${product.photo}" alt="${escapeHtml(product.name)}" onerror="this.style.display='none'">`;
  const detailsArea=document.getElementById("product-info-details");
- if(product.customCover){
+ if(product.screenProtector){
+  detailsArea.innerHTML=`
+   <p><strong>Escolha a proteção ideal:</strong><br>Primeiro, informe o modelo exato do celular. O sistema verificará se a tela é curva ou plana antes de liberar as películas compatíveis.</p>
+   <div class="screen-film-box">
+    <label for="film-model">Marca e modelo do celular</label>
+    <input id="film-model" type="text" placeholder="Ex.: Samsung Galaxy S23 Ultra" autocomplete="off" oninput="checkScreenFilmCompatibility()">
+    <div class="screen-film-help">Digite o nome completo do aparelho, incluindo a versão (por exemplo, Pro, Plus ou Ultra).</div>
+    <div id="screen-film-result" class="screen-film-result">Informe o modelo para verificar a compatibilidade.</div>
+    <div id="screen-film-options" hidden>
+     <label for="film-type">Tipo de película</label>
+     <select id="film-type" onchange="updateScreenFilmPrice()"><option value="">Selecione uma película</option></select>
+     <label for="film-bundle">Deseja incluir uma capa?</label>
+     <select id="film-bundle" onchange="updateScreenFilmPrice()"><option value="solo">Somente película</option><option value="bundle">Capa + película (oferta especial)</option></select>
+     <div class="screen-film-help" id="screen-film-price-note"></div>
+    </div>
+   </div>`;
+ }else if(product.customCover){
   detailsArea.innerHTML=`
    <p><strong>Como personalizar:</strong><br>Informe o modelo exato do aparelho e escolha a cor desejada.</p>
    <div class="custom-field"><label for="cover-model">Modelo do celular</label><input id="cover-model" type="text" placeholder="Ex.: iPhone 13, Samsung A15" oninput="updateCoverPreview()"></div>
@@ -858,6 +956,19 @@ function showProductInfo(id){
  if(isUnknownPrice(product)){addButton.disabled=true;addButton.textContent="Preço ainda não definido";addButton.style.opacity=".5"}
  else{addButton.disabled=false;addButton.textContent="+ Adicionar ao carrinho";addButton.style.opacity="1"}
  addButton.onclick=()=>{
+  if(product.screenProtector){
+   const model=document.getElementById("film-model").value.trim();
+   const compatibility=getScreenFilmCompatibility(model);
+   if(!model){showToast("Informe a marca e o modelo do celular.","error");return}
+   if(!compatibility){showToast("Não foi possível confirmar a curvatura deste modelo. Consulte a loja antes de escolher.","error");return}
+   const filmType=document.getElementById("film-type").value;
+   if(!filmType){showToast("Selecione uma película compatível.","error");return}
+   const bundle=document.getElementById("film-bundle").value;
+   const price=screenFilmPrice(filmType,bundle);
+   const label=`${filmType} · ${bundle==="bundle"?"Capa + película":"Somente película"}`;
+   addToCart(product.id,{model,filmType,bundle,label,price,screenProtector:true});
+   closeProductInfo();return;
+  }
   if(product.customCover){
    const model=document.getElementById("cover-model").value.trim();
    if(!model){showToast("Informe o modelo exato do celular.","error");return}
@@ -894,7 +1005,7 @@ function addToCart(id,variant=null){
  const product=productsList.find(p=>p.id===id);if(!product)return;
  if(product.customCover&&!variant){showProductInfo(id);return}
  if(isUnknownPrice(product)){showToast("O preço deste produto ainda será definido.","error");return}
- const variantKey=variant?`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`:String(id);
+ const variantKey=variant?(variant.screenProtector?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.filmType)}-${normalizeText(variant.bundle)}`:`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`):String(id);
  const existing=cart.find(item=>item.variantKey===variantKey);
  if(existing)existing.quantity++;
  else cart.push({...product,...(variant||{}),price:variant?variant.price:product.price,quantity:1,variantKey});
@@ -931,7 +1042,7 @@ function renderCart(){
  document.getElementById("cart-items-count").textContent=`${count} ${count===1?"item":"itens"}`;
  if(cart.length===0)area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
  else area.innerHTML=cart.map(item=>{
-  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
+  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.screenProtector?`Modelo: ${escapeHtml(item.model)}<br>Película: ${escapeHtml(item.filmType)}<br>${item.bundle==="bundle"?"Inclui capa promocional":"Somente película"}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
   return `<div class="cart-item"><div class="cart-item-image">${item.photo?`<img src="${item.photo}" alt="${escapeHtml(item.name)}">`:item.image}</div><div class="cart-item-info"><strong>${escapeHtml(item.name)}</strong>${variantText?`<small>${variantText}</small>`:""}<span class="cart-warranty">🛡️ ${escapeHtml(item.warranty||"Consultar garantia")}</span><div class="cart-price">${money(item.price*item.quantity)}</div></div><div class="cart-item-actions"><div class="quantity"><button type="button" onclick="changeQuantity('${item.variantKey}',-1)">−</button><strong>${item.quantity}</strong><button type="button" onclick="changeQuantity('${item.variantKey}',1)">+</button></div><button type="button" class="remove" onclick="removeItem('${item.variantKey}')">🗑</button></div></div>`;
  }).join("");
  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
@@ -1004,6 +1115,9 @@ function sendOrder(){
 • ${item.name}
 ${item.customCover?`Modelo do celular: ${item.model}
 Cor escolhida: ${item.color}
+`:item.screenProtector?`Modelo do celular: ${item.model}
+Tipo de película: ${item.filmType}
+Oferta: ${item.bundle==="bundle"?"Capa + película":"Somente película"}
 `:item.label?`Opção escolhida: ${item.label}
 `:""}Quantidade: ${item.quantity}
 Valor estimado: ${money(item.price*item.quantity)}
@@ -1020,6 +1134,7 @@ ${payment.description}
 Pedido aguardando confirmação de disponibilidade pelo proprietário.
 
 No caso da capa de silicone, confirmar a disponibilidade da cor e do modelo escolhidos antes de aceitar a encomenda.
+Para películas, confirmar a compatibilidade do modelo e a disponibilidade antes de aceitar a encomenda.
 
 Por favor, entre em contato com o cliente para confirmar os produtos e combinar a entrega.
 
