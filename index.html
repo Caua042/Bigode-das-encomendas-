@@ -111,6 +111,7 @@ header{background:#101010;color:white;padding:13px 5%;display:flex;align-items:c
 .color-choice:focus-visible{outline:2px solid #40DCCB;outline-offset:4px;border-radius:8px}
 .case-preview-wrap{width:100%;display:flex;align-items:center;justify-content:center}
 .case-preview-wrap svg{height:195px;max-width:100%;width:auto;filter:drop-shadow(0 5px 5px #0003)}
+.cover-real-photo{width:100%;height:100%;object-fit:contain;padding:8px;background:#f7f7f7}.cover-reference-note{font-size:11px;color:#aaa;line-height:1.5;margin-top:8px}.cover-extra-link{display:block;margin-top:10px;padding:11px;border:1px solid #40DCCB;border-radius:10px;color:#40DCCB;text-align:center;font-size:12px;font-weight:800;text-decoration:none}.film-cover-choice{margin:12px 0;padding:12px;border:1px solid #454545;border-radius:12px;background:#101010}.film-cover-choice strong{display:block;font-size:13px;margin-bottom:8px}.film-cover-choice .color-options{gap:9px}.film-cover-choice .color-choice{min-width:38px}.film-cover-choice .color-swatch{width:29px;height:29px}.film-promo-cover-photo{height:155px;max-width:220px;margin:10px auto 2px;border-radius:10px;overflow:hidden;background:#f7f7f7}.film-promo-cover-photo .case-preview-wrap{height:100%}.film-promo-cover-photo .cover-real-photo{height:100%;width:100%;object-fit:contain}
 .custom-price-note{font-size:11px;color:#aaa;margin-top:9px;line-height:1.5}
 body[data-theme="light"] .custom-field input,body[data-theme="light"] .custom-field select{background:white;color:#222;border-color:#ccc}
 body[data-theme="light"] .color-choice{color:#333}
@@ -453,8 +454,8 @@ const RECENT_SEARCHES_KEY="bigode-recent-searches";
 const MAX_RECENT_SEARCHES=5;
 let currentTheme="dark",toastTimer,cart=[],cancelModalMode="";
 let currentInfoProduct=null;
-let selectedCoverColor="";
-let filmCategoryModel="",filmCardIndex=0,filmSelectedType="Vidro 3D",filmSelectedPrivacy=false,filmSelectedBundle=false;
+let selectedCoverColor="",filmModalCoverColor="";
+let filmCategoryModel="",filmCardIndex=0,filmSelectedType="Vidro 3D",filmSelectedPrivacy=false,filmSelectedBundle=false,filmSelectedCoverColor="";
 
 /* LOGOS DAS MARCAS */
 const brandLogos={
@@ -591,7 +592,7 @@ const productDescriptions={
 /* PREÇO E FORMATAÇÃO */
 function money(value){return Number(value).toLocaleString("pt-BR",{style:"currency",currency:"BRL"})}
 function coverPrice(model,color){
- const isIphone=/iphone/i.test(model);
+ const isIphone=isIphoneModel(model);
  if(isIphone)return(color==="Branco"||color==="Marrom")?42:35;
  return 25;
 }
@@ -623,72 +624,76 @@ function getCoverColor(colorName){
  return coverColors.find(c=>c.name===colorName)?.hex||"#222222";
 }
 
-function renderCoverPreview(model="",colorName="Preto"){
- const color=getCoverColor(colorName);
- const isIphone=/iphone/i.test(model);
- const isTransparent=/transparente/i.test(colorName);
- const phoneColor="#b9c5ce";
- const caseFill=isTransparent?"rgba(220,232,235,.22)":color;
-
- const cameraDesign=isIphone
- ?`
-   <rect x="43" y="25" width="105" height="112" rx="21" fill="#171717" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
-   <circle cx="72" cy="55" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
-   <circle cx="119" cy="55" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
-   <circle cx="72" cy="101" r="16" fill="#080808" stroke="#555" stroke-width="2"/>
-   <circle cx="72" cy="55" r="7" fill="#292929"/>
-   <circle cx="119" cy="55" r="7" fill="#292929"/>
-   <circle cx="72" cy="101" r="7" fill="#292929"/>
-   <circle cx="119" cy="101" r="7" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
- `
- :`
-   <rect x="49" y="25" width="91" height="105" rx="18" fill="${isTransparent?"rgba(90,105,115,.12)":color}" stroke="#ffffff" stroke-opacity=".55" stroke-width="2.5"/>
-   <circle cx="75" cy="53" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="113" cy="53" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="75" cy="89" r="11" fill="#171717" stroke="#777" stroke-width="2"/>
-   <circle cx="75" cy="53" r="4.5" fill="#292929"/>
-   <circle cx="113" cy="53" r="4.5" fill="#292929"/>
-   <circle cx="75" cy="89" r="4.5" fill="#292929"/>
-   <circle cx="113" cy="89" r="5" fill="#f4edc8" stroke="#aaa" stroke-width="1.5"/>
- `;
-
- return `<div class="case-preview-wrap">
-  <svg viewBox="0 0 220 300" role="img" aria-label="Capa ${escapeHtml(colorName)} para ${isIphone?"iPhone":"Android"}">
-   <defs><linearGradient id="caseShine" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".3"/><stop offset=".45" stop-color="#ffffff" stop-opacity="0"/><stop offset="1" stop-color="#000000" stop-opacity=".13"/></linearGradient></defs>
-   <rect x="37" y="14" width="146" height="272" rx="25" fill="${phoneColor}"/>
-   <rect x="30" y="7" width="160" height="286" rx="31" fill="${caseFill}" stroke="${isTransparent?"#b9d0d8":"#777"}" stroke-width="3"/>
-   <rect x="37" y="14" width="146" height="272" rx="25" fill="url(#caseShine)" stroke="#ffffff" stroke-opacity="${isTransparent?".65":".3"}" stroke-width="2"/>
-   ${cameraDesign}
-   <rect x="187" y="78" width="5" height="39" rx="2" fill="#888"/>
-   <rect x="187" y="129" width="5" height="26" rx="2" fill="#888"/>
-   <path d="M48 150 Q110 166 172 150" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
-   <path d="M47 269 Q110 280 173 269" fill="none" stroke="#ffffff" stroke-opacity=".12" stroke-width="2"/>
-  </svg>
- </div>`;
+const coverPhotoSets={
+ iphone:{"Preto":"imagens/IMG_1328.webp","Branco":"imagens/IMG_1329.webp","Marrom":"imagens/IMG_1330.webp","Azul":"imagens/IMG_1331.webp","Vermelho":"imagens/IMG_1332.webp"},
+ samsung:{"Preto":"imagens/IMG_1322.webp","Azul":"imagens/IMG_1323.webp","Vermelho":"imagens/IMG_1324.webp"},
+ xiaomi:{"Vermelho":"imagens/IMG_1325.webp","Preto":"imagens/IMG_1326.webp","Azul":"imagens/IMG_1327.webp"},
+ motorola:{"Preto":"imagens/IMG_1322.webp","Azul":"imagens/IMG_1323.webp","Vermelho":"imagens/IMG_1324.webp"},
+ fallback:{"Preto":"imagens/IMG_1322.webp","Azul":"imagens/IMG_1323.webp","Vermelho":"imagens/IMG_1324.webp"}
+};
+function getCoverBrand(model=""){
+ const m=normalizeText(model);
+ if(/iphone|apple/.test(m))return "iphone";
+ if(/xiaomi|xiomi|redmi|poco/.test(m))return "xiaomi";
+ if(/motorola|moto /.test(m))return "motorola";
+ if(/samsung|galaxy/.test(m))return "samsung";
+ return "fallback";
 }
-
+function getCoverColorsForModel(model=""){
+ const brand=getCoverBrand(model);
+ return brand==="iphone"?["Preto","Branco","Marrom","Azul","Vermelho"]:["Preto","Azul","Vermelho"];
+}
+function getCoverPhoto(model,color){
+ const brand=getCoverBrand(model),set=coverPhotoSets[brand]||coverPhotoSets.fallback;
+ return set[color]||coverPhotoSets.fallback[color]||coverPhotoSets.fallback.Preto;
+}
+function isIphoneModel(model=""){return getCoverBrand(model)==="iphone"}
+function renderCoverPreview(model="",colorName="Preto"){
+ const brand=getCoverBrand(model),src=getCoverPhoto(model,colorName);
+ const isReference=brand==="fallback"||brand==="motorola";
+ return `<div class="case-preview-wrap"><img class="cover-real-photo" src="${src}" alt="Capa ${colorName} ${brand==="iphone"?"para iPhone":brand==="xiaomi"?"para Xiaomi/Redmi":brand==="samsung"?"para Samsung":"como referência visual"}" onerror="this.style.display='none'"></div>`;
+}
+function renderCoverColorChoices(model,selected="",context="cover"){
+ const colors=getCoverColorsForModel(model);
+ return `<div class="color-options">${colors.map(name=>{
+  const hex=getCoverColor(name);
+  return `<button type="button" class="color-choice ${selected===name?"selected":""}" data-color="${name}" aria-label="Escolher cor ${name}" aria-pressed="${selected===name}" onclick="${context==="film"?`selectFilmBundleCoverColor('${name}')`:context==="filmModal"?`selectFilmModalCoverColor('${name}')`:`selectCoverColor('${name}')`}"><span class="color-swatch" style="background:${hex}"></span><span>${name}</span></button>`;
+ }).join("")}</div>`;
+}
 function updateCoverPreview(){
  const model=document.getElementById("cover-model")?.value.trim()||"";
  const area=document.getElementById("product-info-photo");
- if(area)area.innerHTML=renderCoverPreview(model,selectedCoverColor||"Preto");
+ if(area)area.innerHTML=renderCoverPreview(model,selectedCoverColor||getCoverColorsForModel(model)[0]||"Preto");
+ const colorArea=document.getElementById("cover-color-options");
+ if(colorArea){
+  const valid=getCoverColorsForModel(model);
+  if(!valid.includes(selectedCoverColor))selectedCoverColor="";
+  colorArea.innerHTML=renderCoverColorChoices(model,selectedCoverColor);
+ }
+ const note=document.getElementById("cover-reference-note");
+ if(note)note.textContent=getCoverBrand(model)==="fallback"||getCoverBrand(model)==="motorola"?"Imagem de referência de cor. A loja confirmará o modelo exato e a disponibilidade antes de aceitar a encomenda.":"As fotos mostram as opções de capas cadastradas para esta marca. A disponibilidade será confirmada pela loja.";
  updateCoverPricePreview();
 }
-
 function selectCoverColor(color){
  selectedCoverColor=color;
- document.querySelectorAll(".color-choice").forEach(button=>{
-  const selected=button.dataset.color===color;
-  button.classList.toggle("selected",selected);
-  button.setAttribute("aria-pressed",selected?"true":"false");
- });
- updateCoverPreview();
+ const model=document.getElementById("cover-model")?.value.trim()||"";
+ const area=document.getElementById("product-info-photo");
+ if(area)area.innerHTML=renderCoverPreview(model,color);
+ const colorArea=document.getElementById("cover-color-options");
+ if(colorArea)colorArea.innerHTML=renderCoverColorChoices(model,color);
+ updateCoverPricePreview();
 }
-
 function updateCoverPricePreview(){
  const model=document.getElementById("cover-model")?.value.trim()||"";
  const priceArea=document.getElementById("product-info-price");
+ if(!priceArea)return;
  if(!model||!selectedCoverColor){priceArea.textContent="A partir de R$ 25,00";return}
  priceArea.textContent=money(coverPrice(model,selectedCoverColor));
+}
+function requestOtherCoverColors(){
+ const model=document.getElementById("cover-model")?.value.trim()||"Modelo não informado";
+ const message=`Olá! Gostaria de consultar outras cores de capa para ${model}. Vocês têm outras opções disponíveis?`;
+ window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`,"_blank");
 }
 
 /* PESQUISA */
@@ -869,14 +874,17 @@ function renderFilmChoicePanel(){
   {privacy:true,bundle:true,title:"Privacidade + capa",sub:"Combo + R$ 10,00"}
  ];
  const price=getFilmChoicePrice(product,filmSelectedPrivacy,filmSelectedBundle);
+ const promoCoverExtra=filmSelectedBundle&&isIphoneModel(filmCategoryModel)&&["Branco","Marrom"].includes(filmSelectedCoverColor)?5:0;
+ const finalPrice=price+promoCoverExtra;
+ const coverChoices=filmSelectedBundle?`<div class="film-cover-choice"><strong>Escolha a cor da capa da promoção</strong>${renderCoverColorChoices(filmCategoryModel,filmSelectedCoverColor,"film")}<div class="film-promo-cover-photo">${filmSelectedCoverColor?renderCoverPreview(filmCategoryModel,filmSelectedCoverColor):"<small style=\"color:#aaa\">Escolha uma cor para visualizar a foto da capa.</small>"}</div><small style="display:block;color:#aaa;line-height:1.4">${isIphoneModel(filmCategoryModel)?"Para iPhone, branco e marrom acrescentam R$ 5,00 à promoção.":"A foto de referência pode ser de outra marca; a loja confirmará o modelo correto."}</small></div>`:"";
  return `<section class="film-options-panel"><h3>🎁 Escolha sua opção:</h3><div class="film-options-grid">${options.map(o=>{
   const active=o.privacy===filmSelectedPrivacy&&o.bundle===filmSelectedBundle;
   const optionPrice=getFilmChoicePrice(product,o.privacy,o.bundle);
-  return `<button type="button" class="film-option ${active?"selected":""}" onclick="setFilmPurchaseOption(${o.privacy},${o.bundle})"><span class="film-option-dot"></span><span><strong>${o.title}</strong><small>${o.sub} · ${money(optionPrice)}</small></span></button>`;
- }).join("")}</div><div class="film-choice-price"><span>Película ${escapeHtml(filmSelectedType)}${filmSelectedPrivacy?" · Privacidade":""}${filmSelectedBundle?" · Capa":""}</span><strong>${money(price)}</strong></div><button type="button" class="film-add-button" onclick="addSelectedFilmToCart()">🛒 Adicionar ao carrinho</button></section>`;
+  return `<button type="button" class="film-option ${active?"selected":""}" onclick="setFilmPurchaseOption(${o.privacy},${o.bundle})"><span class="film-option-dot"></span><span><strong>${o.title}</strong><small>${o.sub} · ${money(optionPrice)}${o.bundle&&isIphoneModel(filmCategoryModel)?" (capa branca/marrom + R$ 5)":""}</small></span></button>`;
+ }).join("")}</div>${coverChoices}${filmSelectedBundle?`<button type="button" class="cover-extra-link" onclick="requestOtherFilmCoverColors()">Consultar outras cores com a loja</button>`:""}<div class="film-choice-price"><span>Película ${escapeHtml(filmSelectedType)}${filmSelectedPrivacy?" · Privacidade":""}${filmSelectedBundle?` · Capa ${filmSelectedCoverColor?"· "+filmSelectedCoverColor:""}`:""}</span><strong>${money(finalPrice)}</strong></div><button type="button" class="film-add-button" onclick="addSelectedFilmToCart()">🛒 Adicionar ao carrinho</button></section>`;
 }
 function renderFilmCategory(area,title,items){
- filmSelectedType="Vidro 3D";filmSelectedPrivacy=false;filmSelectedBundle=false;
+ filmSelectedType="Vidro 3D";filmSelectedPrivacy=false;filmSelectedBundle=false;filmSelectedCoverColor="";
  area.innerHTML=`<div class="film-catalog"><div class="film-hero"><span class="film-hero-mark">◈</span><h2>Películas de <span>Alta Proteção</span></h2><p>Escolha a proteção ideal para a tela do seu aparelho.</p></div>
  <div class="screen-film-box film-category-check"><label for="film-category-model">Primeiro, informe a marca e o modelo do celular</label><input id="film-category-model" type="text" value="${escapeHtml(filmCategoryModel)}" placeholder="Ex.: Samsung Galaxy S23 FE" autocomplete="off" oninput="updateFilmCategory()"><div class="screen-film-help">Precisamos do modelo exato para verificar a compatibilidade da tela.</div><div id="film-category-result" class="screen-film-result">Informe o modelo para ver as películas compatíveis.</div></div>
  <div id="film-category-card-area"></div><div id="film-category-options"></div><p class="screen-film-help" style="margin-top:14px;text-align:center">Nenhuma película oferece proteção de 100%. A disponibilidade e a compatibilidade serão confirmadas pela loja.</p></div>`;
@@ -886,6 +894,7 @@ function updateFilmCategory(){
  const input=document.getElementById("film-category-model"),result=document.getElementById("film-category-result"),area=document.getElementById("film-category-card-area"),options=document.getElementById("film-category-options");
  if(!input||!result||!area||!options)return;
  filmCategoryModel=input.value.trim();
+ if(!getCoverColorsForModel(filmCategoryModel).includes(filmSelectedCoverColor))filmSelectedCoverColor="";
  const compatibility=getScreenFilmCompatibility(filmCategoryModel);
  if(!filmCategoryModel){result.className="screen-film-result";result.textContent="Informe o modelo para ver as películas compatíveis.";area.innerHTML="";options.innerHTML="";return}
  if(!compatibility){
@@ -910,7 +919,9 @@ function selectFilmType(type){
  if(compatibility==="curved"&&type!=="Hidrogel"){showToast("Para telas curvas, a opção indicada é a película de hidrogel.","error");return}
  filmSelectedType=type;updateFilmCategory();
 }
-function setFilmPurchaseOption(privacy,bundle){filmSelectedPrivacy=!!privacy;filmSelectedBundle=!!bundle;updateFilmCategory()}
+function setFilmPurchaseOption(privacy,bundle){filmSelectedPrivacy=!!privacy;filmSelectedBundle=!!bundle;if(!filmSelectedBundle)filmSelectedCoverColor="";updateFilmCategory()}
+function selectFilmBundleCoverColor(color){filmSelectedCoverColor=color;updateFilmCategory()}
+function requestOtherFilmCoverColors(){const model=filmCategoryModel||"modelo não informado";const message=`Olá! Gostaria de consultar outras cores de capa para ${model} na promoção de película + capa.`;window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`,"_blank")}
 function addSelectedFilmToCart(){
  const product=getFilmProducts().find(p=>p.screenFilmType===filmSelectedType);
  const model=filmCategoryModel.trim(),compatibility=getScreenFilmCompatibility(model);
@@ -918,11 +929,13 @@ function addSelectedFilmToCart(){
  if(!compatibility){showToast("Escolha uma das sugestões de modelo ou confirme a compatibilidade com a loja.","error");return}
  if(compatibility==="curved"&&filmSelectedType!=="Hidrogel"){showToast("Para telas curvas, escolha a película de hidrogel.","error");return}
  if(!product)return;
- const price=getFilmChoicePrice(product,filmSelectedPrivacy,filmSelectedBundle);
+ if(filmSelectedBundle&&!filmSelectedCoverColor){showToast("Escolha a cor da capa para continuar com a promoção.","error");return}
+ const coverExtra=filmSelectedBundle&&isIphoneModel(model)&&["Branco","Marrom"].includes(filmSelectedCoverColor)?5:0;
+ const price=getFilmChoicePrice(product,filmSelectedPrivacy,filmSelectedBundle)+coverExtra;
  const filmType=product.screenFilmType;
  const bundle=filmSelectedBundle?"bundle":"solo";
- const label=`${filmType} · ${filmSelectedPrivacy?"Privacidade":"Normal"} · ${filmSelectedBundle?"Capa + película":"Somente película"}`;
- addToCart(product.id,{model,filmType,bundle,privacy:filmSelectedPrivacy,label,price,screenProtector:true});
+ const label=`${filmType} · ${filmSelectedPrivacy?"Privacidade":"Normal"} · ${filmSelectedBundle?`Capa ${filmSelectedCoverColor} + película`:"Somente película"}`;
+ addToCart(product.id,{model,filmType,bundle,privacy:filmSelectedPrivacy,coverColor:filmSelectedBundle?filmSelectedCoverColor:"",label,price,screenProtector:true});
 }
 function chooseSuggestedPhoneModel(model){
  filmCategoryModel=model;
@@ -1040,6 +1053,7 @@ function checkScreenFilmCompatibility(){
  if(!input)return;
  const model=input.value.trim(),result=document.getElementById("screen-film-result"),options=document.getElementById("screen-film-options"),type=currentInfoProduct?.screenFilmType;
  const bundle=document.getElementById("film-bundle");
+ filmModalCoverColor="";
  options.hidden=true;
  if(!model){result.className="screen-film-result";result.textContent="Informe o modelo para verificar a compatibilidade.";return}
  const compatibility=getScreenFilmCompatibility(model);
@@ -1054,6 +1068,7 @@ function checkScreenFilmCompatibility(){
   result.className="screen-film-result";
   result.innerHTML="<strong>✓ Tela plana identificada</strong>Esta opção pode ser usada neste aparelho.";
   options.hidden=false;
+  updateFilmModalCoverChoices();
  }else{
   result.className="screen-film-result unknown";
   result.innerHTML="<strong>⚠️ Modelo ainda não identificado</strong>Não encontramos esse modelo na nossa lista. Confirme a compatibilidade com a loja antes de continuar.";
@@ -1063,22 +1078,37 @@ function checkScreenFilmCompatibility(){
 function updateScreenFilmPrice(){
  const bundle=document.getElementById("film-bundle"),note=document.getElementById("screen-film-price-note"),priceArea=document.getElementById("product-info-price");
  if(!bundle||!note||!currentInfoProduct)return;
- const product=currentInfoProduct,type=product.screenFilmType;
- const solo=Number(product.price),combo=Number(product.screenFilmBundlePrice),price=bundle.value==="bundle"?combo:solo;
+ const product=currentInfoProduct,type=product.screenFilmType,solo=Number(product.price),combo=Number(product.screenFilmBundlePrice);
+ const model=document.getElementById("film-model")?.value.trim()||"";
+ const extra=bundle.value==="bundle"&&isIphoneModel(model)&&["Branco","Marrom"].includes(filmModalCoverColor)?5:0;
+ const price=(bundle.value==="bundle"?combo:solo)+extra;
  priceArea.textContent=money(price);
- note.innerHTML=bundle.value==="bundle"?`Oferta capa + película: <strong>${money(combo)}</strong>.`:`Somente película: <strong>${money(solo)}</strong>. Com capa, o valor promocional fica por ${money(combo)}.`;
+ note.innerHTML=bundle.value==="bundle"?`Oferta capa + película: <strong>${money(combo)}</strong>${extra?` + ${money(extra)} pela capa ${filmModalCoverColor.toLowerCase()}`:""}.`:`Somente película: <strong>${money(solo)}</strong>. Com capa: ${money(combo)}.`;
+ const coverArea=document.getElementById("film-bundle-cover-colors");
+ if(coverArea)coverArea.hidden=bundle.value!=="bundle";
 }
+function updateFilmModalCoverChoices(){
+ const bundle=document.getElementById("film-bundle"),model=document.getElementById("film-model")?.value.trim()||"",wrap=document.getElementById("film-bundle-cover-colors"),area=document.getElementById("film-modal-color-options");
+ if(!bundle||!wrap||!area)return;
+ wrap.hidden=bundle.value!=="bundle";
+ if(bundle.value==="bundle")area.innerHTML=renderCoverColorChoices(model,filmModalCoverColor,"filmModal");
+ const photo=document.getElementById("film-modal-cover-photo");if(photo)photo.innerHTML=filmModalCoverColor?renderCoverPreview(model,filmModalCoverColor):"<small style=\"color:#aaa\">Escolha uma cor para visualizar a foto da capa.</small>";
+ updateScreenFilmPrice();
+}
+function selectFilmModalCoverColor(color){filmModalCoverColor=color;updateFilmModalCoverChoices()}
+function requestOtherModalFilmCoverColors(){const model=document.getElementById("film-model")?.value.trim()||"modelo não informado";const message=`Olá! Gostaria de consultar outras cores de capa para ${model} na promoção de película + capa.`;window.open(`https://wa.me/${STORE_WHATSAPP}?text=${encodeURIComponent(message)}`,"_blank")}
+
 
 /* INFORMAÇÕES DO PRODUTO */
 function showProductInfo(id){
  const product=productsList.find(item=>item.id===id);if(!product)return;
- currentInfoProduct=product;selectedCoverColor="";
+ currentInfoProduct=product;selectedCoverColor="";filmModalCoverColor="";
  const details=productDescriptions[id]||{description:"Consulte a loja para mais informações.",compatibility:"Confirme a compatibilidade antes de encomendar.",extra:"Consulte a loja para detalhes adicionais."};
  document.getElementById("product-info-title").textContent=product.name;
  document.getElementById("product-info-price").textContent=product.screenProtector?money(product.price):getProductPriceText(product);
  document.getElementById("product-info-description").textContent=details.description;
  const photoArea=document.getElementById("product-info-photo");
- if(product.customCover)photoArea.innerHTML=renderCoverPreview("","Preto");
+ if(product.customCover)photoArea.innerHTML=`<span>📱</span>`;
  else if(product.screenProtector)photoArea.innerHTML=`<span>🛡️</span>`;
  else photoArea.innerHTML=`<img src="${product.photo}" alt="${escapeHtml(product.name)}" onerror="this.style.display='none'">`;
  const detailsArea=document.getElementById("product-info-details");
@@ -1093,19 +1123,19 @@ function showProductInfo(id){
     <div id="screen-film-result" class="screen-film-result">Informe o modelo para verificar a compatibilidade.</div>
     <div id="screen-film-options" hidden>
      <label for="film-bundle">Deseja incluir uma capa?</label>
-     <select id="film-bundle" onchange="updateScreenFilmPrice()"><option value="solo">Somente película</option><option value="bundle">Capa + película (oferta especial)</option></select>
-     <div class="screen-film-help" id="screen-film-price-note">Somente película: ${money(product.price)}. Com capa: ${money(product.screenFilmBundlePrice)}.</div>
+     <select id="film-bundle" onchange="updateFilmModalCoverChoices()"><option value="solo">Somente película</option><option value="bundle">Capa + película (oferta especial)</option></select>
+     <div class="screen-film-help" id="screen-film-price-note">Somente película: ${money(product.price)}. Com capa: ${money(product.screenFilmBundlePrice)}.</div><div id="film-bundle-cover-colors" class="film-cover-choice" hidden><strong>Escolha a cor da capa da promoção</strong><div id="film-modal-color-options"></div><div id="film-modal-cover-photo" class="film-promo-cover-photo"><small style="color:#aaa">Escolha uma cor para visualizar a foto da capa.</small></div><small style="display:block;color:#aaa;line-height:1.4">Para iPhone, branco e marrom acrescentam R$ 5,00 à promoção.</small><button type="button" class="cover-extra-link" onclick="requestOtherModalFilmCoverColors()">Consultar outras cores com a loja</button></div>
     </div>
    </div>
    <p class="screen-film-help">Atenção: nenhuma película garante proteção de 100%. Evite impactos e objetos abrasivos.</p>`;
  }else if(product.customCover){
   detailsArea.innerHTML=`
-   <p><strong>Como personalizar:</strong><br>Informe o modelo exato do aparelho e escolha a cor desejada.</p>
-   <div class="custom-field"><label for="cover-model">Modelo do celular</label><input id="cover-model" type="text" placeholder="Ex.: iPhone 13, Samsung A15" oninput="updateCoverPreview()"></div>
-   <div class="custom-field"><label>Escolha a cor</label><div class="color-options">
-   ${coverColors.map(c=>`<button type="button" class="color-choice" data-color="${c.name}" aria-label="Escolher cor ${c.name}" aria-pressed="false" onclick="selectCoverColor('${c.name}')"><span class="color-swatch" style="background:${c.hex};${c.name==="Transparente"?"background-image:linear-gradient(135deg,#fff 25%,#d5d5d5 25%,#d5d5d5 50%,#fff 50%,#fff 75%,#d5d5d5 75%);background-size:10px 10px;":""}"></span><span>${c.name}</span></button>`).join("")}
-   </div></div>
-   <p class="custom-price-note">O valor pode variar conforme o modelo e a cor. A disponibilidade será confirmada pelo WhatsApp.</p>`;
+   <p><strong>Como personalizar:</strong><br>Informe o modelo exato do aparelho. As fotos e cores disponíveis serão exibidas conforme a marca.</p>
+   <div class="custom-field"><label for="cover-model">Modelo do celular</label><input id="cover-model" type="text" placeholder="Ex.: iPhone 13, Samsung A15, Redmi Note 13" oninput="updateCoverPreview()"></div>
+   <div class="custom-field"><label>Escolha uma cor</label><div id="cover-color-options">Informe o modelo para ver as cores.</div></div>
+   <p class="cover-reference-note" id="cover-reference-note">As fotos disponíveis serão mostradas depois que informar o modelo.</p>
+   <button type="button" class="cover-extra-link" onclick="requestOtherCoverColors()">Consultar outras cores com a loja</button>
+   <p class="custom-price-note">iPhone: R$ 35,00; branco ou marrom: R$ 42,00. Outras marcas: R$ 25,00. Disponibilidade sujeita à confirmação.</p>`;
  }else{
   detailsArea.innerHTML=`<p><strong>Compatibilidade:</strong><br>${escapeHtml(details.compatibility)}</p><p><strong>Garantia:</strong><br>${escapeHtml(product.warranty)}</p><p><strong>Detalhes:</strong><br>${escapeHtml(details.extra)}</p>${product.options?`<div class="custom-field"><label for="product-option">Escolha uma opção</label><select id="product-option" onchange="updateProductOptionPrice(${product.id})">${product.options.map((option,index)=>`<option value="${index}">${escapeHtml(option.label)} — ${money(option.price)}</option>`).join("")}</select></div>`:""}`;
  }
@@ -1123,9 +1153,11 @@ function showProductInfo(id){
    const result=document.getElementById("screen-film-result");
    if(!document.getElementById("screen-film-options")||document.getElementById("screen-film-options").hidden){showToast("Confirme a compatibilidade do aparelho antes de continuar.","error");return}
    const bundle=document.getElementById("film-bundle").value;
-   const price=bundle==="bundle"?product.screenFilmBundlePrice:product.price;
-   const label=`${filmType} · ${bundle==="bundle"?"Capa + película":"Somente película"}`;
-   addToCart(product.id,{model,filmType,bundle,label,price,screenProtector:true});
+   if(bundle==="bundle"&&!filmModalCoverColor){showToast("Escolha a cor da capa para continuar com a promoção.","error");return}
+   const extra=bundle==="bundle"&&isIphoneModel(model)&&["Branco","Marrom"].includes(filmModalCoverColor)?5:0;
+   const price=(bundle==="bundle"?product.screenFilmBundlePrice:product.price)+extra;
+   const label=`${filmType} · ${bundle==="bundle"?`Capa ${filmModalCoverColor} + película`:"Somente película"}`;
+   addToCart(product.id,{model,filmType,bundle,label,price,coverColor:bundle==="bundle"?filmModalCoverColor:"",screenProtector:true});
    closeProductInfo();return;
   }
   if(product.customCover){
@@ -1144,6 +1176,7 @@ function showProductInfo(id){
   }
   addToCart(product.id);closeProductInfo();
  };
+ if(product.customCover)updateCoverPreview();
  document.getElementById("product-info-overlay").classList.add("open");
  document.body.style.overflow="hidden";
 }
@@ -1164,7 +1197,7 @@ function addToCart(id,variant=null){
  const product=productsList.find(p=>p.id===id);if(!product)return;
  if(product.customCover&&!variant){showProductInfo(id);return}
  if(isUnknownPrice(product)){showToast("O preço deste produto ainda será definido.","error");return}
- const variantKey=variant?(variant.screenProtector?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.filmType)}-${normalizeText(variant.bundle)}-${normalizeText(variant.privacy?"privacidade":"normal")}`:`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`):String(id);
+ const variantKey=variant?(variant.screenProtector?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.filmType)}-${normalizeText(variant.bundle)}-${normalizeText(variant.privacy?"privacidade":"normal")}-${normalizeText(variant.coverColor||"")}`:`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`):String(id);
  const existing=cart.find(item=>item.variantKey===variantKey);
  if(existing)existing.quantity++;
  else cart.push({...product,...(variant||{}),price:variant?variant.price:product.price,quantity:1,variantKey});
@@ -1201,7 +1234,7 @@ function renderCart(){
  document.getElementById("cart-items-count").textContent=`${count} ${count===1?"item":"itens"}`;
  if(cart.length===0)area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
  else area.innerHTML=cart.map(item=>{
-  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.screenProtector?`Modelo: ${escapeHtml(item.model)}<br>Película: ${escapeHtml(item.filmType)}<br>Versão: ${item.privacy?"Com privacidade":"Normal"}<br>${item.bundle==="bundle"?"Inclui capa promocional":"Somente película"}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
+  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.screenProtector?`Modelo: ${escapeHtml(item.model)}<br>Película: ${escapeHtml(item.filmType)}<br>Versão: ${item.privacy?"Com privacidade":"Normal"}<br>${item.bundle==="bundle"?`Inclui capa promocional · Cor: ${escapeHtml(item.coverColor||"não selecionada")}`:"Somente película"}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
   return `<div class="cart-item"><div class="cart-item-image">${item.photo?`<img src="${item.photo}" alt="${escapeHtml(item.name)}">`:item.image}</div><div class="cart-item-info"><strong>${escapeHtml(item.name)}</strong>${variantText?`<small>${variantText}</small>`:""}<span class="cart-warranty">🛡️ ${escapeHtml(item.warranty||"Consultar garantia")}</span><div class="cart-price">${money(item.price*item.quantity)}</div></div><div class="cart-item-actions"><div class="quantity"><button type="button" onclick="changeQuantity('${item.variantKey}',-1)">−</button><strong>${item.quantity}</strong><button type="button" onclick="changeQuantity('${item.variantKey}',1)">+</button></div><button type="button" class="remove" onclick="removeItem('${item.variantKey}')">🗑</button></div></div>`;
  }).join("");
  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
@@ -1278,7 +1311,7 @@ Cor escolhida: ${item.color}
 Tipo de película: ${item.filmType}
 Versão: ${item.privacy?"Com privacidade":"Normal"}
 Oferta: ${item.bundle==="bundle"?"Capa + película":"Somente película"}
-`:item.label?`Opção escolhida: ${item.label}
+${item.bundle==="bundle"?`Cor da capa: ${item.coverColor||"Não informada"}\n`:""}`:item.label?`Opção escolhida: ${item.label}
 `:""}Quantidade: ${item.quantity}
 Valor estimado: ${money(item.price*item.quantity)}
 Garantia: ${item.warranty||"Não informada"}
