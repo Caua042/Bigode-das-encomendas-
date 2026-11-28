@@ -215,6 +215,7 @@ body[data-theme="light"] .section-title p{color:#777}
 body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
 /* Categoria de películas — identidade original Bigode */
 .film-catalog{margin-top:18px;color:var(--text,#fff)}
+.film-home-button{display:inline-flex;align-items:center;gap:7px;margin:0 0 12px;padding:10px 14px;border:1px solid #40DCCB;border-radius:10px;background:#101010;color:#40DCCB;font-size:13px;font-weight:800;cursor:pointer}.film-home-button:active{transform:scale(.98)}body[data-theme="light"] .film-home-button{background:#fff;color:#087f73;border-color:#20b9aa}
 .film-hero{position:relative;overflow:hidden;padding:22px 18px 18px;border-radius:18px;background:linear-gradient(125deg,#090909,#171717 65%,#090909);border:1px solid #343434;margin-bottom:16px}
 .film-hero h2{font-size:clamp(24px,5vw,38px);line-height:1.05;font-weight:900;letter-spacing:-1px;margin:0 0 8px}
 .film-hero h2 span{color:#40DCCB}.film-hero p{font-size:14px;color:#c8c8c8;margin:0}.film-hero-mark{position:absolute;right:18px;top:18px;font-size:38px;color:#40DCCB;opacity:.9}
@@ -885,7 +886,7 @@ function renderFilmChoicePanel(){
 }
 function renderFilmCategory(area,title,items){
  filmSelectedType="Vidro 3D";filmSelectedPrivacy=false;filmSelectedBundle=false;filmSelectedCoverColor="";
- area.innerHTML=`<div class="film-catalog"><div class="film-hero"><span class="film-hero-mark">◈</span><h2>Películas de <span>Alta Proteção</span></h2><p>Escolha a proteção ideal para a tela do seu aparelho.</p></div>
+ area.innerHTML=`<div class="film-catalog"><button type="button" class="film-home-button" onclick="showAllCategories()">← Voltar à página inicial</button><div class="film-hero"><span class="film-hero-mark">◈</span><h2>Películas de <span>Alta Proteção</span></h2><p>Escolha a proteção ideal para a tela do seu aparelho.</p></div>
  <div class="screen-film-box film-category-check"><label for="film-category-model">Primeiro, informe a marca e o modelo do celular</label><input id="film-category-model" type="text" value="${escapeHtml(filmCategoryModel)}" placeholder="Ex.: Samsung Galaxy S23 FE" autocomplete="off" oninput="updateFilmCategory()"><div class="screen-film-help">Precisamos do modelo exato para verificar a compatibilidade da tela.</div><div id="film-category-result" class="screen-film-result">Informe o modelo para ver as películas compatíveis.</div></div>
  <div id="film-category-card-area"></div><div id="film-category-options"></div><p class="screen-film-help" style="margin-top:14px;text-align:center">Nenhuma película oferece proteção de 100%. A disponibilidade e a compatibilidade serão confirmadas pela loja.</p></div>`;
  updateFilmCategory();
@@ -1016,7 +1017,9 @@ function getScreenFilmCompatibility(model){
  if(!value||(value==="a5"&&!/\bredmi\b/i.test(model)))return null;
  const matches=name=>{
   const candidate=normalizePhoneModel(name);
-  return value===candidate||value.includes(candidate)||candidate.includes(value)&&value.length>=5;
+  // Correspondência exata após remover marcas: evita que "iPhone 12"
+  // seja confundido com modelos curvos que também contêm o número 12.
+  return value===candidate;
  };
  if(curvedScreenModels.some(matches))return "curved";
  if(flatScreenModels.some(matches))return "flat";
