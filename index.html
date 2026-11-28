@@ -212,26 +212,47 @@ body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);colo
 body[data-theme="light"] .hero p{color:#444}
 body[data-theme="light"] .section-title p{color:#777}
 body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
-/* Cartões especiais das três películas */
+/* Categoria de películas — identidade original Bigode */
+.film-catalog{margin-top:18px;color:var(--text,#fff)}
+.film-hero{position:relative;overflow:hidden;padding:22px 18px 18px;border-radius:18px;background:linear-gradient(125deg,#090909,#171717 65%,#090909);border:1px solid #343434;margin-bottom:16px}
+.film-hero h2{font-size:clamp(24px,5vw,38px);line-height:1.05;font-weight:900;letter-spacing:-1px;margin:0 0 8px}
+.film-hero h2 span{color:#40DCCB}.film-hero p{font-size:14px;color:#c8c8c8;margin:0}.film-hero-mark{position:absolute;right:18px;top:18px;font-size:38px;color:#40DCCB;opacity:.9}
+.film-category-check{max-width:100%;margin:0 0 16px;padding:15px;background:#151515;border:1px solid #383838;border-radius:15px}
+.film-category-check label{display:block;font-size:13px;font-weight:800;margin:0 0 8px}
+.film-category-check input{width:100%;padding:13px;border:1px solid #555;border-radius:10px;background:#090909;color:#fff;outline-color:#40DCCB}
+.film-category-check .screen-film-help{margin-top:8px}
 .film-cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:stretch}
-.film-card{display:flex;flex-direction:column;gap:10px;align-items:stretch;background:#1c1c1c;color:#fff;border:1px solid #3b3b3b;border-radius:16px;padding:13px;box-shadow:0 4px 14px #00000028;min-width:0}
-.film-card-icon{height:66px;border-radius:12px;background:linear-gradient(145deg,#303030,#151515);display:flex;align-items:center;justify-content:center;font-size:36px;border:1px solid #444}
-.film-card-content{min-width:0}
-.film-card h3{font-size:15px;line-height:1.3;margin-bottom:7px;min-height:38px}
-.film-card p{font-size:11px;line-height:1.5;color:#bbb;margin-bottom:8px;min-height:98px}
-.film-card-price{font-size:12px;line-height:1.6;margin-bottom:7px;min-height:55px}
-.film-card-price strong{color:#20d875;font-size:16px}
-.film-card-promo{color:#40DCCB;font-weight:bold}
-.film-card-choice{margin-top:auto}.film-card-choice label{display:block;font-size:11px;font-weight:bold;margin-bottom:6px}.film-card-choice select{width:100%;padding:9px 7px;border-radius:9px;background:#101010;color:#fff;border:1px solid #555;font-size:11px}.film-card button{width:100%;padding:11px 7px;border-radius:10px;background:#20d875;color:#101010;font-weight:bold;font-size:12px;margin-top:9px}
-.film-next-button{display:block;width:min(100%,360px);margin:13px auto 0;padding:12px 16px;border:1px solid #40DCCB;border-radius:11px;background:transparent;color:#40DCCB;font-weight:bold}
-.film-category-check{max-width:560px;margin:0 auto 14px;padding:15px;background:#1c1c1c;border:1px solid #444;border-radius:15px}
-body[data-theme="light"] .film-category-check{background:#fff;border-color:#ddd}
-body[data-theme="light"] .film-next-button{color:#087e72;border-color:#087e72}
-body[data-theme="light"] .film-card{background:#fff;color:#222;border-color:#ddd}
-body[data-theme="light"] .film-card p{color:#555}
-body[data-theme="light"] .film-card-icon{background:#f0f0f0;border-color:#ddd}
-body[data-theme="light"] .film-card-choice select{background:#fff;color:#222;border-color:#ccc}
-@media(max-width:650px){.film-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.film-card{display:flex;flex-direction:column;gap:7px;padding:7px;border-radius:11px}.film-card-icon{height:42px;font-size:24px}.film-card h3{font-size:11px;line-height:1.25;min-height:28px}.film-card p{font-size:9px;line-height:1.35;min-height:112px;margin-bottom:4px}.film-card-price{font-size:9px;line-height:1.45;min-height:72px}.film-card-price strong{font-size:11px}.film-card-choice{margin-top:auto}.film-card-choice label{font-size:9px;line-height:1.25}.film-card-choice select{font-size:9px;padding:7px 3px}.film-card button{font-size:9px;padding:9px 3px}}
+.film-card{position:relative;display:flex;flex-direction:column;gap:9px;min-width:0;overflow:hidden;background:linear-gradient(160deg,#111,#070707);color:#fff;border:1px solid #454545;border-radius:15px;padding:10px;box-shadow:0 5px 18px #0005;cursor:pointer;transition:border-color .2s,transform .2s}
+.film-card.selected{border:2px solid #40DCCB;box-shadow:0 0 0 1px #40DCCB35,0 7px 22px #0008;transform:translateY(-2px)}
+.film-card-photo{height:clamp(105px,20vw,190px);display:flex;align-items:center;justify-content:center;background:radial-gradient(ellipse at center,#262626,#090909 72%);border-radius:10px;overflow:hidden}
+.film-card-photo img{width:100%;height:100%;object-fit:contain;padding:5px;display:block}
+.film-card-photo .film-photo-fallback{font-size:36px;color:#40DCCB}
+.film-card h3{font-size:clamp(12px,1.8vw,17px);line-height:1.2;margin:0;min-height:2.4em}
+.film-card p{font-size:11px;line-height:1.45;color:#c2c2c2;margin:0;min-height:4.2em}
+.film-card-price{font-size:11px;line-height:1.55;margin-top:auto;color:#ddd}
+.film-card-price strong{display:block;color:#40DCCB;font-size:clamp(14px,2vw,20px);margin-top:2px}
+.film-card-select{display:block;width:100%;padding:9px 5px;border-radius:9px;background:#101010;color:#fff;border:1px solid #555;font-size:11px;font-weight:700}
+.film-card-choice{margin-top:2px}.film-card-choice button{width:100%;padding:10px 5px;border-radius:9px;background:#40DCCB;color:#07110f;font-weight:900;font-size:11px}
+.film-options-panel{margin-top:18px;padding:16px;border-radius:17px;background:linear-gradient(145deg,#171717,#0b0b0b);border:1px solid #414141}
+.film-options-panel h3{font-size:20px;margin:0 0 12px}.film-options-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.film-option{display:flex;align-items:center;gap:10px;text-align:left;padding:12px;border:1px solid #484848;border-radius:12px;background:#080808;color:#fff;min-width:0}
+.film-option.selected{border:2px solid #40DCCB;background:#10201e}.film-option-dot{width:18px;height:18px;flex:0 0 18px;border:2px solid #aaa;border-radius:50%}.film-option.selected .film-option-dot{border:5px solid #40DCCB}
+.film-option strong{display:block;font-size:13px;line-height:1.25}.film-option small{display:block;color:#aaa;font-size:10px;margin-top:4px}
+.film-choice-price{display:flex;justify-content:space-between;gap:10px;align-items:center;margin:13px 0 10px;padding:12px;border-radius:11px;background:#050505;border:1px solid #333;font-size:13px}.film-choice-price strong{font-size:20px;color:#40DCCB;white-space:nowrap}
+.film-add-button{width:100%;padding:15px;border:0;border-radius:13px;background:#40DCCB;color:#07110f;font-weight:900;font-size:16px}
+.film-suggestions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.film-suggestion{padding:9px 12px;border:1px solid #40DCCB;border-radius:9px;background:#101c1a;color:#fff;font-size:12px;font-weight:700}
+body[data-theme="light"] .film-hero,body[data-theme="light"] .film-options-panel{background:linear-gradient(145deg,#fff,#eee);color:#171717;border-color:#ccc}
+body[data-theme="light"] .film-hero p,body[data-theme="light"] .film-card p{color:#555}
+body[data-theme="light"] .film-category-check{background:#fff;border-color:#ccc}
+body[data-theme="light"] .film-category-check input{background:#f8f8f8;color:#222;border-color:#ccc}
+body[data-theme="light"] .film-card{background:linear-gradient(160deg,#fff,#f1f1f1);color:#222;border-color:#ccc}
+body[data-theme="light"] .film-card-photo{background:radial-gradient(ellipse at center,#eee,#ddd 72%)}
+body[data-theme="light"] .film-option{background:#fff;color:#222;border-color:#ccc}
+body[data-theme="light"] .film-option.selected{background:#e9f8f5}
+body[data-theme="light"] .film-option small{color:#666}
+body[data-theme="light"] .film-choice-price{background:#fff;color:#222;border-color:#ddd}
+@media(max-width:650px){.film-catalog{margin-top:12px}.film-hero{padding:18px 13px}.film-hero-mark{font-size:28px;right:12px}.film-cards{gap:6px}.film-card{padding:7px;gap:7px;border-radius:11px}.film-card-photo{height:105px}.film-card h3{font-size:11px;min-height:2.5em}.film-card p{font-size:9px;min-height:5.6em}.film-card-price{font-size:9px}.film-card-price strong{font-size:13px}.film-card-choice button{font-size:9px;padding:9px 3px}.film-options-panel{padding:11px}.film-options-panel h3{font-size:17px}.film-options-grid{gap:6px}.film-option{padding:9px 7px;gap:7px}.film-option strong{font-size:10px}.film-option small{font-size:9px}.film-choice-price{font-size:11px;padding:10px}.film-choice-price strong{font-size:17px}.film-add-button{font-size:14px;padding:13px}}
+@media(max-width:360px){.film-card-photo{height:88px}.film-card p{font-size:8px}}
 body[data-theme="light"] .product{background:white;color:#202020}
 body[data-theme="light"] .product-image{background:white}
 body[data-theme="light"] .price{color:#111}
@@ -433,7 +454,7 @@ const MAX_RECENT_SEARCHES=5;
 let currentTheme="dark",toastTimer,cart=[],cancelModalMode="";
 let currentInfoProduct=null;
 let selectedCoverColor="";
-let filmCategoryModel="",filmCardIndex=0;
+let filmCategoryModel="",filmCardIndex=0,filmSelectedType="Vidro 3D",filmSelectedPrivacy=false,filmSelectedBundle=false;
 
 /* LOGOS DAS MARCAS */
 const brandLogos={
@@ -819,67 +840,94 @@ function createProductCard(product){
   </div>
  </div>`;
 }
+const filmPhotoPaths={
+ "Vidro 3D":{normal:"imagens/IMG_1315.webp",privacy:"imagens/IMG_1316.jpeg"},
+ "Cerâmica":{normal:"imagens/IMG_1318.jpeg",privacy:"imagens/IMG_1317.jpeg"},
+ "Hidrogel":{normal:"imagens/IMG_1319.webp",privacy:"imagens/IMG_1319.webp"}
+};
+function getFilmProducts(){return ["Vidro 3D","Cerâmica","Hidrogel"].map(type=>productsList.find(p=>p.screenProtector&&p.screenFilmType===type)).filter(Boolean)}
+function getFilmChoicePrice(product,privacy,bundle){return (bundle?Number(product.screenFilmBundlePrice):Number(product.price))+(privacy?10:0)}
 function createFilmCard(product){
- const combo=Number(product.screenFilmBundlePrice),solo=Number(product.price);
- const promoText=combo<solo?`Economize ${money(solo-combo)} levando capa + película.`:`Oferta com capa + película por ${money(combo)}.`;
- return `<article class="film-card">
-  <div class="film-card-icon" aria-hidden="true">🛡️</div>
-  <div class="film-card-content">
-   <h3>${escapeHtml(product.name)}</h3>
-   <p>${escapeHtml(product.screenFilmDescription)}</p>
-   <div class="film-card-price">Somente película: <strong>${money(solo)}</strong><br><span class="film-card-promo">Capa + película: ${money(combo)}</span><br><small>${promoText}</small></div>
-  </div>
-  <div class="film-card-choice">
-   <label for="film-bundle-${product.id}">Como deseja levar?</label>
-   <select id="film-bundle-${product.id}">
-    <option value="solo">Somente película — ${money(solo)}</option>
-    <option value="bundle">Aproveitar oferta: capa + película — ${money(combo)}</option>
-   </select>
-   <button type="button" onclick="addFilmFromCategory(${product.id})">Adicionar ao carrinho</button>
-  </div>
+ const privacy=filmSelectedPrivacy,photo=filmPhotoPaths[product.screenFilmType]||{};
+ const src=privacy?photo.privacy:photo.normal;
+ const selected=filmSelectedType===product.screenFilmType;
+ return `<article class="film-card ${selected?"selected":""}" role="button" tabindex="0" aria-pressed="${selected}" onclick="selectFilmType('${product.screenFilmType}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectFilmType('${product.screenFilmType}')}">
+  <div class="film-card-photo"><img src="${src}" alt="Película ${escapeHtml(product.screenFilmType)} ${privacy?"com privacidade":"normal"}" loading="lazy" onerror="this.style.display='none';this.parentElement.innerHTML='<span class=&quot;film-photo-fallback&quot;>▱</span>'"></div>
+  <h3>Película ${escapeHtml(product.screenFilmType)}</h3>
+  <p>${escapeHtml(product.screenFilmDescription)}</p>
+  <div class="film-card-price">A partir de<strong>${money(getFilmChoicePrice(product,privacy,false))}</strong></div>
+  <div class="film-card-choice"><button type="button" onclick="event.stopPropagation();selectFilmType('${product.screenFilmType}')">${selected?"Selecionada ✓":"Escolher película"}</button></div>
  </article>`;
 }
+function renderFilmChoicePanel(){
+ const product=getFilmProducts().find(p=>p.screenFilmType===filmSelectedType)||getFilmProducts()[0];
+ if(!product)return "";
+ const options=[
+  {privacy:false,bundle:false,title:"Apenas película",sub:"Proteção sem capa"},
+  {privacy:false,bundle:true,title:"Película + capa",sub:"Oferta promocional"},
+  {privacy:true,bundle:false,title:"Película com privacidade",sub:"Adicional de R$ 10,00"},
+  {privacy:true,bundle:true,title:"Privacidade + capa",sub:"Combo + R$ 10,00"}
+ ];
+ const price=getFilmChoicePrice(product,filmSelectedPrivacy,filmSelectedBundle);
+ return `<section class="film-options-panel"><h3>🎁 Escolha sua opção:</h3><div class="film-options-grid">${options.map(o=>{
+  const active=o.privacy===filmSelectedPrivacy&&o.bundle===filmSelectedBundle;
+  const optionPrice=getFilmChoicePrice(product,o.privacy,o.bundle);
+  return `<button type="button" class="film-option ${active?"selected":""}" onclick="setFilmPurchaseOption(${o.privacy},${o.bundle})"><span class="film-option-dot"></span><span><strong>${o.title}</strong><small>${o.sub} · ${money(optionPrice)}</small></span></button>`;
+ }).join("")}</div><div class="film-choice-price"><span>Película ${escapeHtml(filmSelectedType)}${filmSelectedPrivacy?" · Privacidade":""}${filmSelectedBundle?" · Capa":""}</span><strong>${money(price)}</strong></div><button type="button" class="film-add-button" onclick="addSelectedFilmToCart()">🛒 Adicionar ao carrinho</button></section>`;
+}
 function renderFilmCategory(area,title,items){
- area.innerHTML=title+`<div class="screen-film-box film-category-check">
-  <label for="film-category-model">Primeiro, informe a marca e o modelo do celular</label>
-  <input id="film-category-model" type="text" value="${escapeHtml(filmCategoryModel)}" placeholder="Ex.: Samsung Galaxy A15" autocomplete="off" oninput="updateFilmCategory()">
-  <div class="screen-film-help">Precisamos do modelo exato para verificar se a tela é plana ou curva.</div>
-  <div id="film-category-result" class="screen-film-result">Informe o modelo para ver as películas compatíveis.</div>
- </div>
- <div id="film-category-card-area"></div>
- <p class="screen-film-help" style="margin-top:14px;text-align:center">Nenhuma película oferece proteção de 100%. A escolha deve considerar o modelo do aparelho e os cuidados de uso.</p>`;
+ filmSelectedType="Vidro 3D";filmSelectedPrivacy=false;filmSelectedBundle=false;
+ area.innerHTML=`<div class="film-catalog"><div class="film-hero"><span class="film-hero-mark">◈</span><h2>Películas de <span>Alta Proteção</span></h2><p>Escolha a proteção ideal para a tela do seu aparelho.</p></div>
+ <div class="screen-film-box film-category-check"><label for="film-category-model">Primeiro, informe a marca e o modelo do celular</label><input id="film-category-model" type="text" value="${escapeHtml(filmCategoryModel)}" placeholder="Ex.: Samsung Galaxy S23 FE" autocomplete="off" oninput="updateFilmCategory()"><div class="screen-film-help">Precisamos do modelo exato para verificar a compatibilidade da tela.</div><div id="film-category-result" class="screen-film-result">Informe o modelo para ver as películas compatíveis.</div></div>
+ <div id="film-category-card-area"></div><div id="film-category-options"></div><p class="screen-film-help" style="margin-top:14px;text-align:center">Nenhuma película oferece proteção de 100%. A disponibilidade e a compatibilidade serão confirmadas pela loja.</p></div>`;
  updateFilmCategory();
 }
 function updateFilmCategory(){
- const input=document.getElementById("film-category-model"),result=document.getElementById("film-category-result"),area=document.getElementById("film-category-card-area");
- if(!input||!result||!area)return;
+ const input=document.getElementById("film-category-model"),result=document.getElementById("film-category-result"),area=document.getElementById("film-category-card-area"),options=document.getElementById("film-category-options");
+ if(!input||!result||!area||!options)return;
  filmCategoryModel=input.value.trim();
  const compatibility=getScreenFilmCompatibility(filmCategoryModel);
- if(!filmCategoryModel){result.className="screen-film-result";result.textContent="Informe o modelo para ver as películas compatíveis.";area.innerHTML="";return}
- if(!compatibility){result.className="screen-film-result unknown";result.innerHTML="<strong>⚠️ Modelo ainda não identificado</strong>Não encontramos esse aparelho na nossa lista. Confirme a compatibilidade com a loja antes de escolher a película.";area.innerHTML="";return}
- if(compatibility==="curved"){
-  result.className="screen-film-result curved";result.innerHTML="<strong>✓ Tela curva identificada</strong>Para este aparelho, a opção compatível indicada é a película de hidrogel.";
-  const hydro=productsList.find(p=>p.screenProtector&&p.screenFilmType==="Hidrogel");
-  area.innerHTML=hydro?`<div class="film-cards">${createFilmCard(hydro)}</div>`:"";
-  return;
+ if(!filmCategoryModel){result.className="screen-film-result";result.textContent="Informe o modelo para ver as películas compatíveis.";area.innerHTML="";options.innerHTML="";return}
+ if(!compatibility){
+  const suggestions=getSimilarPhoneModelSuggestions(filmCategoryModel);
+  result.className="screen-film-result unknown";
+  result.innerHTML=`<strong>⚠️ Modelo não identificado. Tem certeza de que você não quis dizer:</strong><span>Confira estas opções semelhantes e selecione a correta:</span><div class="film-suggestions">${suggestions.length?suggestions.map(name=>`<button type="button" class="film-suggestion" onclick="chooseSuggestedPhoneModel('${name.replace(/'/g,"\\'")}')">${escapeHtml(name)}</button>`).join(""):`<span>Não encontramos sugestões próximas. Confira a escrita ou confirme o modelo com a loja.</span>`}</div>`;
+  area.innerHTML="";options.innerHTML="";return;
  }
- result.className="screen-film-result";result.innerHTML="<strong>✓ Tela plana identificada</strong>Estas são as opções disponíveis para o aparelho. Escolha em cada cartão se deseja somente a película ou a oferta com capa.";
- const films=["Vidro 3D","Cerâmica","Hidrogel"].map(type=>productsList.find(p=>p.screenProtector&&p.screenFilmType===type)).filter(Boolean);
- area.innerHTML=`<div class="film-cards">${films.map(createFilmCard).join("")}</div>`;
+ if(compatibility==="curved"){
+  result.className="screen-film-result curved";result.innerHTML="<strong>✓ Tela curva identificada</strong>Para este aparelho, a película indicada é a de hidrogel. As opções de privacidade também estão disponíveis.";
+  if(filmSelectedType!=="Hidrogel")filmSelectedType="Hidrogel";
+  const hydro=getFilmProducts().filter(p=>p.screenFilmType==="Hidrogel");
+  area.innerHTML=`<div class="film-cards">${hydro.map(createFilmCard).join("")}</div>`;
+ }else{
+  result.className="screen-film-result";result.innerHTML="<strong>✓ Tela plana identificada</strong>Escolha uma das três películas e depois selecione se deseja privacidade e/ou capa.";
+  area.innerHTML=`<div class="film-cards">${getFilmProducts().map(createFilmCard).join("")}</div>`;
+ }
+ options.innerHTML=renderFilmChoicePanel();
 }
-function addFilmFromCategory(productId){
- const product=productsList.find(p=>p.id===productId&&p.screenProtector);
- if(!product)return;
+function selectFilmType(type){
+ const compatibility=getScreenFilmCompatibility(filmCategoryModel);
+ if(compatibility==="curved"&&type!=="Hidrogel"){showToast("Para telas curvas, a opção indicada é a película de hidrogel.","error");return}
+ filmSelectedType=type;updateFilmCategory();
+}
+function setFilmPurchaseOption(privacy,bundle){filmSelectedPrivacy=!!privacy;filmSelectedBundle=!!bundle;updateFilmCategory()}
+function addSelectedFilmToCart(){
+ const product=getFilmProducts().find(p=>p.screenFilmType===filmSelectedType);
  const model=filmCategoryModel.trim(),compatibility=getScreenFilmCompatibility(model);
  if(!model){showToast("Informe a marca e o modelo do celular.","error");return}
- if(!compatibility){showToast("Não foi possível confirmar a compatibilidade. Consulte a loja antes de continuar.","error");return}
- if(compatibility==="curved"&&product.screenFilmType!=="Hidrogel"){showToast("Para telas curvas, escolha a película de hidrogel.","error");return}
- const choice=document.getElementById(`film-bundle-${productId}`);
- if(!choice)return;
- const bundle=choice.value,price=bundle==="bundle"?Number(product.screenFilmBundlePrice):Number(product.price);
+ if(!compatibility){showToast("Escolha uma das sugestões de modelo ou confirme a compatibilidade com a loja.","error");return}
+ if(compatibility==="curved"&&filmSelectedType!=="Hidrogel"){showToast("Para telas curvas, escolha a película de hidrogel.","error");return}
+ if(!product)return;
+ const price=getFilmChoicePrice(product,filmSelectedPrivacy,filmSelectedBundle);
  const filmType=product.screenFilmType;
- const label=`${filmType} · ${bundle==="bundle"?"Capa + película":"Somente película"}`;
- addToCart(product.id,{model,filmType,bundle,label,price,screenProtector:true});
+ const bundle=filmSelectedBundle?"bundle":"solo";
+ const label=`${filmType} · ${filmSelectedPrivacy?"Privacidade":"Normal"} · ${filmSelectedBundle?"Capa + película":"Somente película"}`;
+ addToCart(product.id,{model,filmType,bundle,privacy:filmSelectedPrivacy,label,price,screenProtector:true});
+}
+function chooseSuggestedPhoneModel(model){
+ filmCategoryModel=model;
+ const input=document.getElementById("film-category-model");if(input)input.value=model;
+ updateFilmCategory();
 }
 
 function createCategoryCard(category,items){
@@ -943,7 +991,7 @@ const curvedScreenModels=[
 ];
 const flatScreenModels=[
  "iphone 6","iphone 6s","iphone 7","iphone 8","iphone se","iphone se 2020","iphone se 2022","iphone 11","iphone 12","iphone 12 mini","iphone 12 pro","iphone 12 pro max","iphone 13","iphone 13 mini","iphone 13 pro","iphone 13 pro max","iphone 14","iphone 14 plus","iphone 14 pro","iphone 14 pro max","iphone 15","iphone 15 plus","iphone 15 pro","iphone 15 pro max","iphone 16e","iphone 16","iphone 16 plus","iphone 16 pro","iphone 16 pro max",
- "samsung galaxy a04","samsung galaxy a05","samsung galaxy a05s","samsung galaxy a06","samsung galaxy a10","samsung galaxy a12","samsung galaxy a13","samsung galaxy a14","samsung galaxy a15","samsung galaxy a16","samsung galaxy a20","samsung galaxy a21s","samsung galaxy a22","samsung galaxy a23","samsung galaxy a24","samsung galaxy a25","samsung galaxy a30","samsung galaxy a31","samsung galaxy a32","samsung galaxy a33","samsung galaxy a34","samsung galaxy a35","samsung galaxy a50","samsung galaxy a51","samsung galaxy a52","samsung galaxy a53","samsung galaxy a54","samsung galaxy a55","samsung galaxy a70","samsung galaxy a71","samsung galaxy a72","samsung galaxy a73",
+ "samsung galaxy s23","samsung galaxy s23 fe","samsung galaxy s23 plus","samsung galaxy a04","samsung galaxy a05","samsung galaxy a05s","samsung galaxy a06","samsung galaxy a10","samsung galaxy a12","samsung galaxy a13","samsung galaxy a14","samsung galaxy a15","samsung galaxy a16","samsung galaxy a20","samsung galaxy a21s","samsung galaxy a22","samsung galaxy a23","samsung galaxy a24","samsung galaxy a25","samsung galaxy a30","samsung galaxy a31","samsung galaxy a32","samsung galaxy a33","samsung galaxy a34","samsung galaxy a35","samsung galaxy a50","samsung galaxy a51","samsung galaxy a52","samsung galaxy a53","samsung galaxy a54","samsung galaxy a55","samsung galaxy a70","samsung galaxy a71","samsung galaxy a72","samsung galaxy a73",
  "motorola moto g04","motorola moto g14","motorola moto g24","motorola moto g34","motorola moto g54","motorola moto g84","motorola moto g85","motorola moto g100","motorola moto g200","motorola moto g200 5g"
 ];
 function normalizePhoneModel(model){
@@ -959,6 +1007,26 @@ function getScreenFilmCompatibility(model){
  if(curvedScreenModels.some(matches))return "curved";
  if(flatScreenModels.some(matches))return "flat";
  return null;
+}
+function getSimilarPhoneModelSuggestions(model){
+ const all=[...new Set([...flatScreenModels,...curvedScreenModels])];
+ const value=normalizePhoneModel(model);
+ if(!value)return [];
+ const tokens=value.split(" ").filter(Boolean);
+ let scored=all.map(name=>{
+  const candidate=normalizePhoneModel(name),candidateTokens=candidate.split(" ");
+  let score=0;
+  if(candidate.includes(value)||value.includes(candidate))score+=8;
+  if(tokens.some(token=>token.length>=2&&candidateTokens.includes(token)))score+=3;
+  if(tokens.length>=2&&candidateTokens.slice(-2).join(" ")===tokens.slice(-2).join(" "))score+=4;
+  const a=value.replace(/ /g,""),b=candidate.replace(/ /g,"");
+  let prev=Array.from({length:b.length+1},(_,i)=>i);
+  for(let i=1;i<=a.length;i++){const cur=[i];for(let j=1;j<=b.length;j++)cur[j]=Math.min(cur[j-1]+1,prev[j]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));prev=cur;}
+  const distance=prev[b.length];
+  if(distance<=4)score+=Math.max(0,6-distance);
+  return {name,score};
+ }).filter(item=>item.score>=5).sort((a,b)=>b.score-a.score);
+ const seen=new Set();return scored.map(item=>item.name.replace(/^samsung /,"Samsung ").replace(/^motorola /,"Motorola ").replace(/^iphone /,"iPhone ")).filter(name=>{const key=normalizeText(name);if(seen.has(key))return false;seen.add(key);return true}).slice(0,5);
 }
 function screenFilmPrice(type,bundle){
  const solo={"Vidro 3D":30,"Cerâmica":65,"Hidrogel":90};
@@ -1094,7 +1162,7 @@ function addToCart(id,variant=null){
  const product=productsList.find(p=>p.id===id);if(!product)return;
  if(product.customCover&&!variant){showProductInfo(id);return}
  if(isUnknownPrice(product)){showToast("O preço deste produto ainda será definido.","error");return}
- const variantKey=variant?(variant.screenProtector?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.filmType)}-${normalizeText(variant.bundle)}`:`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`):String(id);
+ const variantKey=variant?(variant.screenProtector?`${id}-${normalizeText(variant.model)}-${normalizeText(variant.filmType)}-${normalizeText(variant.bundle)}-${normalizeText(variant.privacy?"privacidade":"normal")}`:`${id}-${normalizeText(variant.model||variant.label||"opcao")}-${normalizeText(variant.color||"")}`):String(id);
  const existing=cart.find(item=>item.variantKey===variantKey);
  if(existing)existing.quantity++;
  else cart.push({...product,...(variant||{}),price:variant?variant.price:product.price,quantity:1,variantKey});
@@ -1131,7 +1199,7 @@ function renderCart(){
  document.getElementById("cart-items-count").textContent=`${count} ${count===1?"item":"itens"}`;
  if(cart.length===0)area.innerHTML=`<p class="empty">Seu carrinho está vazio. 😔<br><br>Que tal escolher alguns produtos?</p>`;
  else area.innerHTML=cart.map(item=>{
-  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.screenProtector?`Modelo: ${escapeHtml(item.model)}<br>Película: ${escapeHtml(item.filmType)}<br>${item.bundle==="bundle"?"Inclui capa promocional":"Somente película"}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
+  const variantText=item.customCover?`Modelo: ${escapeHtml(item.model)}<br>Cor: ${escapeHtml(item.color)}`:item.screenProtector?`Modelo: ${escapeHtml(item.model)}<br>Película: ${escapeHtml(item.filmType)}<br>Versão: ${item.privacy?"Com privacidade":"Normal"}<br>${item.bundle==="bundle"?"Inclui capa promocional":"Somente película"}`:item.label?`Opção: ${escapeHtml(item.label)}`:"";
   return `<div class="cart-item"><div class="cart-item-image">${item.photo?`<img src="${item.photo}" alt="${escapeHtml(item.name)}">`:item.image}</div><div class="cart-item-info"><strong>${escapeHtml(item.name)}</strong>${variantText?`<small>${variantText}</small>`:""}<span class="cart-warranty">🛡️ ${escapeHtml(item.warranty||"Consultar garantia")}</span><div class="cart-price">${money(item.price*item.quantity)}</div></div><div class="cart-item-actions"><div class="quantity"><button type="button" onclick="changeQuantity('${item.variantKey}',-1)">−</button><strong>${item.quantity}</strong><button type="button" onclick="changeQuantity('${item.variantKey}',1)">+</button></div><button type="button" class="remove" onclick="removeItem('${item.variantKey}')">🗑</button></div></div>`;
  }).join("");
  const total=cart.reduce((sum,item)=>sum+item.price*item.quantity,0);
@@ -1206,6 +1274,7 @@ ${item.customCover?`Modelo do celular: ${item.model}
 Cor escolhida: ${item.color}
 `:item.screenProtector?`Modelo do celular: ${item.model}
 Tipo de película: ${item.filmType}
+Versão: ${item.privacy?"Com privacidade":"Normal"}
 Oferta: ${item.bundle==="bundle"?"Capa + película":"Somente película"}
 `:item.label?`Opção escolhida: ${item.label}
 `:""}Quantidade: ${item.quantity}
