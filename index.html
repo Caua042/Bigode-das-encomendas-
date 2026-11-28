@@ -13,15 +13,13 @@ button,input,select{font:inherit}button{cursor:pointer;border:0}
 #intro{position:fixed;inset:0;background:#f5f5f5;z-index:9999;display:flex;align-items:center;justify-content:center;overflow:hidden;transition:opacity .3s,visibility .3s}
 #intro.hide{opacity:0;visibility:hidden;pointer-events:none}
 .intro-stage{position:absolute;width:100%;padding:20px;text-align:center;opacity:0;visibility:hidden}
-.stage-mustache{animation:mustacheShow .7s ease forwards}
-.big-mustache{width:90%;max-width:430px;animation:growMustache .7s ease}
-.intro-logo-image{display:block;width:min(88vw,430px);max-height:62vh;object-fit:contain;margin:auto;filter:drop-shadow(0 5px 12px #0002)}
+.intro-logo-image{display:block;width:min(88vw,430px);max-height:62vh;object-fit:contain;margin:auto;filter:drop-shadow(0 5px 12px #0002);animation:growMustache .7s ease}
+.stage-logo{animation:mustacheShow .7s ease forwards}
 .brand-logo{display:block;width:78px;height:78px;object-fit:contain;flex-shrink:0;border-radius:10px}
-.stage-logo{animation:logoShow .8s ease .65s forwards}
 .stage-logo h1,.stage-logo h2{color:#101010;font-weight:900}
 .stage-logo h1{font-size:clamp(23px,6vw,38px)}
 .stage-logo h2{font-size:22px;letter-spacing:7px;margin-top:12px}
-.stage-welcome{animation:welcomeShow 1s ease 1.4s forwards}
+.stage-welcome{animation:welcomeShow 1s ease .65s forwards}
 .stage-welcome h1{color:#101010;font-size:clamp(30px,7vw,44px)}
 .stage-welcome p{color:#101010;font-size:21px;margin-top:15px}
 @keyframes growMustache{from{transform:scale(.3)}to{transform:scale(1)}}
@@ -214,6 +212,21 @@ body[data-theme="light"] .hero{background:linear-gradient(135deg,#eee,#ddd);colo
 body[data-theme="light"] .hero p{color:#444}
 body[data-theme="light"] .section-title p{color:#777}
 body[data-theme="light"] .catalog-filters select{background:white;color:#222;border-color:#ddd}
+/* Cartões especiais das três películas */
+.film-cards{display:grid;grid-template-columns:1fr;gap:16px}
+.film-card{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;align-items:center;background:#1c1c1c;color:#fff;border:1px solid #3b3b3b;border-radius:18px;padding:16px;box-shadow:0 4px 14px #00000028}
+.film-card-icon{height:112px;border-radius:14px;background:linear-gradient(145deg,#303030,#151515);display:flex;align-items:center;justify-content:center;font-size:54px;border:1px solid #444}
+.film-card-content{min-width:0}
+.film-card h3{font-size:17px;line-height:1.3;margin-bottom:7px}
+.film-card p{font-size:12px;line-height:1.55;color:#bbb;margin-bottom:9px}
+.film-card-price{font-size:13px;line-height:1.65;margin-bottom:10px}
+.film-card-price strong{color:#20d875;font-size:16px}
+.film-card-promo{color:#40DCCB;font-weight:bold}
+.film-card button{width:100%;padding:12px;border-radius:10px;background:#20d875;color:#101010;font-weight:bold;font-size:13px}
+body[data-theme="light"] .film-card{background:#fff;color:#222;border-color:#ddd}
+body[data-theme="light"] .film-card p{color:#555}
+body[data-theme="light"] .film-card-icon{background:#f0f0f0;border-color:#ddd}
+@media(max-width:390px){.film-card{grid-template-columns:84px minmax(0,1fr);gap:11px;padding:12px}.film-card-icon{height:100px;font-size:44px}.film-card h3{font-size:15px}}
 body[data-theme="light"] .product{background:white;color:#202020}
 body[data-theme="light"] .product-image{background:white}
 body[data-theme="light"] .price{color:#111}
@@ -323,7 +336,6 @@ body[data-theme="light"] .category-back{background:#eee;color:#222;border-color:
 <body data-theme="dark">
 
 <div id="intro">
- <div class="intro-stage stage-mustache"><svg viewBox="0 0 400 180" class="big-mustache"><path fill="#101010" d="M200 83 C170 45 125 35 90 49 C54 62 35 91 10 85 C18 119 52 139 90 130 C132 120 161 99 200 91 C239 99 268 120 310 130 C348 139 382 119 390 85 C365 91 346 62 310 49 C275 35 230 45 200 83Z"/></svg></div>
  <div class="intro-stage stage-logo"><img class="intro-logo-image" src="imagens/IMG_1314.png" alt="Logo Bigode das Encomendas | Importações" onerror="this.style.display='none'"></div>
  <div class="intro-stage stage-welcome"><h1>Seja bem-vindo!</h1><p>Em que posso te ajudar?</p></div>
 </div>
@@ -505,11 +517,15 @@ const productsList=[
  {id:48,name:"Fone Bluetooth sem borracha ",price:55,image:"🎧",photo:"imagens/IMG_1261.webp",brand:"Gold",warranty:"Consultar garantia"},
  {id:49,name:"Fone Bluetooth sem borracha ",price:75,image:"🎧",photo:"imagens/IMG_1262.webp",brand:"Gold",warranty:"Consultar garantia"},
  {id:50,name:"Fone Bluetooth com borracha ",price:80,image:"🎧",photo:"imagens/IMG_1263.webp",brand:"Gold",warranty:"Consultar garantia"},
- {id:51,name:"Películas para celular",price:30,image:"🛡️",warranty:"Consultar garantia",screenProtector:true}
+ {id:51,name:"Película 3D de vidro",price:30,image:"🛡️",warranty:"Consultar garantia",screenProtector:true,screenFilmType:"Vidro 3D",screenFilmDescription:"Boa proteção para o dia a dia. Pode trincar ou quebrar em caso de impacto. Indicada como uma opção de proteção de curto prazo.",screenFilmBundlePrice:40},
+ {id:52,name:"Película de cerâmica",price:65,image:"🛡️",warranty:"Consultar garantia",screenProtector:true,screenFilmType:"Cerâmica",screenFilmDescription:"Não quebra como o vidro e oferece boa proteção. Pode riscar em contato com chaves ou objetos abrasivos. Uma opção para uso prolongado.",screenFilmBundlePrice:75},
+ {id:53,name:"Película de hidrogel",price:90,image:"🛡️",warranty:"Consultar garantia",screenProtector:true,screenFilmType:"Hidrogel",screenFilmDescription:"Recomendada para celulares com tela curva. Oferece proteção semelhante à cerâmica e exige os mesmos cuidados. Tem ótima adaptação às bordas.",screenFilmBundlePrice:75}
 ];
 
 const productDescriptions={
- 51:{description:"Escolha a película ideal para o seu aparelho. Informe o modelo exato para o sistema verificar a curvatura da tela e liberar somente as opções compatíveis.",compatibility:"A compatibilidade será verificada pelo modelo informado.",extra:"Vidro 3D: R$ 30,00. Cerâmica: R$ 65,00. Hidrogel: R$ 90,00. Consulte as ofertas de capa + película."},
+ 51:{description:"Película 3D de vidro. Boa proteção, mas pode trincar ou quebrar em caso de impacto.",compatibility:"Disponível somente para aparelhos com tela plana.",extra:"R$ 30,00 somente a película ou R$ 40,00 na oferta de capa + película."},
+ 52:{description:"Película de cerâmica. Não quebra como o vidro, mas pode riscar com chaves ou objetos abrasivos.",compatibility:"Disponível somente para aparelhos com tela plana.",extra:"R$ 65,00 somente a película ou R$ 75,00 na oferta de capa + película."},
+ 53:{description:"Película de hidrogel, com ótima adaptação às bordas e indicada para telas curvas.",compatibility:"Indicada para telas curvas; também pode ser escolhida para telas planas.",extra:"R$ 90,00 somente a película ou R$ 75,00 na oferta de capa + película."},
  1:{description:"Capa de silicone para celular. Escolha a cor e informe o modelo exato do seu aparelho para solicitar a encomenda.",compatibility:"Informe o modelo completo do celular, por exemplo: iPhone 13 ou Samsung A15.",extra:"A disponibilidade da cor e do modelo será confirmada pelo WhatsApp. O preço varia conforme o modelo e a cor escolhida."},
  5:{description:"Cabo FAM com uma ponta Tipo-C e outra USB convencional. Possui 1 metro de comprimento.",compatibility:"Use a ponta Tipo-C em aparelhos com entrada USB-C e a ponta USB em carregadores ou portas USB convencionais.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
  6:{description:"Cabo FAM com conector Lightning para aparelhos Apple e ponta USB convencional.",compatibility:"Indicado para aparelhos Apple que utilizam entrada Lightning.",extra:"Comprimento: 1 metro. Garantia: 1 ano."},
@@ -741,7 +757,7 @@ const catalogCategories=[
  {id:"fones",name:"Fones de ouvido",icon:"🎧",ids:[33,48,49,50]},
  {id:"suportes",name:"Suportes",icon:"🚗",ids:[31,32,44,45]},
  {id:"acessorios",name:"Acessórios",icon:"✨",ids:[34,46,47]},
- {id:"peliculas",name:"Películas",icon:"🛡️",ids:[51]}
+ {id:"peliculas",name:"Películas",icon:"🛡️",ids:[51,52,53]}
 ];
 let activeCategory=null;
 
@@ -800,6 +816,17 @@ function createProductCard(product){
   </div>
  </div>`;
 }
+function createFilmCard(product){
+ return `<article class="film-card">
+  <div class="film-card-icon" aria-hidden="true">🛡️</div>
+  <div class="film-card-content">
+   <h3>${escapeHtml(product.name)}</h3>
+   <p>${escapeHtml(product.screenFilmDescription)}</p>
+   <div class="film-card-price">Somente película: <strong>${money(product.price)}</strong><br><span class="film-card-promo">Capa + película: ${money(product.screenFilmBundlePrice)}</span></div>
+   <button type="button" onclick="showProductInfo(${product.id})">Escolher esta película</button>
+  </div>
+ </article>`;
+}
 function createCategoryCard(category,items){
  const first=items.find(product=>product.photo);
  const image=first?`<img src="${first.photo}" alt="${escapeHtml(category.name)}" loading="lazy">`:`<span class="fallback">${category.icon}</span>`;
@@ -837,7 +864,11 @@ function renderProducts(){
    <button class="category-back" type="button" onclick="showAllCategories()">← Categorias</button>
    <div class="category-heading-text"><h3>${escapeHtml(category.name)}</h3><p>${items.length} ${items.length===1?"opção disponível":"opções disponíveis"}</p></div>
   </div>`;
-  area.innerHTML=title+(items.length?`<div class="product-grid">${items.map(createProductCard).join("")}</div>`:`<p class="no-products">Nenhum produto encontrado nesta categoria com os filtros atuais.</p>`);
+  if(category.id==="peliculas"){
+   area.innerHTML=title+(items.length?`<div class="film-cards">${items.map(createFilmCard).join("")}</div><p class="screen-film-help" style="margin-top:14px;text-align:center">Nenhuma película oferece proteção de 100%. A escolha deve considerar o modelo do aparelho e os cuidados de uso.</p>`:`<p class="no-products">Nenhuma opção encontrada.</p>`);
+  }else{
+   area.innerHTML=title+(items.length?`<div class="product-grid">${items.map(createProductCard).join("")}</div>`:`<p class="no-products">Nenhum produto encontrado nesta categoria com os filtros atuais.</p>`);
+  }
   return;
  }
  const categories=catalogCategories.map(category=>({category,items:getCategoryProducts(category).filter(product=>filtered.includes(product))}))
@@ -881,35 +912,35 @@ function screenFilmPrice(type,bundle){
 function checkScreenFilmCompatibility(){
  const input=document.getElementById("film-model");
  if(!input)return;
- const model=input.value.trim(),result=document.getElementById("screen-film-result"),options=document.getElementById("screen-film-options"),typeSelect=document.getElementById("film-type");
+ const model=input.value.trim(),result=document.getElementById("screen-film-result"),options=document.getElementById("screen-film-options"),type=currentInfoProduct?.screenFilmType;
+ const bundle=document.getElementById("film-bundle");
  options.hidden=true;
  if(!model){result.className="screen-film-result";result.textContent="Informe o modelo para verificar a compatibilidade.";return}
  const compatibility=getScreenFilmCompatibility(model);
- if(compatibility==="curved"){
+ if(compatibility==="curved"&&type!=="Hidrogel"){
   result.className="screen-film-result curved";
-  result.innerHTML="<strong>✓ Tela curvada identificada</strong>Para este aparelho, não disponibilizamos película 3D de vidro nem cerâmica, pois não são as opções adequadas para a curvatura da tela. A película indicada é a hidrogel, por sua melhor adaptação às bordas.";
-  typeSelect.innerHTML='<option value="Hidrogel">Hidrogel — R$ 90,00</option>';
+  result.innerHTML="<strong>⚠️ Tela curva identificada</strong>Esta película não é indicada para este aparelho. Para telas curvas, escolha a película de hidrogel.";
+ }else if(compatibility==="curved"){
+  result.className="screen-film-result curved";
+  result.innerHTML="<strong>✓ Tela curva identificada</strong>A hidrogel é a opção indicada para este aparelho.";
   options.hidden=false;
  }else if(compatibility==="flat"){
   result.className="screen-film-result";
-  result.innerHTML="<strong>✓ Tela plana identificada</strong>Este modelo está cadastrado como tela plana. Você pode escolher entre película 3D de vidro ou cerâmica. A hidrogel também pode ser solicitada.";
-  typeSelect.innerHTML='<option value="">Selecione uma película</option><option value="Vidro 3D">3D de vidro — R$ 30,00</option><option value="Cerâmica">Cerâmica — R$ 65,00</option><option value="Hidrogel">Hidrogel — R$ 90,00</option>';
+  result.innerHTML="<strong>✓ Tela plana identificada</strong>Esta opção pode ser usada neste aparelho.";
   options.hidden=false;
  }else{
   result.className="screen-film-result unknown";
-  result.innerHTML="<strong>⚠️ Modelo ainda não identificado</strong>Não encontramos esse modelo na nossa lista de compatibilidade. Para evitar indicar uma película incorreta, confirme com a loja antes de escolher. Confira se digitou o nome completo do aparelho.";
+  result.innerHTML="<strong>⚠️ Modelo ainda não identificado</strong>Não encontramos esse modelo na nossa lista. Confirme a compatibilidade com a loja antes de continuar.";
  }
  updateScreenFilmPrice();
 }
 function updateScreenFilmPrice(){
- const type=document.getElementById("film-type"),bundle=document.getElementById("film-bundle"),note=document.getElementById("screen-film-price-note"),priceArea=document.getElementById("product-info-price");
- if(!type||!bundle||!note)return;
- const selected=type.value;
- if(!selected){note.textContent="Selecione o tipo de película para consultar o valor.";return}
- const solo=screenFilmPrice(selected,"solo"),combo=screenFilmPrice(selected,"bundle");
- const price=screenFilmPrice(selected,bundle.value);
+ const bundle=document.getElementById("film-bundle"),note=document.getElementById("screen-film-price-note"),priceArea=document.getElementById("product-info-price");
+ if(!bundle||!note||!currentInfoProduct)return;
+ const product=currentInfoProduct,type=product.screenFilmType;
+ const solo=Number(product.price),combo=Number(product.screenFilmBundlePrice),price=bundle.value==="bundle"?combo:solo;
  priceArea.textContent=money(price);
- note.innerHTML=bundle.value==="bundle"?`Oferta capa + película: <strong>${money(combo)}</strong>. Você economiza ${money(25+solo-combo)} em relação aos valores individuais.`:`Somente película: <strong>${money(solo)}</strong>. Se incluir uma capa, o valor promocional fica por ${money(combo)}.`;
+ note.innerHTML=bundle.value==="bundle"?`Oferta capa + película: <strong>${money(combo)}</strong>.`:`Somente película: <strong>${money(solo)}</strong>. Com capa, o valor promocional fica por ${money(combo)}.`;
 }
 
 /* INFORMAÇÕES DO PRODUTO */
@@ -918,7 +949,7 @@ function showProductInfo(id){
  currentInfoProduct=product;selectedCoverColor="";
  const details=productDescriptions[id]||{description:"Consulte a loja para mais informações.",compatibility:"Confirme a compatibilidade antes de encomendar.",extra:"Consulte a loja para detalhes adicionais."};
  document.getElementById("product-info-title").textContent=product.name;
- document.getElementById("product-info-price").textContent=product.screenProtector?"A partir de R$ 30,00":getProductPriceText(product);
+ document.getElementById("product-info-price").textContent=product.screenProtector?money(product.price):getProductPriceText(product);
  document.getElementById("product-info-description").textContent=details.description;
  const photoArea=document.getElementById("product-info-photo");
  if(product.customCover)photoArea.innerHTML=renderCoverPreview("","Preto");
@@ -927,20 +958,20 @@ function showProductInfo(id){
  const detailsArea=document.getElementById("product-info-details");
  if(product.screenProtector){
   detailsArea.innerHTML=`
-   <p><strong>Escolha a proteção ideal:</strong><br>Primeiro, informe o modelo exato do celular. O sistema verificará se a tela é curva ou plana antes de liberar as películas compatíveis.</p>
+   <p><strong>${escapeHtml(product.screenFilmDescription)}</strong></p>
+   <p>Informe o modelo exato do celular. O sistema verificará a curvatura da tela antes de liberar a encomenda.</p>
    <div class="screen-film-box">
     <label for="film-model">Marca e modelo do celular</label>
     <input id="film-model" type="text" placeholder="Ex.: Samsung Galaxy S23 Ultra" autocomplete="off" oninput="checkScreenFilmCompatibility()">
-    <div class="screen-film-help">Digite o nome completo do aparelho, incluindo a versão (por exemplo, Pro, Plus ou Ultra).</div>
+    <div class="screen-film-help">Digite o nome completo do aparelho, incluindo a versão (Pro, Plus ou Ultra, por exemplo).</div>
     <div id="screen-film-result" class="screen-film-result">Informe o modelo para verificar a compatibilidade.</div>
     <div id="screen-film-options" hidden>
-     <label for="film-type">Tipo de película</label>
-     <select id="film-type" onchange="updateScreenFilmPrice()"><option value="">Selecione uma película</option></select>
      <label for="film-bundle">Deseja incluir uma capa?</label>
      <select id="film-bundle" onchange="updateScreenFilmPrice()"><option value="solo">Somente película</option><option value="bundle">Capa + película (oferta especial)</option></select>
-     <div class="screen-film-help" id="screen-film-price-note"></div>
+     <div class="screen-film-help" id="screen-film-price-note">Somente película: ${money(product.price)}. Com capa: ${money(product.screenFilmBundlePrice)}.</div>
     </div>
-   </div>`;
+   </div>
+   <p class="screen-film-help">Atenção: nenhuma película garante proteção de 100%. Evite impactos e objetos abrasivos.</p>`;
  }else if(product.customCover){
   detailsArea.innerHTML=`
    <p><strong>Como personalizar:</strong><br>Informe o modelo exato do aparelho e escolha a cor desejada.</p>
@@ -961,10 +992,12 @@ function showProductInfo(id){
    const compatibility=getScreenFilmCompatibility(model);
    if(!model){showToast("Informe a marca e o modelo do celular.","error");return}
    if(!compatibility){showToast("Não foi possível confirmar a curvatura deste modelo. Consulte a loja antes de escolher.","error");return}
-   const filmType=document.getElementById("film-type").value;
-   if(!filmType){showToast("Selecione uma película compatível.","error");return}
+   const filmType=product.screenFilmType;
+   if(compatibility==="curved"&&filmType!=="Hidrogel"){showToast("Para telas curvas, escolha a película de hidrogel.","error");return}
+   const result=document.getElementById("screen-film-result");
+   if(!document.getElementById("screen-film-options")||document.getElementById("screen-film-options").hidden){showToast("Confirme a compatibilidade do aparelho antes de continuar.","error");return}
    const bundle=document.getElementById("film-bundle").value;
-   const price=screenFilmPrice(filmType,bundle);
+   const price=bundle==="bundle"?product.screenFilmBundlePrice:product.price;
    const label=`${filmType} · ${bundle==="bundle"?"Capa + película":"Somente película"}`;
    addToCart(product.id,{model,filmType,bundle,label,price,screenProtector:true});
    closeProductInfo();return;
